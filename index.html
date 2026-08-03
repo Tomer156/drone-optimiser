@@ -197,9 +197,9 @@
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #ffffff;
     border-bottom: 1px solid var(--border);
-    background: var(--bg);
+    background: #1A1A1A;
     flex-shrink: 0;
     display: flex; align-items: center; gap: 6px;
   }
@@ -207,16 +207,16 @@
 
   .col-body { overflow-y: auto; flex: 1; }
 
-  /* ─── SECTION HEADER ─── */
+  /* ─── SECTION HEADER (menu header: dark bg, white text) ─── */
   .sec {
     padding: 6px 14px 5px;
     font-size: 8px;
     font-weight: 700;
     letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #ffffff;
     border-bottom: 1px solid var(--border);
-    background: var(--sunken);
+    background: #1A1A1A;
   }
 
   /* ─── INPUT ATOMS ─── */
@@ -655,6 +655,43 @@
   }
   #site-footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
   #site-footer a:hover { text-decoration: underline; }
+
+  /* ═══ EDITABLE SLIDER VALUE FIELD ═══ */
+  .iv-edit { display: inline-flex; align-items: baseline; gap: 3px; }
+  .iv-input {
+    width: 52px; text-align: right;
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    color: #00BCD4;                 /* cyan value text */
+    background: var(--panel2);
+    border: 1px solid var(--border2);
+    border-radius: 4px; padding: 2px 5px; outline: none;
+    -moz-appearance: textfield;
+  }
+  :root[data-theme="dark"] .iv-input { color: #22D3EE; }
+  .iv-input::-webkit-outer-spin-button,
+  .iv-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .iv-input:focus { border-color: #00BCD4; }
+  .iv-unit { font-size: 9px; color: var(--muted); font-family: var(--mono); }
+
+  /* ═══ STAGE NAV ═══ */
+  .step-pill { cursor: pointer; }
+  .stage-nav {
+    flex-shrink: 0;
+    display: flex; gap: 8px;
+    padding: 10px 14px;
+    border-top: 1px solid var(--border);
+    background: var(--panel);
+  }
+  .nav-btn {
+    flex: 1;
+    padding: 9px 12px; border-radius: 6px; cursor: pointer;
+    font-family: var(--sans); font-size: 12px; font-weight: 600;
+    background: var(--panel2); border: 1px solid var(--border2); color: var(--text);
+  }
+  .nav-btn:hover:not(:disabled) { border-color: var(--accent); }
+  .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .nav-btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .nav-btn.primary:hover:not(:disabled) { background: var(--accent-hover); }
 </style>
 </head>
 <body>
@@ -680,10 +717,10 @@
 
 <!-- STEP INDICATOR -->
 <div class="steps-bar">
-  <div class="step-pill" id="step1-pill"><div class="step-num">1</div>SET MTOW</div>
-  <div class="step-pill" id="step2-pill"><div class="step-num">2</div>SELECT MOTOR</div>
-  <div class="step-pill" id="step3-pill"><div class="step-num">3</div>SELECT BATTERY</div>
-  <div class="step-pill" id="step4-pill"><div class="step-num">4</div>CLOSE GAP</div>
+  <div class="step-pill" id="step1-pill" data-stage="1"><div class="step-num">1</div>MISSION + MTOW</div>
+  <div class="step-pill" id="step2-pill" data-stage="2"><div class="step-num">2</div>MOTOR</div>
+  <div class="step-pill" id="step3-pill" data-stage="3"><div class="step-num">3</div>BATTERY</div>
+  <div class="step-pill" id="step4-pill" data-stage="4"><div class="step-num">4</div>FINE TUNE</div>
 </div>
 
 <!-- KPI STRIP -->
@@ -718,12 +755,13 @@
 
   <!-- ═══ LEFT: INPUTS ═══ -->
   <div class="col">
-    <div class="col-hdr"><div class="hdr-dot" style="background:var(--accent)"></div>INPUTS &amp; SELECTIONS</div>
+    <div class="col-hdr"><div class="hdr-dot" style="background:#fff"></div>INPUTS &amp; SELECTIONS</div>
     <div class="col-body">
 
+      <div class="menu" data-menu="mission">
       <div class="sec">① Mission</div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">t</span> Flight Time Target</span><span class="iv" id="lbl-time">40 min</span></div>
+        <div class="ir"><span class="il"><span class="sym">t</span> Flight Time Target</span><span class="iv-edit"><input class="iv-input" id="in-time" data-slider="s-time" inputmode="decimal"><span class="iv-unit">min</span></span></div>
         <input type="range" id="s-time" min="5" max="90" value="40" step="1">
       </div>
       <div class="ig">
@@ -736,51 +774,54 @@
         </select>
       </div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">alt</span> Altitude</span><span class="iv" id="lbl-alt">500 m</span></div>
+        <div class="ir"><span class="il"><span class="sym">alt</span> Altitude</span><span class="iv-edit"><input class="iv-input" id="in-alt" data-slider="s-alt" inputmode="decimal"><span class="iv-unit">m</span></span></div>
         <input type="range" id="s-alt" min="0" max="3000" value="500" step="100">
         <div id="lbl-rho" style="font-size:8px;color:var(--muted);font-family:var(--mono);margin-top:3px"></div>
       </div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">&eta;_wind</span> Wind losses</span><span class="iv" id="lbl-eff-wind">75%</span></div>
+        <div class="ir"><span class="il"><span class="sym">&eta;_wind</span> Wind losses</span><span class="iv-edit"><input class="iv-input" id="in-eff-wind" data-slider="s-eff-wind" inputmode="decimal"><span class="iv-unit">%</span></span></div>
         <input type="range" id="s-eff-wind" min="50" max="100" value="75" step="1">
       </div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">&eta;_prop</span> Motor+ESC+Prop</span><span class="iv" id="lbl-eff-prop">100%</span></div>
+        <div class="ir"><span class="il"><span class="sym">&eta;_prop</span> Motor+ESC+Prop</span><span class="iv-edit"><input class="iv-input" id="in-eff-prop" data-slider="s-eff-prop" inputmode="decimal"><span class="iv-unit">%</span></span></div>
         <input type="range" id="s-eff-prop" min="50" max="100" value="100" step="1">
       </div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">&eta;_av</span> Avionics+Misc</span><span class="iv" id="lbl-eff-av">95%</span></div>
+        <div class="ir"><span class="il"><span class="sym">&eta;_av</span> Avionics+Misc</span><span class="iv-edit"><input class="iv-input" id="in-eff-av" data-slider="s-eff-av" inputmode="decimal"><span class="iv-unit">%</span></span></div>
         <input type="range" id="s-eff-av" min="50" max="100" value="95" step="1">
         <div style="font-size:8px;color:var(--muted);font-family:var(--mono);margin-top:3px">&eta;_total = <span id="lbl-eta-total">—</span></div>
       </div>
 
+      </div><!-- /menu mission -->
+
+      <div class="menu" data-menu="mass">
       <div class="sec">② Mass Budget</div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">struct</span> Structure + Frame</span><span class="iv" id="lbl-struct">350 g</span></div>
+        <div class="ir"><span class="il"><span class="sym">struct</span> Structure + Frame</span><span class="iv-edit"><input class="iv-input" id="in-struct" data-slider="s-struct" inputmode="decimal"><span class="iv-unit">g</span></span></div>
         <input type="range" id="s-struct" min="50" max="2000" value="350" step="10">
       </div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">motors</span> Motors (×4, est.)</span><span class="iv" id="lbl-motors">200 g</span></div>
+        <div class="ir"><span class="il"><span class="sym">motors</span> Motors (×4, est.)</span><span class="iv-edit"><input class="iv-input" id="in-motors" data-slider="s-motors" inputmode="decimal"><span class="iv-unit">g</span></span></div>
         <input type="range" id="s-motors" min="50" max="1000" value="200" step="10">
       </div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">esc</span> ESC(s)</span><span class="iv" id="lbl-esc">25 g</span></div>
+        <div class="ir"><span class="il"><span class="sym">esc</span> ESC(s)</span><span class="iv-edit"><input class="iv-input" id="in-esc" data-slider="s-esc" inputmode="decimal"><span class="iv-unit">g</span></span></div>
         <input type="range" id="s-esc" min="5" max="300" value="25" step="5">
       </div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">av</span> FC + GPS + RX</span><span class="iv" id="lbl-av">35 g</span></div>
+        <div class="ir"><span class="il"><span class="sym">av</span> FC + GPS + RX</span><span class="iv-edit"><input class="iv-input" id="in-av" data-slider="s-av" inputmode="decimal"><span class="iv-unit">g</span></span></div>
         <input type="range" id="s-av" min="10" max="300" value="35" step="5">
       </div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">misc</span> Wiring + Misc</span><span class="iv" id="lbl-misc">40 g</span></div>
+        <div class="ir"><span class="il"><span class="sym">misc</span> Wiring + Misc</span><span class="iv-edit"><input class="iv-input" id="in-misc" data-slider="s-misc" inputmode="decimal"><span class="iv-unit">g</span></span></div>
         <input type="range" id="s-misc" min="10" max="300" value="40" step="5">
       </div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">cam</span> Camera / FPV</span><span class="iv" id="lbl-cam">0 g</span></div>
+        <div class="ir"><span class="il"><span class="sym">cam</span> Camera / FPV</span><span class="iv-edit"><input class="iv-input" id="in-cam" data-slider="s-cam" inputmode="decimal"><span class="iv-unit">g</span></span></div>
         <input type="range" id="s-cam" min="0" max="800" value="0" step="5">
       </div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">payload</span> Payload</span><span class="iv" id="lbl-payload">0 g</span></div>
+        <div class="ir"><span class="il"><span class="sym">payload</span> Payload</span><span class="iv-edit"><input class="iv-input" id="in-payload" data-slider="s-payload" inputmode="decimal"><span class="iv-unit">g</span></span></div>
         <input type="range" id="s-payload" min="0" max="5000" value="0" step="10">
       </div>
       <!-- Battery placeholder -->
@@ -790,6 +831,9 @@
         <div style="font-size:8px;color:var(--muted);font-family:var(--mono);margin-top:3px">Used for MTOW until a battery is selected below</div>
       </div>
 
+      </div><!-- /menu mass -->
+
+      <div class="menu" data-menu="motor">
       <div class="sec">③ Prop + Motor</div>
       <div class="ig" id="prop-global-group">
         <div class="ir"><span class="il">Propeller size</span></div>
@@ -828,6 +872,9 @@
         </div>
       </div>
 
+      </div><!-- /menu motor -->
+
+      <div class="menu" data-menu="battery">
       <div class="sec">④ Battery Selection</div>
       <div class="ig">
         <div class="cells-tabs" id="cells-tabs">
@@ -840,7 +887,12 @@
         <div class="battery-list" id="battery-list"></div>
         <div style="font-size:8px;color:var(--muted);margin-top:3px">Dimmed = no weight data. Dot = C-rating match.</div>
       </div>
+      </div><!-- /menu battery -->
 
+    </div>
+    <div class="stage-nav">
+      <button class="nav-btn" id="stage-back">← Back</button>
+      <button class="nav-btn primary" id="stage-next">Next →</button>
     </div>
   </div>
 
@@ -1000,6 +1052,7 @@ let selProp  = null;   // prop string
 let selBatt  = null;   // index into BATTERY_DB
 let cellsFilter = 'all';
 let lastD = null;
+let currentStage = 1;   // wizard stage 1..4
 
 // ══════════════════════════════════════════════════════════
 // COMPUTE — strict physics model
@@ -1173,20 +1226,79 @@ function compute() {
 // ══════════════════════════════════════════════════════════
 // STEP INDICATOR
 // ══════════════════════════════════════════════════════════
-function updateSteps(d) {
-  const step1done = d.MTOW > 0;
-  const step2done = d.hasMotor && d.hasProp;
-  const step3done = d.batt !== null;
-  const step4done = step3done && d.flightTime !== null;
-
-  const pills = ['step1-pill','step2-pill','step3-pill','step4-pill'];
-  const done  = [step1done, step2done, step3done, step4done];
-  const curr  = done.indexOf(false);  // first undone step
-
-  pills.forEach((id, i) => {
+function updateSteps() {
+  // pills reflect the wizard stage: before = done, current = active
+  ['step1-pill','step2-pill','step3-pill','step4-pill'].forEach((id, i) => {
+    const stage = i + 1;
     const el = document.getElementById(id);
-    el.className = 'step-pill' + (done[i] ? ' done' : (i === curr ? ' active' : ''));
+    el.className = 'step-pill' + (stage < currentStage ? ' done' : (stage === currentStage ? ' active' : ''));
   });
+}
+
+// which left-column menus are visible per stage
+const STAGE_MENUS = {
+  1: ['mission','mass'],
+  2: ['motor'],
+  3: ['battery'],
+  4: ['mission','mass','motor','battery'],
+};
+
+function setStage(n) {
+  currentStage = Math.max(1, Math.min(4, n));
+  const show = STAGE_MENUS[currentStage];
+  document.querySelectorAll('.menu').forEach(m => {
+    m.style.display = show.includes(m.dataset.menu) ? '' : 'none';
+  });
+  // nav buttons
+  const back = document.getElementById('stage-back');
+  const next = document.getElementById('stage-next');
+  if (back) back.disabled = currentStage === 1;
+  if (next) next.textContent = currentStage === 4 ? 'Export ↓' : 'Next →';
+  updateSteps();
+  // scroll input panel back to top on stage change
+  const body = document.querySelector('.col-body');
+  if (body) body.scrollTop = 0;
+}
+
+function exportBuild() {
+  const d = lastD || compute();
+  const f = (x, dp=2) => (x === null || x === undefined || isNaN(x)) ? '—' : (+x).toFixed(dp);
+  const lines = [
+    'DRONE MISSION OPTIMISER — BUILD SUMMARY',
+    '========================================',
+    '',
+    '[ MISSION ]',
+    `Flight time target : ${document.getElementById('s-time').value} min`,
+    `Flight style K_T   : ${document.getElementById('s-style').value}`,
+    `Altitude           : ${document.getElementById('s-alt').value} m`,
+    `Efficiency (w/p/a) : ${document.getElementById('s-eff-wind').value}% / ${document.getElementById('s-eff-prop').value}% / ${document.getElementById('s-eff-av').value}%`,
+    '',
+    '[ MASS BUDGET (g) ]',
+    `Structure+Frame ${document.getElementById('s-struct').value} · Motors ${document.getElementById('s-motors').value} · ESC ${document.getElementById('s-esc').value} · FC/GPS/RX ${document.getElementById('s-av').value} · Wiring/Misc ${document.getElementById('s-misc').value} · Camera ${document.getElementById('s-cam').value} · Payload ${document.getElementById('s-payload').value}`,
+    `MTOW               : ${f(d.MTOW,0)} g`,
+    '',
+    '[ MOTOR / PROP ]',
+    `Motor              : ${selMotor || '—'}`,
+    `Prop               : ${selProp || '—'}`,
+    '',
+    '[ BATTERY ]',
+    `Battery            : ${d.batt ? (d.batt.cells+'S · '+d.batt.capacity_mah+'mAh · '+d.batt.discharge_c+'C · '+d.batt.voltage_v+'V') : '—'}`,
+    '',
+    '[ RESULTS ]',
+    `Hover current tot  : ${f(d.I_hover_total)} A`,
+    `Flight time        : ${f(d.flightTime,1)} min`,
+    `Thrust/Weight      : ${f(d.tw,1)} : 1`,
+    `Current margin     : ${f(d.cm,2)} ×`,
+    `Air density        : ${f(d.AIR,4)} kg/m³`,
+    '',
+    `Generated by tools.tomertouviano.com`,
+  ];
+  const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'drone-build-summary.txt';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(a.href);
 }
 
 // ══════════════════════════════════════════════════════════
@@ -1589,7 +1701,7 @@ function renderMiddle(d) {
       d.propTestV ? 'prop tested at ' + d.propTestV.toFixed(1) + 'V' : '');
 
     battActualsHtml = `
-      <div class="gap-section-title" style="color:var(--green)">BATTERY ACTUALS vs BENCHMARKS</div>
+      <div class="gap-section-title">BATTERY ACTUALS vs BENCHMARKS</div>
       <div class="gap-grid">${ahCard}${cCard}${cmCard}${ftCard}${wtCard}${voltCard}</div>`;
   }
 
@@ -1601,7 +1713,7 @@ function renderMiddle(d) {
     <div class="gap-grid">${mtowCard}${gcardInfo('Fixed Mass', fKg(d.m_fixed), 'excl. battery')}</div>
     <div class="gap-section-title">MOTOR BENCHMARKS</div>
     <div class="gap-grid">${hoverThrCard}${peakThrCard}${effCard}${twCard}</div>
-    <div class="gap-section-title" style="color:var(--warn)">BATTERY BENCHMARKS — FROM MOTOR (frozen)</div>
+    <div class="gap-section-title">BATTERY BENCHMARKS — FROM MOTOR (frozen)</div>
     <div class="gap-grid">${benchAhCard}${benchCCard}${benchIhCard}${benchIpCard}${benchPwrCard}${rhoCard}</div>
     ${battActualsHtml}
   `;
@@ -1903,25 +2015,10 @@ function renderFrame(d) {
 // LABEL UPDATES
 // ══════════════════════════════════════════════════════════
 function updateLabels(d) {
-  const map = {
-    'lbl-time':    ['s-time',    v => v+' min'],
-    'lbl-alt':     ['s-alt',     v => v+' m'],
-    'lbl-struct':  ['s-struct',  v => v+' g'],
-    'lbl-motors':  ['s-motors',  v => v+' g'],
-    'lbl-esc':     ['s-esc',     v => v+' g'],
-    'lbl-av':      ['s-av',      v => v+' g'],
-    'lbl-misc':    ['s-misc',    v => v+' g'],
-    'lbl-cam':     ['s-cam',     v => v+' g'],
-    'lbl-payload': ['s-payload', v => v+' g'],
-    'lbl-batt-ph':   ['s-batt-ph',   v => v+' g'],
-    'lbl-eff-wind':  ['s-eff-wind',  v => v+'%'],
-    'lbl-eff-prop':  ['s-eff-prop',  v => v+'%'],
-    'lbl-eff-av':    ['s-eff-av',    v => v+'%'],
-  };
-  Object.entries(map).forEach(([lbl,[sid,fmt]]) => {
-    const el = document.getElementById(lbl);
-    const sl = document.getElementById(sid);
-    if (el && sl) el.textContent = fmt(sl.value);
+  // sync editable value fields from their sliders (don't clobber the field being typed in)
+  document.querySelectorAll('.iv-input').forEach(inp => {
+    const sl = document.getElementById(inp.dataset.slider);
+    if (sl && document.activeElement !== inp) inp.value = sl.value;
   });
   const rhoEl = document.getElementById('lbl-rho');
   if (rhoEl) rhoEl.textContent = `ρ = ${rho(+document.getElementById('s-alt').value).toFixed(4)} kg/m³`;
@@ -2041,7 +2138,7 @@ function update() {
   const d = compute();
   lastD = d;
   updateLabels(d);
-  updateSteps(d);
+  updateSteps();
   renderKPI(d);
   renderEffZone(d);
   renderMiddle(d);
@@ -2065,6 +2162,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('s-style').addEventListener('change', update);
   document.getElementById('motor-filter').addEventListener('input', populateMotors);
+
+  // Editable value fields → drive their slider (numbers only, no formula change)
+  document.querySelectorAll('.iv-input').forEach(inp => {
+    const sl = document.getElementById(inp.dataset.slider);
+    if (!sl) return;
+    const commit = (snap) => {
+      let v = parseFloat(inp.value);
+      if (isNaN(v)) { inp.value = sl.value; return; }
+      const min = parseFloat(sl.min), max = parseFloat(sl.max), step = parseFloat(sl.step) || 1;
+      v = Math.min(max, Math.max(min, v));
+      if (snap) { v = Math.round((v - min) / step) * step + min; inp.value = v; }
+      sl.value = v;
+      update();
+    };
+    inp.addEventListener('input', () => commit(false));
+    inp.addEventListener('change', () => commit(true));
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { commit(true); inp.blur(); } });
+  });
+
+  // Stage navigation
+  document.querySelectorAll('.step-pill').forEach(p => {
+    p.addEventListener('click', () => setStage(+p.dataset.stage));
+  });
+  document.getElementById('stage-back').addEventListener('click', () => setStage(currentStage - 1));
+  document.getElementById('stage-next').addEventListener('click', () => {
+    if (currentStage === 4) exportBuild(); else setStage(currentStage + 1);
+  });
 
   // Global prop filter — re-populates motor list when changed
   document.getElementById('s-prop-global').addEventListener('change', () => {
@@ -2103,6 +2227,7 @@ document.addEventListener('DOMContentLoaded', () => {
   populateMotors();
   populateBatteries();
   update();
+  setStage(1);
 });
 
 </script>
