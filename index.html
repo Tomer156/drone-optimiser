@@ -26,44 +26,70 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-  /* ─── DARK (default) ─── */
+  /* ─── LIGHT (default) ─── */
   :root {
-    --bg: #0d0d0d;
-    --panel: #151515;
-    --panel2: #1c1c1c;
-    --border: rgba(97,0,255,0.15);
-    --border2: rgba(97,0,255,0.28);
+    --bg: #ffffff;
+    --panel: #ffffff;
+    --panel2: #fafafa;
+    --border: #E0E0E0;       /* borders / dividers */
+    --border2: #E0E0E0;
     --accent: #6100ff;
     --accent-hover: #4d00cc;
-    --green: #9EFF00;   /* good   */
-    --warn:  #FF6100;   /* medium */
-    --danger:#FF001E;   /* bad    */
-    --phase: #00FFE1;
-    --text: #ffffff;
-    --muted: rgba(255,255,255,0.45);
-    --sunken: rgba(0,0,0,0.28);
-    --card-border: rgba(97,0,255,0.15);
+    --green: #6FA81E;        /* good  (muted) */
+    --warn:  #FF6100;        /* medium */
+    --danger:#FF001E;        /* bad    */
+    --phase: #0AA69A;        /* legible teal */
+    --text: #1A1A1A;         /* primary text */
+    --muted: #666666;        /* secondary text */
+    --sunken: #F5F5F5;
+    --card-border: #E0E0E0;
+    /* box-coloring tints (colour the box, not the text) */
+    --good-bg: rgba(111,168,30,0.12);
+    --warn-bg: rgba(255,97,0,0.10);
+    --bad-bg:  rgba(255,0,30,0.08);
+    --info-bg: rgba(97,0,255,0.07);
+    --phase-bg: rgba(10,166,154,0.10);
     --mono: 'Inter', ui-monospace, monospace;
     --sans: 'Inter', system-ui, sans-serif;
   }
 
-  /* ─── LIGHT ─── */
-  :root[data-theme="light"] {
-    --bg: #ffffff;
-    --panel: #f7f6fb;
-    --panel2: #f0edfa;
-    --text: #0d0d0d;
-    --muted: rgba(13,13,13,0.45);
-    --sunken: rgba(97,0,255,0.05);
+  /* ─── DARK ─── */
+  :root[data-theme="dark"] {
+    --bg: #0d0d0d;
+    --panel: #161616;
+    --panel2: #1e1e1e;
+    --border: rgba(255,255,255,0.12);
+    --border2: rgba(255,255,255,0.16);
+    --green: #7CB82A;
+    --phase: #00FFE1;
+    --text: #ffffff;
+    --muted: rgba(255,255,255,0.5);
+    --sunken: rgba(255,255,255,0.04);
+    --card-border: rgba(255,255,255,0.12);
+    --good-bg: rgba(124,184,42,0.16);
+    --warn-bg: rgba(255,97,0,0.16);
+    --bad-bg:  rgba(255,0,30,0.15);
+    --info-bg: rgba(97,0,255,0.20);
+    --phase-bg: rgba(0,255,225,0.12);
   }
-  @media (prefers-color-scheme: light) {
+  @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
-      --bg: #ffffff;
-      --panel: #f7f6fb;
-      --panel2: #f0edfa;
-      --text: #0d0d0d;
-      --muted: rgba(13,13,13,0.45);
-      --sunken: rgba(97,0,255,0.05);
+      --bg: #0d0d0d;
+      --panel: #161616;
+      --panel2: #1e1e1e;
+      --border: rgba(255,255,255,0.12);
+      --border2: rgba(255,255,255,0.16);
+      --green: #7CB82A;
+      --phase: #00FFE1;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.5);
+      --sunken: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.12);
+      --good-bg: rgba(124,184,42,0.16);
+      --warn-bg: rgba(255,97,0,0.16);
+      --bad-bg:  rgba(255,0,30,0.15);
+      --info-bg: rgba(97,0,255,0.20);
+      --phase-bg: rgba(0,255,225,0.12);
     }
   }
 
@@ -125,17 +151,21 @@
     font-family: var(--mono);
     white-space: nowrap;
   }
-  .step-pill.active { color: var(--accent); border-bottom-color: var(--accent); }
-  .step-pill.done   { color: var(--green); }
+  .step-pill.active { color: var(--text); border-bottom-color: var(--text); }
+  .step-pill.done   { color: var(--text); }
   .step-num {
     width: 18px; height: 18px;
     border-radius: 50%;
-    background: var(--border2);
+    background: var(--sunken);
+    border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     font-size: 9px; font-weight: 700; flex-shrink: 0;
   }
-  .step-pill.active .step-num { background: var(--accent); color: #000; }
-  .step-pill.done   .step-num { background: var(--green);  color: #000; }
+  /* black tabs */
+  .step-pill.active .step-num { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .step-pill.done   .step-num { background: var(--text); color: var(--bg); border-color: var(--text); font-size: 0; }
+  /* tick mark on completed */
+  .step-pill.done   .step-num::after { content: '✓'; font-size: 10px; line-height: 1; }
 
   /* ─── THREE-COLUMN LAYOUT ─── */
   .layout {
@@ -241,11 +271,11 @@
   .bc:nth-child(even) { border-right: none; }
   .bc:nth-last-child(-n+2) { border-bottom: none; }
   .bc-lbl { font-size: 8px; color: var(--muted); margin-bottom: 2px; font-family: var(--mono); }
-  .bc-val { font-family: var(--mono); font-size: 13px; font-weight: 600; }
-  .bc-val.target  { color: var(--accent); }
-  .bc-val.need    { color: var(--warn); }
-  .bc-val.ok      { color: var(--green); }
-  .bc-val.hi      { color: var(--danger); }
+  .bc-val { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--text); }
+  /* colour the box, not the text */
+  .bc:has(.bc-val.need)   { background: var(--warn-bg); }
+  .bc:has(.bc-val.ok)     { background: var(--good-bg); }
+  .bc:has(.bc-val.hi)     { background: var(--bad-bg); }
   .bc-sub { font-size: 8px; color: var(--muted); font-family: var(--mono); margin-top: 1px; }
 
   /* ─── EFFICIENCY ZONE BAR ─── */
@@ -375,6 +405,10 @@
     content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
     background: var(--muted);
   }
+  /* colour the box, not the text */
+  .gap-card.good { background: var(--good-bg); border-color: var(--green); }
+  .gap-card.warn { background: var(--warn-bg); border-color: var(--warn); }
+  .gap-card.bad  { background: var(--bad-bg);  border-color: var(--danger); }
   .gap-card.good::before { background: var(--green); }
   .gap-card.warn::before { background: var(--warn); }
   .gap-card.bad::before  { background: var(--danger); }
@@ -383,15 +417,8 @@
   .gc-lbl    { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; }
   .gc-bench  { font-size: 9px; color: var(--muted); font-family: var(--mono); margin-bottom: 1px; }
   .gc-actual { font-family: var(--mono); font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.1; }
-  .gc-delta  { font-family: var(--mono); font-size: 9px; margin-top: 2px; }
-  .gc-delta.pos { color: var(--green); }
-  .gc-delta.neg { color: var(--danger); }
-  .gc-delta.neutral { color: var(--muted); }
-
-  .gap-card.good .gc-actual { color: var(--green); }
-  .gap-card.warn .gc-actual { color: var(--warn); }
-  .gap-card.bad  .gc-actual { color: var(--danger); }
-  .gap-card.info .gc-actual { color: var(--accent); }
+  .gc-delta  { font-family: var(--mono); font-size: 9px; margin-top: 2px; color: var(--muted); }
+  .gap-card .gc-actual { color: var(--text); }
 
   /* alert strips */
   .alert-box {
@@ -415,7 +442,7 @@
     background: none; border: none; border-bottom: 2px solid transparent;
     margin-bottom: -1px; color: var(--muted); cursor: pointer; white-space: nowrap;
   }
-  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn.active { color: var(--text); border-bottom-color: var(--text); }
 
   .tab-pane { display: none; padding: 10px 12px; }
   .tab-pane.active { display: block; }
@@ -497,10 +524,10 @@
   .kpi-pill:last-child { border-right: none; }
   .kpi-lbl { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
   .kpi-val { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--text); }
-  .kpi-val.good { color: var(--green); }
-  .kpi-val.warn { color: var(--warn); }
-  .kpi-val.bad  { color: var(--danger); }
-  .kpi-val.info { color: var(--accent); }
+  /* colour the box, not the text */
+  .kpi-pill:has(.kpi-val.good) { background: var(--good-bg); }
+  .kpi-pill:has(.kpi-val.warn) { background: var(--warn-bg); }
+  .kpi-pill:has(.kpi-val.bad)  { background: var(--bad-bg); }
 
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
@@ -538,9 +565,19 @@
   }
   #promo-banner .banner-x:hover { background: rgba(255,255,255,0.32); }
 
+  /* ═══ HEADER ACTIONS ═══ */
+  .header-actions { margin-left: auto; flex-shrink: 0; display: flex; align-items: center; gap: 8px; }
+  .reset-btn {
+    background: var(--panel2); border: 1px solid var(--border2);
+    color: var(--text); height: 30px; padding: 0 12px; border-radius: 6px;
+    cursor: pointer; font-size: 11px; font-weight: 600; font-family: var(--sans);
+    display: flex; align-items: center; gap: 5px; white-space: nowrap;
+  }
+  .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
   /* ═══ THEME TOGGLE ═══ */
   .theme-toggle {
-    margin-left: auto; flex-shrink: 0;
+    flex-shrink: 0;
     background: var(--panel2); border: 1px solid var(--border2);
     color: var(--text); width: 30px; height: 30px; border-radius: 6px;
     cursor: pointer; font-size: 14px; line-height: 1;
@@ -628,7 +665,10 @@
     <h1>Drone Mission Optimiser</h1>
     <p>Bench data · Efficiency-driven motor matching · Iterative battery selection</p>
   </div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">◐</button>
+  <div class="header-actions">
+    <button class="reset-btn" id="reset-all" title="Reset all inputs to defaults">↺ Reset all</button>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">◐</button>
+  </div>
 </header>
 
 <!-- STEP INDICATOR -->
@@ -2072,12 +2112,21 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('click', function(){ fireCta(el.getAttribute('data-cta')); });
   });
 
+  /* ── Reset all (restore input defaults + clear selections) ── */
+  var resetBtn = document.getElementById('reset-all');
+  if (resetBtn){
+    resetBtn.addEventListener('click', function(){
+      // reload restores every input to its HTML default value and clears motor/battery selection
+      location.reload();
+    });
+  }
+
   /* ── Theme toggle ── */
   var toggle = document.getElementById('theme-toggle');
   function currentTheme(){
     var attr = document.documentElement.getAttribute('data-theme');
     if (attr) return attr;
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
   if (toggle){
     toggle.addEventListener('click', function(){
