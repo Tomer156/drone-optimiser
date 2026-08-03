@@ -1,0 +1,7033 @@
+{
+  "AOS 3220 1000KV": {
+    "name": "AOS 3220 1000KV",
+    "avg_voltage": 24.0,
+    "props": [
+      "10.0x5.0x3"
+    ],
+    "data": [
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 1125.0,
+        "voltage_v": 24.0,
+        "current_a": 8.2,
+        "power_w": 196.8,
+        "efficiency": 5.716,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 1036.0,
+        "voltage_v": 24.0,
+        "current_a": 7.5,
+        "power_w": 180.0,
+        "efficiency": 5.756,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 1936.0,
+        "voltage_v": 24.0,
+        "current_a": 16.3,
+        "power_w": 391.2,
+        "efficiency": 4.949,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 1900.0,
+        "voltage_v": 24.0,
+        "current_a": 15.6,
+        "power_w": 374.4,
+        "efficiency": 5.075,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 2797.0,
+        "voltage_v": 24.0,
+        "current_a": 27.6,
+        "power_w": 662.4,
+        "efficiency": 4.223,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 2702.0,
+        "voltage_v": 24.0,
+        "current_a": 25.3,
+        "power_w": 607.2,
+        "efficiency": 4.45,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 3637.0,
+        "voltage_v": 24.0,
+        "current_a": 40.4,
+        "power_w": 969.6,
+        "efficiency": 3.751,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 3525.0,
+        "voltage_v": 24.0,
+        "current_a": 37.6,
+        "power_w": 902.4,
+        "efficiency": 3.906,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 4491.0,
+        "voltage_v": 24.0,
+        "current_a": 57.9,
+        "power_w": 1389.6,
+        "efficiency": 3.232,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 4356.0,
+        "voltage_v": 24.0,
+        "current_a": 52.4,
+        "power_w": 1257.6,
+        "efficiency": 3.464,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 5272.0,
+        "voltage_v": 24.0,
+        "current_a": 76.9,
+        "power_w": 1845.6,
+        "efficiency": 2.857,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 5173.0,
+        "voltage_v": 24.0,
+        "current_a": 71.5,
+        "power_w": 1716.0,
+        "efficiency": 3.015,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 5442.0,
+        "voltage_v": 24.0,
+        "current_a": 84.2,
+        "power_w": 2020.8,
+        "efficiency": 2.693,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 5410.0,
+        "voltage_v": 24.0,
+        "current_a": 78.2,
+        "power_w": 1876.8,
+        "efficiency": 2.883,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 5735.0,
+        "voltage_v": 24.0,
+        "current_a": 87.9,
+        "power_w": 2109.6,
+        "efficiency": 2.719,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 5746.0,
+        "voltage_v": 24.0,
+        "current_a": 83.9,
+        "power_w": 2013.6,
+        "efficiency": 2.854,
+        "rpm": null
+      }
+    ]
+  },
+  "AOS SuperNova 3220 700KV": {
+    "name": "AOS SuperNova 3220 700KV",
+    "avg_voltage": 32.0,
+    "props": [
+      "10.0x5.0x3"
+    ],
+    "data": [
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 1150.0,
+        "voltage_v": 32.0,
+        "current_a": 6.4,
+        "power_w": 204.8,
+        "efficiency": 5.615,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 1055.0,
+        "voltage_v": 32.0,
+        "current_a": 5.9,
+        "power_w": 188.8,
+        "efficiency": 5.588,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 1979.0,
+        "voltage_v": 32.0,
+        "current_a": 12.8,
+        "power_w": 409.6,
+        "efficiency": 4.832,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 1940.0,
+        "voltage_v": 32.0,
+        "current_a": 12.3,
+        "power_w": 393.6,
+        "efficiency": 4.929,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 2707.0,
+        "voltage_v": 32.0,
+        "current_a": 21.7,
+        "power_w": 694.4,
+        "efficiency": 4.116,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 2760.0,
+        "voltage_v": 32.0,
+        "current_a": 19.8,
+        "power_w": 633.6,
+        "efficiency": 4.356,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 3707.0,
+        "voltage_v": 32.0,
+        "current_a": 31.8,
+        "power_w": 1017.6,
+        "efficiency": 3.647,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 3601.0,
+        "voltage_v": 32.0,
+        "current_a": 29.6,
+        "power_w": 947.2,
+        "efficiency": 3.802,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 4590.0,
+        "voltage_v": 32.0,
+        "current_a": 45.6,
+        "power_w": 1459.2,
+        "efficiency": 3.146,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 4447.0,
+        "voltage_v": 32.0,
+        "current_a": 41.3,
+        "power_w": 1321.6,
+        "efficiency": 3.365,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 5389.0,
+        "voltage_v": 32.0,
+        "current_a": 60.5,
+        "power_w": 1936.0,
+        "efficiency": 2.784,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 5285.0,
+        "voltage_v": 32.0,
+        "current_a": 56.3,
+        "power_w": 1801.6,
+        "efficiency": 2.934,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 5562.0,
+        "voltage_v": 32.0,
+        "current_a": 66.3,
+        "power_w": 2121.6,
+        "efficiency": 2.622,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 5522.0,
+        "voltage_v": 32.0,
+        "current_a": 61.5,
+        "power_w": 1968.0,
+        "efficiency": 2.806,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 5851.0,
+        "voltage_v": 32.0,
+        "current_a": 69.2,
+        "power_w": 2214.4,
+        "efficiency": 2.642,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 5859.0,
+        "voltage_v": 32.0,
+        "current_a": 66.1,
+        "power_w": 2115.2,
+        "efficiency": 2.77,
+        "rpm": null
+      }
+    ]
+  },
+  "AOS SuperNova 3220 925KV": {
+    "name": "AOS SuperNova 3220 925KV",
+    "avg_voltage": 24.0,
+    "props": [
+      "10.0x5.0x3"
+    ],
+    "data": [
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 1067.0,
+        "voltage_v": 24.0,
+        "current_a": 7.5,
+        "power_w": 180.0,
+        "efficiency": 5.928,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 984.0,
+        "voltage_v": 24.0,
+        "current_a": 6.9,
+        "power_w": 165.6,
+        "efficiency": 5.942,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 1839.0,
+        "voltage_v": 24.0,
+        "current_a": 14.9,
+        "power_w": 357.6,
+        "efficiency": 5.143,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 1805.0,
+        "voltage_v": 24.0,
+        "current_a": 14.3,
+        "power_w": 343.2,
+        "efficiency": 5.259,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 2657.0,
+        "voltage_v": 24.0,
+        "current_a": 25.4,
+        "power_w": 609.6,
+        "efficiency": 4.359,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 2566.0,
+        "voltage_v": 24.0,
+        "current_a": 23.3,
+        "power_w": 559.2,
+        "efficiency": 4.589,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 2455.0,
+        "voltage_v": 24.0,
+        "current_a": 37.1,
+        "power_w": 890.4,
+        "efficiency": 2.757,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 3348.0,
+        "voltage_v": 24.0,
+        "current_a": 34.6,
+        "power_w": 830.4,
+        "efficiency": 4.032,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 4266.0,
+        "voltage_v": 24.0,
+        "current_a": 53.2,
+        "power_w": 1276.8,
+        "efficiency": 3.341,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 4138.0,
+        "voltage_v": 24.0,
+        "current_a": 48.2,
+        "power_w": 1156.8,
+        "efficiency": 3.577,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 5008.0,
+        "voltage_v": 24.0,
+        "current_a": 70.7,
+        "power_w": 1696.8,
+        "efficiency": 2.951,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 4914.0,
+        "voltage_v": 24.0,
+        "current_a": 65.8,
+        "power_w": 1579.2,
+        "efficiency": 3.112,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 5169.0,
+        "voltage_v": 24.0,
+        "current_a": 77.4,
+        "power_w": 1857.6,
+        "efficiency": 2.783,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 5139.0,
+        "voltage_v": 24.0,
+        "current_a": 71.9,
+        "power_w": 1725.6,
+        "efficiency": 2.978,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 5448.0,
+        "voltage_v": 24.0,
+        "current_a": 80.8,
+        "power_w": 1939.2,
+        "efficiency": 2.809,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 5458.0,
+        "voltage_v": 24.0,
+        "current_a": 77.2,
+        "power_w": 1852.8,
+        "efficiency": 2.946,
+        "rpm": null
+      }
+    ]
+  },
+  "BrotherHobby Avenger 2810 1180K": {
+    "name": "BrotherHobby Avenger 2810 1180K",
+    "avg_voltage": 23.9,
+    "props": [
+      "7.0x4.0x3"
+    ],
+    "data": [
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 30.0,
+        "thrust_g": 293.0,
+        "voltage_v": 24.0,
+        "current_a": 2.6,
+        "power_w": 62.4,
+        "efficiency": 4.7,
+        "rpm": 7808.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 40.0,
+        "thrust_g": 437.0,
+        "voltage_v": 24.0,
+        "current_a": 4.3,
+        "power_w": 103.2,
+        "efficiency": 4.23,
+        "rpm": 9440.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 626.0,
+        "voltage_v": 24.0,
+        "current_a": 6.7,
+        "power_w": 160.8,
+        "efficiency": 3.89,
+        "rpm": 11054.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 961.0,
+        "voltage_v": 24.0,
+        "current_a": 11.2,
+        "power_w": 268.8,
+        "efficiency": 3.58,
+        "rpm": 13322.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1342.0,
+        "voltage_v": 23.9,
+        "current_a": 17.3,
+        "power_w": 413.47,
+        "efficiency": 3.25,
+        "rpm": 15379.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 1807.0,
+        "voltage_v": 23.8,
+        "current_a": 26.7,
+        "power_w": 635.46,
+        "efficiency": 2.84,
+        "rpm": 17706.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2193.0,
+        "voltage_v": 23.8,
+        "current_a": 36.0,
+        "power_w": 856.8,
+        "efficiency": 2.56,
+        "rpm": 19318.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2339.0,
+        "voltage_v": 23.7,
+        "current_a": 43.5,
+        "power_w": 1030.95,
+        "efficiency": 2.27,
+        "rpm": 19769.0
+      }
+    ]
+  },
+  "BrotherHobby Avenger 2810 1350K": {
+    "name": "BrotherHobby Avenger 2810 1350K",
+    "avg_voltage": 25.07,
+    "props": [
+      "7.0x3.5x3"
+    ],
+    "data": [
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 30.0,
+        "thrust_g": 396.0,
+        "voltage_v": 25.2,
+        "current_a": 3.4,
+        "power_w": 85.68,
+        "efficiency": 4.62,
+        "rpm": 9544.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 40.0,
+        "thrust_g": 689.0,
+        "voltage_v": 25.2,
+        "current_a": 6.9,
+        "power_w": 173.88,
+        "efficiency": 3.96,
+        "rpm": 12278.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 50.0,
+        "thrust_g": 1049.0,
+        "voltage_v": 25.2,
+        "current_a": 11.9,
+        "power_w": 299.88,
+        "efficiency": 3.5,
+        "rpm": 14485.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1321.0,
+        "voltage_v": 25.2,
+        "current_a": 16.3,
+        "power_w": 410.76,
+        "efficiency": 3.22,
+        "rpm": 16778.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 70.0,
+        "thrust_g": 1703.0,
+        "voltage_v": 25.1,
+        "current_a": 24.2,
+        "power_w": 607.42,
+        "efficiency": 2.8,
+        "rpm": 18855.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 80.0,
+        "thrust_g": 2001.0,
+        "voltage_v": 25.0,
+        "current_a": 31.9,
+        "power_w": 797.5,
+        "efficiency": 2.51,
+        "rpm": 20740.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 90.0,
+        "thrust_g": 2103.0,
+        "voltage_v": 24.9,
+        "current_a": 45.6,
+        "power_w": 1135.44,
+        "efficiency": 1.85,
+        "rpm": 21783.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 100.0,
+        "thrust_g": 2473.0,
+        "voltage_v": 24.8,
+        "current_a": 57.9,
+        "power_w": 1435.92,
+        "efficiency": 1.72,
+        "rpm": 22405.0
+      }
+    ]
+  },
+  "BrotherHobby Avenger 2810 1500K": {
+    "name": "BrotherHobby Avenger 2810 1500K",
+    "avg_voltage": 25.2,
+    "props": [
+      "6.0x3.5x3"
+    ],
+    "data": [
+      {
+        "prop": "6.0x3.5x3",
+        "throttle": 30.0,
+        "thrust_g": 573.0,
+        "voltage_v": 25.2,
+        "current_a": 6.5,
+        "power_w": 163.8,
+        "efficiency": 3.5,
+        "rpm": 13931.0
+      },
+      {
+        "prop": "6.0x3.5x3",
+        "throttle": 40.0,
+        "thrust_g": 823.0,
+        "voltage_v": 25.2,
+        "current_a": 10.4,
+        "power_w": 262.08,
+        "efficiency": 3.14,
+        "rpm": 16375.0
+      },
+      {
+        "prop": "6.0x3.5x3",
+        "throttle": 50.0,
+        "thrust_g": 1040.0,
+        "voltage_v": 25.2,
+        "current_a": 13.9,
+        "power_w": 350.28,
+        "efficiency": 2.97,
+        "rpm": 18402.0
+      },
+      {
+        "prop": "6.0x3.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1267.0,
+        "voltage_v": 25.2,
+        "current_a": 17.9,
+        "power_w": 451.08,
+        "efficiency": 2.81,
+        "rpm": 20206.0
+      },
+      {
+        "prop": "6.0x3.5x3",
+        "throttle": 70.0,
+        "thrust_g": 1660.0,
+        "voltage_v": 25.2,
+        "current_a": 26.9,
+        "power_w": 677.88,
+        "efficiency": 2.45,
+        "rpm": 23122.0
+      },
+      {
+        "prop": "6.0x3.5x3",
+        "throttle": 80.0,
+        "thrust_g": 1995.0,
+        "voltage_v": 25.2,
+        "current_a": 36.0,
+        "power_w": 907.2,
+        "efficiency": 2.2,
+        "rpm": 25435.0
+      },
+      {
+        "prop": "6.0x3.5x3",
+        "throttle": 90.0,
+        "thrust_g": 2313.0,
+        "voltage_v": 25.2,
+        "current_a": 45.0,
+        "power_w": 1134.0,
+        "efficiency": 2.04,
+        "rpm": 27274.0
+      },
+      {
+        "prop": "6.0x3.5x3",
+        "throttle": 100.0,
+        "thrust_g": 2329.0,
+        "voltage_v": 25.2,
+        "current_a": 46.0,
+        "power_w": 1159.2,
+        "efficiency": 2.01,
+        "rpm": 27328.0
+      }
+    ]
+  },
+  "BrotherHobby Avenger 2810 900KV": {
+    "name": "BrotherHobby Avenger 2810 900KV",
+    "avg_voltage": 23.9,
+    "props": [
+      "8.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 30.0,
+        "thrust_g": 329.0,
+        "voltage_v": 24.0,
+        "current_a": 2.2,
+        "power_w": 52.8,
+        "efficiency": 6.23,
+        "rpm": 6045.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 40.0,
+        "thrust_g": 569.0,
+        "voltage_v": 24.0,
+        "current_a": 4.3,
+        "power_w": 103.2,
+        "efficiency": 5.51,
+        "rpm": 7666.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 50.0,
+        "thrust_g": 871.0,
+        "voltage_v": 24.0,
+        "current_a": 7.8,
+        "power_w": 187.2,
+        "efficiency": 4.65,
+        "rpm": 9480.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1233.0,
+        "voltage_v": 24.0,
+        "current_a": 12.4,
+        "power_w": 297.6,
+        "efficiency": 4.14,
+        "rpm": 10928.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 70.0,
+        "thrust_g": 1571.0,
+        "voltage_v": 23.9,
+        "current_a": 18.5,
+        "power_w": 442.15,
+        "efficiency": 3.55,
+        "rpm": 12331.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 2107.0,
+        "voltage_v": 23.8,
+        "current_a": 39.4,
+        "power_w": 937.72,
+        "efficiency": 2.25,
+        "rpm": 14141.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 90.0,
+        "thrust_g": 2660.0,
+        "voltage_v": 23.8,
+        "current_a": 38.8,
+        "power_w": 923.44,
+        "efficiency": 2.88,
+        "rpm": 15636.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 100.0,
+        "thrust_g": 2724.0,
+        "voltage_v": 23.7,
+        "current_a": 43.8,
+        "power_w": 1038.06,
+        "efficiency": 2.62,
+        "rpm": 16011.0
+      }
+    ]
+  },
+  "BrotherHobby Avenger 2812 900KV": {
+    "name": "BrotherHobby Avenger 2812 900KV",
+    "avg_voltage": 23.94,
+    "props": [
+      "9.0x4.7x2"
+    ],
+    "data": [
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 30.0,
+        "thrust_g": 250.0,
+        "voltage_v": 24.0,
+        "current_a": 1.5,
+        "power_w": 36.0,
+        "efficiency": 6.94,
+        "rpm": 5425.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 40.0,
+        "thrust_g": 470.0,
+        "voltage_v": 24.0,
+        "current_a": 3.2,
+        "power_w": 76.8,
+        "efficiency": 6.12,
+        "rpm": 7362.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 50.0,
+        "thrust_g": 780.0,
+        "voltage_v": 24.0,
+        "current_a": 5.9,
+        "power_w": 141.6,
+        "efficiency": 5.51,
+        "rpm": 9238.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 60.0,
+        "thrust_g": 1120.0,
+        "voltage_v": 24.0,
+        "current_a": 9.5,
+        "power_w": 228.0,
+        "efficiency": 4.91,
+        "rpm": 10904.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 70.0,
+        "thrust_g": 1480.0,
+        "voltage_v": 24.0,
+        "current_a": 14.0,
+        "power_w": 336.0,
+        "efficiency": 4.4,
+        "rpm": 12423.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 80.0,
+        "thrust_g": 1990.0,
+        "voltage_v": 23.9,
+        "current_a": 21.5,
+        "power_w": 513.85,
+        "efficiency": 3.87,
+        "rpm": 14262.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 90.0,
+        "thrust_g": 2490.0,
+        "voltage_v": 23.8,
+        "current_a": 29.5,
+        "power_w": 702.1,
+        "efficiency": 3.55,
+        "rpm": 15826.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 100.0,
+        "thrust_g": 2750.0,
+        "voltage_v": 23.8,
+        "current_a": 33.8,
+        "power_w": 804.44,
+        "efficiency": 3.42,
+        "rpm": 16416.0
+      }
+    ]
+  },
+  "BrotherHobby Avenger 2812 V3 11": {
+    "name": "BrotherHobby Avenger 2812 V3 11",
+    "avg_voltage": 23.89,
+    "props": [
+      "9.0x4.7x2"
+    ],
+    "data": [
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 30.0,
+        "thrust_g": 360.0,
+        "voltage_v": 24.0,
+        "current_a": 2.4,
+        "power_w": 57.6,
+        "efficiency": 6.25,
+        "rpm": 6513.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 40.0,
+        "thrust_g": 720.0,
+        "voltage_v": 24.0,
+        "current_a": 5.9,
+        "power_w": 141.6,
+        "efficiency": 5.08,
+        "rpm": 9043.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 50.0,
+        "thrust_g": 1090.0,
+        "voltage_v": 24.0,
+        "current_a": 10.1,
+        "power_w": 242.4,
+        "efficiency": 4.5,
+        "rpm": 10949.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 60.0,
+        "thrust_g": 1430.0,
+        "voltage_v": 24.0,
+        "current_a": 14.7,
+        "power_w": 352.8,
+        "efficiency": 4.05,
+        "rpm": 12451.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 70.0,
+        "thrust_g": 1940.0,
+        "voltage_v": 23.9,
+        "current_a": 22.8,
+        "power_w": 544.92,
+        "efficiency": 3.56,
+        "rpm": 14395.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 80.0,
+        "thrust_g": 2570.0,
+        "voltage_v": 23.8,
+        "current_a": 34.2,
+        "power_w": 813.96,
+        "efficiency": 3.16,
+        "rpm": 16352.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 90.0,
+        "thrust_g": 3090.0,
+        "voltage_v": 23.7,
+        "current_a": 46.9,
+        "power_w": 1111.53,
+        "efficiency": 2.78,
+        "rpm": 17789.0
+      },
+      {
+        "prop": "9.0x4.7x2",
+        "throttle": 100.0,
+        "thrust_g": 3520.0,
+        "voltage_v": 23.7,
+        "current_a": 54.5,
+        "power_w": 1291.65,
+        "efficiency": 2.73,
+        "rpm": 18768.0
+      }
+    ]
+  },
+  "BrotherHobby Avenger 3120 500KV": {
+    "name": "BrotherHobby Avenger 3120 500KV",
+    "avg_voltage": 50.07,
+    "props": [
+      "10.0x5.0x3"
+    ],
+    "data": [
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 379.56,
+        "voltage_v": 50.3,
+        "current_a": 1.1,
+        "power_w": 55.33,
+        "efficiency": 6.86,
+        "rpm": 4560.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 1337.98,
+        "voltage_v": 50.3,
+        "current_a": 4.0,
+        "power_w": 201.2,
+        "efficiency": 6.65,
+        "rpm": 8320.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 2725.0,
+        "voltage_v": 50.3,
+        "current_a": 13.7,
+        "power_w": 689.11,
+        "efficiency": 3.95,
+        "rpm": 11196.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 3502.0,
+        "voltage_v": 50.1,
+        "current_a": 20.5,
+        "power_w": 1027.05,
+        "efficiency": 3.41,
+        "rpm": 12480.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 4938.0,
+        "voltage_v": 50.0,
+        "current_a": 35.6,
+        "power_w": 1780.0,
+        "efficiency": 2.77,
+        "rpm": 14632.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 5758.0,
+        "voltage_v": 49.9,
+        "current_a": 49.0,
+        "power_w": 2445.1,
+        "efficiency": 2.35,
+        "rpm": 15613.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 6628.0,
+        "voltage_v": 49.9,
+        "current_a": 62.6,
+        "power_w": 3123.74,
+        "efficiency": 2.12,
+        "rpm": 16625.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 6719.0,
+        "voltage_v": 49.8,
+        "current_a": 67.9,
+        "power_w": 3381.42,
+        "efficiency": 1.99,
+        "rpm": 16705.0
+      }
+    ]
+  },
+  "BrotherHobby Avenger 3120 700KV": {
+    "name": "BrotherHobby Avenger 3120 700KV",
+    "avg_voltage": 32.76,
+    "props": [
+      "10.0x5.0x3",
+      "10.0x6.0x3"
+    ],
+    "data": [
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 1153.0,
+        "voltage_v": 33.6,
+        "current_a": 4.1,
+        "power_w": 137.76,
+        "efficiency": 8.37,
+        "rpm": 7277.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 1558.0,
+        "voltage_v": 33.6,
+        "current_a": 7.2,
+        "power_w": 241.92,
+        "efficiency": 6.44,
+        "rpm": 8160.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 2513.0,
+        "voltage_v": 33.5,
+        "current_a": 18.9,
+        "power_w": 633.15,
+        "efficiency": 3.97,
+        "rpm": 10619.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 3108.0,
+        "voltage_v": 33.4,
+        "current_a": 27.0,
+        "power_w": 901.8,
+        "efficiency": 3.45,
+        "rpm": 11237.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 3710.0,
+        "voltage_v": 33.3,
+        "current_a": 38.0,
+        "power_w": 1265.4,
+        "efficiency": 2.93,
+        "rpm": 12112.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 4201.0,
+        "voltage_v": 33.1,
+        "current_a": 48.4,
+        "power_w": 1602.04,
+        "efficiency": 2.62,
+        "rpm": 12741.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 4476.0,
+        "voltage_v": 33.1,
+        "current_a": 57.6,
+        "power_w": 1906.56,
+        "efficiency": 2.35,
+        "rpm": 13198.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 5041.0,
+        "voltage_v": 32.5,
+        "current_a": 72.5,
+        "power_w": 2356.25,
+        "efficiency": 2.14,
+        "rpm": 14054.0
+      },
+      {
+        "prop": "10.0x6.0x3",
+        "throttle": 30.0,
+        "thrust_g": 412.0,
+        "voltage_v": 33.6,
+        "current_a": 1.6,
+        "power_w": 53.76,
+        "efficiency": 7.66,
+        "rpm": 4679.0
+      },
+      {
+        "prop": "10.0x6.0x3",
+        "throttle": 40.0,
+        "thrust_g": 1155.0,
+        "voltage_v": 33.6,
+        "current_a": 6.9,
+        "power_w": 231.84,
+        "efficiency": 4.98,
+        "rpm": 8144.0
+      },
+      {
+        "prop": "10.0x6.0x3",
+        "throttle": 50.0,
+        "thrust_g": 2027.0,
+        "voltage_v": 33.6,
+        "current_a": 15.3,
+        "power_w": 514.08,
+        "efficiency": 3.94,
+        "rpm": 10691.0
+      },
+      {
+        "prop": "10.0x6.0x3",
+        "throttle": 60.0,
+        "thrust_g": 3381.0,
+        "voltage_v": 33.6,
+        "current_a": 32.4,
+        "power_w": 1088.64,
+        "efficiency": 3.11,
+        "rpm": 13423.0
+      },
+      {
+        "prop": "10.0x6.0x3",
+        "throttle": 70.0,
+        "thrust_g": 3752.0,
+        "voltage_v": 33.2,
+        "current_a": 39.8,
+        "power_w": 1321.36,
+        "efficiency": 2.84,
+        "rpm": 14167.0
+      },
+      {
+        "prop": "10.0x6.0x3",
+        "throttle": 80.0,
+        "thrust_g": 4392.0,
+        "voltage_v": 30.9,
+        "current_a": 67.4,
+        "power_w": 2081.51,
+        "efficiency": 2.11,
+        "rpm": 14206.0
+      },
+      {
+        "prop": "10.0x6.0x3",
+        "throttle": 90.0,
+        "thrust_g": 4583.0,
+        "voltage_v": 29.9,
+        "current_a": 73.33,
+        "power_w": 2192.82,
+        "efficiency": 2.09,
+        "rpm": 14596.0
+      },
+      {
+        "prop": "10.0x6.0x3",
+        "throttle": 100.0,
+        "thrust_g": 4709.0,
+        "voltage_v": 29.6,
+        "current_a": 76.3,
+        "power_w": 2258.48,
+        "efficiency": 2.08,
+        "rpm": 15031.0
+      }
+    ]
+  },
+  "EMAX ECOII 2812 1100KV": {
+    "name": "EMAX ECOII 2812 1100KV",
+    "avg_voltage": 25.2,
+    "props": [
+      "8.0x4.0x3",
+      "8.0x4.3x3"
+    ],
+    "data": [
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": null,
+        "thrust_g": 380.0,
+        "voltage_v": 25.2,
+        "current_a": 3.15,
+        "power_w": 79.38,
+        "efficiency": 4.79,
+        "rpm": 7440.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": null,
+        "thrust_g": 670.0,
+        "voltage_v": 25.2,
+        "current_a": 6.2,
+        "power_w": 156.24,
+        "efficiency": 4.29,
+        "rpm": 9550.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": null,
+        "thrust_g": 1050.0,
+        "voltage_v": 25.2,
+        "current_a": 11.0,
+        "power_w": 277.2,
+        "efficiency": 3.79,
+        "rpm": 11540.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": null,
+        "thrust_g": 1450.0,
+        "voltage_v": 25.2,
+        "current_a": 17.1,
+        "power_w": 430.92,
+        "efficiency": 3.36,
+        "rpm": 13340.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": null,
+        "thrust_g": 1910.0,
+        "voltage_v": 25.2,
+        "current_a": 25.0,
+        "power_w": 630.0,
+        "efficiency": 3.03,
+        "rpm": 15080.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": null,
+        "thrust_g": 2420.0,
+        "voltage_v": 25.2,
+        "current_a": 34.9,
+        "power_w": 879.48,
+        "efficiency": 2.75,
+        "rpm": 16770.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": null,
+        "thrust_g": 2820.0,
+        "voltage_v": 25.2,
+        "current_a": 46.3,
+        "power_w": 1166.76,
+        "efficiency": 2.42,
+        "rpm": 17970.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": null,
+        "thrust_g": 3320.0,
+        "voltage_v": 25.2,
+        "current_a": 60.8,
+        "power_w": 1532.16,
+        "efficiency": 2.17,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.3x3",
+        "throttle": null,
+        "thrust_g": 430.0,
+        "voltage_v": 25.2,
+        "current_a": 3.4,
+        "power_w": 85.68,
+        "efficiency": 5.02,
+        "rpm": 7320.0
+      },
+      {
+        "prop": "8.0x4.3x3",
+        "throttle": null,
+        "thrust_g": 730.0,
+        "voltage_v": 25.2,
+        "current_a": 6.7,
+        "power_w": 168.84,
+        "efficiency": 4.32,
+        "rpm": 9360.0
+      },
+      {
+        "prop": "8.0x4.3x3",
+        "throttle": null,
+        "thrust_g": 1100.0,
+        "voltage_v": 25.2,
+        "current_a": 11.7,
+        "power_w": 294.84,
+        "efficiency": 3.73,
+        "rpm": 11360.0
+      },
+      {
+        "prop": "8.0x4.3x3",
+        "throttle": null,
+        "thrust_g": 1470.0,
+        "voltage_v": 25.2,
+        "current_a": 18.3,
+        "power_w": 461.16,
+        "efficiency": 3.19,
+        "rpm": 13100.0
+      },
+      {
+        "prop": "8.0x4.3x3",
+        "throttle": null,
+        "thrust_g": 1900.0,
+        "voltage_v": 25.2,
+        "current_a": 26.7,
+        "power_w": 672.84,
+        "efficiency": 2.82,
+        "rpm": 14760.0
+      },
+      {
+        "prop": "8.0x4.3x3",
+        "throttle": null,
+        "thrust_g": 2330.0,
+        "voltage_v": 25.2,
+        "current_a": 37.0,
+        "power_w": 932.4,
+        "efficiency": 2.5,
+        "rpm": 16250.0
+      },
+      {
+        "prop": "8.0x4.3x3",
+        "throttle": null,
+        "thrust_g": 2600.0,
+        "voltage_v": 25.2,
+        "current_a": 49.4,
+        "power_w": 1244.88,
+        "efficiency": 2.09,
+        "rpm": 17420.0
+      },
+      {
+        "prop": "8.0x4.3x3",
+        "throttle": null,
+        "thrust_g": 2900.0,
+        "voltage_v": 25.2,
+        "current_a": 68.2,
+        "power_w": 1718.64,
+        "efficiency": 1.69,
+        "rpm": null
+      }
+    ]
+  },
+  "EMAX ECOII 2812 930KV": {
+    "name": "EMAX ECOII 2812 930KV",
+    "avg_voltage": 25.2,
+    "props": [
+      "8.0x4.5x3",
+      "8.0x6.0x3",
+      "9.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 320.0,
+        "voltage_v": 25.2,
+        "current_a": 2.5,
+        "power_w": 63.0,
+        "efficiency": 5.08,
+        "rpm": 6200.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 570.0,
+        "voltage_v": 25.2,
+        "current_a": 4.88,
+        "power_w": 122.98,
+        "efficiency": 4.64,
+        "rpm": 7930.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 900.0,
+        "voltage_v": 25.2,
+        "current_a": 8.75,
+        "power_w": 220.5,
+        "efficiency": 4.08,
+        "rpm": 9680.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 1270.0,
+        "voltage_v": 25.2,
+        "current_a": 14.0,
+        "power_w": 352.8,
+        "efficiency": 3.6,
+        "rpm": 11310.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 1620.0,
+        "voltage_v": 25.2,
+        "current_a": 20.6,
+        "power_w": 519.12,
+        "efficiency": 3.12,
+        "rpm": 12700.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 1950.0,
+        "voltage_v": 25.2,
+        "current_a": 28.5,
+        "power_w": 718.2,
+        "efficiency": 2.72,
+        "rpm": 14020.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 2450.0,
+        "voltage_v": 25.2,
+        "current_a": 38.0,
+        "power_w": 957.6,
+        "efficiency": 2.56,
+        "rpm": 15180.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 2900.0,
+        "voltage_v": 25.2,
+        "current_a": 50.5,
+        "power_w": 1272.6,
+        "efficiency": 2.28,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x6.0x3",
+        "throttle": null,
+        "thrust_g": 300.0,
+        "voltage_v": 25.2,
+        "current_a": 2.6,
+        "power_w": 65.52,
+        "efficiency": 4.58,
+        "rpm": 6170.0
+      },
+      {
+        "prop": "8.0x6.0x3",
+        "throttle": null,
+        "thrust_g": 570.0,
+        "voltage_v": 25.2,
+        "current_a": 5.04,
+        "power_w": 127.01,
+        "efficiency": 4.49,
+        "rpm": 7920.0
+      },
+      {
+        "prop": "8.0x6.0x3",
+        "throttle": null,
+        "thrust_g": 900.0,
+        "voltage_v": 25.2,
+        "current_a": 8.8,
+        "power_w": 221.76,
+        "efficiency": 4.06,
+        "rpm": 9690.0
+      },
+      {
+        "prop": "8.0x6.0x3",
+        "throttle": null,
+        "thrust_g": 1250.0,
+        "voltage_v": 25.2,
+        "current_a": 13.8,
+        "power_w": 347.76,
+        "efficiency": 3.59,
+        "rpm": 11370.0
+      },
+      {
+        "prop": "8.0x6.0x3",
+        "throttle": null,
+        "thrust_g": 1610.0,
+        "voltage_v": 25.2,
+        "current_a": 19.9,
+        "power_w": 501.48,
+        "efficiency": 3.21,
+        "rpm": 12760.0
+      },
+      {
+        "prop": "8.0x6.0x3",
+        "throttle": null,
+        "thrust_g": 1950.0,
+        "voltage_v": 25.2,
+        "current_a": 27.6,
+        "power_w": 695.52,
+        "efficiency": 2.8,
+        "rpm": 14120.0
+      },
+      {
+        "prop": "8.0x6.0x3",
+        "throttle": null,
+        "thrust_g": 2400.0,
+        "voltage_v": 25.2,
+        "current_a": 36.8,
+        "power_w": 927.36,
+        "efficiency": 2.59,
+        "rpm": 15410.0
+      },
+      {
+        "prop": "8.0x6.0x3",
+        "throttle": null,
+        "thrust_g": 2850.0,
+        "voltage_v": 25.2,
+        "current_a": 48.5,
+        "power_w": 1222.2,
+        "efficiency": 2.33,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 460.0,
+        "voltage_v": 25.2,
+        "current_a": 3.15,
+        "power_w": 79.38,
+        "efficiency": 5.79,
+        "rpm": 5840.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 810.0,
+        "voltage_v": 25.2,
+        "current_a": 6.53,
+        "power_w": 164.56,
+        "efficiency": 4.92,
+        "rpm": 7550.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 1220.0,
+        "voltage_v": 25.2,
+        "current_a": 11.5,
+        "power_w": 289.8,
+        "efficiency": 4.21,
+        "rpm": 9110.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 1660.0,
+        "voltage_v": 25.2,
+        "current_a": 18.4,
+        "power_w": 463.68,
+        "efficiency": 3.58,
+        "rpm": 10540.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 2100.0,
+        "voltage_v": 25.2,
+        "current_a": 26.1,
+        "power_w": 657.72,
+        "efficiency": 3.19,
+        "rpm": 11840.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 2500.0,
+        "voltage_v": 25.2,
+        "current_a": 35.0,
+        "power_w": 882.0,
+        "efficiency": 2.83,
+        "rpm": 12900.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 2800.0,
+        "voltage_v": 25.2,
+        "current_a": 45.8,
+        "power_w": 1154.16,
+        "efficiency": 2.43,
+        "rpm": 13820.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 3300.0,
+        "voltage_v": 25.2,
+        "current_a": 62.0,
+        "power_w": 1562.4,
+        "efficiency": 2.11,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 370.0,
+        "voltage_v": 25.2,
+        "current_a": 2.75,
+        "power_w": 69.3,
+        "efficiency": 5.34,
+        "rpm": 6020.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 700.0,
+        "voltage_v": 25.2,
+        "current_a": 5.6,
+        "power_w": 141.12,
+        "efficiency": 4.96,
+        "rpm": 7750.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 1100.0,
+        "voltage_v": 25.2,
+        "current_a": 10.0,
+        "power_w": 252.0,
+        "efficiency": 4.37,
+        "rpm": 9410.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 1520.0,
+        "voltage_v": 25.2,
+        "current_a": 15.6,
+        "power_w": 393.12,
+        "efficiency": 3.87,
+        "rpm": 10910.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 1960.0,
+        "voltage_v": 25.2,
+        "current_a": 23.0,
+        "power_w": 579.6,
+        "efficiency": 3.38,
+        "rpm": 12240.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 2400.0,
+        "voltage_v": 25.2,
+        "current_a": 31.5,
+        "power_w": 793.8,
+        "efficiency": 3.02,
+        "rpm": 13500.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 2830.0,
+        "voltage_v": 25.2,
+        "current_a": 41.6,
+        "power_w": 1048.32,
+        "efficiency": 2.7,
+        "rpm": 14560.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": null,
+        "thrust_g": 3300.0,
+        "voltage_v": 25.2,
+        "current_a": 56.0,
+        "power_w": 1411.2,
+        "efficiency": 2.34,
+        "rpm": null
+      }
+    ]
+  },
+  "GEPRC EM2812 900KV": {
+    "name": "GEPRC EM2812 900KV",
+    "avg_voltage": 23.91,
+    "props": [
+      "8.0x4.0x3",
+      "9.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 20.0,
+        "thrust_g": 93.0,
+        "voltage_v": 24.1,
+        "current_a": 0.17,
+        "power_w": 4.1,
+        "efficiency": 22.69,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 30.0,
+        "thrust_g": 322.0,
+        "voltage_v": 24.1,
+        "current_a": 1.93,
+        "power_w": 46.63,
+        "efficiency": 6.91,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 40.0,
+        "thrust_g": 594.0,
+        "voltage_v": 24.1,
+        "current_a": 4.43,
+        "power_w": 107.59,
+        "efficiency": 5.52,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 872.0,
+        "voltage_v": 24.1,
+        "current_a": 7.01,
+        "power_w": 170.43,
+        "efficiency": 5.12,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1240.0,
+        "voltage_v": 24.1,
+        "current_a": 11.53,
+        "power_w": 280.11,
+        "efficiency": 4.43,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1680.0,
+        "voltage_v": 23.93,
+        "current_a": 17.46,
+        "power_w": 421.34,
+        "efficiency": 3.99,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2261.0,
+        "voltage_v": 23.71,
+        "current_a": 26.97,
+        "power_w": 645.03,
+        "efficiency": 3.51,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2288.0,
+        "voltage_v": 23.71,
+        "current_a": 28.29,
+        "power_w": 676.58,
+        "efficiency": 3.38,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2318.0,
+        "voltage_v": 23.66,
+        "current_a": 28.43,
+        "power_w": 678.34,
+        "efficiency": 3.42,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 20.0,
+        "thrust_g": 88.0,
+        "voltage_v": 24.1,
+        "current_a": 0.23,
+        "power_w": 5.51,
+        "efficiency": 15.97,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 30.0,
+        "thrust_g": 345.0,
+        "voltage_v": 24.1,
+        "current_a": 2.07,
+        "power_w": 49.99,
+        "efficiency": 6.9,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 40.0,
+        "thrust_g": 630.0,
+        "voltage_v": 24.07,
+        "current_a": 4.64,
+        "power_w": 112.65,
+        "efficiency": 5.59,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 50.0,
+        "thrust_g": 1011.0,
+        "voltage_v": 23.99,
+        "current_a": 8.06,
+        "power_w": 194.85,
+        "efficiency": 5.19,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1488.0,
+        "voltage_v": 23.99,
+        "current_a": 14.38,
+        "power_w": 347.71,
+        "efficiency": 4.28,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 70.0,
+        "thrust_g": 2028.0,
+        "voltage_v": 23.88,
+        "current_a": 22.04,
+        "power_w": 530.74,
+        "efficiency": 3.82,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 2566.0,
+        "voltage_v": 23.6,
+        "current_a": 32.53,
+        "power_w": 774.31,
+        "efficiency": 3.31,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 90.0,
+        "thrust_g": 2664.0,
+        "voltage_v": 23.6,
+        "current_a": 34.54,
+        "power_w": 822.26,
+        "efficiency": 3.24,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 100.0,
+        "thrust_g": 2710.0,
+        "voltage_v": 23.6,
+        "current_a": 36.26,
+        "power_w": 855.73,
+        "efficiency": 3.16,
+        "rpm": null
+      }
+    ]
+  },
+  "GEPRC SPEEDX2 3214 860KV": {
+    "name": "GEPRC SPEEDX2 3214 860KV",
+    "avg_voltage": 24.0,
+    "props": [
+      "9.0x4.5x3",
+      "10.0x5.0x3"
+    ],
+    "data": [
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 30.0,
+        "thrust_g": 35.0,
+        "voltage_v": 24.0,
+        "current_a": 0.28,
+        "power_w": 6.72,
+        "efficiency": 5.21,
+        "rpm": 5804.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 40.0,
+        "thrust_g": 543.0,
+        "voltage_v": 24.0,
+        "current_a": 5.33,
+        "power_w": 127.92,
+        "efficiency": 4.24,
+        "rpm": 7578.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 50.0,
+        "thrust_g": 860.0,
+        "voltage_v": 24.0,
+        "current_a": 9.42,
+        "power_w": 226.08,
+        "efficiency": 3.8,
+        "rpm": 9250.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1265.0,
+        "voltage_v": 24.0,
+        "current_a": 14.54,
+        "power_w": 348.96,
+        "efficiency": 3.63,
+        "rpm": 10773.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 70.0,
+        "thrust_g": 1889.0,
+        "voltage_v": 24.0,
+        "current_a": 21.66,
+        "power_w": 519.84,
+        "efficiency": 3.63,
+        "rpm": 12229.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 2323.0,
+        "voltage_v": 24.0,
+        "current_a": 30.73,
+        "power_w": 737.52,
+        "efficiency": 3.15,
+        "rpm": 13661.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 90.0,
+        "thrust_g": 2701.0,
+        "voltage_v": 24.0,
+        "current_a": 42.11,
+        "power_w": 1010.64,
+        "efficiency": 2.67,
+        "rpm": 15035.0
+      },
+      {
+        "prop": "9.0x4.5x3",
+        "throttle": 100.0,
+        "thrust_g": 3419.0,
+        "voltage_v": 24.0,
+        "current_a": 60.31,
+        "power_w": 1447.44,
+        "efficiency": 2.36,
+        "rpm": 16586.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 45.0,
+        "voltage_v": 24.0,
+        "current_a": 0.35,
+        "power_w": 8.4,
+        "efficiency": 5.36,
+        "rpm": 3435.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 686.0,
+        "voltage_v": 24.0,
+        "current_a": 6.34,
+        "power_w": 152.16,
+        "efficiency": 4.51,
+        "rpm": 7201.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 1327.0,
+        "voltage_v": 24.0,
+        "current_a": 12.06,
+        "power_w": 289.44,
+        "efficiency": 4.58,
+        "rpm": 8861.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1774.0,
+        "voltage_v": 24.0,
+        "current_a": 18.93,
+        "power_w": 454.32,
+        "efficiency": 3.9,
+        "rpm": 10241.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 2480.0,
+        "voltage_v": 24.0,
+        "current_a": 27.92,
+        "power_w": 670.08,
+        "efficiency": 3.7,
+        "rpm": 11522.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2987.0,
+        "voltage_v": 24.0,
+        "current_a": 40.52,
+        "power_w": 972.48,
+        "efficiency": 3.07,
+        "rpm": 12809.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 3576.0,
+        "voltage_v": 24.0,
+        "current_a": 55.56,
+        "power_w": 1333.44,
+        "efficiency": 2.68,
+        "rpm": 13963.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 4723.0,
+        "voltage_v": 24.0,
+        "current_a": 77.8,
+        "power_w": 1867.2,
+        "efficiency": 2.53,
+        "rpm": 15135.0
+      }
+    ]
+  },
+  "GTS3215 1200KV": {
+    "name": "GTS3215 1200KV",
+    "avg_voltage": 18.5,
+    "props": [
+      "9.0x5.0x3@16V",
+      "9.0x5.0x3@21V",
+      "10.0x5.0x3@16V",
+      "10.0x5.0x3@21V"
+    ],
+    "data": [
+      {
+        "prop": "9.0x5.0x3@16V",
+        "throttle": 25.0,
+        "thrust_g": 308.0,
+        "voltage_v": 16.0,
+        "current_a": 3.5,
+        "power_w": 56.0,
+        "efficiency": 5.5,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3@16V",
+        "throttle": 50.0,
+        "thrust_g": 861.0,
+        "voltage_v": 16.0,
+        "current_a": 12.1,
+        "power_w": 193.6,
+        "efficiency": 4.447,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3@16V",
+        "throttle": 75.0,
+        "thrust_g": 1677.0,
+        "voltage_v": 16.0,
+        "current_a": 30.1,
+        "power_w": 481.6,
+        "efficiency": 3.482,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3@16V",
+        "throttle": 100.0,
+        "thrust_g": 2453.0,
+        "voltage_v": 16.0,
+        "current_a": 57.5,
+        "power_w": 920.0,
+        "efficiency": 2.666,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3@21V",
+        "throttle": 25.0,
+        "thrust_g": 445.0,
+        "voltage_v": 21.0,
+        "current_a": 4.6,
+        "power_w": 96.6,
+        "efficiency": 4.607,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3@21V",
+        "throttle": 50.0,
+        "thrust_g": 1227.0,
+        "voltage_v": 21.0,
+        "current_a": 16.9,
+        "power_w": 354.9,
+        "efficiency": 3.457,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3@21V",
+        "throttle": 75.0,
+        "thrust_g": 2382.0,
+        "voltage_v": 21.0,
+        "current_a": 41.2,
+        "power_w": 865.2,
+        "efficiency": 2.753,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3@21V",
+        "throttle": 100.0,
+        "thrust_g": 3412.0,
+        "voltage_v": 21.0,
+        "current_a": 77.1,
+        "power_w": 1619.1,
+        "efficiency": 2.107,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3@16V",
+        "throttle": 25.0,
+        "thrust_g": 424.0,
+        "voltage_v": 16.0,
+        "current_a": 4.2,
+        "power_w": 67.2,
+        "efficiency": 6.31,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3@16V",
+        "throttle": 50.0,
+        "thrust_g": 1073.0,
+        "voltage_v": 16.0,
+        "current_a": 16.9,
+        "power_w": 270.4,
+        "efficiency": 3.968,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3@16V",
+        "throttle": 75.0,
+        "thrust_g": 2109.0,
+        "voltage_v": 16.0,
+        "current_a": 39.0,
+        "power_w": 624.0,
+        "efficiency": 3.38,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3@16V",
+        "throttle": 100.0,
+        "thrust_g": 2977.0,
+        "voltage_v": 16.0,
+        "current_a": 67.3,
+        "power_w": 1076.8,
+        "efficiency": 2.765,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3@21V",
+        "throttle": 25.0,
+        "thrust_g": 523.0,
+        "voltage_v": 21.0,
+        "current_a": 4.7,
+        "power_w": 98.7,
+        "efficiency": 5.299,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3@21V",
+        "throttle": 50.0,
+        "thrust_g": 1615.0,
+        "voltage_v": 21.0,
+        "current_a": 21.1,
+        "power_w": 443.1,
+        "efficiency": 3.645,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3@21V",
+        "throttle": 75.0,
+        "thrust_g": 2995.0,
+        "voltage_v": 21.0,
+        "current_a": 52.3,
+        "power_w": 1098.3,
+        "efficiency": 2.727,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3@21V",
+        "throttle": 100.0,
+        "thrust_g": 3978.0,
+        "voltage_v": 21.0,
+        "current_a": 91.2,
+        "power_w": 1915.2,
+        "efficiency": 2.077,
+        "rpm": null
+      }
+    ]
+  },
+  "MAD BSC2810 1100KV": {
+    "name": "MAD BSC2810 1100KV",
+    "avg_voltage": 25.0,
+    "props": [
+      "7.0x4.0x3",
+      "8.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 30.0,
+        "thrust_g": 404.0,
+        "voltage_v": 25.0,
+        "current_a": 2.48,
+        "power_w": 62.0,
+        "efficiency": 6.5,
+        "rpm": 9579.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 35.0,
+        "thrust_g": 477.0,
+        "voltage_v": 25.0,
+        "current_a": 3.29,
+        "power_w": 82.3,
+        "efficiency": 5.8,
+        "rpm": 10451.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 40.0,
+        "thrust_g": 560.0,
+        "voltage_v": 25.0,
+        "current_a": 4.11,
+        "power_w": 102.8,
+        "efficiency": 5.5,
+        "rpm": 11163.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 45.0,
+        "thrust_g": 630.0,
+        "voltage_v": 25.0,
+        "current_a": 4.99,
+        "power_w": 124.8,
+        "efficiency": 5.1,
+        "rpm": 11910.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 717.0,
+        "voltage_v": 25.0,
+        "current_a": 5.98,
+        "power_w": 149.5,
+        "efficiency": 4.8,
+        "rpm": 12605.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 55.0,
+        "thrust_g": 789.0,
+        "voltage_v": 25.0,
+        "current_a": 6.98,
+        "power_w": 174.5,
+        "efficiency": 4.5,
+        "rpm": 13323.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 873.0,
+        "voltage_v": 25.0,
+        "current_a": 7.86,
+        "power_w": 196.5,
+        "efficiency": 4.4,
+        "rpm": 13954.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 65.0,
+        "thrust_g": 974.0,
+        "voltage_v": 25.0,
+        "current_a": 9.33,
+        "power_w": 233.3,
+        "efficiency": 4.2,
+        "rpm": 14777.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1107.0,
+        "voltage_v": 25.0,
+        "current_a": 11.38,
+        "power_w": 284.5,
+        "efficiency": 3.9,
+        "rpm": 15686.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 75.0,
+        "thrust_g": 1255.0,
+        "voltage_v": 25.0,
+        "current_a": 13.91,
+        "power_w": 347.8,
+        "efficiency": 3.6,
+        "rpm": 16661.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 1402.0,
+        "voltage_v": 25.0,
+        "current_a": 16.36,
+        "power_w": 409.0,
+        "efficiency": 3.4,
+        "rpm": 17489.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 85.0,
+        "thrust_g": 1526.0,
+        "voltage_v": 25.0,
+        "current_a": 18.82,
+        "power_w": 470.5,
+        "efficiency": 3.2,
+        "rpm": 18309.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 1679.0,
+        "voltage_v": 25.0,
+        "current_a": 21.69,
+        "power_w": 542.3,
+        "efficiency": 3.1,
+        "rpm": 19067.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 95.0,
+        "thrust_g": 1872.0,
+        "voltage_v": 25.0,
+        "current_a": 24.99,
+        "power_w": 624.8,
+        "efficiency": 3.0,
+        "rpm": 19829.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2036.0,
+        "voltage_v": 25.0,
+        "current_a": 28.5,
+        "power_w": 712.5,
+        "efficiency": 2.9,
+        "rpm": 20497.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 30.0,
+        "thrust_g": 520.0,
+        "voltage_v": 25.0,
+        "current_a": 3.07,
+        "power_w": 76.8,
+        "efficiency": 6.8,
+        "rpm": 6943.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 35.0,
+        "thrust_g": 642.0,
+        "voltage_v": 25.0,
+        "current_a": 4.35,
+        "power_w": 108.8,
+        "efficiency": 5.9,
+        "rpm": 7670.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 40.0,
+        "thrust_g": 770.0,
+        "voltage_v": 25.0,
+        "current_a": 5.76,
+        "power_w": 144.0,
+        "efficiency": 5.3,
+        "rpm": 8397.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 45.0,
+        "thrust_g": 927.0,
+        "voltage_v": 25.0,
+        "current_a": 8.0,
+        "power_w": 200.0,
+        "efficiency": 4.6,
+        "rpm": 9203.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 50.0,
+        "thrust_g": 1097.0,
+        "voltage_v": 25.0,
+        "current_a": 10.67,
+        "power_w": 266.8,
+        "efficiency": 4.1,
+        "rpm": 10007.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 55.0,
+        "thrust_g": 1251.0,
+        "voltage_v": 25.0,
+        "current_a": 13.36,
+        "power_w": 334.0,
+        "efficiency": 3.7,
+        "rpm": 10752.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1439.0,
+        "voltage_v": 25.0,
+        "current_a": 15.63,
+        "power_w": 390.8,
+        "efficiency": 3.7,
+        "rpm": 11489.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 65.0,
+        "thrust_g": 1608.0,
+        "voltage_v": 25.0,
+        "current_a": 18.72,
+        "power_w": 468.0,
+        "efficiency": 3.4,
+        "rpm": 12132.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 70.0,
+        "thrust_g": 1789.0,
+        "voltage_v": 25.0,
+        "current_a": 22.44,
+        "power_w": 561.0,
+        "efficiency": 3.2,
+        "rpm": 12800.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 75.0,
+        "thrust_g": 1963.0,
+        "voltage_v": 25.0,
+        "current_a": 26.69,
+        "power_w": 667.3,
+        "efficiency": 2.9,
+        "rpm": 13307.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 2125.0,
+        "voltage_v": 25.0,
+        "current_a": 30.56,
+        "power_w": 764.0,
+        "efficiency": 2.8,
+        "rpm": 13785.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 85.0,
+        "thrust_g": 2274.0,
+        "voltage_v": 25.0,
+        "current_a": 34.93,
+        "power_w": 873.3,
+        "efficiency": 2.6,
+        "rpm": 14279.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 90.0,
+        "thrust_g": 2407.0,
+        "voltage_v": 25.0,
+        "current_a": 39.51,
+        "power_w": 987.8,
+        "efficiency": 2.4,
+        "rpm": 14573.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 95.0,
+        "thrust_g": 2501.0,
+        "voltage_v": 25.0,
+        "current_a": 43.8,
+        "power_w": 1095.0,
+        "efficiency": 2.3,
+        "rpm": 14907.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 100.0,
+        "thrust_g": 2600.0,
+        "voltage_v": 25.0,
+        "current_a": 48.61,
+        "power_w": 1215.5,
+        "efficiency": 2.1,
+        "rpm": 15000.0
+      }
+    ]
+  },
+  "MAD BSC2810 1350KV": {
+    "name": "MAD BSC2810 1350KV",
+    "avg_voltage": 22.5,
+    "props": [
+      "7.0x4.0x3",
+      "8.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 30.0,
+        "thrust_g": 552.0,
+        "voltage_v": 25.0,
+        "current_a": 4.53,
+        "power_w": 113.3,
+        "efficiency": 4.9,
+        "rpm": 11275.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 35.0,
+        "thrust_g": 677.0,
+        "voltage_v": 25.0,
+        "current_a": 6.03,
+        "power_w": 150.8,
+        "efficiency": 4.5,
+        "rpm": 12303.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 40.0,
+        "thrust_g": 781.0,
+        "voltage_v": 25.0,
+        "current_a": 7.2,
+        "power_w": 180.0,
+        "efficiency": 4.3,
+        "rpm": 13150.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 45.0,
+        "thrust_g": 887.0,
+        "voltage_v": 25.0,
+        "current_a": 8.85,
+        "power_w": 221.3,
+        "efficiency": 4.0,
+        "rpm": 14131.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 1004.0,
+        "voltage_v": 25.0,
+        "current_a": 10.68,
+        "power_w": 267.0,
+        "efficiency": 3.8,
+        "rpm": 14971.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 55.0,
+        "thrust_g": 1128.0,
+        "voltage_v": 25.0,
+        "current_a": 12.8,
+        "power_w": 320.0,
+        "efficiency": 3.5,
+        "rpm": 15856.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1266.0,
+        "voltage_v": 25.0,
+        "current_a": 15.48,
+        "power_w": 387.0,
+        "efficiency": 3.3,
+        "rpm": 16885.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 65.0,
+        "thrust_g": 1453.0,
+        "voltage_v": 25.0,
+        "current_a": 19.2,
+        "power_w": 480.0,
+        "efficiency": 3.0,
+        "rpm": 17767.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1606.0,
+        "voltage_v": 25.0,
+        "current_a": 22.99,
+        "power_w": 574.8,
+        "efficiency": 2.8,
+        "rpm": 18815.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 75.0,
+        "thrust_g": 1794.0,
+        "voltage_v": 25.0,
+        "current_a": 26.92,
+        "power_w": 673.0,
+        "efficiency": 2.7,
+        "rpm": 19490.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2023.0,
+        "voltage_v": 25.0,
+        "current_a": 31.12,
+        "power_w": 778.0,
+        "efficiency": 2.6,
+        "rpm": 20325.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 85.0,
+        "thrust_g": 2180.0,
+        "voltage_v": 25.0,
+        "current_a": 35.21,
+        "power_w": 880.3,
+        "efficiency": 2.5,
+        "rpm": 21277.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2285.0,
+        "voltage_v": 25.0,
+        "current_a": 39.69,
+        "power_w": 992.3,
+        "efficiency": 2.3,
+        "rpm": 22186.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 95.0,
+        "thrust_g": 2439.0,
+        "voltage_v": 25.0,
+        "current_a": 45.08,
+        "power_w": 1127.0,
+        "efficiency": 2.2,
+        "rpm": 22867.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2568.0,
+        "voltage_v": 25.0,
+        "current_a": 51.2,
+        "power_w": 1280.0,
+        "efficiency": 2.0,
+        "rpm": 23605.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 30.0,
+        "thrust_g": 530.0,
+        "voltage_v": 20.0,
+        "current_a": 4.47,
+        "power_w": 89.4,
+        "efficiency": 5.9,
+        "rpm": 7079.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 35.0,
+        "thrust_g": 653.0,
+        "voltage_v": 20.0,
+        "current_a": 5.99,
+        "power_w": 119.8,
+        "efficiency": 5.5,
+        "rpm": 7850.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 40.0,
+        "thrust_g": 800.0,
+        "voltage_v": 20.0,
+        "current_a": 8.32,
+        "power_w": 166.4,
+        "efficiency": 4.8,
+        "rpm": 8668.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 45.0,
+        "thrust_g": 960.0,
+        "voltage_v": 20.0,
+        "current_a": 11.42,
+        "power_w": 228.4,
+        "efficiency": 4.2,
+        "rpm": 9479.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 50.0,
+        "thrust_g": 1118.0,
+        "voltage_v": 20.0,
+        "current_a": 14.91,
+        "power_w": 298.2,
+        "efficiency": 3.7,
+        "rpm": 10229.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 55.0,
+        "thrust_g": 1287.0,
+        "voltage_v": 20.0,
+        "current_a": 18.62,
+        "power_w": 372.4,
+        "efficiency": 3.5,
+        "rpm": 10934.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1469.0,
+        "voltage_v": 20.0,
+        "current_a": 21.64,
+        "power_w": 432.8,
+        "efficiency": 3.4,
+        "rpm": 11598.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 65.0,
+        "thrust_g": 1618.0,
+        "voltage_v": 20.0,
+        "current_a": 25.61,
+        "power_w": 512.2,
+        "efficiency": 3.2,
+        "rpm": 12248.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 70.0,
+        "thrust_g": 1797.0,
+        "voltage_v": 20.0,
+        "current_a": 30.39,
+        "power_w": 607.8,
+        "efficiency": 3.0,
+        "rpm": 12842.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 75.0,
+        "thrust_g": 1975.0,
+        "voltage_v": 20.0,
+        "current_a": 35.79,
+        "power_w": 715.8,
+        "efficiency": 2.8,
+        "rpm": 13303.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 2100.0,
+        "voltage_v": 20.0,
+        "current_a": 40.41,
+        "power_w": 808.2,
+        "efficiency": 2.6,
+        "rpm": 13743.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 85.0,
+        "thrust_g": 2220.0,
+        "voltage_v": 20.0,
+        "current_a": 45.43,
+        "power_w": 908.6,
+        "efficiency": 2.4,
+        "rpm": 14067.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 90.0,
+        "thrust_g": 2314.0,
+        "voltage_v": 20.0,
+        "current_a": 50.58,
+        "power_w": 1011.6,
+        "efficiency": 2.3,
+        "rpm": 14487.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 95.0,
+        "thrust_g": 2403.0,
+        "voltage_v": 20.0,
+        "current_a": 55.94,
+        "power_w": 1118.8,
+        "efficiency": 2.1,
+        "rpm": 14731.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 100.0,
+        "thrust_g": 2471.0,
+        "voltage_v": 20.0,
+        "current_a": 61.68,
+        "power_w": 1233.6,
+        "efficiency": 2.0,
+        "rpm": 14904.0
+      }
+    ]
+  },
+  "MAD BSC3115 1050KV": {
+    "name": "MAD BSC3115 1050KV",
+    "avg_voltage": 24.0,
+    "props": [
+      "9.0x5.0x3"
+    ],
+    "data": [
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 827.0,
+        "voltage_v": 24.0,
+        "current_a": 6.35,
+        "power_w": 151.4,
+        "efficiency": 5.6,
+        "rpm": 7256.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 35.0,
+        "thrust_g": 1015.0,
+        "voltage_v": 24.0,
+        "current_a": 8.68,
+        "power_w": 207.4,
+        "efficiency": 5.0,
+        "rpm": 8117.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 1261.0,
+        "voltage_v": 24.0,
+        "current_a": 11.57,
+        "power_w": 276.7,
+        "efficiency": 4.6,
+        "rpm": 9025.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 45.0,
+        "thrust_g": 1529.0,
+        "voltage_v": 24.0,
+        "current_a": 15.1,
+        "power_w": 361.4,
+        "efficiency": 4.2,
+        "rpm": 9684.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 1750.0,
+        "voltage_v": 24.0,
+        "current_a": 17.89,
+        "power_w": 428.4,
+        "efficiency": 4.1,
+        "rpm": 10918.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 55.0,
+        "thrust_g": 1978.0,
+        "voltage_v": 24.0,
+        "current_a": 22.38,
+        "power_w": 536.2,
+        "efficiency": 3.7,
+        "rpm": 11198.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 2253.0,
+        "voltage_v": 24.0,
+        "current_a": 27.38,
+        "power_w": 656.2,
+        "efficiency": 3.4,
+        "rpm": 12421.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 65.0,
+        "thrust_g": 2512.0,
+        "voltage_v": 24.0,
+        "current_a": 32.8,
+        "power_w": 782.4,
+        "efficiency": 3.2,
+        "rpm": 12656.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 2785.0,
+        "voltage_v": 24.0,
+        "current_a": 39.12,
+        "power_w": 934.1,
+        "efficiency": 2.9,
+        "rpm": 13146.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 75.0,
+        "thrust_g": 2989.0,
+        "voltage_v": 24.0,
+        "current_a": 43.81,
+        "power_w": 1046.6,
+        "efficiency": 2.8,
+        "rpm": 13700.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 3305.0,
+        "voltage_v": 24.0,
+        "current_a": 52.34,
+        "power_w": 1251.4,
+        "efficiency": 2.6,
+        "rpm": 14168.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 85.0,
+        "thrust_g": 3512.0,
+        "voltage_v": 24.0,
+        "current_a": 56.51,
+        "power_w": 1351.4,
+        "efficiency": 2.5,
+        "rpm": 14661.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 3720.0,
+        "voltage_v": 24.0,
+        "current_a": 63.74,
+        "power_w": 1525.0,
+        "efficiency": 2.4,
+        "rpm": 15162.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 95.0,
+        "thrust_g": 3931.0,
+        "voltage_v": 24.0,
+        "current_a": 69.59,
+        "power_w": 1665.4,
+        "efficiency": 2.3,
+        "rpm": 15575.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 4073.0,
+        "voltage_v": 24.0,
+        "current_a": 76.72,
+        "power_w": 1836.5,
+        "efficiency": 2.2,
+        "rpm": 16060.0
+      }
+    ]
+  },
+  "MAD BSC3115 900KV": {
+    "name": "MAD BSC3115 900KV",
+    "avg_voltage": 24.5,
+    "props": [
+      "9.0x5.0x3",
+      "10.0x5.0x3"
+    ],
+    "data": [
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 515.0,
+        "voltage_v": 25.0,
+        "current_a": 3.57,
+        "power_w": 79.3,
+        "efficiency": 7.2,
+        "rpm": 5709.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 35.0,
+        "thrust_g": 648.0,
+        "voltage_v": 25.0,
+        "current_a": 4.8,
+        "power_w": 110.0,
+        "efficiency": 6.4,
+        "rpm": 6431.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 804.0,
+        "voltage_v": 25.0,
+        "current_a": 6.4,
+        "power_w": 150.0,
+        "efficiency": 5.7,
+        "rpm": 7178.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 45.0,
+        "thrust_g": 992.0,
+        "voltage_v": 25.0,
+        "current_a": 8.62,
+        "power_w": 205.5,
+        "efficiency": 5.1,
+        "rpm": 8039.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 1238.0,
+        "voltage_v": 25.0,
+        "current_a": 11.18,
+        "power_w": 269.5,
+        "efficiency": 4.8,
+        "rpm": 8947.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 55.0,
+        "thrust_g": 1526.0,
+        "voltage_v": 25.0,
+        "current_a": 14.58,
+        "power_w": 354.5,
+        "efficiency": 4.4,
+        "rpm": 9700.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1727.0,
+        "voltage_v": 25.0,
+        "current_a": 17.41,
+        "power_w": 425.3,
+        "efficiency": 4.2,
+        "rpm": 10840.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 65.0,
+        "thrust_g": 1950.0,
+        "voltage_v": 25.0,
+        "current_a": 21.65,
+        "power_w": 531.3,
+        "efficiency": 3.8,
+        "rpm": 11120.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 2225.0,
+        "voltage_v": 25.0,
+        "current_a": 26.5,
+        "power_w": 652.5,
+        "efficiency": 3.5,
+        "rpm": 12343.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 75.0,
+        "thrust_g": 2504.0,
+        "voltage_v": 25.0,
+        "current_a": 30.83,
+        "power_w": 760.8,
+        "efficiency": 3.4,
+        "rpm": 12587.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2777.0,
+        "voltage_v": 25.0,
+        "current_a": 37.75,
+        "power_w": 933.8,
+        "efficiency": 2.9,
+        "rpm": 13077.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 85.0,
+        "thrust_g": 2968.0,
+        "voltage_v": 25.0,
+        "current_a": 41.95,
+        "power_w": 1038.8,
+        "efficiency": 2.8,
+        "rpm": 13631.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 3264.0,
+        "voltage_v": 25.0,
+        "current_a": 50.52,
+        "power_w": 1253.0,
+        "efficiency": 2.6,
+        "rpm": 14099.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 95.0,
+        "thrust_g": 3491.0,
+        "voltage_v": 25.0,
+        "current_a": 55.57,
+        "power_w": 1379.3,
+        "efficiency": 2.5,
+        "rpm": 14590.0
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 3699.0,
+        "voltage_v": 25.0,
+        "current_a": 58.6,
+        "power_w": 1476.0,
+        "efficiency": 2.4,
+        "rpm": 15151.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 587.0,
+        "voltage_v": 24.0,
+        "current_a": 4.55,
+        "power_w": 109.2,
+        "efficiency": 5.4,
+        "rpm": 5530.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 35.0,
+        "thrust_g": 824.0,
+        "voltage_v": 24.0,
+        "current_a": 6.3,
+        "power_w": 151.2,
+        "efficiency": 5.4,
+        "rpm": 6183.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 1061.0,
+        "voltage_v": 24.0,
+        "current_a": 8.52,
+        "power_w": 204.5,
+        "efficiency": 5.2,
+        "rpm": 6831.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 45.0,
+        "thrust_g": 1298.0,
+        "voltage_v": 24.0,
+        "current_a": 11.08,
+        "power_w": 265.9,
+        "efficiency": 4.9,
+        "rpm": 7477.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 1535.0,
+        "voltage_v": 24.0,
+        "current_a": 13.48,
+        "power_w": 323.5,
+        "efficiency": 4.7,
+        "rpm": 8133.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 55.0,
+        "thrust_g": 1773.0,
+        "voltage_v": 24.0,
+        "current_a": 16.31,
+        "power_w": 391.4,
+        "efficiency": 4.5,
+        "rpm": 8777.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 2010.0,
+        "voltage_v": 24.0,
+        "current_a": 20.55,
+        "power_w": 493.2,
+        "efficiency": 4.1,
+        "rpm": 9431.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 65.0,
+        "thrust_g": 2193.0,
+        "voltage_v": 24.0,
+        "current_a": 25.4,
+        "power_w": 609.6,
+        "efficiency": 3.6,
+        "rpm": 10027.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 2430.0,
+        "voltage_v": 24.0,
+        "current_a": 29.73,
+        "power_w": 713.5,
+        "efficiency": 3.4,
+        "rpm": 10679.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 75.0,
+        "thrust_g": 2678.0,
+        "voltage_v": 24.0,
+        "current_a": 36.65,
+        "power_w": 879.6,
+        "efficiency": 3.0,
+        "rpm": 11334.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2936.0,
+        "voltage_v": 24.0,
+        "current_a": 41.22,
+        "power_w": 989.3,
+        "efficiency": 3.0,
+        "rpm": 11981.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 85.0,
+        "thrust_g": 3173.0,
+        "voltage_v": 24.0,
+        "current_a": 49.79,
+        "power_w": 1195.0,
+        "efficiency": 2.7,
+        "rpm": 12630.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 3410.0,
+        "voltage_v": 24.0,
+        "current_a": 53.84,
+        "power_w": 1292.2,
+        "efficiency": 2.6,
+        "rpm": 13278.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 95.0,
+        "thrust_g": 3647.0,
+        "voltage_v": 24.0,
+        "current_a": 58.63,
+        "power_w": 1407.1,
+        "efficiency": 2.6,
+        "rpm": 13933.0
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 3884.0,
+        "voltage_v": 24.0,
+        "current_a": 63.87,
+        "power_w": 1532.9,
+        "efficiency": 2.5,
+        "rpm": 14579.0
+      }
+    ]
+  },
+  "MAD Shadow XC3000 1200KV": {
+    "name": "MAD Shadow XC3000 1200KV",
+    "avg_voltage": 23.58,
+    "props": [
+      "7.0x3.5x3"
+    ],
+    "data": [
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 30.0,
+        "thrust_g": 289.0,
+        "voltage_v": 23.86,
+        "current_a": 2.34,
+        "power_w": 55.9,
+        "efficiency": 5.4,
+        "rpm": 8280.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 35.0,
+        "thrust_g": 409.0,
+        "voltage_v": 23.84,
+        "current_a": 3.5,
+        "power_w": 83.5,
+        "efficiency": 5.1,
+        "rpm": 9757.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 40.0,
+        "thrust_g": 534.0,
+        "voltage_v": 23.82,
+        "current_a": 4.81,
+        "power_w": 114.7,
+        "efficiency": 4.8,
+        "rpm": 10953.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 45.0,
+        "thrust_g": 676.0,
+        "voltage_v": 23.79,
+        "current_a": 6.33,
+        "power_w": 150.5,
+        "efficiency": 4.7,
+        "rpm": 12095.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 50.0,
+        "thrust_g": 801.0,
+        "voltage_v": 23.75,
+        "current_a": 7.98,
+        "power_w": 189.6,
+        "efficiency": 4.4,
+        "rpm": 13199.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 55.0,
+        "thrust_g": 949.0,
+        "voltage_v": 23.72,
+        "current_a": 9.93,
+        "power_w": 235.5,
+        "efficiency": 4.2,
+        "rpm": 14218.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1072.0,
+        "voltage_v": 23.68,
+        "current_a": 12.05,
+        "power_w": 285.4,
+        "efficiency": 3.9,
+        "rpm": 15190.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 65.0,
+        "thrust_g": 1249.0,
+        "voltage_v": 23.63,
+        "current_a": 14.68,
+        "power_w": 347.0,
+        "efficiency": 3.7,
+        "rpm": 16154.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 70.0,
+        "thrust_g": 1417.0,
+        "voltage_v": 23.58,
+        "current_a": 17.44,
+        "power_w": 411.2,
+        "efficiency": 3.5,
+        "rpm": 17160.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 75.0,
+        "thrust_g": 1589.0,
+        "voltage_v": 23.51,
+        "current_a": 20.59,
+        "power_w": 484.2,
+        "efficiency": 3.4,
+        "rpm": 18131.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 80.0,
+        "thrust_g": 1753.0,
+        "voltage_v": 23.45,
+        "current_a": 24.06,
+        "power_w": 564.4,
+        "efficiency": 3.2,
+        "rpm": 19078.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 85.0,
+        "thrust_g": 1919.0,
+        "voltage_v": 23.4,
+        "current_a": 27.8,
+        "power_w": 650.3,
+        "efficiency": 3.0,
+        "rpm": 19992.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 90.0,
+        "thrust_g": 2097.0,
+        "voltage_v": 23.31,
+        "current_a": 32.48,
+        "power_w": 756.9,
+        "efficiency": 2.8,
+        "rpm": 20723.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 95.0,
+        "thrust_g": 2252.0,
+        "voltage_v": 23.23,
+        "current_a": 36.46,
+        "power_w": 847.0,
+        "efficiency": 2.7,
+        "rpm": 21630.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 100.0,
+        "thrust_g": 2467.0,
+        "voltage_v": 23.12,
+        "current_a": 42.44,
+        "power_w": 981.2,
+        "efficiency": 2.5,
+        "rpm": 22554.0
+      }
+    ]
+  },
+  "MAD Shadow XC3000 920KV": {
+    "name": "MAD Shadow XC3000 920KV",
+    "avg_voltage": 23.63,
+    "props": [
+      "7.0x3.5x3",
+      "8.0x4.0x3",
+      "8.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 30.0,
+        "thrust_g": 165.0,
+        "voltage_v": 23.89,
+        "current_a": 1.13,
+        "power_w": 27.1,
+        "efficiency": 6.5,
+        "rpm": 6343.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 35.0,
+        "thrust_g": 231.0,
+        "voltage_v": 23.88,
+        "current_a": 1.61,
+        "power_w": 38.5,
+        "efficiency": 6.3,
+        "rpm": 7359.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 40.0,
+        "thrust_g": 310.0,
+        "voltage_v": 23.89,
+        "current_a": 2.33,
+        "power_w": 55.7,
+        "efficiency": 5.8,
+        "rpm": 8456.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 45.0,
+        "thrust_g": 399.0,
+        "voltage_v": 23.83,
+        "current_a": 3.04,
+        "power_w": 73.5,
+        "efficiency": 5.43,
+        "rpm": 9540.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 50.0,
+        "thrust_g": 488.0,
+        "voltage_v": 23.83,
+        "current_a": 3.93,
+        "power_w": 93.7,
+        "efficiency": 5.4,
+        "rpm": 10485.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 55.0,
+        "thrust_g": 590.0,
+        "voltage_v": 23.81,
+        "current_a": 4.91,
+        "power_w": 116.9,
+        "efficiency": 5.2,
+        "rpm": 11252.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 60.0,
+        "thrust_g": 686.0,
+        "voltage_v": 23.8,
+        "current_a": 6.01,
+        "power_w": 143.0,
+        "efficiency": 5.0,
+        "rpm": 12170.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 65.0,
+        "thrust_g": 801.0,
+        "voltage_v": 23.77,
+        "current_a": 7.33,
+        "power_w": 174.3,
+        "efficiency": 4.8,
+        "rpm": 13019.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 70.0,
+        "thrust_g": 905.0,
+        "voltage_v": 23.74,
+        "current_a": 8.7,
+        "power_w": 206.5,
+        "efficiency": 4.5,
+        "rpm": 13870.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 75.0,
+        "thrust_g": 1038.0,
+        "voltage_v": 23.71,
+        "current_a": 10.43,
+        "power_w": 247.4,
+        "efficiency": 4.2,
+        "rpm": 14722.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 80.0,
+        "thrust_g": 1163.0,
+        "voltage_v": 23.68,
+        "current_a": 12.21,
+        "power_w": 289.1,
+        "efficiency": 4.2,
+        "rpm": 15559.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 85.0,
+        "thrust_g": 1303.0,
+        "voltage_v": 23.64,
+        "current_a": 14.37,
+        "power_w": 339.7,
+        "efficiency": 3.9,
+        "rpm": 16409.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 90.0,
+        "thrust_g": 1434.0,
+        "voltage_v": 23.6,
+        "current_a": 16.62,
+        "power_w": 392.1,
+        "efficiency": 3.8,
+        "rpm": 17248.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 95.0,
+        "thrust_g": 1585.0,
+        "voltage_v": 23.56,
+        "current_a": 19.17,
+        "power_w": 451.5,
+        "efficiency": 3.6,
+        "rpm": 18060.0
+      },
+      {
+        "prop": "7.0x3.5x3",
+        "throttle": 100.0,
+        "thrust_g": 1750.0,
+        "voltage_v": 23.49,
+        "current_a": 22.62,
+        "power_w": 531.4,
+        "efficiency": 3.4,
+        "rpm": 19053.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 30.0,
+        "thrust_g": 286.0,
+        "voltage_v": 23.88,
+        "current_a": 1.74,
+        "power_w": 41.7,
+        "efficiency": 7.2,
+        "rpm": 6100.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 35.0,
+        "thrust_g": 384.0,
+        "voltage_v": 23.86,
+        "current_a": 2.48,
+        "power_w": 59.3,
+        "efficiency": 6.8,
+        "rpm": 6973.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 40.0,
+        "thrust_g": 511.0,
+        "voltage_v": 23.84,
+        "current_a": 3.5,
+        "power_w": 83.5,
+        "efficiency": 6.4,
+        "rpm": 7856.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 45.0,
+        "thrust_g": 659.0,
+        "voltage_v": 23.82,
+        "current_a": 4.94,
+        "power_w": 117.6,
+        "efficiency": 5.8,
+        "rpm": 8832.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 845.0,
+        "voltage_v": 23.79,
+        "current_a": 6.59,
+        "power_w": 156.8,
+        "efficiency": 5.5,
+        "rpm": 9715.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 55.0,
+        "thrust_g": 966.0,
+        "voltage_v": 23.76,
+        "current_a": 8.31,
+        "power_w": 197.6,
+        "efficiency": 4.8,
+        "rpm": 10543.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1115.0,
+        "voltage_v": 23.72,
+        "current_a": 10.21,
+        "power_w": 242.3,
+        "efficiency": 4.8,
+        "rpm": 11312.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 65.0,
+        "thrust_g": 1292.0,
+        "voltage_v": 23.67,
+        "current_a": 12.63,
+        "power_w": 299.0,
+        "efficiency": 4.5,
+        "rpm": 12059.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1401.0,
+        "voltage_v": 23.63,
+        "current_a": 15.2,
+        "power_w": 359.0,
+        "efficiency": 4.2,
+        "rpm": 12787.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 75.0,
+        "thrust_g": 1607.0,
+        "voltage_v": 23.58,
+        "current_a": 17.86,
+        "power_w": 421.2,
+        "efficiency": 3.8,
+        "rpm": 13525.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 1979.0,
+        "voltage_v": 23.46,
+        "current_a": 24.8,
+        "power_w": 581.8,
+        "efficiency": 3.5,
+        "rpm": 14827.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 85.0,
+        "thrust_g": 2146.0,
+        "voltage_v": 23.38,
+        "current_a": 28.71,
+        "power_w": 671.3,
+        "efficiency": 3.5,
+        "rpm": 15393.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2291.0,
+        "voltage_v": 23.31,
+        "current_a": 32.65,
+        "power_w": 760.9,
+        "efficiency": 3.1,
+        "rpm": 15978.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 95.0,
+        "thrust_g": 2478.0,
+        "voltage_v": 23.2,
+        "current_a": 38.33,
+        "power_w": 889.3,
+        "efficiency": 2.8,
+        "rpm": 16566.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 30.0,
+        "thrust_g": 303.0,
+        "voltage_v": 23.89,
+        "current_a": 1.82,
+        "power_w": 43.4,
+        "efficiency": 7.3,
+        "rpm": 5682.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 35.0,
+        "thrust_g": 386.0,
+        "voltage_v": 23.87,
+        "current_a": 2.56,
+        "power_w": 61.2,
+        "efficiency": 6.6,
+        "rpm": 6453.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 40.0,
+        "thrust_g": 489.0,
+        "voltage_v": 23.86,
+        "current_a": 3.47,
+        "power_w": 82.7,
+        "efficiency": 6.2,
+        "rpm": 7207.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 45.0,
+        "thrust_g": 629.0,
+        "voltage_v": 23.81,
+        "current_a": 4.87,
+        "power_w": 115.9,
+        "efficiency": 5.6,
+        "rpm": 8048.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 50.0,
+        "thrust_g": 787.0,
+        "voltage_v": 23.77,
+        "current_a": 6.65,
+        "power_w": 158.1,
+        "efficiency": 5.2,
+        "rpm": 8928.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 55.0,
+        "thrust_g": 981.0,
+        "voltage_v": 23.71,
+        "current_a": 8.51,
+        "power_w": 201.8,
+        "efficiency": 4.9,
+        "rpm": 9792.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1254.0,
+        "voltage_v": 23.66,
+        "current_a": 10.75,
+        "power_w": 254.3,
+        "efficiency": 4.1,
+        "rpm": 10423.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 65.0,
+        "thrust_g": 1335.0,
+        "voltage_v": 23.59,
+        "current_a": 13.4,
+        "power_w": 316.0,
+        "efficiency": 4.22,
+        "rpm": 11152.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 70.0,
+        "thrust_g": 1416.0,
+        "voltage_v": 23.51,
+        "current_a": 16.2,
+        "power_w": 381.0,
+        "efficiency": 3.8,
+        "rpm": 11755.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 75.0,
+        "thrust_g": 1578.0,
+        "voltage_v": 23.43,
+        "current_a": 19.37,
+        "power_w": 453.7,
+        "efficiency": 3.5,
+        "rpm": 12374.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 1872.0,
+        "voltage_v": 23.36,
+        "current_a": 22.96,
+        "power_w": 536.7,
+        "efficiency": 2.9,
+        "rpm": 12938.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 85.0,
+        "thrust_g": 1951.0,
+        "voltage_v": 23.23,
+        "current_a": 26.31,
+        "power_w": 611.1,
+        "efficiency": 3.19,
+        "rpm": 13484.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 90.0,
+        "thrust_g": 2031.0,
+        "voltage_v": 23.12,
+        "current_a": 30.48,
+        "power_w": 704.8,
+        "efficiency": 2.9,
+        "rpm": 13958.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 95.0,
+        "thrust_g": 2181.0,
+        "voltage_v": 23.0,
+        "current_a": 35.0,
+        "power_w": 804.9,
+        "efficiency": 2.6,
+        "rpm": 14364.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 100.0,
+        "thrust_g": 2294.0,
+        "voltage_v": 22.87,
+        "current_a": 39.56,
+        "power_w": 904.9,
+        "efficiency": 2.6,
+        "rpm": 14753.0
+      }
+    ]
+  },
+  "NIDICI 2807 1300KV": {
+    "name": "NIDICI 2807 1300KV",
+    "avg_voltage": 23.95,
+    "props": [
+      "7.5x3.7x3"
+    ],
+    "data": [
+      {
+        "prop": "7.5x3.7x3",
+        "throttle": 50.0,
+        "thrust_g": 824.0,
+        "voltage_v": 24.06,
+        "current_a": 6.75,
+        "power_w": 162.4,
+        "efficiency": 5.07,
+        "rpm": null
+      },
+      {
+        "prop": "7.5x3.7x3",
+        "throttle": 60.0,
+        "thrust_g": 1118.0,
+        "voltage_v": 24.02,
+        "current_a": 11.24,
+        "power_w": 270.0,
+        "efficiency": 4.14,
+        "rpm": null
+      },
+      {
+        "prop": "7.5x3.7x3",
+        "throttle": 70.0,
+        "thrust_g": 1539.0,
+        "voltage_v": 23.99,
+        "current_a": 17.29,
+        "power_w": 414.8,
+        "efficiency": 3.71,
+        "rpm": null
+      },
+      {
+        "prop": "7.5x3.7x3",
+        "throttle": 80.0,
+        "thrust_g": 2009.0,
+        "voltage_v": 23.94,
+        "current_a": 26.35,
+        "power_w": 630.8,
+        "efficiency": 3.18,
+        "rpm": null
+      },
+      {
+        "prop": "7.5x3.7x3",
+        "throttle": 90.0,
+        "thrust_g": 2386.0,
+        "voltage_v": 23.89,
+        "current_a": 35.01,
+        "power_w": 836.4,
+        "efficiency": 2.85,
+        "rpm": null
+      },
+      {
+        "prop": "7.5x3.7x3",
+        "throttle": 100.0,
+        "thrust_g": 2602.0,
+        "voltage_v": 23.83,
+        "current_a": 40.28,
+        "power_w": 959.9,
+        "efficiency": 2.71,
+        "rpm": null
+      }
+    ]
+  },
+  "NIDICI 3115 1250KV": {
+    "name": "NIDICI 3115 1250KV",
+    "avg_voltage": 23.7,
+    "props": [
+      "8.0x4.0x3",
+      "9.0x4.0x3"
+    ],
+    "data": [
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 1029.0,
+        "voltage_v": 24.05,
+        "current_a": 9.28,
+        "power_w": 223.2,
+        "efficiency": 4.61,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1508.0,
+        "voltage_v": 24.01,
+        "current_a": 15.98,
+        "power_w": 383.7,
+        "efficiency": 3.93,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 2159.0,
+        "voltage_v": 23.89,
+        "current_a": 27.29,
+        "power_w": 652.0,
+        "efficiency": 3.31,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2795.0,
+        "voltage_v": 23.77,
+        "current_a": 42.29,
+        "power_w": 1005.2,
+        "efficiency": 2.78,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 3421.0,
+        "voltage_v": 23.61,
+        "current_a": 60.21,
+        "power_w": 1421.6,
+        "efficiency": 2.41,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 4156.0,
+        "voltage_v": 23.48,
+        "current_a": 73.98,
+        "power_w": 1737.1,
+        "efficiency": 2.39,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 1298.0,
+        "voltage_v": 23.99,
+        "current_a": 11.29,
+        "power_w": 270.8,
+        "efficiency": 4.79,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1628.0,
+        "voltage_v": 23.87,
+        "current_a": 17.25,
+        "power_w": 411.8,
+        "efficiency": 3.95,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 2318.0,
+        "voltage_v": 23.71,
+        "current_a": 29.19,
+        "power_w": 692.1,
+        "efficiency": 3.35,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 3014.0,
+        "voltage_v": 23.49,
+        "current_a": 45.98,
+        "power_w": 1080.1,
+        "efficiency": 2.79,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 3986.0,
+        "voltage_v": 23.32,
+        "current_a": 64.2,
+        "power_w": 1497.1,
+        "efficiency": 2.66,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 4539.0,
+        "voltage_v": 23.21,
+        "current_a": 78.86,
+        "power_w": 1830.3,
+        "efficiency": 2.48,
+        "rpm": null
+      }
+    ]
+  },
+  "NIDICI 3115 900KV": {
+    "name": "NIDICI 3115 900KV",
+    "avg_voltage": 23.77,
+    "props": [
+      "9.0x4.0x3",
+      "10.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 956.0,
+        "voltage_v": 24.08,
+        "current_a": 7.24,
+        "power_w": 174.3,
+        "efficiency": 5.48,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1315.0,
+        "voltage_v": 24.02,
+        "current_a": 11.33,
+        "power_w": 272.1,
+        "efficiency": 4.83,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1666.0,
+        "voltage_v": 23.91,
+        "current_a": 19.92,
+        "power_w": 476.3,
+        "efficiency": 3.5,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2269.0,
+        "voltage_v": 23.78,
+        "current_a": 24.54,
+        "power_w": 583.6,
+        "efficiency": 3.89,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2994.0,
+        "voltage_v": 23.63,
+        "current_a": 36.45,
+        "power_w": 861.3,
+        "efficiency": 3.48,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 3414.0,
+        "voltage_v": 23.51,
+        "current_a": 44.24,
+        "power_w": 1040.1,
+        "efficiency": 3.28,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 50.0,
+        "thrust_g": 1299.0,
+        "voltage_v": 24.07,
+        "current_a": 10.23,
+        "power_w": 246.2,
+        "efficiency": 5.28,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1945.0,
+        "voltage_v": 23.9,
+        "current_a": 17.46,
+        "power_w": 417.3,
+        "efficiency": 4.66,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 70.0,
+        "thrust_g": 2388.0,
+        "voltage_v": 23.78,
+        "current_a": 25.16,
+        "power_w": 598.3,
+        "efficiency": 3.99,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 3315.0,
+        "voltage_v": 23.64,
+        "current_a": 41.68,
+        "power_w": 985.3,
+        "efficiency": 3.36,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 90.0,
+        "thrust_g": 3993.0,
+        "voltage_v": 23.52,
+        "current_a": 55.17,
+        "power_w": 1297.6,
+        "efficiency": 3.08,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 100.0,
+        "thrust_g": 4406.0,
+        "voltage_v": 23.38,
+        "current_a": 63.28,
+        "power_w": 1479.5,
+        "efficiency": 2.98,
+        "rpm": null
+      }
+    ]
+  },
+  "Surpass Hobby B2810 1180KV": {
+    "name": "Surpass Hobby B2810 1180KV",
+    "avg_voltage": 23.82,
+    "props": [
+      "7.0x4.0x3"
+    ],
+    "data": [
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 631.0,
+        "voltage_v": 24.0,
+        "current_a": 6.8,
+        "power_w": 163.0,
+        "efficiency": 3.87,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 965.0,
+        "voltage_v": 23.9,
+        "current_a": 11.4,
+        "power_w": 272.0,
+        "efficiency": 3.55,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1346.0,
+        "voltage_v": 23.8,
+        "current_a": 17.5,
+        "power_w": 416.0,
+        "efficiency": 3.23,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 1806.0,
+        "voltage_v": 23.8,
+        "current_a": 26.6,
+        "power_w": 633.0,
+        "efficiency": 2.85,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2203.0,
+        "voltage_v": 23.7,
+        "current_a": 36.1,
+        "power_w": 853.0,
+        "efficiency": 2.58,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2341.0,
+        "voltage_v": 23.7,
+        "current_a": 43.2,
+        "power_w": 1024.0,
+        "efficiency": 2.29,
+        "rpm": null
+      }
+    ]
+  },
+  "Surpass Hobby B2810 980KV": {
+    "name": "Surpass Hobby B2810 980KV",
+    "avg_voltage": 23.82,
+    "props": [
+      "8.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 50.0,
+        "thrust_g": 1088.0,
+        "voltage_v": 24.0,
+        "current_a": 10.8,
+        "power_w": 259.0,
+        "efficiency": 4.2,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1466.0,
+        "voltage_v": 23.9,
+        "current_a": 15.6,
+        "power_w": 373.0,
+        "efficiency": 3.93,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 70.0,
+        "thrust_g": 1800.0,
+        "voltage_v": 23.8,
+        "current_a": 21.7,
+        "power_w": 516.0,
+        "efficiency": 3.49,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 2350.0,
+        "voltage_v": 23.8,
+        "current_a": 32.6,
+        "power_w": 776.0,
+        "efficiency": 3.03,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 90.0,
+        "thrust_g": 2880.0,
+        "voltage_v": 23.7,
+        "current_a": 42.2,
+        "power_w": 1000.0,
+        "efficiency": 2.88,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 100.0,
+        "thrust_g": 2950.0,
+        "voltage_v": 23.7,
+        "current_a": 46.8,
+        "power_w": 1110.0,
+        "efficiency": 2.66,
+        "rpm": null
+      }
+    ]
+  },
+  "Surpass Hobby S3110 1280KV": {
+    "name": "Surpass Hobby S3110 1280KV",
+    "avg_voltage": 23.28,
+    "props": [
+      "8.0x4.0x3"
+    ],
+    "data": [
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 1433.0,
+        "voltage_v": 24.0,
+        "current_a": 15.2,
+        "power_w": 360.0,
+        "efficiency": 3.98,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1988.0,
+        "voltage_v": 23.8,
+        "current_a": 24.9,
+        "power_w": 592.0,
+        "efficiency": 3.36,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 2620.0,
+        "voltage_v": 23.5,
+        "current_a": 36.3,
+        "power_w": 853.0,
+        "efficiency": 3.07,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 3100.0,
+        "voltage_v": 23.1,
+        "current_a": 51.2,
+        "power_w": 1173.0,
+        "efficiency": 2.64,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 3621.0,
+        "voltage_v": 22.8,
+        "current_a": 67.7,
+        "power_w": 1543.0,
+        "efficiency": 2.35,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 3820.0,
+        "voltage_v": 22.5,
+        "current_a": 75.6,
+        "power_w": 1700.0,
+        "efficiency": 2.25,
+        "rpm": null
+      }
+    ]
+  },
+  "Surpass Hobby S3110 1580KV": {
+    "name": "Surpass Hobby S3110 1580KV",
+    "avg_voltage": 24.75,
+    "props": [
+      "6.0x4.0x3"
+    ],
+    "data": [
+      {
+        "prop": "6.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 899.0,
+        "voltage_v": 25.2,
+        "current_a": 11.8,
+        "power_w": 295.0,
+        "efficiency": 3.05,
+        "rpm": null
+      },
+      {
+        "prop": "6.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1220.0,
+        "voltage_v": 25.2,
+        "current_a": 18.0,
+        "power_w": 450.0,
+        "efficiency": 2.71,
+        "rpm": null
+      },
+      {
+        "prop": "6.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1625.0,
+        "voltage_v": 24.9,
+        "current_a": 26.8,
+        "power_w": 667.0,
+        "efficiency": 2.44,
+        "rpm": null
+      },
+      {
+        "prop": "6.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2011.0,
+        "voltage_v": 24.7,
+        "current_a": 38.1,
+        "power_w": 938.0,
+        "efficiency": 2.14,
+        "rpm": null
+      },
+      {
+        "prop": "6.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2388.0,
+        "voltage_v": 24.4,
+        "current_a": 49.8,
+        "power_w": 1215.0,
+        "efficiency": 1.97,
+        "rpm": null
+      },
+      {
+        "prop": "6.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2801.0,
+        "voltage_v": 24.1,
+        "current_a": 64.2,
+        "power_w": 1540.0,
+        "efficiency": 1.82,
+        "rpm": null
+      }
+    ]
+  },
+  "Surpass Hobby S3110 800KV": {
+    "name": "Surpass Hobby S3110 800KV",
+    "avg_voltage": 33.0,
+    "props": [
+      "8.0x4.0x3"
+    ],
+    "data": [
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 941.0,
+        "voltage_v": 33.3,
+        "current_a": 6.6,
+        "power_w": 219.0,
+        "efficiency": 4.3,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1281.0,
+        "voltage_v": 33.1,
+        "current_a": 10.7,
+        "power_w": 354.0,
+        "efficiency": 3.62,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1877.0,
+        "voltage_v": 33.1,
+        "current_a": 17.7,
+        "power_w": 585.0,
+        "efficiency": 3.21,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2550.0,
+        "voltage_v": 32.9,
+        "current_a": 26.4,
+        "power_w": 868.0,
+        "efficiency": 2.94,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 3157.0,
+        "voltage_v": 32.8,
+        "current_a": 37.9,
+        "power_w": 1243.0,
+        "efficiency": 2.54,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 3659.0,
+        "voltage_v": 32.8,
+        "current_a": 48.3,
+        "power_w": 1584.0,
+        "efficiency": 2.31,
+        "rpm": null
+      }
+    ]
+  },
+  "T-Motor F100 1100KV": {
+    "name": "T-Motor F100 1100KV",
+    "avg_voltage": 24.69,
+    "props": [
+      "8.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 30.0,
+        "thrust_g": 517.08,
+        "voltage_v": 25.09,
+        "current_a": 3.05,
+        "power_w": 76.42,
+        "efficiency": 6.77,
+        "rpm": 6880.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 35.0,
+        "thrust_g": 638.27,
+        "voltage_v": 25.05,
+        "current_a": 4.33,
+        "power_w": 108.5,
+        "efficiency": 5.88,
+        "rpm": 7607.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 40.0,
+        "thrust_g": 766.38,
+        "voltage_v": 25.02,
+        "current_a": 5.74,
+        "power_w": 143.54,
+        "efficiency": 5.34,
+        "rpm": 8334.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 45.0,
+        "thrust_g": 923.95,
+        "voltage_v": 24.95,
+        "current_a": 7.98,
+        "power_w": 199.21,
+        "efficiency": 4.64,
+        "rpm": 9140.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 50.0,
+        "thrust_g": 1093.76,
+        "voltage_v": 24.89,
+        "current_a": 10.65,
+        "power_w": 265.19,
+        "efficiency": 4.12,
+        "rpm": 9944.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 55.0,
+        "thrust_g": 1248.08,
+        "voltage_v": 24.83,
+        "current_a": 13.34,
+        "power_w": 331.19,
+        "efficiency": 3.77,
+        "rpm": 10689.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1435.92,
+        "voltage_v": 24.77,
+        "current_a": 15.61,
+        "power_w": 386.76,
+        "efficiency": 3.71,
+        "rpm": 11426.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 65.0,
+        "thrust_g": 1605.01,
+        "voltage_v": 24.69,
+        "current_a": 18.7,
+        "power_w": 461.9,
+        "efficiency": 3.47,
+        "rpm": 12069.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 70.0,
+        "thrust_g": 1786.01,
+        "voltage_v": 24.62,
+        "current_a": 22.42,
+        "power_w": 551.82,
+        "efficiency": 3.24,
+        "rpm": 12737.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 75.0,
+        "thrust_g": 1959.36,
+        "voltage_v": 24.54,
+        "current_a": 26.67,
+        "power_w": 654.29,
+        "efficiency": 2.99,
+        "rpm": 13244.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 2122.12,
+        "voltage_v": 24.51,
+        "current_a": 30.54,
+        "power_w": 748.34,
+        "efficiency": 2.84,
+        "rpm": 13722.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 85.0,
+        "thrust_g": 2270.25,
+        "voltage_v": 24.46,
+        "current_a": 34.91,
+        "power_w": 853.85,
+        "efficiency": 2.66,
+        "rpm": 14216.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 90.0,
+        "thrust_g": 2403.24,
+        "voltage_v": 24.38,
+        "current_a": 39.49,
+        "power_w": 962.58,
+        "efficiency": 2.5,
+        "rpm": 14510.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 95.0,
+        "thrust_g": 2497.41,
+        "voltage_v": 24.28,
+        "current_a": 43.78,
+        "power_w": 1062.95,
+        "efficiency": 2.35,
+        "rpm": 14844.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 100.0,
+        "thrust_g": 2597.38,
+        "voltage_v": 24.22,
+        "current_a": 48.59,
+        "power_w": 1176.78,
+        "efficiency": 2.21,
+        "rpm": 15087.0
+      }
+    ]
+  },
+  "T-Motor F100 1350KV": {
+    "name": "T-Motor F100 1350KV",
+    "avg_voltage": 22.89,
+    "props": [
+      "7.0x4.0x3",
+      "8.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 1000.75,
+        "voltage_v": 25.0,
+        "current_a": 10.66,
+        "power_w": 266.38,
+        "efficiency": 3.76,
+        "rpm": 14904.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 55.0,
+        "thrust_g": 1124.69,
+        "voltage_v": 24.96,
+        "current_a": 12.78,
+        "power_w": 318.87,
+        "efficiency": 3.53,
+        "rpm": 15789.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1262.28,
+        "voltage_v": 24.91,
+        "current_a": 15.46,
+        "power_w": 385.19,
+        "efficiency": 3.28,
+        "rpm": 16818.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 65.0,
+        "thrust_g": 1449.63,
+        "voltage_v": 24.85,
+        "current_a": 19.18,
+        "power_w": 476.53,
+        "efficiency": 3.04,
+        "rpm": 17700.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1602.7,
+        "voltage_v": 24.77,
+        "current_a": 22.97,
+        "power_w": 568.96,
+        "efficiency": 2.82,
+        "rpm": 18748.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 75.0,
+        "thrust_g": 1790.7,
+        "voltage_v": 24.7,
+        "current_a": 26.9,
+        "power_w": 664.53,
+        "efficiency": 2.69,
+        "rpm": 19423.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2019.43,
+        "voltage_v": 24.62,
+        "current_a": 31.1,
+        "power_w": 765.64,
+        "efficiency": 2.64,
+        "rpm": 20258.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 85.0,
+        "thrust_g": 2177.0,
+        "voltage_v": 24.53,
+        "current_a": 35.19,
+        "power_w": 863.26,
+        "efficiency": 2.52,
+        "rpm": 21210.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2281.83,
+        "voltage_v": 24.38,
+        "current_a": 39.67,
+        "power_w": 967.25,
+        "efficiency": 2.36,
+        "rpm": 22119.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 95.0,
+        "thrust_g": 2435.86,
+        "voltage_v": 24.28,
+        "current_a": 45.06,
+        "power_w": 1093.93,
+        "efficiency": 2.23,
+        "rpm": 22800.0
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2564.86,
+        "voltage_v": 24.19,
+        "current_a": 51.18,
+        "power_w": 1237.92,
+        "efficiency": 2.07,
+        "rpm": 23538.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 30.0,
+        "thrust_g": 527.31,
+        "voltage_v": 20.94,
+        "current_a": 4.44,
+        "power_w": 92.95,
+        "efficiency": 5.67,
+        "rpm": 7023.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 35.0,
+        "thrust_g": 650.52,
+        "voltage_v": 20.91,
+        "current_a": 5.96,
+        "power_w": 124.7,
+        "efficiency": 5.22,
+        "rpm": 7794.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 40.0,
+        "thrust_g": 797.36,
+        "voltage_v": 20.87,
+        "current_a": 8.29,
+        "power_w": 173.09,
+        "efficiency": 4.61,
+        "rpm": 8612.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 45.0,
+        "thrust_g": 957.18,
+        "voltage_v": 20.82,
+        "current_a": 11.39,
+        "power_w": 237.24,
+        "efficiency": 4.03,
+        "rpm": 9423.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 50.0,
+        "thrust_g": 1115.1,
+        "voltage_v": 20.76,
+        "current_a": 14.88,
+        "power_w": 308.85,
+        "efficiency": 3.61,
+        "rpm": 10173.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 55.0,
+        "thrust_g": 1283.86,
+        "voltage_v": 20.69,
+        "current_a": 18.59,
+        "power_w": 384.65,
+        "efficiency": 3.34,
+        "rpm": 10878.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1466.19,
+        "voltage_v": 20.64,
+        "current_a": 21.61,
+        "power_w": 445.88,
+        "efficiency": 3.29,
+        "rpm": 11542.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 65.0,
+        "thrust_g": 1615.53,
+        "voltage_v": 20.56,
+        "current_a": 25.58,
+        "power_w": 525.97,
+        "efficiency": 3.07,
+        "rpm": 12192.0
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 70.0,
+        "thrust_g": 1794.07,
+        "voltage_v": 20.48,
+        "current_a": 30.36,
+        "power_w": 621.74,
+        "efficiency": 2.89,
+        "rpm": 12786.0
+      }
+    ]
+  },
+  "T-Motor V2812 1155KV": {
+    "name": "T-Motor V2812 1155KV",
+    "avg_voltage": 24.82,
+    "props": [
+      "7.5x4.6x3",
+      "8.0x4.0x3",
+      "8.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 20.0,
+        "thrust_g": 286.1,
+        "voltage_v": 25.2,
+        "current_a": 2.6,
+        "power_w": 64.5,
+        "efficiency": 4.44,
+        "rpm": 6707.2
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 40.0,
+        "thrust_g": 810.4,
+        "voltage_v": 25.1,
+        "current_a": 8.5,
+        "power_w": 212.0,
+        "efficiency": 3.82,
+        "rpm": 10407.8
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 60.0,
+        "thrust_g": 1433.1,
+        "voltage_v": 24.9,
+        "current_a": 17.4,
+        "power_w": 432.8,
+        "efficiency": 3.31,
+        "rpm": 13720.8
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 80.0,
+        "thrust_g": 2348.0,
+        "voltage_v": 24.7,
+        "current_a": 36.1,
+        "power_w": 889.5,
+        "efficiency": 2.64,
+        "rpm": 17231.3
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 100.0,
+        "thrust_g": 3233.8,
+        "voltage_v": 24.3,
+        "current_a": 59.2,
+        "power_w": 1437.9,
+        "efficiency": 2.25,
+        "rpm": 20049.6
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 20.0,
+        "thrust_g": 276.8,
+        "voltage_v": 25.2,
+        "current_a": 2.5,
+        "power_w": 64.0,
+        "efficiency": 4.33,
+        "rpm": 6970.9
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 40.0,
+        "thrust_g": 813.3,
+        "voltage_v": 25.1,
+        "current_a": 8.2,
+        "power_w": 206.3,
+        "efficiency": 3.94,
+        "rpm": 10727.5
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1402.6,
+        "voltage_v": 25.0,
+        "current_a": 16.2,
+        "power_w": 403.6,
+        "efficiency": 3.48,
+        "rpm": 14016.0
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2375.0,
+        "voltage_v": 24.7,
+        "current_a": 34.1,
+        "power_w": 842.7,
+        "efficiency": 2.82,
+        "rpm": 17549.3
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 3352.8,
+        "voltage_v": 24.3,
+        "current_a": 57.5,
+        "power_w": 1397.7,
+        "efficiency": 2.4,
+        "rpm": 20334.9
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 20.0,
+        "thrust_g": 257.9,
+        "voltage_v": 25.2,
+        "current_a": 2.4,
+        "power_w": 60.4,
+        "efficiency": 4.27,
+        "rpm": 5470.92
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 40.0,
+        "thrust_g": 773.5,
+        "voltage_v": 25.1,
+        "current_a": 8.4,
+        "power_w": 210.6,
+        "efficiency": 3.67,
+        "rpm": 8536.86
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1511.5,
+        "voltage_v": 24.9,
+        "current_a": 19.9,
+        "power_w": 494.5,
+        "efficiency": 3.06,
+        "rpm": 11564.01
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 2356.6,
+        "voltage_v": 24.5,
+        "current_a": 40.5,
+        "power_w": 993.3,
+        "efficiency": 2.37,
+        "rpm": 14091.12
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 100.0,
+        "thrust_g": 3014.2,
+        "voltage_v": 24.1,
+        "current_a": 63.1,
+        "power_w": 1520.6,
+        "efficiency": 1.98,
+        "rpm": 15759.63
+      }
+    ]
+  },
+  "T-Motor V2812 925KV": {
+    "name": "T-Motor V2812 925KV",
+    "avg_voltage": 24.95,
+    "props": [
+      "7.5x4.6x3",
+      "8.0x4.0x3",
+      "8.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 20.0,
+        "thrust_g": 204.4,
+        "voltage_v": 25.2,
+        "current_a": 1.6,
+        "power_w": 41.0,
+        "efficiency": 4.99,
+        "rpm": 5772.6
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 40.0,
+        "thrust_g": 586.0,
+        "voltage_v": 25.2,
+        "current_a": 5.1,
+        "power_w": 128.0,
+        "efficiency": 4.58,
+        "rpm": 8944.0
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 60.0,
+        "thrust_g": 1016.9,
+        "voltage_v": 25.0,
+        "current_a": 10.3,
+        "power_w": 258.9,
+        "efficiency": 3.93,
+        "rpm": 11624.4
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 80.0,
+        "thrust_g": 1684.7,
+        "voltage_v": 24.9,
+        "current_a": 20.6,
+        "power_w": 511.8,
+        "efficiency": 3.29,
+        "rpm": 14861.0
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 100.0,
+        "thrust_g": 2470.0,
+        "voltage_v": 24.7,
+        "current_a": 35.8,
+        "power_w": 883.6,
+        "efficiency": 2.8,
+        "rpm": 17690.8
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 20.0,
+        "thrust_g": 190.0,
+        "voltage_v": 25.2,
+        "current_a": 1.5,
+        "power_w": 37.7,
+        "efficiency": 5.04,
+        "rpm": 4714.92
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 40.0,
+        "thrust_g": 572.7,
+        "voltage_v": 25.1,
+        "current_a": 5.1,
+        "power_w": 128.1,
+        "efficiency": 4.47,
+        "rpm": 7324.83
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1099.2,
+        "voltage_v": 25.0,
+        "current_a": 12.0,
+        "power_w": 299.7,
+        "efficiency": 3.67,
+        "rpm": 9961.83
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 1787.1,
+        "voltage_v": 24.8,
+        "current_a": 24.2,
+        "power_w": 599.9,
+        "efficiency": 2.98,
+        "rpm": 12473.19
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2476.8,
+        "voltage_v": 24.5,
+        "current_a": 41.4,
+        "power_w": 1013.3,
+        "efficiency": 2.44,
+        "rpm": 14533.92
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 20.0,
+        "thrust_g": 190.0,
+        "voltage_v": 25.2,
+        "current_a": 1.5,
+        "power_w": 37.7,
+        "efficiency": 5.04,
+        "rpm": 4714.92
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 40.0,
+        "thrust_g": 572.7,
+        "voltage_v": 25.1,
+        "current_a": 5.1,
+        "power_w": 128.1,
+        "efficiency": 4.47,
+        "rpm": 7324.83
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1099.2,
+        "voltage_v": 25.0,
+        "current_a": 12.0,
+        "power_w": 299.7,
+        "efficiency": 3.67,
+        "rpm": 9961.83
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 1787.1,
+        "voltage_v": 24.8,
+        "current_a": 24.2,
+        "power_w": 599.9,
+        "efficiency": 2.98,
+        "rpm": 12473.19
+      },
+      {
+        "prop": "8.0x4.5x3",
+        "throttle": 100.0,
+        "thrust_g": 2476.8,
+        "voltage_v": 24.5,
+        "current_a": 41.4,
+        "power_w": 1013.3,
+        "efficiency": 2.44,
+        "rpm": 14533.92
+      }
+    ]
+  },
+  "T-Motor V3008 1155KV": {
+    "name": "T-Motor V3008 1155KV",
+    "avg_voltage": 24.9,
+    "props": [
+      "7.5x4.6x3"
+    ],
+    "data": [
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 20.0,
+        "thrust_g": 183.1,
+        "voltage_v": 25.2,
+        "current_a": 1.6,
+        "power_w": 41.3,
+        "efficiency": 4.43,
+        "rpm": 5805.2
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 40.0,
+        "thrust_g": 633.8,
+        "voltage_v": 25.2,
+        "current_a": 6.0,
+        "power_w": 150.0,
+        "efficiency": 4.23,
+        "rpm": 9357.6
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 60.0,
+        "thrust_g": 1260.4,
+        "voltage_v": 25.0,
+        "current_a": 17.6,
+        "power_w": 438.3,
+        "efficiency": 2.88,
+        "rpm": 12681.7
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 80.0,
+        "thrust_g": 2130.7,
+        "voltage_v": 24.7,
+        "current_a": 32.2,
+        "power_w": 796.6,
+        "efficiency": 2.67,
+        "rpm": 16341.3
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 100.0,
+        "thrust_g": 2815.0,
+        "voltage_v": 24.4,
+        "current_a": 53.9,
+        "power_w": 1314.4,
+        "efficiency": 2.14,
+        "rpm": 18703.9
+      }
+    ]
+  },
+  "T-Motor V3008 1350KV": {
+    "name": "T-Motor V3008 1350KV",
+    "avg_voltage": 24.78,
+    "props": [
+      "7.5x4.6x3"
+    ],
+    "data": [
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 20.0,
+        "thrust_g": 239.3,
+        "voltage_v": 25.2,
+        "current_a": 2.3,
+        "power_w": 57.2,
+        "efficiency": 4.18,
+        "rpm": 6412.3
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 40.0,
+        "thrust_g": 790.4,
+        "voltage_v": 25.1,
+        "current_a": 9.3,
+        "power_w": 232.2,
+        "efficiency": 3.4,
+        "rpm": 10279.8
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 60.0,
+        "thrust_g": 1548.8,
+        "voltage_v": 24.9,
+        "current_a": 21.8,
+        "power_w": 541.7,
+        "efficiency": 2.86,
+        "rpm": 14095.0
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 80.0,
+        "thrust_g": 2482.5,
+        "voltage_v": 24.6,
+        "current_a": 42.7,
+        "power_w": 1049.1,
+        "efficiency": 2.37,
+        "rpm": 17588.9
+      },
+      {
+        "prop": "7.5x4.6x3",
+        "throttle": 100.0,
+        "thrust_g": 3188.7,
+        "voltage_v": 24.1,
+        "current_a": 69.7,
+        "power_w": 1680.9,
+        "efficiency": 1.9,
+        "rpm": 19768.4
+      }
+    ]
+  },
+  "T-Motor V3008 1500KV": {
+    "name": "T-Motor V3008 1500KV",
+    "avg_voltage": 24.94,
+    "props": [
+      "6.0x1.43x3"
+    ],
+    "data": [
+      {
+        "prop": "6.0x1.43x3",
+        "throttle": 20.0,
+        "thrust_g": 173.0,
+        "voltage_v": 25.2,
+        "current_a": 2.4,
+        "power_w": 59.2,
+        "efficiency": 2.92,
+        "rpm": 9981.0
+      },
+      {
+        "prop": "6.0x1.43x3",
+        "throttle": 40.0,
+        "thrust_g": 540.3,
+        "voltage_v": 25.1,
+        "current_a": 7.1,
+        "power_w": 179.3,
+        "efficiency": 3.01,
+        "rpm": 15374.6
+      },
+      {
+        "prop": "6.0x1.43x3",
+        "throttle": 60.0,
+        "thrust_g": 907.4,
+        "voltage_v": 25.0,
+        "current_a": 13.7,
+        "power_w": 343.5,
+        "efficiency": 2.64,
+        "rpm": 19080.6
+      },
+      {
+        "prop": "6.0x1.43x3",
+        "throttle": 80.0,
+        "thrust_g": 1425.2,
+        "voltage_v": 24.8,
+        "current_a": 24.6,
+        "power_w": 611.4,
+        "efficiency": 2.33,
+        "rpm": 23595.3
+      },
+      {
+        "prop": "6.0x1.43x3",
+        "throttle": 100.0,
+        "thrust_g": 2105.6,
+        "voltage_v": 24.6,
+        "current_a": 43.6,
+        "power_w": 1069.3,
+        "efficiency": 1.97,
+        "rpm": 28321.2
+      }
+    ]
+  },
+  "XING 2806.5 1300KV": {
+    "name": "XING 2806.5 1300KV",
+    "avg_voltage": 23.65,
+    "props": [
+      "7.0x4.0x2",
+      "7.0x4.0x3",
+      "8.0x4.0x3"
+    ],
+    "data": [
+      {
+        "prop": "7.0x4.0x2",
+        "throttle": 50.0,
+        "thrust_g": 593.0,
+        "voltage_v": 23.94,
+        "current_a": 5.9,
+        "power_w": 141.2,
+        "efficiency": 4.201,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x2",
+        "throttle": 60.0,
+        "thrust_g": 856.0,
+        "voltage_v": 23.69,
+        "current_a": 9.48,
+        "power_w": 224.6,
+        "efficiency": 3.811,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x2",
+        "throttle": 70.0,
+        "thrust_g": 1159.0,
+        "voltage_v": 23.51,
+        "current_a": 13.8,
+        "power_w": 324.4,
+        "efficiency": 3.573,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x2",
+        "throttle": 80.0,
+        "thrust_g": 1451.0,
+        "voltage_v": 23.48,
+        "current_a": 19.78,
+        "power_w": 464.4,
+        "efficiency": 3.124,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x2",
+        "throttle": 90.0,
+        "thrust_g": 1747.0,
+        "voltage_v": 23.41,
+        "current_a": 26.8,
+        "power_w": 627.4,
+        "efficiency": 2.785,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x2",
+        "throttle": 100.0,
+        "thrust_g": 2058.0,
+        "voltage_v": 23.33,
+        "current_a": 32.38,
+        "power_w": 755.4,
+        "efficiency": 2.725,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 872.0,
+        "voltage_v": 23.95,
+        "current_a": 8.42,
+        "power_w": 201.7,
+        "efficiency": 4.323,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1147.0,
+        "voltage_v": 23.88,
+        "current_a": 13.91,
+        "power_w": 332.2,
+        "efficiency": 3.452,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1438.0,
+        "voltage_v": 23.85,
+        "current_a": 19.2,
+        "power_w": 457.9,
+        "efficiency": 3.141,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 1797.0,
+        "voltage_v": 23.59,
+        "current_a": 27.23,
+        "power_w": 642.4,
+        "efficiency": 2.797,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2078.0,
+        "voltage_v": 23.48,
+        "current_a": 35.16,
+        "power_w": 825.6,
+        "efficiency": 2.517,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2319.0,
+        "voltage_v": 23.42,
+        "current_a": 42.33,
+        "power_w": 991.4,
+        "efficiency": 2.339,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 1034.0,
+        "voltage_v": 23.91,
+        "current_a": 10.42,
+        "power_w": 249.1,
+        "efficiency": 4.152,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1363.0,
+        "voltage_v": 23.88,
+        "current_a": 17.19,
+        "power_w": 410.5,
+        "efficiency": 3.319,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1683.0,
+        "voltage_v": 23.84,
+        "current_a": 23.38,
+        "power_w": 557.4,
+        "efficiency": 3.019,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2036.0,
+        "voltage_v": 23.59,
+        "current_a": 31.1,
+        "power_w": 733.6,
+        "efficiency": 2.775,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2328.0,
+        "voltage_v": 23.48,
+        "current_a": 40.48,
+        "power_w": 950.5,
+        "efficiency": 2.449,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2510.0,
+        "voltage_v": 23.44,
+        "current_a": 48.33,
+        "power_w": 1132.9,
+        "efficiency": 2.215,
+        "rpm": null
+      }
+    ]
+  },
+  "XING2 3110 900KV": {
+    "name": "XING2 3110 900KV",
+    "avg_voltage": 30.8,
+    "props": [
+      "7.0x4.0x3",
+      "8.0x4.0x3",
+      "9.0x5.0x3",
+      "10.0x5.0x3"
+    ],
+    "data": [
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 721.2,
+        "voltage_v": 33.56,
+        "current_a": 4.86,
+        "power_w": 163.1,
+        "efficiency": 4.42,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1036.0,
+        "voltage_v": 33.53,
+        "current_a": 7.82,
+        "power_w": 262.2,
+        "efficiency": 3.95,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1411.9,
+        "voltage_v": 33.47,
+        "current_a": 11.92,
+        "power_w": 399.0,
+        "efficiency": 3.54,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 1844.6,
+        "voltage_v": 33.39,
+        "current_a": 17.12,
+        "power_w": 571.6,
+        "efficiency": 3.23,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2250.8,
+        "voltage_v": 33.3,
+        "current_a": 23.88,
+        "power_w": 795.2,
+        "efficiency": 2.83,
+        "rpm": null
+      },
+      {
+        "prop": "7.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2612.3,
+        "voltage_v": 33.19,
+        "current_a": 31.74,
+        "power_w": 1053.5,
+        "efficiency": 2.48,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 1302.9,
+        "voltage_v": 33.51,
+        "current_a": 9.05,
+        "power_w": 303.3,
+        "efficiency": 4.3,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1780.0,
+        "voltage_v": 33.43,
+        "current_a": 14.72,
+        "power_w": 492.1,
+        "efficiency": 3.62,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 2317.1,
+        "voltage_v": 33.33,
+        "current_a": 21.68,
+        "power_w": 722.6,
+        "efficiency": 3.21,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2970.5,
+        "voltage_v": 33.21,
+        "current_a": 30.4,
+        "power_w": 1009.6,
+        "efficiency": 2.94,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 3520.5,
+        "voltage_v": 33.05,
+        "current_a": 41.91,
+        "power_w": 1385.1,
+        "efficiency": 2.54,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 4013.8,
+        "voltage_v": 32.88,
+        "current_a": 52.79,
+        "power_w": 1735.7,
+        "efficiency": 2.31,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 1632.5,
+        "voltage_v": 33.48,
+        "current_a": 11.34,
+        "power_w": 379.7,
+        "efficiency": 4.3,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 2178.6,
+        "voltage_v": 33.35,
+        "current_a": 19.79,
+        "power_w": 660.0,
+        "efficiency": 3.3,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 2872.4,
+        "voltage_v": 33.26,
+        "current_a": 27.29,
+        "power_w": 907.7,
+        "efficiency": 3.16,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 3509.0,
+        "voltage_v": 33.09,
+        "current_a": 39.09,
+        "power_w": 1293.5,
+        "efficiency": 2.71,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 4044.7,
+        "voltage_v": 32.92,
+        "current_a": 50.99,
+        "power_w": 1678.6,
+        "efficiency": 2.41,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 4311.4,
+        "voltage_v": 32.71,
+        "current_a": 65.54,
+        "power_w": 2143.8,
+        "efficiency": 2.01,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 789.0,
+        "voltage_v": 24.91,
+        "current_a": 9.95,
+        "power_w": 247.9,
+        "efficiency": 3.18,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1191.0,
+        "voltage_v": 24.36,
+        "current_a": 16.38,
+        "power_w": 399.0,
+        "efficiency": 2.98,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1639.0,
+        "voltage_v": 23.73,
+        "current_a": 23.85,
+        "power_w": 566.0,
+        "efficiency": 2.9,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2193.0,
+        "voltage_v": 23.18,
+        "current_a": 34.58,
+        "power_w": 801.6,
+        "efficiency": 2.74,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2768.0,
+        "voltage_v": 22.58,
+        "current_a": 46.85,
+        "power_w": 1057.9,
+        "efficiency": 2.62,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2906.0,
+        "voltage_v": 21.86,
+        "current_a": 49.85,
+        "power_w": 1089.7,
+        "efficiency": 2.67,
+        "rpm": null
+      }
+    ]
+  },
+  "XING2 3314 900KV": {
+    "name": "XING2 3314 900KV",
+    "avg_voltage": 23.83,
+    "props": [
+      "8.0x4.0x3",
+      "9.0x4.0x3",
+      "10.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 689.0,
+        "voltage_v": 24.1,
+        "current_a": 6.16,
+        "power_w": 148.5,
+        "efficiency": 4.64,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 977.0,
+        "voltage_v": 24.05,
+        "current_a": 9.41,
+        "power_w": 226.3,
+        "efficiency": 4.32,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1297.0,
+        "voltage_v": 23.98,
+        "current_a": 13.57,
+        "power_w": 325.4,
+        "efficiency": 3.98,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 1656.0,
+        "voltage_v": 23.91,
+        "current_a": 18.79,
+        "power_w": 449.3,
+        "efficiency": 3.69,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2034.0,
+        "voltage_v": 23.82,
+        "current_a": 25.07,
+        "power_w": 597.2,
+        "efficiency": 3.41,
+        "rpm": null
+      },
+      {
+        "prop": "8.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2355.0,
+        "voltage_v": 23.74,
+        "current_a": 30.28,
+        "power_w": 718.8,
+        "efficiency": 3.28,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 50.0,
+        "thrust_g": 956.0,
+        "voltage_v": 24.06,
+        "current_a": 8.34,
+        "power_w": 200.7,
+        "efficiency": 4.76,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1341.0,
+        "voltage_v": 24.0,
+        "current_a": 12.73,
+        "power_w": 305.5,
+        "efficiency": 4.39,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1755.0,
+        "voltage_v": 23.92,
+        "current_a": 18.32,
+        "power_w": 438.2,
+        "efficiency": 4.0,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 80.0,
+        "thrust_g": 2269.0,
+        "voltage_v": 23.81,
+        "current_a": 25.59,
+        "power_w": 609.3,
+        "efficiency": 3.72,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2787.0,
+        "voltage_v": 23.69,
+        "current_a": 34.2,
+        "power_w": 810.2,
+        "efficiency": 3.44,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 100.0,
+        "thrust_g": 3213.0,
+        "voltage_v": 23.59,
+        "current_a": 41.44,
+        "power_w": 977.6,
+        "efficiency": 3.29,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 50.0,
+        "thrust_g": 1358.0,
+        "voltage_v": 24.02,
+        "current_a": 11.79,
+        "power_w": 283.2,
+        "efficiency": 4.8,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1972.0,
+        "voltage_v": 23.93,
+        "current_a": 17.83,
+        "power_w": 426.7,
+        "efficiency": 4.62,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 70.0,
+        "thrust_g": 2558.0,
+        "voltage_v": 23.81,
+        "current_a": 26.11,
+        "power_w": 621.7,
+        "efficiency": 4.12,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 3191.0,
+        "voltage_v": 23.66,
+        "current_a": 36.63,
+        "power_w": 866.7,
+        "efficiency": 3.68,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 90.0,
+        "thrust_g": 3633.0,
+        "voltage_v": 23.5,
+        "current_a": 48.14,
+        "power_w": 1131.3,
+        "efficiency": 3.21,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 100.0,
+        "thrust_g": 4191.0,
+        "voltage_v": 23.36,
+        "current_a": 58.48,
+        "power_w": 1366.1,
+        "efficiency": 3.07,
+        "rpm": null
+      }
+    ]
+  },
+  "XNOVA Cinelifter 3220 490KV": {
+    "name": "XNOVA Cinelifter 3220 490KV",
+    "avg_voltage": 50.4,
+    "props": [
+      "10.0x5.0x3"
+    ],
+    "data": [
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 10.0,
+        "thrust_g": 156.0,
+        "voltage_v": 50.4,
+        "current_a": 0.38,
+        "power_w": 19.15,
+        "efficiency": 8.15,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 20.0,
+        "thrust_g": 416.0,
+        "voltage_v": 50.4,
+        "current_a": 1.17,
+        "power_w": 58.97,
+        "efficiency": 7.05,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 30.0,
+        "thrust_g": 893.0,
+        "voltage_v": 50.4,
+        "current_a": 2.87,
+        "power_w": 144.65,
+        "efficiency": 6.17,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 40.0,
+        "thrust_g": 1630.0,
+        "voltage_v": 50.4,
+        "current_a": 6.3,
+        "power_w": 317.52,
+        "efficiency": 5.13,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 2220.0,
+        "voltage_v": 50.4,
+        "current_a": 9.76,
+        "power_w": 491.9,
+        "efficiency": 4.51,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 3120.0,
+        "voltage_v": 50.4,
+        "current_a": 16.48,
+        "power_w": 830.59,
+        "efficiency": 3.76,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 4020.0,
+        "voltage_v": 50.4,
+        "current_a": 23.87,
+        "power_w": 1203.05,
+        "efficiency": 3.34,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 4700.0,
+        "voltage_v": 50.4,
+        "current_a": 32.74,
+        "power_w": 1650.1,
+        "efficiency": 2.85,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 5200.0,
+        "voltage_v": 50.4,
+        "current_a": 41.08,
+        "power_w": 2070.43,
+        "efficiency": 2.51,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 5950.0,
+        "voltage_v": 50.4,
+        "current_a": 51.65,
+        "power_w": 2603.16,
+        "efficiency": 2.29,
+        "rpm": null
+      }
+    ]
+  },
+  "iFlight XING 2814 1100KV": {
+    "name": "iFlight XING 2814 1100KV",
+    "avg_voltage": 16.0,
+    "props": [
+      "9.0x4.5x2",
+      "9.0x5.0x3",
+      "10.0x4.5x2",
+      "10.0x4.5x3"
+    ],
+    "data": [
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 50.0,
+        "thrust_g": 434.0,
+        "voltage_v": 16.0,
+        "current_a": 6.9,
+        "power_w": 110.4,
+        "efficiency": 3.931,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 60.0,
+        "thrust_g": 792.0,
+        "voltage_v": 16.0,
+        "current_a": 10.3,
+        "power_w": 164.8,
+        "efficiency": 4.806,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 70.0,
+        "thrust_g": 1072.0,
+        "voltage_v": 16.0,
+        "current_a": 15.4,
+        "power_w": 246.4,
+        "efficiency": 4.351,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 80.0,
+        "thrust_g": 1332.0,
+        "voltage_v": 16.0,
+        "current_a": 21.0,
+        "power_w": 336.0,
+        "efficiency": 3.964,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 90.0,
+        "thrust_g": 1603.0,
+        "voltage_v": 16.0,
+        "current_a": 27.8,
+        "power_w": 444.8,
+        "efficiency": 3.604,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 100.0,
+        "thrust_g": 1761.0,
+        "voltage_v": 16.0,
+        "current_a": 32.0,
+        "power_w": 512.0,
+        "efficiency": 3.439,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 50.0,
+        "thrust_g": 833.0,
+        "voltage_v": 16.0,
+        "current_a": 10.6,
+        "power_w": 169.6,
+        "efficiency": 4.912,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 60.0,
+        "thrust_g": 1161.0,
+        "voltage_v": 16.0,
+        "current_a": 16.5,
+        "power_w": 264.0,
+        "efficiency": 4.398,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 70.0,
+        "thrust_g": 1489.0,
+        "voltage_v": 16.0,
+        "current_a": 23.3,
+        "power_w": 372.8,
+        "efficiency": 3.994,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 80.0,
+        "thrust_g": 1766.0,
+        "voltage_v": 16.0,
+        "current_a": 30.9,
+        "power_w": 494.4,
+        "efficiency": 3.572,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 90.0,
+        "thrust_g": 2030.0,
+        "voltage_v": 16.0,
+        "current_a": 39.4,
+        "power_w": 630.4,
+        "efficiency": 3.22,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 100.0,
+        "thrust_g": 2163.0,
+        "voltage_v": 16.0,
+        "current_a": 43.9,
+        "power_w": 702.4,
+        "efficiency": 3.079,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x2",
+        "throttle": 50.0,
+        "thrust_g": 820.0,
+        "voltage_v": 16.0,
+        "current_a": 9.8,
+        "power_w": 156.8,
+        "efficiency": 5.23,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x2",
+        "throttle": 60.0,
+        "thrust_g": 1140.0,
+        "voltage_v": 16.0,
+        "current_a": 15.1,
+        "power_w": 241.6,
+        "efficiency": 4.719,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x2",
+        "throttle": 70.0,
+        "thrust_g": 1473.0,
+        "voltage_v": 16.0,
+        "current_a": 22.1,
+        "power_w": 353.6,
+        "efficiency": 4.166,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x2",
+        "throttle": 80.0,
+        "thrust_g": 1794.0,
+        "voltage_v": 16.0,
+        "current_a": 29.7,
+        "power_w": 475.2,
+        "efficiency": 3.775,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x2",
+        "throttle": 90.0,
+        "thrust_g": 2062.0,
+        "voltage_v": 16.0,
+        "current_a": 38.0,
+        "power_w": 608.0,
+        "efficiency": 3.391,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x2",
+        "throttle": 100.0,
+        "thrust_g": 2216.0,
+        "voltage_v": 16.0,
+        "current_a": 43.0,
+        "power_w": 688.0,
+        "efficiency": 3.221,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 50.0,
+        "thrust_g": 1157.0,
+        "voltage_v": 16.0,
+        "current_a": 15.5,
+        "power_w": 248.0,
+        "efficiency": 4.665,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 60.0,
+        "thrust_g": 1489.0,
+        "voltage_v": 16.0,
+        "current_a": 22.8,
+        "power_w": 364.8,
+        "efficiency": 4.082,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 70.0,
+        "thrust_g": 1804.0,
+        "voltage_v": 16.0,
+        "current_a": 31.1,
+        "power_w": 497.6,
+        "efficiency": 3.625,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 80.0,
+        "thrust_g": 2029.0,
+        "voltage_v": 16.0,
+        "current_a": 39.3,
+        "power_w": 628.8,
+        "efficiency": 3.227,
+        "rpm": null
+      }
+    ]
+  },
+  "GEPRC EM3115 900KV": {
+    "name": "GEPRC EM3115 900KV",
+    "avg_voltage": 23.76,
+    "props": [
+      "9.0x4.5x2",
+      "10.0x5.0x2"
+    ],
+    "data": [
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 20.0,
+        "thrust_g": 92.0,
+        "voltage_v": 24.05,
+        "current_a": 0.34,
+        "power_w": 8.2,
+        "efficiency": 11.22,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 30.0,
+        "thrust_g": 386.0,
+        "voltage_v": 24.03,
+        "current_a": 2.76,
+        "power_w": 66.79,
+        "efficiency": 5.78,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 40.0,
+        "thrust_g": 730.0,
+        "voltage_v": 24.01,
+        "current_a": 5.42,
+        "power_w": 131.91,
+        "efficiency": 5.53,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 50.0,
+        "thrust_g": 1071.0,
+        "voltage_v": 23.99,
+        "current_a": 9.17,
+        "power_w": 221.73,
+        "efficiency": 4.83,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 60.0,
+        "thrust_g": 1566.0,
+        "voltage_v": 23.88,
+        "current_a": 15.31,
+        "power_w": 368.54,
+        "efficiency": 4.25,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 70.0,
+        "thrust_g": 2191.0,
+        "voltage_v": 23.85,
+        "current_a": 24.47,
+        "power_w": 588.59,
+        "efficiency": 3.72,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 80.0,
+        "thrust_g": 2911.0,
+        "voltage_v": 23.58,
+        "current_a": 37.94,
+        "power_w": 902.22,
+        "efficiency": 3.23,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 90.0,
+        "thrust_g": 3062.0,
+        "voltage_v": 23.58,
+        "current_a": 40.87,
+        "power_w": 963.7,
+        "efficiency": 3.18,
+        "rpm": null
+      },
+      {
+        "prop": "9.0x4.5x2",
+        "throttle": 100.0,
+        "thrust_g": 3190.0,
+        "voltage_v": 23.52,
+        "current_a": 43.2,
+        "power_w": 1016.1,
+        "efficiency": 3.14,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x2",
+        "throttle": 20.0,
+        "thrust_g": 117.0,
+        "voltage_v": 24.08,
+        "current_a": 0.48,
+        "power_w": 11.56,
+        "efficiency": 10.12,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x2",
+        "throttle": 30.0,
+        "thrust_g": 472.0,
+        "voltage_v": 24.05,
+        "current_a": 2.9,
+        "power_w": 70.15,
+        "efficiency": 6.73,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x2",
+        "throttle": 40.0,
+        "thrust_g": 907.0,
+        "voltage_v": 23.91,
+        "current_a": 6.6,
+        "power_w": 159.04,
+        "efficiency": 5.7,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x2",
+        "throttle": 50.0,
+        "thrust_g": 1665.0,
+        "voltage_v": 23.87,
+        "current_a": 15.31,
+        "power_w": 370.64,
+        "efficiency": 4.49,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x2",
+        "throttle": 60.0,
+        "thrust_g": 2439.0,
+        "voltage_v": 23.8,
+        "current_a": 27.81,
+        "power_w": 667.24,
+        "efficiency": 3.66,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x2",
+        "throttle": 70.0,
+        "thrust_g": 3152.0,
+        "voltage_v": 23.77,
+        "current_a": 42.69,
+        "power_w": 1023.36,
+        "efficiency": 3.08,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x2",
+        "throttle": 80.0,
+        "thrust_g": 3866.0,
+        "voltage_v": 23.52,
+        "current_a": 61.72,
+        "power_w": 1464.2,
+        "efficiency": 2.64,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x2",
+        "throttle": 90.0,
+        "thrust_g": 3972.0,
+        "voltage_v": 23.52,
+        "current_a": 64.39,
+        "power_w": 1514.4,
+        "efficiency": 2.62,
+        "rpm": null
+      },
+      {
+        "prop": "10.0x5.0x2",
+        "throttle": 100.0,
+        "thrust_g": 4032.0,
+        "voltage_v": 23.47,
+        "current_a": 66.71,
+        "power_w": 1565.7,
+        "efficiency": 2.57,
+        "rpm": null
+      }
+    ]
+  },
+  "RTF-3115 900KV": {
+    "name": "RTF-3115 900KV",
+    "avg_voltage": 24.0,
+    "props": [
+      "9.0x4.0x3",
+      "9.0x5.0x3",
+      "10.0x4.5x3",
+      "10.0x5.0x3"
+    ],
+    "data": [
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 40,
+        "thrust_g": 560,
+        "voltage_v": 24,
+        "current_a": 3.3,
+        "power_w": 80,
+        "efficiency": 6.97,
+        "rpm": 7382
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 50,
+        "thrust_g": 937,
+        "voltage_v": 24,
+        "current_a": 7.4,
+        "power_w": 178,
+        "efficiency": 5.25,
+        "rpm": 9556
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 60,
+        "thrust_g": 1274,
+        "voltage_v": 24,
+        "current_a": 11.9,
+        "power_w": 286,
+        "efficiency": 4.46,
+        "rpm": 11190
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 70,
+        "thrust_g": 1690,
+        "voltage_v": 24,
+        "current_a": 17.2,
+        "power_w": 414,
+        "efficiency": 4.08,
+        "rpm": 12749
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 80,
+        "thrust_g": 2327,
+        "voltage_v": 24,
+        "current_a": 24.7,
+        "power_w": 594,
+        "efficiency": 3.92,
+        "rpm": 14398
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 90,
+        "thrust_g": 3099,
+        "voltage_v": 24,
+        "current_a": 35.5,
+        "power_w": 852,
+        "efficiency": 3.64,
+        "rpm": 16069
+      },
+      {
+        "prop": "9.0x4.0x3",
+        "throttle": 100,
+        "thrust_g": 3432,
+        "voltage_v": 24,
+        "current_a": 41.8,
+        "power_w": 1003,
+        "efficiency": 3.42,
+        "rpm": 16934
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 40,
+        "thrust_g": 784,
+        "voltage_v": 24,
+        "current_a": 5.4,
+        "power_w": 129,
+        "efficiency": 6.06,
+        "rpm": 7106
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 50,
+        "thrust_g": 1263,
+        "voltage_v": 24,
+        "current_a": 11.1,
+        "power_w": 267,
+        "efficiency": 4.74,
+        "rpm": 9016
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 60,
+        "thrust_g": 1736,
+        "voltage_v": 24,
+        "current_a": 18.1,
+        "power_w": 435,
+        "efficiency": 3.99,
+        "rpm": 10509
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 70,
+        "thrust_g": 2300,
+        "voltage_v": 24,
+        "current_a": 27.0,
+        "power_w": 649,
+        "efficiency": 3.54,
+        "rpm": 11932
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 80,
+        "thrust_g": 3062,
+        "voltage_v": 24,
+        "current_a": 39.0,
+        "power_w": 935,
+        "efficiency": 3.27,
+        "rpm": 13400
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 90,
+        "thrust_g": 3910,
+        "voltage_v": 24,
+        "current_a": 54.3,
+        "power_w": 1304,
+        "efficiency": 3.0,
+        "rpm": 14738
+      },
+      {
+        "prop": "9.0x5.0x3",
+        "throttle": 100,
+        "thrust_g": 4279,
+        "voltage_v": 24,
+        "current_a": 64.0,
+        "power_w": 1535,
+        "efficiency": 2.79,
+        "rpm": 15438
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 40,
+        "thrust_g": 761,
+        "voltage_v": 24,
+        "current_a": 5.1,
+        "power_w": 124,
+        "efficiency": 6.16,
+        "rpm": 7052
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 50,
+        "thrust_g": 1336,
+        "voltage_v": 24,
+        "current_a": 10.9,
+        "power_w": 262,
+        "efficiency": 5.1,
+        "rpm": 9142
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 60,
+        "thrust_g": 1871,
+        "voltage_v": 24,
+        "current_a": 17.5,
+        "power_w": 421,
+        "efficiency": 4.44,
+        "rpm": 10582
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 70,
+        "thrust_g": 2451,
+        "voltage_v": 24,
+        "current_a": 25.7,
+        "power_w": 617,
+        "efficiency": 3.97,
+        "rpm": 11958
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 80,
+        "thrust_g": 3242,
+        "voltage_v": 24,
+        "current_a": 37.2,
+        "power_w": 894,
+        "efficiency": 3.63,
+        "rpm": 13565
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 90,
+        "thrust_g": 4181,
+        "voltage_v": 24,
+        "current_a": 51.7,
+        "power_w": 1242,
+        "efficiency": 3.37,
+        "rpm": 14900
+      },
+      {
+        "prop": "10.0x4.5x3",
+        "throttle": 100,
+        "thrust_g": 4648,
+        "voltage_v": 24,
+        "current_a": 61.6,
+        "power_w": 1477,
+        "efficiency": 3.15,
+        "rpm": 15606
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 40,
+        "thrust_g": 1089,
+        "voltage_v": 24,
+        "current_a": 7.5,
+        "power_w": 180,
+        "efficiency": 6.04,
+        "rpm": 6999
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 50,
+        "thrust_g": 1728,
+        "voltage_v": 24,
+        "current_a": 14.2,
+        "power_w": 341,
+        "efficiency": 5.07,
+        "rpm": 8663
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 60,
+        "thrust_g": 2403,
+        "voltage_v": 24,
+        "current_a": 23.0,
+        "power_w": 551,
+        "efficiency": 4.36,
+        "rpm": 10072
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 70,
+        "thrust_g": 3152,
+        "voltage_v": 24,
+        "current_a": 34.4,
+        "power_w": 825,
+        "efficiency": 3.82,
+        "rpm": 11403
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 80,
+        "thrust_g": 4006,
+        "voltage_v": 24,
+        "current_a": 49.9,
+        "power_w": 1197,
+        "efficiency": 3.35,
+        "rpm": 12713
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 90,
+        "thrust_g": 4831,
+        "voltage_v": 24,
+        "current_a": 69.8,
+        "power_w": 1674,
+        "efficiency": 2.89,
+        "rpm": 13779
+      },
+      {
+        "prop": "10.0x5.0x3",
+        "throttle": 100,
+        "thrust_g": 5177,
+        "voltage_v": 24,
+        "current_a": 80.9,
+        "power_w": 1940,
+        "efficiency": 2.67,
+        "rpm": 14171
+      }
+    ]
+  }
+}
