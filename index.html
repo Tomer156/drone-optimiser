@@ -493,7 +493,7 @@
   .ctbl tr.br td { background: rgba(158,255,0,0.02); }
   .sc { color: var(--accent); }
   .vc { color: var(--green); font-weight: 600; text-align: right; }
-  .fc { color: var(--muted); font-size: 8px; }
+  .fc { color: var(--muted); font-size: 9px; font-family: Georgia, 'Times New Roman', serif; font-style: italic; }
 
   /* ─── CHECKS ─── */
   .chk-list { display: flex; flex-direction: column; gap: 4px; }
@@ -744,6 +744,20 @@
   }
   #opt-toast.ok  { border-left: 4px solid var(--green); }
   #opt-toast.bad { border-left: 4px solid var(--warn); }
+
+  /* Custom card tooltip (calc line in serif) */
+  #card-tip {
+    position: fixed; z-index: 3000; max-width: 280px; pointer-events: none;
+    background: var(--panel); border: 1px solid var(--border2); border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25); padding: 8px 10px;
+    font-family: var(--sans); font-size: 11px; line-height: 1.45; color: var(--text);
+  }
+  #card-tip .ct-purpose { color: var(--text); }
+  #card-tip .ct-calc {
+    margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--border);
+    font-family: Georgia, 'Times New Roman', serif; font-style: italic; color: var(--muted);
+  }
+  #card-tip .ct-calc b { font-style: normal; font-family: var(--sans); color: var(--muted); }
 </style>
 </head>
 <body>
@@ -1753,9 +1767,10 @@ const CARD_PURPOSE = {
 // `drift` (optional) is the signed delta-from-target → shown in parentheses next to value.
 function buildCard(lbl, value, calc, cls, drift) {
   const purpose = CARD_PURPOSE[lbl] || '';
-  const tipText = [purpose, calc ? 'Calc: ' + calc : ''].filter(Boolean).join('\n');
-  const tip = tipText ? ` title="${tipText.replace(/"/g,'&quot;')}"` : '';
-  const mark = tipText ? '<span class="gc-info">ⓘ</span>' : '';
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+  const hasTip = purpose || calc;
+  const tip = hasTip ? ` data-purpose="${esc(purpose)}" data-calc="${esc(calc || '')}"` : '';
+  const mark = hasTip ? '<span class="gc-info">ⓘ</span>' : '';
   const driftHtml = (drift !== undefined && drift !== null && drift !== '')
     ? ` <span class="gc-drift ${parseFloat(drift) >= 0 ? 'pos' : 'neg'}">(${parseFloat(drift) >= 0 ? '+' : ''}${drift})</span>`
     : '';
@@ -1764,6 +1779,40 @@ function buildCard(lbl, value, calc, cls, drift) {
     <div class="gc-lbl">${lbl}</div>
     <div class="gc-actual">${value}${driftHtml}</div>
   </div>`;
+}
+
+// Custom hover tooltip for cards — lets the calc render in a serif font (native title can't).
+function initCardTooltip() {
+  const tip = document.createElement('div');
+  tip.id = 'card-tip';
+  tip.style.display = 'none';
+  document.body.appendChild(tip);
+
+  const show = card => {
+    const p = card.getAttribute('data-purpose') || '';
+    const c = card.getAttribute('data-calc') || '';
+    if (!p && !c) { tip.style.display = 'none'; return; }
+    tip.innerHTML = (p ? `<div class="ct-purpose">${p}</div>` : '')
+                  + (c ? `<div class="ct-calc"><b>Calc:</b> ${c}</div>` : '');
+    tip.style.display = 'block';
+  };
+  const move = e => {
+    const pad = 14, r = tip.getBoundingClientRect();
+    let x = e.clientX + pad, y = e.clientY + pad;
+    if (x + r.width  > innerWidth  - 8) x = e.clientX - r.width  - pad;
+    if (y + r.height > innerHeight - 8) y = e.clientY - r.height - pad;
+    tip.style.left = Math.max(8, x) + 'px';
+    tip.style.top  = Math.max(8, y) + 'px';
+  };
+  document.addEventListener('mouseover', e => {
+    const card = e.target.closest && e.target.closest('.gap-card');
+    if (card && (card.hasAttribute('data-purpose') || card.hasAttribute('data-calc'))) { show(card); move(e); }
+  });
+  document.addEventListener('mousemove', e => { if (tip.style.display === 'block') move(e); });
+  document.addEventListener('mouseout', e => {
+    const card = e.target.closest && e.target.closest('.gap-card');
+    if (card && !card.contains(e.relatedTarget)) tip.style.display = 'none';
+  });
 }
 
 // gcard: benchmark card with a target + drift. bench/benchLbl → tooltip calc; delta → parens.
@@ -2412,6 +2461,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  initCardTooltip();
   lastD = compute();
   populatePropGlobal();
   populateMotors();
