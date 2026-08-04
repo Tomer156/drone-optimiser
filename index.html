@@ -217,6 +217,14 @@
     color: #ffffff;
     border-bottom: 1px solid var(--border);
     background: #1A1A1A;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .sec-n {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: #ffffff; color: #1A1A1A;
+    font-size: 11px; font-weight: 800; letter-spacing: 0;
+    flex-shrink: 0;
   }
 
   /* ─── INPUT ATOMS ─── */
@@ -407,6 +415,8 @@
     border-radius: 5px;
     padding: 9px 11px;
     position: relative; overflow: hidden;
+    aspect-ratio: 1 / 1;
+    display: flex; flex-direction: column; justify-content: center;
   }
   .gap-card::before {
     content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
@@ -759,7 +769,7 @@
     <div class="col-body">
 
       <div class="menu" data-menu="mission">
-      <div class="sec">① Mission</div>
+      <div class="sec"><span class="sec-n">1</span> Mission</div>
       <div class="ig">
         <div class="ir"><span class="il"><span class="sym">t</span> Flight Time Target</span><span class="iv-edit"><input class="iv-input" id="in-time" data-slider="s-time" inputmode="decimal"><span class="iv-unit">min</span></span></div>
         <input type="range" id="s-time" min="5" max="90" value="40" step="1">
@@ -795,7 +805,7 @@
       </div><!-- /menu mission -->
 
       <div class="menu" data-menu="mass">
-      <div class="sec">② Mass Budget</div>
+      <div class="sec"><span class="sec-n">2</span> Mass Budget</div>
       <div class="ig">
         <div class="ir"><span class="il"><span class="sym">struct</span> Structure + Frame</span><span class="iv-edit"><input class="iv-input" id="in-struct" data-slider="s-struct" inputmode="decimal"><span class="iv-unit">g</span></span></div>
         <input type="range" id="s-struct" min="50" max="2000" value="350" step="10">
@@ -834,7 +844,7 @@
       </div><!-- /menu mass -->
 
       <div class="menu" data-menu="motor">
-      <div class="sec">③ Prop + Motor</div>
+      <div class="sec"><span class="sec-n">3</span> Prop + Motor</div>
       <div class="ig" id="prop-global-group">
         <div class="ir"><span class="il">Propeller size</span></div>
         <select id="s-prop-global">
@@ -875,7 +885,7 @@
       </div><!-- /menu motor -->
 
       <div class="menu" data-menu="battery">
-      <div class="sec">④ Battery Selection</div>
+      <div class="sec"><span class="sec-n">4</span> Battery Selection</div>
       <div class="ig">
         <div class="cells-tabs" id="cells-tabs">
           <div class="ct active" data-cells="all">All</div>
