@@ -411,7 +411,37 @@
     font-size: 8px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--muted);
     border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 6px;
   }
+  .sec-add {
+    margin-left: auto; flex-shrink: 0;
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 1px solid var(--border2); background: var(--panel2); color: var(--text);
+    cursor: pointer; font-size: 11px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sec-add:hover { border-color: var(--accent); color: var(--accent); }
+  body.auto-mode .sec-add { display: none; }
+  #sec-menu {
+    position: fixed; z-index: 3500; min-width: 190px; max-height: 320px; overflow-y: auto;
+    background: var(--panel); border: 1px solid var(--border2); border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25); padding: 5px; font-family: var(--sans);
+  }
+  #sec-menu .sm-head {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); padding: 4px 6px 6px;
+  }
+  #sec-menu .sm-clear {
+    border: none; background: transparent; color: var(--accent);
+    cursor: pointer; font-size: 10px; font-weight: 600; text-transform: none; letter-spacing: 0; padding: 0;
+  }
+  #sec-menu .sm-row {
+    display: flex; align-items: center; gap: 7px;
+    padding: 5px 6px; border-radius: 5px; cursor: pointer; font-size: 11px; color: var(--text);
+  }
+  #sec-menu .sm-row:hover { background: var(--panel2); }
+  #sec-menu .sm-row input { accent-color: var(--accent); cursor: pointer; }
   .sec-comp {
     display: inline-block; text-transform: none; letter-spacing: 0.02em; font-weight: 600;
     font-family: var(--mono); margin-left: 6px; font-size: 9px;
@@ -446,8 +476,18 @@
   .gap-card.bad::before  { background: var(--danger); }
   .gap-card.info::before { background: var(--accent); }
 
-  .gc-info { position: absolute; top: 6px; right: 7px; font-size: 14px; color: var(--muted); opacity: 0.6; cursor: help; z-index: 3; line-height: 1; }
+  .gc-info { font-size: 12px; color: var(--muted); opacity: 0.55; cursor: help; vertical-align: -1px; }
   .gap-card:hover .gc-info { opacity: 1; color: var(--accent); }
+  .gc-close {
+    position: absolute; top: 4px; right: 4px; z-index: 4;
+    border: none; background: transparent; color: var(--muted);
+    cursor: pointer; font-size: 12px; line-height: 1; padding: 2px; border-radius: 3px;
+    opacity: 0; transition: opacity 0.12s;
+  }
+  .gap-card:hover .gc-close { opacity: 0.6; }
+  .gc-close:hover { opacity: 1; color: var(--danger); background: rgba(0,0,0,0.05); }
+  body.auto-mode .gc-close { display: none; }
+  .card-hidden { display: none !important; }
   .gc-drift { font-size: 11px; font-weight: 600; color: var(--muted); }
   .gc-lbl    { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; padding-right: 16px; }
   .gc-bench  { font-size: 9px; color: var(--muted); font-family: var(--mono); margin-bottom: 1px; }
@@ -1352,7 +1392,9 @@ function setMode(m) {
   document.body.classList.toggle('auto-mode', m === 'auto');
   const btn = document.getElementById('mode-toggle');
   if (btn) btn.textContent = 'Mode: ' + (m === 'auto' ? 'Auto' : 'Full');
+  closeSectionMenu();
   setStage(m === 'auto' ? 1 : currentStage);
+  applyCardVisibility();
 }
 
 // ══════════════════════════════════════════════════════════
@@ -1774,18 +1816,19 @@ const CARD_PURPOSE = {
 };
 // Build a card. `calc` is the live calculation/benchmark string → goes to tooltip.
 // `drift` (optional) is the signed delta-from-target → shown in parentheses next to value.
+const slugify = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 function buildCard(lbl, value, calc, cls, drift) {
   const purpose = CARD_PURPOSE[lbl] || '';
   const esc = s => String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
   const hasTip = purpose || calc;
   const tip = hasTip ? ` data-purpose="${esc(purpose)}" data-calc="${esc(calc || '')}"` : '';
-  const mark = hasTip ? '<i class="ph ph-info gc-info"></i>' : '';
+  const mark = hasTip ? ' <i class="ph ph-info gc-info"></i>' : '';
   const driftHtml = (drift !== undefined && drift !== null && drift !== '')
     ? ` <span class="gc-drift ${parseFloat(drift) >= 0 ? 'pos' : 'neg'}">(${parseFloat(drift) >= 0 ? '+' : ''}${drift})</span>`
     : '';
-  return `<div class="gap-card ${cls || 'info'}"${tip}>
-    ${mark}
-    <div class="gc-lbl">${lbl}</div>
+  return `<div class="gap-card ${cls || 'info'}" data-card="${slugify(lbl)}"${tip}>
+    <button class="gc-close" title="Hide card"><i class="ph ph-x"></i></button>
+    <div class="gc-lbl">${lbl}${mark}</div>
     <div class="gc-actual">${value}${driftHtml}</div>
   </div>`;
 }
@@ -1942,26 +1985,105 @@ function renderMiddle(d) {
     const voltCard = gcardInfo('Battery Voltage', fV(d.batt.voltage_v) + ' (' + d.batt.cells + ')',
       d.propTestV ? 'prop tested at ' + d.propTestV.toFixed(1) + 'V' : '');
 
+    const battChip = `<span class="sec-comp">${d.batt.cells} · ${d.batt.capacity_mah}mAh · ${d.batt.discharge_c}C${d.batt.connector ? ' · ' + d.batt.connector : ''}</span>`;
     battActualsHtml = `
-      <div class="gap-section-title">BATTERY ACTUALS vs BENCHMARKS <span class="sec-comp">${d.batt.cells} · ${d.batt.capacity_mah}mAh · ${d.batt.discharge_c}C${d.batt.connector ? ' · ' + d.batt.connector : ''}</span></div>
-      <div class="gap-grid">${ahCard}${cCard}${cmCard}${ftCard}${wtCard}${voltCard}</div>`;
+      ${sectionTitle('batt-actuals', 'BATTERY ACTUALS vs BENCHMARKS', battChip)}
+      <div class="gap-grid" data-section="batt-actuals">${ahCard}${cCard}${cmCard}${ftCard}${wtCard}${voltCard}</div>`;
   }
 
   const comp = txt => txt ? `<span class="sec-comp">${txt}</span>` : '';
   const motorProp = [selMotor, selProp ? selProp + '"' : null].filter(Boolean).join(' · ');
-  const battModel = d.batt ? `${d.batt.cells} · ${d.batt.capacity_mah}mAh · ${d.batt.discharge_c}C${d.batt.connector ? ' · ' + d.batt.connector : ''}` : '';
 
   body.innerHTML = `
     ${alerts}
-    <div class="gap-section-title">MASS</div>
-    <div class="gap-grid">${mtowCard}${gcardInfo('Fixed Mass', fKg(d.m_fixed), 'excl. battery')}</div>
-    <div class="gap-section-title">MOTOR BENCHMARKS ${comp(motorProp)}</div>
-    <div class="gap-grid">${hoverThrCard}${peakThrCard}${effCard}${twCard}</div>
-    <div class="gap-section-title">BATTERY BENCHMARKS — FROM MOTOR (frozen) ${comp(motorProp)}</div>
-    <div class="gap-grid">${benchAhCard}${benchCCard}${benchIhCard}${benchIpCard}${benchPwrCard}</div>
+    ${sectionTitle('mass', 'MASS')}
+    <div class="gap-grid" data-section="mass">${mtowCard}${gcardInfo('Fixed Mass', fKg(d.m_fixed), 'excl. battery')}</div>
+    ${sectionTitle('motor', 'MOTOR BENCHMARKS', comp(motorProp))}
+    <div class="gap-grid" data-section="motor">${hoverThrCard}${peakThrCard}${effCard}${twCard}</div>
+    ${sectionTitle('batt-bench', 'BATTERY BENCHMARKS — FROM MOTOR (frozen)', comp(motorProp))}
+    <div class="gap-grid" data-section="batt-bench">${benchAhCard}${benchCCard}${benchIhCard}${benchIpCard}${benchPwrCard}</div>
     ${battActualsHtml}
   `;
+  applyCardVisibility();
 }
+
+// Section title with an "add cards" (+) button, used to re-show hidden cards.
+function sectionTitle(section, label, compHtml = '') {
+  return `<div class="gap-section-title" data-section="${section}">
+    <span>${label}</span>${compHtml}
+    <button class="sec-add" data-section="${section}" title="Add / remove cards"><i class="ph ph-plus"></i></button>
+  </div>`;
+}
+
+// ══════════════════════════════════════════════════════════
+// CARD VISIBILITY — auto mode shows only mission-critical cards;
+// full mode shows all and lets the user hide (X) / re-add (+) per section.
+// ══════════════════════════════════════════════════════════
+const AUTO_CARDS = new Set(['mtow','motor-efficiency-at-hover','thrust-weight','flight-time','current-margin','required-capacity']);
+let hiddenCards = new Set();
+try { const s = localStorage.getItem('do_hidden_cards'); if (s) hiddenCards = new Set(JSON.parse(s)); } catch(e){}
+function saveHidden() { try { localStorage.setItem('do_hidden_cards', JSON.stringify([...hiddenCards])); } catch(e){} }
+
+function applyCardVisibility() {
+  const body = document.getElementById('mid-body');
+  if (!body) return;
+  body.querySelectorAll('.gap-card').forEach(c => {
+    const slug = c.dataset.card;
+    const hide = appMode === 'auto' ? !AUTO_CARDS.has(slug) : hiddenCards.has(slug);
+    c.classList.toggle('card-hidden', hide);
+  });
+  // In auto mode, collapse a section whose cards are all hidden.
+  body.querySelectorAll('.gap-grid[data-section]').forEach(g => {
+    const title = g.previousElementSibling;
+    if (appMode === 'auto') {
+      const anyVisible = [...g.querySelectorAll('.gap-card')].some(c => !c.classList.contains('card-hidden'));
+      g.style.display = anyVisible ? '' : 'none';
+      if (title) title.style.display = anyVisible ? '' : 'none';
+    } else {
+      g.style.display = '';
+      if (title) title.style.display = '';
+    }
+  });
+}
+
+function closeSectionMenu() { const m = document.getElementById('sec-menu'); if (m) m.remove(); }
+function openSectionMenu(btn) {
+  closeSectionMenu();
+  const section = btn.dataset.section;
+  const grid = document.querySelector(`.gap-grid[data-section="${section}"]`);
+  if (!grid) return;
+  const cards = [...grid.querySelectorAll('.gap-card')];
+  const menu = document.createElement('div');
+  menu.id = 'sec-menu';
+  const cardLabel = c => (c.querySelector('.gc-lbl')?.childNodes[0]?.textContent || c.dataset.card).trim();
+  menu.innerHTML =
+    `<div class="sm-head"><span>Show cards</span><button class="sm-clear">Clear all</button></div>` +
+    cards.map(c => `<label class="sm-row"><input type="checkbox" data-slug="${c.dataset.card}" ${hiddenCards.has(c.dataset.card) ? '' : 'checked'}><span>${cardLabel(c)}</span></label>`).join('');
+  document.body.appendChild(menu);
+  const r = btn.getBoundingClientRect();
+  menu.style.left = Math.max(8, Math.min(r.left, innerWidth - menu.offsetWidth - 8)) + 'px';
+  menu.style.top  = Math.min(r.bottom + 4, innerHeight - menu.offsetHeight - 8) + 'px';
+
+  menu.addEventListener('change', e => {
+    const cb = e.target.closest('input[type=checkbox]'); if (!cb) return;
+    if (cb.checked) hiddenCards.delete(cb.dataset.slug); else hiddenCards.add(cb.dataset.slug);
+    saveHidden(); applyCardVisibility();
+  });
+  menu.querySelector('.sm-clear').addEventListener('click', () => {
+    cards.forEach(c => hiddenCards.add(c.dataset.card));
+    menu.querySelectorAll('input').forEach(i => i.checked = false);
+    saveHidden(); applyCardVisibility();
+  });
+}
+
+// Delegated clicks: hide a card (X), open a section menu (+), or dismiss the menu.
+document.addEventListener('click', e => {
+  const close = e.target.closest && e.target.closest('.gc-close');
+  if (close) { const c = close.closest('.gap-card'); if (c) { hiddenCards.add(c.dataset.card); saveHidden(); applyCardVisibility(); } return; }
+  const add = e.target.closest && e.target.closest('.sec-add');
+  if (add) { e.stopPropagation(); openSectionMenu(add); return; }
+  if (!(e.target.closest && e.target.closest('#sec-menu'))) closeSectionMenu();
+});
 
 // ══════════════════════════════════════════════════════════
 // CALC CHAIN TAB
