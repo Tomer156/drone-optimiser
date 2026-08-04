@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Drone Mission Optimiser</title>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S035S8EW92"></script>
@@ -320,10 +322,6 @@
     position: absolute; left: 0; top: 0; bottom: 0; width: 0%;
     border-radius: 8px;
     background-color: var(--muted);
-    background-image: linear-gradient(45deg,
-      rgba(255,255,255,0.16) 25%, transparent 25%, transparent 50%,
-      rgba(255,255,255,0.16) 50%, rgba(255,255,255,0.16) 75%, transparent 75%, transparent);
-    background-size: 28px 28px;
     transition: width 0.6s cubic-bezier(0.4,0,0.2,1), background-color 0.35s ease;
   }
   .eff-fill.good { background-color: var(--green); }
@@ -415,11 +413,14 @@
     border-bottom: 1px solid var(--border);
   }
   .sec-comp {
-    text-transform: none; letter-spacing: 0.02em; font-weight: 600;
-    color: var(--accent); font-family: var(--mono); margin-left: 6px;
+    display: inline-block; text-transform: none; letter-spacing: 0.02em; font-weight: 600;
+    font-family: var(--mono); margin-left: 6px; font-size: 9px;
+    color: #0891A6; background: rgba(8,145,166,0.12);
+    border: 1px solid rgba(8,145,166,0.35); border-radius: 999px; padding: 1px 8px;
   }
+  :root[data-theme="dark"] .sec-comp { color: #22D3EE; background: rgba(34,211,238,0.14); border-color: rgba(34,211,238,0.4); }
 
-  .gap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 7px; padding: 10px 12px; }
+  .gap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); gap: 7px; padding: 10px 12px; }
 
   .gap-card {
     background: var(--panel);
@@ -768,19 +769,20 @@
 <div id="promo-banner">
   <span>Enjoying the tool? Help grow the database.</span>
   <a href="https://form.typeform.com/to/ciDWV9CU" target="_blank" rel="noopener" data-cta="banner">Contribute here →</a>
-  <button class="banner-x" id="banner-close" aria-label="Dismiss banner">✕</button>
+  <button class="banner-x" id="banner-close" aria-label="Dismiss banner"><i class="ph ph-x"></i></button>
 </div>
 
 <header>
-  <div class="logo">✦</div>
+  <div class="logo"><i class="ph-bold ph-drone"></i></div>
   <div>
     <h1>Drone Mission Optimiser</h1>
     <p>Bench data · Efficiency-driven motor matching · Iterative battery selection</p>
   </div>
   <div class="header-actions">
     <button class="mode-toggle" id="mode-toggle" title="Switch between Auto (one-step optimise) and Full (manual wizard)">Mode: Full</button>
-    <button class="reset-btn" id="reset-all" title="Reset all inputs to defaults">↺ Reset all</button>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">◐</button>
+    <button class="reset-btn" id="reset-all" title="Reset all inputs to defaults"><i class="ph ph-arrow-counter-clockwise"></i> Reset all</button>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme"><i class="ph ph-circle-half"></i></button>
+    <button class="theme-toggle" id="export-btn" aria-label="Export inputs as CSV" title="Export inputs as CSV"><i class="ph ph-download-simple"></i></button>
   </div>
 </header>
 
@@ -962,8 +964,8 @@
 
     </div>
     <div class="stage-nav">
-      <button class="nav-btn" id="stage-back">← Back</button>
-      <button class="nav-btn primary" id="stage-next">Next →</button>
+      <button class="nav-btn" id="stage-back"><i class="ph ph-arrow-left"></i> Back</button>
+      <button class="nav-btn primary" id="stage-next">Next <i class="ph ph-arrow-right"></i></button>
     </div>
   </div>
 
@@ -1126,6 +1128,7 @@ let lastD = null;
 let currentStage = 1;   // wizard stage 1..4
 let appMode = 'full';   // 'full' (staged wizard) | 'auto' (one-step optimise)
 let lastEffKey = null;  // motor|prop key — eff bar animates only when this changes
+let frameGap = 15;      // prop clearance (mm) — persists across frame re-renders
 
 // ══════════════════════════════════════════════════════════
 // COMPUTE — strict physics model
@@ -1329,10 +1332,14 @@ function setStage(n) {
   const next = document.getElementById('stage-next');
   if (appMode === 'auto') {
     if (back) back.disabled = true;
-    if (next) next.textContent = 'Optimise ✦';
+    if (next) { next.style.display = ''; next.innerHTML = 'Optimise <i class="ph ph-sparkle"></i>'; }
   } else {
     if (back) back.disabled = currentStage === 1;
-    if (next) next.textContent = currentStage === 4 ? 'Export ↓' : 'Next →';
+    // Export lives in the header now → last stage has no Next button
+    if (next) {
+      if (currentStage === 4) { next.style.display = 'none'; }
+      else { next.style.display = ''; next.innerHTML = 'Next <i class="ph ph-arrow-right"></i>'; }
+    }
   }
   updateSteps();
   // scroll input panel back to top on stage change
@@ -1772,7 +1779,7 @@ function buildCard(lbl, value, calc, cls, drift) {
   const esc = s => String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
   const hasTip = purpose || calc;
   const tip = hasTip ? ` data-purpose="${esc(purpose)}" data-calc="${esc(calc || '')}"` : '';
-  const mark = hasTip ? '<span class="gc-info">ⓘ</span>' : '';
+  const mark = hasTip ? '<i class="ph ph-info gc-info"></i>' : '';
   const driftHtml = (drift !== undefined && drift !== null && drift !== '')
     ? ` <span class="gc-drift ${parseFloat(drift) >= 0 ? 'pos' : 'neg'}">(${parseFloat(drift) >= 0 ? '+' : ''}${drift})</span>`
     : '';
@@ -2188,24 +2195,31 @@ function renderChecks(d) {
 // ══════════════════════════════════════════════════════════
 // FRAME TAB
 // ══════════════════════════════════════════════════════════
-function renderFrame(d) {
-  const area = document.getElementById('frame-content');
-  if (!d.propInches) { area.innerHTML = '<div class="empty">Select a motor + prop to calculate frame dimensions</div>'; return; }
-
-  const gap = parseInt(document.getElementById('frame-gap-sl')?.value ?? 15);
+function frameGeom(d, gap) {
   const propDia = d.propInches * 25.4;
   const adj = propDia + gap;
   const diag = adj * Math.SQRT2;
-  const arm = diag / 2;
-  const tipSpan = diag + propDia;
-  const bodyW = arm * 0.55;
-
-  // Frame class
+  return { propDia, adj, diag, arm: diag / 2, tipSpan: diag + propDia, bodyW: (diag / 2) * 0.55 };
+}
+function frameTopHTML(d, gap, g) {
   const classes = [2,2.5,3,3.5,4,5,6,7,8,9,10,12];
   let fc = `${Math.round(d.propInches)}"`;
   for (const s of classes) { if (d.propInches <= s + 0.5) { fc = `${s}"`; break; } }
-
-  // SVG
+  return `
+    <div style="margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <div class="frame-cls">${fc} CLASS</div>
+      <span style="font-size:9px;color:var(--muted);font-family:var(--mono)">${d.propInches}" prop · ${gap}mm clearance</span>
+    </div>
+    <div class="frame-stats">
+      <div class="fst"><div class="fst-lbl">Diagonal M-M</div><div class="fst-val">${g.diag.toFixed(0)}</div><div class="fst-u">mm</div></div>
+      <div class="fst"><div class="fst-lbl">Arm Length</div><div class="fst-val">${g.arm.toFixed(0)}</div><div class="fst-u">mm</div></div>
+      <div class="fst"><div class="fst-lbl">Tip-to-Tip</div><div class="fst-val">${g.tipSpan.toFixed(0)}</div><div class="fst-u">mm</div></div>
+      <div class="fst"><div class="fst-lbl">Adjacent M-M</div><div class="fst-val">${g.adj.toFixed(0)}</div><div class="fst-u">mm</div></div>
+      <div class="fst"><div class="fst-lbl">Min Body Width</div><div class="fst-val">${g.bodyW.toFixed(0)}</div><div class="fst-u">mm (est.)</div></div>
+      <div class="fst"><div class="fst-lbl">Prop Diameter</div><div class="fst-val">${g.propDia.toFixed(0)}</div><div class="fst-u">mm</div></div>
+    </div>`;
+}
+function frameSVG(d, g) {
   const cx=130, cy=110, R=80;
   const ms = [
     {x: cx+R*Math.cos(-Math.PI/4), y: cy+R*Math.sin(-Math.PI/4)},
@@ -2213,9 +2227,8 @@ function renderFrame(d) {
     {x: cx+R*Math.cos(3*Math.PI/4),y: cy+R*Math.sin(3*Math.PI/4)},
     {x: cx+R*Math.cos(-3*Math.PI/4),y: cy+R*Math.sin(-3*Math.PI/4)},
   ];
-  const pr = Math.min(propDia/2/diag*R*2, R*0.85);
-
-  const svg = `<svg width="260" height="220" viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg">
+  const pr = Math.min(g.propDia/2/g.diag*R*2, R*0.85);
+  return `<svg width="260" height="220" viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg">
     ${ms.map((m,i) => `
       <line x1="${cx}" y1="${cy}" x2="${m.x.toFixed(0)}" y2="${m.y.toFixed(0)}" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
       <circle cx="${m.x.toFixed(0)}" cy="${m.y.toFixed(0)}" r="${pr.toFixed(0)}" fill="none" stroke="var(--border2)" stroke-width="1" stroke-dasharray="4,2"/>
@@ -2226,32 +2239,36 @@ function renderFrame(d) {
       stroke="var(--warn)" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.5"/>
     <circle cx="${cx}" cy="${cy}" r="11" fill="var(--panel2)" stroke="var(--border2)" stroke-width="1.5"/>
     <text x="${cx}" y="${cy+3}" text-anchor="middle" font-size="7" fill="var(--muted)" font-family="Inter">FC</text>
-    <text x="${cx}" y="${cy-R-14}" text-anchor="middle" font-size="9" fill="var(--warn)" font-family="Inter">${diag.toFixed(0)}mm diag</text>
-    <text x="${cx}" y="215" text-anchor="middle" font-size="8" fill="var(--muted)" font-family="Inter">Prop ${d.propInches}" · ${propDia.toFixed(0)}mm</text>
+    <text x="${cx}" y="${cy-R-14}" text-anchor="middle" font-size="9" fill="var(--warn)" font-family="Inter">${g.diag.toFixed(0)}mm diag</text>
+    <text x="${cx}" y="215" text-anchor="middle" font-size="8" fill="var(--muted)" font-family="Inter">Prop ${d.propInches}" · ${g.propDia.toFixed(0)}mm</text>
   </svg>`;
+}
 
+function renderFrame(d) {
+  const area = document.getElementById('frame-content');
+  if (!d.propInches) { area.innerHTML = '<div class="empty">Select a motor + prop to calculate frame dimensions</div>'; return; }
+
+  // Build the shell ONCE; the slider element then stays put so dragging is smooth.
   area.innerHTML = `
-    <div style="margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <div class="frame-cls">${fc} CLASS</div>
-      <span style="font-size:9px;color:var(--muted);font-family:var(--mono)">${d.propInches}" prop · ${gap}mm clearance</span>
-    </div>
-    <div class="frame-stats">
-      <div class="fst"><div class="fst-lbl">Diagonal M-M</div><div class="fst-val">${diag.toFixed(0)}</div><div class="fst-u">mm</div></div>
-      <div class="fst"><div class="fst-lbl">Arm Length</div><div class="fst-val">${arm.toFixed(0)}</div><div class="fst-u">mm</div></div>
-      <div class="fst"><div class="fst-lbl">Tip-to-Tip</div><div class="fst-val">${tipSpan.toFixed(0)}</div><div class="fst-u">mm</div></div>
-      <div class="fst"><div class="fst-lbl">Adjacent M-M</div><div class="fst-val">${adj.toFixed(0)}</div><div class="fst-u">mm</div></div>
-      <div class="fst"><div class="fst-lbl">Min Body Width</div><div class="fst-val">${bodyW.toFixed(0)}</div><div class="fst-u">mm (est.)</div></div>
-      <div class="fst"><div class="fst-lbl">Prop Diameter</div><div class="fst-val">${propDia.toFixed(0)}</div><div class="fst-u">mm</div></div>
-    </div>
+    <div id="frame-top"></div>
     <div class="gap-slider-row">
       <span>Prop clearance:</span>
-      <input type="range" id="frame-gap-sl" min="5" max="50" value="${gap}" step="1" style="flex:1;height:3px;-webkit-appearance:none;background:var(--border2);border-radius:2px;cursor:pointer;outline:none"
-        oninput="document.getElementById('frame-gap-lbl').textContent=this.value+'mm';renderFrame(lastD)">
-      <span id="frame-gap-lbl" class="gv">${gap}mm</span>
+      <input type="range" id="frame-gap-sl" min="5" max="50" value="${frameGap}" step="1" style="flex:1;height:3px;-webkit-appearance:none;background:var(--border2);border-radius:2px;cursor:pointer;outline:none">
+      <span id="frame-gap-lbl" class="gv">${frameGap}mm</span>
     </div>
-    <div class="frame-diagram">${svg}</div>
-    <div class="frame-note">adj = prop_dia + clearance · diag = adj × √2 · arm = diag/2 · body_w ≈ arm × 0.55</div>
-  `;
+    <div id="frame-diagram" class="frame-diagram"></div>
+    <div class="frame-note">adj = prop_dia + clearance · diag = adj × √2 · arm = diag/2 · body_w ≈ arm × 0.55</div>`;
+
+  const sl = document.getElementById('frame-gap-sl');
+  const draw = () => {
+    frameGap = +sl.value;
+    document.getElementById('frame-gap-lbl').textContent = frameGap + 'mm';
+    const g = frameGeom(d, frameGap);
+    document.getElementById('frame-top').innerHTML = frameTopHTML(d, frameGap, g);
+    document.getElementById('frame-diagram').innerHTML = frameSVG(d, g);
+  };
+  sl.addEventListener('input', draw);   // updates diagram only — slider is never rebuilt
+  draw();
 }
 
 // ══════════════════════════════════════════════════════════
@@ -2437,6 +2454,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('mode-toggle').addEventListener('click', () => {
     setMode(appMode === 'auto' ? 'full' : 'auto');
   });
+  document.getElementById('export-btn').addEventListener('click', exportBuild);
 
   // Global prop filter — re-populates motor list when changed
   document.getElementById('s-prop-global').addEventListener('change', () => {
