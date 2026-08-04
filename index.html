@@ -1841,14 +1841,14 @@ function renderMiddle(d) {
   // ─ SECTION 1: MASS & MTOW ─
   const mtowCard = gcardInfo('MTOW',
     fKg(d.MTOW),
-    `fixed ${fG(d.m_fixed)} + batt ${d.using_placeholder ? '~'+fG(d.m_batt_ph)+' (placeholder)' : fG(d.m_batt_actual)}`
+    `[fixed ${fG(d.m_fixed)}] + [batt ${d.using_placeholder ? '~'+fG(d.m_batt_ph)+' (placeholder)' : fG(d.m_batt_actual)}]`
   );
 
   // ─ SECTION 2: MOTOR BENCHMARKS ─
   // Hover thrust target
-  const hoverThrCard = gcardInfo('Hover Thrust / Motor', fG(d.T_hover_per_motor), 'MTOW / 4');
+  const hoverThrCard = gcardInfo('Hover Thrust / Motor', fG(d.T_hover_per_motor), '[MTOW] / [4]');
   // Peak thrust target
-  const peakThrCard = gcardInfo('Peak Thrust Target / Motor', fG(d.T_peak_per_motor), `hover × K=${d.K_T} — motor selection target`);
+  const peakThrCard = gcardInfo('Peak Thrust Target / Motor', fG(d.T_peak_per_motor), `[hover] × [K=${d.K_T}] — motor selection target`);
 
   // Efficiency at hover
   let effCard;
@@ -1878,24 +1878,24 @@ function renderMiddle(d) {
   // ─ SECTION 3: BATTERY BENCHMARKS FROM MOTOR (frozen — motor+prop+MTOW only) ─
   // These never change once motor+prop+MTOW are set. No battery values involved.
   const benchAhCard  = d.req_Ah !== null
-    ? gcardInfo('Required Capacity', fAh(d.req_Ah), 'I_hover_total × t — motor derived')
+    ? gcardInfo('Required Capacity', fAh(d.req_Ah), '[I_hover_total] × [t] — motor derived')
     : gcardInfo('Required Capacity', '—', 'need motor + MTOW');
 
   const benchCCard   = d.req_C !== null
-    ? gcardInfo('Required C-Rating', '>=' + d.req_C.toFixed(0) + 'C', 'I_peak_motor / req_Ah — motor derived')
+    ? gcardInfo('Required C-Rating', '>=' + d.req_C.toFixed(0) + 'C', '[I_peak_motor] / [req_Ah] — motor derived')
     : gcardInfo('Required C-Rating', '—', 'need motor + MTOW');
 
   const benchIhCard  = d.I_hover_total !== null
-    ? gcardInfo('Hover Current (total)', fA(d.I_hover_total), fA(d.I_hover_motor) + '/motor \u2192 interp(T_hover, I)')
+    ? gcardInfo('Hover Current (total)', fA(d.I_hover_total), '[' + fA(d.I_hover_motor) + '/motor] \u2192 [interp(T_hover, I)]')
     : gcardInfo('Hover Current (total)', '—', '');
 
   // Peak current at K_T thrust (flight style) — the critical current value
   const benchIpCard  = d.I_peak_thrust_total !== null
-    ? gcardInfo('Total Current @ K_T Thrust', fA(d.I_peak_thrust_total), fA(d.I_peak_thrust_motor) + '/motor @ T_peak (K_T×T_hover)')
+    ? gcardInfo('Total Current @ K_T Thrust', fA(d.I_peak_thrust_total), '[' + fA(d.I_peak_thrust_motor) + '/motor] @ T_peak ([K_T] × [T_hover])')
     : gcardInfo('Total Current @ K_T Thrust', '—', '');
 
   const benchPwrCard = d.P_hover_total !== null
-    ? gcardInfo('Hover Power (total)', fW(d.P_hover_total), fW(d.P_hover_motor) + '/motor = V\xd7I')
+    ? gcardInfo('Hover Power (total)', fW(d.P_hover_total), '[' + fW(d.P_hover_motor) + '/motor] = [V] \xd7 [I]')
     : gcardInfo('Hover Power (total)', '—', '');
 
   // ─ SECTION 4: BATTERY ACTUALS vs BENCHMARKS (only when battery is selected) ─
@@ -1916,7 +1916,7 @@ function renderMiddle(d) {
     // I_max vs I_peak
     const cmCls = d.cm !== null ? (d.cm >= 1.5 ? 'good' : d.cm >= 1.2 ? 'warn' : 'bad') : 'info';
     const cmCard = d.cm !== null
-      ? gcard('Current Margin', 'I_max ' + fA(d.I_max_batt) + ' / I_KT ' + (d.I_peak_thrust_total ? fA(d.I_peak_thrust_total) : '—'), f(d.cm, 2) + '×', f(d.cm - 1.5, 2), cmCls)
+      ? gcard('Current Margin', '[I_max ' + fA(d.I_max_batt) + '] / [I_KT ' + (d.I_peak_thrust_total ? fA(d.I_peak_thrust_total) : '—') + ']', f(d.cm, 2) + '×', f(d.cm - 1.5, 2), cmCls)
       : gcardInfo('Current Margin', d.I_max_batt ? 'I_max ' + fA(d.I_max_batt) : '—', 'need battery');
 
     // Flight time
@@ -1957,12 +1957,19 @@ function renderMiddle(d) {
 // ══════════════════════════════════════════════════════════
 // CALC CHAIN TAB
 // ══════════════════════════════════════════════════════════
+// Wrap each text operand around a math operator in [brackets]: "MTOW / N" → "[MTOW] / [N]".
+function bracketFormula(s) {
+  const ops = /([×÷*/+=−])/;
+  if (!s || !ops.test(s)) return s;
+  return s.split(ops).map(t => ops.test(t) ? ' ' + t + ' ' : (t.trim() ? '[' + t.trim() + ']' : '')).join('');
+}
+
 function renderChain(d) {
   const tbody = document.getElementById('chain-body');
   const rows = [];
   const ph = lbl => rows.push(`<tr class="ph"><td colspan="5">${lbl}</td></tr>`);
   const row = (n, name, sym, formula, val, cls='') =>
-    rows.push(`<tr class="${cls}"><td>${n}</td><td>${name}</td><td class="sc">${sym}</td><td class="fc">${formula}</td><td class="vc">${val}</td></tr>`);
+    rows.push(`<tr class="${cls}"><td>${n}</td><td>${name}</td><td class="sc">${sym}</td><td class="fc">${bracketFormula(formula)}</td><td class="vc">${val}</td></tr>`);
 
   ph('MISSION');
   row(1,  'Target flight time',   't',    '—',              d.t_min+' min');
@@ -2342,7 +2349,7 @@ function renderElec(d) {
     <div style="padding:10px 12px">
       <div class="gap-section-title">ESC REQUIREMENTS</div>
       <div class="gap-grid" style="margin:8px 0">
-        ${gcardInfo('ESC rating', '>=' + I_esc_ref.toFixed(0) + ' A', 'I at T_peak = T_hover × K_T=' + d.K_T)}
+        ${gcardInfo('ESC rating', '>=' + I_esc_ref.toFixed(0) + ' A', '[I at T_peak] = [T_hover] × [K_T=' + d.K_T + ']')}
         ${gcardInfo('Voltage', esc_cells, 'match battery cells')}
         ${gcardInfo('Protocol', 'DShot300 / DShot600', 'preferred over PWM')}
         ${gcardInfo('Firmware', 'BLHeli_32 or AM32', 'for multishot/DShot')}
@@ -2350,10 +2357,10 @@ function renderElec(d) {
       </div>
       <div class="gap-section-title" style="margin-top:8px">WIRING REQUIREMENTS</div>
       <div class="gap-grid" style="margin:8px 0">
-        ${gcardInfo('Main wire gauge', awg, 'for I_peak = ' + (d.I_peak_total ? fA(d.I_peak_total) : '—'))}
+        ${gcardInfo('Main wire gauge', awg, 'for [I_peak] = [' + (d.I_peak_total ? fA(d.I_peak_total) : '—') + ']')}
         ${gcardInfo('Main connector', conn, 'rated above I_peak')}
         ${gcardInfo('Motor wire gauge', '18–20 AWG', 'per motor phase')}
-        ${gcardInfo('I peak total', d.I_peak_total ? fA(d.I_peak_total) : '—', 'I_peak_motor × 4')}
+        ${gcardInfo('I peak total', d.I_peak_total ? fA(d.I_peak_total) : '—', '[I_peak_motor] × [4]')}
       </div>
       <div class="gap-section-title" style="margin-top:8px">FC REQUIREMENTS</div>
       <div class="gap-grid" style="margin:8px 0">
