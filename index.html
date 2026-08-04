@@ -324,7 +324,6 @@
       rgba(255,255,255,0.16) 25%, transparent 25%, transparent 50%,
       rgba(255,255,255,0.16) 50%, rgba(255,255,255,0.16) 75%, transparent 75%, transparent);
     background-size: 28px 28px;
-    animation: eff-stripes 0.8s linear infinite;
     transition: width 0.6s cubic-bezier(0.4,0,0.2,1), background-color 0.35s ease;
   }
   .eff-fill.good { background-color: var(--green); }
@@ -415,6 +414,10 @@
     color: var(--muted);
     border-bottom: 1px solid var(--border);
   }
+  .sec-comp {
+    text-transform: none; letter-spacing: 0.02em; font-weight: 600;
+    color: var(--accent); font-family: var(--mono); margin-left: 6px;
+  }
 
   .gap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 7px; padding: 10px 12px; }
 
@@ -442,9 +445,10 @@
   .gap-card.bad::before  { background: var(--danger); }
   .gap-card.info::before { background: var(--accent); }
 
-  .gc-info { position: absolute; top: 6px; right: 7px; font-size: 10px; color: var(--muted); opacity: 0.5; cursor: help; z-index: 3; }
+  .gc-info { position: absolute; top: 6px; right: 7px; font-size: 14px; color: var(--muted); opacity: 0.6; cursor: help; z-index: 3; line-height: 1; }
   .gap-card:hover .gc-info { opacity: 1; color: var(--accent); }
-  .gc-lbl    { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; padding-right: 12px; }
+  .gc-drift { font-size: 11px; font-weight: 600; color: var(--muted); }
+  .gc-lbl    { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; padding-right: 16px; }
   .gc-bench  { font-size: 9px; color: var(--muted); font-family: var(--mono); margin-bottom: 1px; }
   .gc-actual { font-family: var(--mono); font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.1; }
   .gc-delta  { font-family: var(--mono); font-size: 9px; margin-top: 2px; color: var(--muted); }
@@ -605,6 +609,14 @@
   }
   .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
 
+  .mode-toggle {
+    background: var(--accent); border: 1px solid var(--accent);
+    color: var(--on-accent); height: 30px; padding: 0 12px; border-radius: 6px;
+    cursor: pointer; font-size: 11px; font-weight: 700; font-family: var(--sans);
+    display: flex; align-items: center; gap: 5px; white-space: nowrap;
+  }
+  .mode-toggle:hover { background: var(--accent-hover); }
+
   /* ═══ THEME TOGGLE ═══ */
   .theme-toggle {
     flex-shrink: 0;
@@ -715,6 +727,23 @@
   .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
   .nav-btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
   .nav-btn.primary:hover:not(:disabled) { background: var(--accent-hover); }
+
+  /* Auto mode: only stage 1 pill is relevant */
+  body.auto-mode #step2-pill,
+  body.auto-mode #step3-pill,
+  body.auto-mode #step4-pill { display: none; }
+
+  /* Optimiser result toast */
+  #opt-toast {
+    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+    max-width: 560px; z-index: 2000; display: none;
+    padding: 11px 16px; border-radius: 8px;
+    font-size: 12px; line-height: 1.45; font-family: var(--sans);
+    background: var(--panel); border: 1px solid var(--border2);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+  }
+  #opt-toast.ok  { border-left: 4px solid var(--green); }
+  #opt-toast.bad { border-left: 4px solid var(--warn); }
 </style>
 </head>
 <body>
@@ -733,6 +762,7 @@
     <p>Bench data · Efficiency-driven motor matching · Iterative battery selection</p>
   </div>
   <div class="header-actions">
+    <button class="mode-toggle" id="mode-toggle" title="Switch between Auto (one-step optimise) and Full (manual wizard)">Mode: Full</button>
     <button class="reset-btn" id="reset-all" title="Reset all inputs to defaults">↺ Reset all</button>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">◐</button>
   </div>
@@ -799,7 +829,7 @@
       <div class="ig">
         <div class="ir"><span class="il"><span class="sym">alt</span> Altitude</span><span class="iv-edit"><input class="iv-input" id="in-alt" data-slider="s-alt" inputmode="decimal"><span class="iv-unit">m</span></span></div>
         <input type="range" id="s-alt" min="0" max="3000" value="500" step="100">
-        <div id="lbl-rho" style="font-size:8px;color:var(--muted);font-family:var(--mono);margin-top:3px"></div>
+        <div id="lbl-rho" style="display:none"></div>
       </div>
       <div class="ig">
         <div class="ir"><span class="il"><span class="sym">&eta;_wind</span> Wind losses</span><span class="iv-edit"><input class="iv-input" id="in-eff-wind" data-slider="s-eff-wind" inputmode="decimal"><span class="iv-unit">%</span></span></div>
@@ -1078,6 +1108,8 @@ let selBatt  = null;   // index into BATTERY_DB
 let cellsFilter = 'all';
 let lastD = null;
 let currentStage = 1;   // wizard stage 1..4
+let appMode = 'full';   // 'full' (staged wizard) | 'auto' (one-step optimise)
+let lastEffKey = null;  // motor|prop key — eff bar animates only when this changes
 
 // ══════════════════════════════════════════════════════════
 // COMPUTE — strict physics model
@@ -1269,6 +1301,8 @@ const STAGE_MENUS = {
 };
 
 function setStage(n) {
+  // Auto mode: only stage 1 exists; the Next button becomes Optimise.
+  if (appMode === 'auto') n = 1;
   currentStage = Math.max(1, Math.min(4, n));
   const show = STAGE_MENUS[currentStage];
   document.querySelectorAll('.menu').forEach(m => {
@@ -1277,12 +1311,107 @@ function setStage(n) {
   // nav buttons
   const back = document.getElementById('stage-back');
   const next = document.getElementById('stage-next');
-  if (back) back.disabled = currentStage === 1;
-  if (next) next.textContent = currentStage === 4 ? 'Export ↓' : 'Next →';
+  if (appMode === 'auto') {
+    if (back) back.disabled = true;
+    if (next) next.textContent = 'Optimise ✦';
+  } else {
+    if (back) back.disabled = currentStage === 1;
+    if (next) next.textContent = currentStage === 4 ? 'Export ↓' : 'Next →';
+  }
   updateSteps();
   // scroll input panel back to top on stage change
   const body = document.querySelector('.col-body');
   if (body) body.scrollTop = 0;
+}
+
+function setMode(m) {
+  appMode = m;
+  document.body.classList.toggle('auto-mode', m === 'auto');
+  const btn = document.getElementById('mode-toggle');
+  if (btn) btn.textContent = 'Mode: ' + (m === 'auto' ? 'Auto' : 'Full');
+  setStage(m === 'auto' ? 1 : currentStage);
+}
+
+// ══════════════════════════════════════════════════════════
+// AUTO OPTIMISER — pick motor + prop + battery to match flight-time target
+// ══════════════════════════════════════════════════════════
+function optToast(msg, ok) {
+  let t = document.getElementById('opt-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'opt-toast';
+    document.body.appendChild(t);
+  }
+  t.className = ok ? 'ok' : 'bad';
+  t.innerHTML = msg;
+  t.style.display = 'block';
+  clearTimeout(optToast._t);
+  optToast._t = setTimeout(() => { t.style.display = 'none'; }, 6000);
+}
+
+function runOptimise() {
+  const target = +document.getElementById('s-time').value;
+  const savedM = selMotor, savedP = selProp, savedB = selBatt;
+  const motors = Object.keys(MOTOR_DB);
+
+  let best = null;      // meets target
+  let fallback = null;  // best endurance if none meet target
+
+  for (const mName of motors) {
+    const props = [...new Set(MOTOR_DB[mName].data.map(r => r.prop))];
+    for (const p of props) {
+      for (let bi = 0; bi < BATTERY_DB.length; bi++) {
+        const b = BATTERY_DB[bi];
+        if (b.weight_g == null || b.discharge_c == null) continue;  // need real weight + C
+        selMotor = mName; selProp = p; selBatt = bi;
+        const d = compute();
+        if (!d.hover || d.flightTime == null) continue;              // must hover
+        if (d.tw == null || d.tw < 1.5) continue;                    // min control authority
+        if (d.cm == null || d.cm < 1.3) continue;                    // safe current margin
+
+        // track best-endurance fallback
+        if (!fallback || d.flightTime > fallback.ft) fallback = { mName, p, bi, ft: d.flightTime };
+
+        if (d.flightTime < target * 0.98) continue;                  // must reach target
+
+        // score: least overshoot, closest to 85% peak-eff, lightest — lower = better
+        const overshoot = d.flightTime - target;
+        const effPen = Math.abs((d.effPctOfPeak == null ? 40 : d.effPctOfPeak) - 85);
+        const score = overshoot * 1.0 + effPen * 0.4 + d.MTOW * 0.001;
+        if (!best || score < best.score) best = { score, mName, p, bi, ft: d.flightTime, eff: d.effPctOfPeak, mtow: d.MTOW };
+      }
+    }
+  }
+
+  const pick = best || fallback;
+  if (!pick) {
+    selMotor = savedM; selProp = savedP; selBatt = savedB;
+    populateMotors(); populateProps(); populateBatteries(); update();
+    optToast('⚠ No motor/prop/battery combo can hover this airframe. Reduce mass or flight-time target.', false);
+    return;
+  }
+  applyOptimSelection(pick.mName, pick.p, pick.bi);
+  const b = BATTERY_DB[pick.bi];
+  const battTxt = `${b.cells} ${b.capacity_mah}mAh ${b.discharge_c}C`;
+  if (best) {
+    optToast(`✦ Optimised for ${target} min → <b>${pick.mName}</b> · ${pick.p}" · ${battTxt}<br>Flight time <b>${lastD.flightTime.toFixed(1)} min</b> · T/W ${lastD.tw.toFixed(1)} · margin ${lastD.cm.toFixed(1)}×`, true);
+  } else {
+    optToast(`⚠ Can't reach ${target} min. Best possible: <b>${pick.mName}</b> · ${pick.p}" · ${battTxt} → <b>${lastD.flightTime.toFixed(1)} min</b>`, false);
+  }
+}
+
+function applyOptimSelection(mName, p, bi) {
+  selMotor = mName;
+  cellsFilter = 'all';
+  document.querySelectorAll('.ct').forEach(t => t.classList.toggle('active', t.dataset.cells === 'all'));
+  document.getElementById('s-prop-global').value = '';   // show all motors so the pick is visible
+  populateProps();                                        // build prop options for this motor
+  selProp = p;
+  document.getElementById('s-prop').value = p;
+  selBatt = bi;
+  populateMotors();
+  populateBatteries();
+  update();
 }
 
 function exportBuild() {
@@ -1345,7 +1474,18 @@ function renderEffZone(d) {
   }
   const fill = document.getElementById('eff-fill');
   fill.className = 'eff-fill ' + fillCls;
-  fill.style.width = fillPct.toFixed(1) + '%';
+  // Animate the fill "loading up" ONLY when the motor/prop changes; otherwise snap (no idle animation).
+  const effKey = (selMotor || '') + '|' + (selProp || '');
+  if (effKey !== lastEffKey) {
+    lastEffKey = effKey;
+    fill.style.transition = '';                 // use CSS transition
+    fill.style.width = '0%';
+    void fill.offsetWidth;                       // force reflow so it starts from 0
+    requestAnimationFrame(() => { fill.style.width = fillPct.toFixed(1) + '%'; });
+  } else {
+    fill.style.transition = 'none';              // static update: no animation
+    fill.style.width = fillPct.toFixed(1) + '%';
+  }
 
   document.getElementById('eff-lbl-min').textContent = '0%';
   document.getElementById('eff-lbl-max').textContent = 'peak ' + fEff(d.peakEfficiency);
@@ -1588,53 +1728,51 @@ function populateBatteries() {
 // ══════════════════════════════════════════════════════════
 // MIDDLE: BENCHMARKS vs REALITY
 // ══════════════════════════════════════════════════════════
-// Card tooltips — purpose + calculation, derived from the model in this file.
-const CARD_TIPS = {
-  'MTOW': 'Max Take-Off Weight — total mass the motors must lift.\nCalc: fixed mass + battery mass.',
-  'Fixed Mass': 'All non-battery mass.\nCalc: structure + motors + ESC + FC/GPS/RX + wiring + camera + payload.',
-  'Hover Thrust / Motor': 'Thrust each of the 4 motors must make to hover.\nCalc: MTOW ÷ 4.',
-  'Peak Thrust Target / Motor': 'Per-motor thrust needed for manoeuvres — the motor selection target.\nCalc: hover thrust × K_T (flight-style factor).',
-  'Motor Efficiency at Hover': 'Propulsive efficiency (g/W) at hover thrust vs the motor’s peak.\nSweet spot = 80–90% of peak efficiency.',
-  'Thrust / Weight': 'Control-authority margin.\nCalc: peak thrust ÷ MTOW. Target ≥ 2.0 : 1.',
-  'Required Capacity': 'Battery capacity needed for the target flight time.\nCalc: total hover current × flight time.',
-  'Required C-Rating': 'Minimum battery C-rating to supply peak current.\nCalc: peak motor current ÷ required Ah.',
-  'Hover Current (total)': 'Current drawn by all 4 motors at hover.\nCalc: per-motor current interpolated at hover thrust, × 4.',
-  'Total Current @ K_T Thrust': 'Total current at peak (manoeuvre) thrust.\nCalc: per-motor current at T_peak (K_T × hover) × 4.',
-  'Hover Power (total)': 'Electrical power drawn at hover.\nCalc: pack voltage × total hover current.',
-  'Air Density': 'Air density ρ at the set altitude (ISA model). Lower ρ → less thrust per watt.',
+// Card tooltips — plain-English PURPOSE. The live calculation (card's sub/bench
+// text) is appended below at render time, so the calc lives only in the tooltip.
+const CARD_PURPOSE = {
+  'MTOW': 'Max Take-Off Weight — total mass the motors must lift.',
+  'Fixed Mass': 'All non-battery mass (structure, motors, ESC, avionics, wiring, camera, payload).',
+  'Hover Thrust / Motor': 'Thrust each of the 4 motors must produce just to hover.',
+  'Peak Thrust Target / Motor': 'Per-motor thrust needed for manoeuvres — the motor-selection target.',
+  'Motor Efficiency at Hover': 'Propulsive efficiency (g/W) at hover thrust vs the motor’s peak. Sweet spot = 80–90% of peak.',
+  'Thrust / Weight': 'Control-authority margin — total max thrust vs weight.',
+  'Required Capacity': 'Battery capacity needed to hit the target flight time.',
+  'Required C-Rating': 'Minimum battery C-rating to safely supply peak current.',
+  'Hover Current (total)': 'Current drawn by all 4 motors at hover.',
+  'Total Current @ K_T Thrust': 'Total current at peak (manoeuvre) thrust.',
+  'Hover Power (total)': 'Electrical power drawn at hover.',
   'Capacity': 'Selected battery capacity vs required.',
   'C-Rating': 'Selected battery C-rating vs required.',
-  'Current Margin': 'Safety margin of pack current vs demand.\nCalc: battery I_max ÷ peak current. Target ≥ 1.5×.',
-  'Flight Time': 'Estimated hover endurance vs target.\nCalc: usable battery energy ÷ hover power.',
+  'Current Margin': 'Safety margin of pack current vs peak demand. Target ≥ 1.5×.',
+  'Flight Time': 'Estimated hover endurance vs your target.',
   'Battery Weight': 'Selected battery mass vs the placeholder used for MTOW.',
   'Battery Voltage': 'Nominal pack voltage and cell count.',
 };
-function tipAttr(lbl) {
-  const t = CARD_TIPS[lbl];
-  return t ? ` title="${t.replace(/"/g,'&quot;')}"` : '';
-}
-const infoMark = lbl => CARD_TIPS[lbl] ? '<span class="gc-info">ⓘ</span>' : '';
-
-function gcard(lbl, bench, actual, delta, cls, benchLbl='Target') {
-  const dHtml = delta !== null
-    ? `<div class="gc-delta ${parseFloat(delta) >= 0 ? 'pos' : 'neg'}">${parseFloat(delta) >= 0 ? '+' : ''}${delta}</div>`
+// Build a card. `calc` is the live calculation/benchmark string → goes to tooltip.
+// `drift` (optional) is the signed delta-from-target → shown in parentheses next to value.
+function buildCard(lbl, value, calc, cls, drift) {
+  const purpose = CARD_PURPOSE[lbl] || '';
+  const tipText = [purpose, calc ? 'Calc: ' + calc : ''].filter(Boolean).join('\n');
+  const tip = tipText ? ` title="${tipText.replace(/"/g,'&quot;')}"` : '';
+  const mark = tipText ? '<span class="gc-info">ⓘ</span>' : '';
+  const driftHtml = (drift !== undefined && drift !== null && drift !== '')
+    ? ` <span class="gc-drift ${parseFloat(drift) >= 0 ? 'pos' : 'neg'}">(${parseFloat(drift) >= 0 ? '+' : ''}${drift})</span>`
     : '';
-  return `<div class="gap-card ${cls}"${tipAttr(lbl)}>
-    ${infoMark(lbl)}
+  return `<div class="gap-card ${cls || 'info'}"${tip}>
+    ${mark}
     <div class="gc-lbl">${lbl}</div>
-    <div class="gc-bench">${benchLbl}: ${bench}</div>
-    <div class="gc-actual">${actual}</div>
-    ${dHtml}
+    <div class="gc-actual">${value}${driftHtml}</div>
   </div>`;
 }
 
+// gcard: benchmark card with a target + drift. bench/benchLbl → tooltip calc; delta → parens.
+function gcard(lbl, bench, actual, delta, cls, benchLbl='Target') {
+  return buildCard(lbl, actual, `${benchLbl} ${bench}`, cls, delta);
+}
+// gcardInfo: plain value card. sub → tooltip calc.
 function gcardInfo(lbl, val, sub='') {
-  return `<div class="gap-card info"${tipAttr(lbl)}>
-    ${infoMark(lbl)}
-    <div class="gc-lbl">${lbl}</div>
-    <div class="gc-actual">${val}</div>
-    ${sub ? `<div class="gc-delta neutral">${sub}</div>` : ''}
-  </div>`;
+  return buildCard(lbl, val, sub, 'info');
 }
 
 function renderMiddle(d) {
@@ -1645,7 +1783,7 @@ function renderMiddle(d) {
     alerts += `<div class="alert-box err">⛔ Motor cannot achieve hover: ${fG(d.T_hover_per_motor)}/motor required, max ${fG(d.maxThrust)}</div>`;
   }
   if (d.vMismatch) {
-    alerts += `<div class="alert-box warn">⚠ Voltage mismatch: prop tested at ${d.propTestV.toFixed(1)}V · battery is ${d.batt.voltage_v}V — DB data may not be representative</div>`;
+    alerts += `<div class="alert-box warn">⚠ Voltage mismatch: prop tested at ${d.propTestV.toFixed(1)}V · battery is ${d.batt.voltage_v.toFixed(1)}V — DB data may not be representative</div>`;
   }
   if (d.using_placeholder && !d.batt) {
     alerts += `<div class="alert-box warn" style="display:block">Using battery placeholder (${fG(d.m_batt_ph)}). Select a real battery to update MTOW.</div>`;
@@ -1747,20 +1885,22 @@ function renderMiddle(d) {
       d.propTestV ? 'prop tested at ' + d.propTestV.toFixed(1) + 'V' : '');
 
     battActualsHtml = `
-      <div class="gap-section-title">BATTERY ACTUALS vs BENCHMARKS</div>
+      <div class="gap-section-title">BATTERY ACTUALS vs BENCHMARKS <span class="sec-comp">${d.batt.cells} · ${d.batt.capacity_mah}mAh · ${d.batt.discharge_c}C${d.batt.connector ? ' · ' + d.batt.connector : ''}</span></div>
       <div class="gap-grid">${ahCard}${cCard}${cmCard}${ftCard}${wtCard}${voltCard}</div>`;
   }
 
-  const rhoCard = gcardInfo('Air Density', f(d.AIR,4)+' kg/m\xb3', `${d.alt}m ISA`);
+  const comp = txt => txt ? `<span class="sec-comp">${txt}</span>` : '';
+  const motorProp = [selMotor, selProp ? selProp + '"' : null].filter(Boolean).join(' · ');
+  const battModel = d.batt ? `${d.batt.cells} · ${d.batt.capacity_mah}mAh · ${d.batt.discharge_c}C${d.batt.connector ? ' · ' + d.batt.connector : ''}` : '';
 
   body.innerHTML = `
     ${alerts}
     <div class="gap-section-title">MASS</div>
     <div class="gap-grid">${mtowCard}${gcardInfo('Fixed Mass', fKg(d.m_fixed), 'excl. battery')}</div>
-    <div class="gap-section-title">MOTOR BENCHMARKS</div>
+    <div class="gap-section-title">MOTOR BENCHMARKS ${comp(motorProp)}</div>
     <div class="gap-grid">${hoverThrCard}${peakThrCard}${effCard}${twCard}</div>
-    <div class="gap-section-title">BATTERY BENCHMARKS — FROM MOTOR (frozen)</div>
-    <div class="gap-grid">${benchAhCard}${benchCCard}${benchIhCard}${benchIpCard}${benchPwrCard}${rhoCard}</div>
+    <div class="gap-section-title">BATTERY BENCHMARKS — FROM MOTOR (frozen) ${comp(motorProp)}</div>
+    <div class="gap-grid">${benchAhCard}${benchCCard}${benchIhCard}${benchIpCard}${benchPwrCard}</div>
     ${battActualsHtml}
   `;
 }
@@ -1779,7 +1919,6 @@ function renderChain(d) {
   row(1,  'Target flight time',   't',    '—',              d.t_min+' min');
   row(2,  'Thrust multiplier',    'K_T',  '—',              d.K_T+'×');
   row(3,  'Altitude',             'alt',  '—',              d.alt+' m');
-  row(4,  'Air density',          'ρ',    'ISA std atm',    f(d.AIR,4)+' kg/m³');
 
   ph('MASS BUDGET');
   row(5,  'Structure + Frame',    'm_s',  '—',  fG(d.m_struct));
@@ -2233,7 +2372,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('stage-back').addEventListener('click', () => setStage(currentStage - 1));
   document.getElementById('stage-next').addEventListener('click', () => {
-    if (currentStage === 4) exportBuild(); else setStage(currentStage + 1);
+    if (appMode === 'auto') runOptimise();
+    else if (currentStage === 4) exportBuild();
+    else setStage(currentStage + 1);
+  });
+  document.getElementById('mode-toggle').addEventListener('click', () => {
+    setMode(appMode === 'auto' ? 'full' : 'auto');
   });
 
   // Global prop filter — re-populates motor list when changed
