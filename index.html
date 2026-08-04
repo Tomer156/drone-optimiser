@@ -310,24 +310,33 @@
     display: flex; align-items: center; justify-content: space-between;
   }
   .eff-bar-body { padding: 10px 12px; }
-  .eff-scale {
-    position: relative; height: 18px;
-    background: linear-gradient(to right, var(--danger), var(--warn), var(--green), var(--warn), var(--danger));
-    border-radius: 3px; margin-bottom: 6px;
-    opacity: 0.6;
+  /* motor-efficiency LOADING BAR */
+  .eff-loadbar {
+    position: relative; height: 16px;
+    background: var(--sunken); border: 1px solid var(--border2);
+    border-radius: 8px; overflow: hidden; margin-bottom: 6px;
   }
-  .eff-zone-band {
-    position: absolute; top: 0; bottom: 0;
-    background: rgba(158,255,0,0.25);
-    border: 1px solid var(--green);
-    border-radius: 2px;
+  .eff-fill {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 0%;
+    border-radius: 8px;
+    background-color: var(--muted);
+    background-image: linear-gradient(45deg,
+      rgba(255,255,255,0.16) 25%, transparent 25%, transparent 50%,
+      rgba(255,255,255,0.16) 50%, rgba(255,255,255,0.16) 75%, transparent 75%, transparent);
+    background-size: 28px 28px;
+    animation: eff-stripes 0.8s linear infinite;
+    transition: width 0.6s cubic-bezier(0.4,0,0.2,1), background-color 0.35s ease;
   }
-  .eff-needle {
-    position: absolute; top: -3px; bottom: -3px;
-    width: 3px; background: var(--accent);
-    border-radius: 2px;
-    transform: translateX(-50%);
-    box-shadow: 0 0 6px rgba(26,26,26,0.6);
+  .eff-fill.good { background-color: var(--green); }
+  .eff-fill.warn { background-color: var(--warn); }
+  .eff-fill.bad  { background-color: var(--danger); }
+  @keyframes eff-stripes { from { background-position: 0 0; } to { background-position: 28px 0; } }
+  /* sweet-spot target marker (80–90% of peak) */
+  .eff-sweet {
+    position: absolute; top: -1px; bottom: -1px; left: 80%; width: 10%;
+    background: rgba(158,255,0,0.10);
+    border-left: 1px dashed var(--green); border-right: 1px dashed var(--green);
+    z-index: 2; pointer-events: none;
   }
   .eff-labels {
     display: flex; justify-content: space-between;
@@ -416,8 +425,10 @@
     padding: 9px 11px;
     position: relative; overflow: hidden;
     aspect-ratio: 1 / 1;
-    display: flex; flex-direction: column; justify-content: center;
+    display: flex; flex-direction: column; justify-content: flex-start;
   }
+  .gap-card .gc-lbl { order: -1; }        /* title pinned top-left */
+  .gap-card .gc-actual { margin-top: auto; margin-bottom: auto; }  /* value centered in remaining space */
   .gap-card::before {
     content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
     background: var(--muted);
@@ -431,7 +442,9 @@
   .gap-card.bad::before  { background: var(--danger); }
   .gap-card.info::before { background: var(--accent); }
 
-  .gc-lbl    { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; }
+  .gc-info { position: absolute; top: 6px; right: 7px; font-size: 10px; color: var(--muted); opacity: 0.5; cursor: help; z-index: 3; }
+  .gap-card:hover .gc-info { opacity: 1; color: var(--accent); }
+  .gc-lbl    { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; padding-right: 12px; }
   .gc-bench  { font-size: 9px; color: var(--muted); font-family: var(--mono); margin-bottom: 1px; }
   .gc-actual { font-family: var(--mono); font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.1; }
   .gc-delta  { font-family: var(--mono); font-size: 9px; margin-top: 2px; color: var(--muted); }
@@ -868,13 +881,13 @@
             <span id="eff-zone-badge" style="font-size:9px;padding:1px 6px;border-radius:3px;background:rgba(0,0,0,0.3)"></span>
           </div>
           <div class="eff-bar-body">
-            <div class="eff-scale" id="eff-scale">
-              <div class="eff-zone-band" id="eff-zone-band"></div>
-              <div class="eff-needle" id="eff-needle"></div>
+            <div class="eff-loadbar" id="eff-loadbar">
+              <div class="eff-sweet"></div>
+              <div class="eff-fill" id="eff-fill"></div>
             </div>
             <div class="eff-labels">
               <span id="eff-lbl-min"></span>
-              <span style="color:var(--green)">80–90% zone</span>
+              <span style="color:var(--green)">80–90% sweet spot</span>
               <span id="eff-lbl-max"></span>
             </div>
             <div class="eff-summary" id="eff-summary"></div>
@@ -889,8 +902,10 @@
       <div class="ig">
         <div class="cells-tabs" id="cells-tabs">
           <div class="ct active" data-cells="all">All</div>
+          <div class="ct" data-cells="3S">3S</div>
           <div class="ct" data-cells="4S">4S</div>
           <div class="ct" data-cells="6S">6S</div>
+          <div class="ct" data-cells="8S">8S</div>
         </div>
         <input type="text" class="text-input" id="batt-filter" placeholder="Filter batteries…">
         <div class="batt-count" id="batt-count"></div>
@@ -1318,29 +1333,22 @@ function renderEffZone(d) {
   if (!d.hasMotor || !d.propDataOk || !d.peakEfficiency) { wrap.style.display = 'none'; return; }
   wrap.style.display = 'block';
 
-  const minE = 0;
-  const maxE = d.peakEfficiency * 1.1;
-
-  // Needle position = hover efficiency
   const hoverE = d.effAtHover;
-  const needlePct = hoverE !== null ? Math.min(100, Math.max(0, (hoverE / maxE) * 100)) : null;
-
-  // Zone band = 80–90% of peak
-  const zoneLo = (d.peakEfficiency * 0.80 / maxE) * 100;
-  const zoneHi = (d.peakEfficiency * 0.90 / maxE) * 100;
-
-  document.getElementById('eff-zone-band').style.cssText =
-    `left:${zoneLo.toFixed(1)}%;width:${(zoneHi-zoneLo).toFixed(1)}%`;
-
-  if (needlePct !== null) {
-    document.getElementById('eff-needle').style.left = needlePct.toFixed(1) + '%';
-    document.getElementById('eff-needle').style.display = 'block';
-  } else {
-    document.getElementById('eff-needle').style.display = 'none';
+  // loading bar fills to η_hover as % of peak; sweet spot = 80–90%
+  const pct = d.effPctOfPeak;                       // may be null if hover out of range
+  const fillPct = pct !== null ? Math.min(100, Math.max(0, pct)) : 0;
+  let fillCls = 'bad';
+  if (pct !== null) {
+    if (pct >= 80 && pct <= 90) fillCls = 'good';   // in the sweet spot → green
+    else if (pct >= 65)         fillCls = 'warn';   // near the spot → orange
+    else                        fillCls = 'bad';    // far off → red
   }
+  const fill = document.getElementById('eff-fill');
+  fill.className = 'eff-fill ' + fillCls;
+  fill.style.width = fillPct.toFixed(1) + '%';
 
-  document.getElementById('eff-lbl-min').textContent = '0';
-  document.getElementById('eff-lbl-max').textContent = maxE.toFixed(2) + ' g/W';
+  document.getElementById('eff-lbl-min').textContent = '0%';
+  document.getElementById('eff-lbl-max').textContent = 'peak ' + fEff(d.peakEfficiency);
 
   // Badge
   const badge = document.getElementById('eff-zone-badge');
@@ -1580,11 +1588,39 @@ function populateBatteries() {
 // ══════════════════════════════════════════════════════════
 // MIDDLE: BENCHMARKS vs REALITY
 // ══════════════════════════════════════════════════════════
+// Card tooltips — purpose + calculation, derived from the model in this file.
+const CARD_TIPS = {
+  'MTOW': 'Max Take-Off Weight — total mass the motors must lift.\nCalc: fixed mass + battery mass.',
+  'Fixed Mass': 'All non-battery mass.\nCalc: structure + motors + ESC + FC/GPS/RX + wiring + camera + payload.',
+  'Hover Thrust / Motor': 'Thrust each of the 4 motors must make to hover.\nCalc: MTOW ÷ 4.',
+  'Peak Thrust Target / Motor': 'Per-motor thrust needed for manoeuvres — the motor selection target.\nCalc: hover thrust × K_T (flight-style factor).',
+  'Motor Efficiency at Hover': 'Propulsive efficiency (g/W) at hover thrust vs the motor’s peak.\nSweet spot = 80–90% of peak efficiency.',
+  'Thrust / Weight': 'Control-authority margin.\nCalc: peak thrust ÷ MTOW. Target ≥ 2.0 : 1.',
+  'Required Capacity': 'Battery capacity needed for the target flight time.\nCalc: total hover current × flight time.',
+  'Required C-Rating': 'Minimum battery C-rating to supply peak current.\nCalc: peak motor current ÷ required Ah.',
+  'Hover Current (total)': 'Current drawn by all 4 motors at hover.\nCalc: per-motor current interpolated at hover thrust, × 4.',
+  'Total Current @ K_T Thrust': 'Total current at peak (manoeuvre) thrust.\nCalc: per-motor current at T_peak (K_T × hover) × 4.',
+  'Hover Power (total)': 'Electrical power drawn at hover.\nCalc: pack voltage × total hover current.',
+  'Air Density': 'Air density ρ at the set altitude (ISA model). Lower ρ → less thrust per watt.',
+  'Capacity': 'Selected battery capacity vs required.',
+  'C-Rating': 'Selected battery C-rating vs required.',
+  'Current Margin': 'Safety margin of pack current vs demand.\nCalc: battery I_max ÷ peak current. Target ≥ 1.5×.',
+  'Flight Time': 'Estimated hover endurance vs target.\nCalc: usable battery energy ÷ hover power.',
+  'Battery Weight': 'Selected battery mass vs the placeholder used for MTOW.',
+  'Battery Voltage': 'Nominal pack voltage and cell count.',
+};
+function tipAttr(lbl) {
+  const t = CARD_TIPS[lbl];
+  return t ? ` title="${t.replace(/"/g,'&quot;')}"` : '';
+}
+const infoMark = lbl => CARD_TIPS[lbl] ? '<span class="gc-info">ⓘ</span>' : '';
+
 function gcard(lbl, bench, actual, delta, cls, benchLbl='Target') {
   const dHtml = delta !== null
     ? `<div class="gc-delta ${parseFloat(delta) >= 0 ? 'pos' : 'neg'}">${parseFloat(delta) >= 0 ? '+' : ''}${delta}</div>`
     : '';
-  return `<div class="gap-card ${cls}">
+  return `<div class="gap-card ${cls}"${tipAttr(lbl)}>
+    ${infoMark(lbl)}
     <div class="gc-lbl">${lbl}</div>
     <div class="gc-bench">${benchLbl}: ${bench}</div>
     <div class="gc-actual">${actual}</div>
@@ -1593,7 +1629,8 @@ function gcard(lbl, bench, actual, delta, cls, benchLbl='Target') {
 }
 
 function gcardInfo(lbl, val, sub='') {
-  return `<div class="gap-card info">
+  return `<div class="gap-card info"${tipAttr(lbl)}>
+    ${infoMark(lbl)}
     <div class="gc-lbl">${lbl}</div>
     <div class="gc-actual">${val}</div>
     ${sub ? `<div class="gc-delta neutral">${sub}</div>` : ''}
