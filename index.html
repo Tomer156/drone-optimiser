@@ -2338,27 +2338,35 @@ function frameTopHTML(d, gap, g) {
     </div>`;
 }
 function frameSVG(d, g) {
-  const cx=130, cy=110, R=80;
-  const ms = [
-    {x: cx+R*Math.cos(-Math.PI/4), y: cy+R*Math.sin(-Math.PI/4)},
-    {x: cx+R*Math.cos(Math.PI/4),  y: cy+R*Math.sin(Math.PI/4)},
-    {x: cx+R*Math.cos(3*Math.PI/4),y: cy+R*Math.sin(3*Math.PI/4)},
-    {x: cx+R*Math.cos(-3*Math.PI/4),y: cy+R*Math.sin(-3*Math.PI/4)},
-  ];
-  const pr = Math.min(g.propDia/2/g.diag*R*2, R*0.85);
-  return `<svg width="260" height="220" viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg">
+  // Draw to real proportions at 1:10 (SVG user unit = 1 mm; physical width in mm = span/10).
+  // Prop-circle radius is the TRUE prop size and stays fixed; clearance spreads the motors
+  // apart, so the DIAGONAL grows — not the circle diameter.
+  const armR  = g.arm;          // mm, motor distance from centre (= diagonal / 2)
+  const propR = g.propDia / 2;  // mm, prop radius (constant vs clearance)
+  const reach = armR + propR;   // mm, centre → prop tip
+  const M = reach * 0.16 + 26;  // mm margin for labels + strokes
+  const half = reach + M;
+  const U = px => (px * 2.6458).toFixed(1);   // desired on-screen px → mm user units (@1:10, 96dpi)
+  const dash = (a, b) => `${U(a)},${U(b)}`;
+
+  const angs = [-45, 45, 135, -135].map(a => a * Math.PI / 180);
+  const ms = angs.map(a => ({ x: armR * Math.cos(a), y: armR * Math.sin(a) }));
+  const widthMM = (2 * half / 10).toFixed(1);
+
+  return `<svg width="${widthMM}mm" height="${widthMM}mm" viewBox="${(-half).toFixed(1)} ${(-half).toFixed(1)} ${(2*half).toFixed(1)} ${(2*half).toFixed(1)}"
+      style="max-width:100%;height:auto" xmlns="http://www.w3.org/2000/svg">
     ${ms.map((m,i) => `
-      <line x1="${cx}" y1="${cy}" x2="${m.x.toFixed(0)}" y2="${m.y.toFixed(0)}" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
-      <circle cx="${m.x.toFixed(0)}" cy="${m.y.toFixed(0)}" r="${pr.toFixed(0)}" fill="none" stroke="var(--border2)" stroke-width="1" stroke-dasharray="4,2"/>
-      <circle cx="${m.x.toFixed(0)}" cy="${m.y.toFixed(0)}" r="5" fill="var(--green)"/>
-      <text x="${m.x.toFixed(0)}" y="${(m.y+16).toFixed(0)}" text-anchor="middle" font-size="8" fill="var(--muted)" font-family="Inter">M${i+1}</text>
+      <line x1="0" y1="0" x2="${m.x.toFixed(1)}" y2="${m.y.toFixed(1)}" stroke="var(--accent)" stroke-width="${U(2.5)}" stroke-linecap="round"/>
+      <circle cx="${m.x.toFixed(1)}" cy="${m.y.toFixed(1)}" r="${propR.toFixed(1)}" fill="none" stroke="var(--border2)" stroke-width="${U(1)}" stroke-dasharray="${dash(4,2)}"/>
+      <circle cx="${m.x.toFixed(1)}" cy="${m.y.toFixed(1)}" r="${U(5)}" fill="var(--green)"/>
+      <text x="${m.x.toFixed(1)}" y="${(m.y + (m.y>0?1:-1)*propR*0.45 + Number(U(3))).toFixed(1)}" text-anchor="middle" font-size="${U(8)}" fill="var(--muted)" font-family="Inter">M${i+1}</text>
     `).join('')}
-    <line x1="${ms[0].x.toFixed(0)}" y1="${ms[0].y.toFixed(0)}" x2="${ms[2].x.toFixed(0)}" y2="${ms[2].y.toFixed(0)}"
-      stroke="var(--warn)" stroke-width="0.8" stroke-dasharray="4,3" opacity="0.5"/>
-    <circle cx="${cx}" cy="${cy}" r="11" fill="var(--panel2)" stroke="var(--border2)" stroke-width="1.5"/>
-    <text x="${cx}" y="${cy+3}" text-anchor="middle" font-size="7" fill="var(--muted)" font-family="Inter">FC</text>
-    <text x="${cx}" y="${cy-R-14}" text-anchor="middle" font-size="9" fill="var(--warn)" font-family="Inter">${g.diag.toFixed(0)}mm diag</text>
-    <text x="${cx}" y="215" text-anchor="middle" font-size="8" fill="var(--muted)" font-family="Inter">Prop ${d.propInches}" · ${g.propDia.toFixed(0)}mm</text>
+    <line x1="${ms[0].x.toFixed(1)}" y1="${ms[0].y.toFixed(1)}" x2="${ms[2].x.toFixed(1)}" y2="${ms[2].y.toFixed(1)}"
+      stroke="var(--warn)" stroke-width="${U(0.8)}" stroke-dasharray="${dash(4,3)}" opacity="0.5"/>
+    <circle cx="0" cy="0" r="${U(11)}" fill="var(--panel2)" stroke="var(--border2)" stroke-width="${U(1.5)}"/>
+    <text x="0" y="${U(3)}" text-anchor="middle" font-size="${U(7)}" fill="var(--muted)" font-family="Inter">FC</text>
+    <text x="0" y="${(-reach - M*0.35).toFixed(1)}" text-anchor="middle" font-size="${U(9)}" fill="var(--warn)" font-family="Inter">${g.diag.toFixed(0)}mm diag</text>
+    <text x="0" y="${(half - M*0.3).toFixed(1)}" text-anchor="middle" font-size="${U(8)}" fill="var(--muted)" font-family="Inter">Prop ${d.propInches}" · ${g.propDia.toFixed(0)}mm · 1:10 scale</text>
   </svg>`;
 }
 
