@@ -370,46 +370,33 @@
   .eff-item-val { font-weight: 600; }
 
   /* ─── MOTOR LIST ─── */
-  .motor-list {
-    max-height: 170px;
-    overflow-y: auto;
-    border: 1px solid var(--border2);
-    border-radius: 3px;
-    margin-top: 4px;
-  }
+  .motor-list { max-height: 200px; overflow-y: auto; margin-top: 4px; display: flex; flex-direction: column; }
   .motor-item {
-    padding: 5px 8px;
-    border-bottom: 1px solid var(--border);
-    cursor: pointer;
-    display: flex; align-items: center; gap: 8px;
-    transition: background 0.1s;
+    padding: 9px 10px; border-radius: 6px; cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
   }
-  .motor-item:hover { background: rgba(26,26,26,0.04); }
-  .motor-item.selected { background: rgba(26,26,26,0.08); border-left: 2px solid var(--accent); }
-  .motor-item-name { font-size: 10px; font-family: var(--mono); flex: 1; }
-  .motor-item-meta { font-size: 9px; color: var(--muted); }
-  .eff-dot {
-    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-    background: var(--muted);
-  }
-  .eff-dot.best { background: var(--green); box-shadow: 0 0 5px rgba(158,255,0,0.5); }
-  .eff-dot.good { background: var(--accent); }
+  .motor-item:hover { background: var(--sunken); }
+  .motor-item.selected { background: var(--line2); }
+  .motor-item-name { font-size: 12px; line-height: 1.35; flex: 1; color: var(--body); }
+  .motor-item.selected .motor-item-name { color: var(--text); }
+  .motor-item-meta { font-size: 10px; font-family: var(--mono); color: var(--muted); }
+  .eff-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; background: var(--muted); }
+  .eff-dot.best { background: var(--green); }
+  .eff-dot.good { background: var(--green); }
   .eff-dot.ok   { background: var(--warn); }
   .eff-dot.poor { background: var(--danger); }
 
   /* ─── BATTERY LIST ─── */
-  .battery-list {
-    max-height: 190px; overflow-y: auto;
-    border: 1px solid var(--border2); border-radius: 3px; margin-top: 4px;
-  }
+  .battery-list { max-height: 210px; overflow-y: auto; margin-top: 4px; display: flex; flex-direction: column; }
   .batt-item {
-    padding: 5px 8px; border-bottom: 1px solid var(--border);
-    cursor: pointer; display: flex; align-items: center; gap: 7px;
+    padding: 9px 10px; border-radius: 6px; cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
   }
-  .batt-item:hover { background: rgba(26,26,26,0.04); }
-  .batt-item.selected { background: rgba(26,26,26,0.08); border-left: 2px solid var(--accent); }
-  .batt-item.no-wt { opacity: 0.4; }
-  .batt-name { font-size: 10px; font-family: var(--mono); flex: 1; }
+  .batt-item:hover { background: var(--sunken); }
+  .batt-item.selected { background: var(--line2); }
+  .batt-item.no-wt { opacity: 0.45; }
+  .batt-name { font-size: 12px; flex: 1; color: var(--body); }
+  .batt-item.selected .batt-name { color: var(--text); }
   .batt-meta { font-size: 8px; color: var(--muted); margin-top: 1px; }
   .batt-cap  { font-size: 9px; color: var(--green); font-family: var(--mono); flex-shrink: 0; }
   .c-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: var(--muted); }
@@ -705,13 +692,12 @@
   }
   .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-  .mode-toggle {
-    background: var(--accent); border: 1px solid var(--accent);
-    color: var(--on-accent); height: 30px; padding: 0 12px; border-radius: 6px;
-    cursor: pointer; font-size: 11px; font-weight: 700; font-family: var(--sans);
-    display: flex; align-items: center; gap: 5px; white-space: nowrap;
-  }
-  .mode-toggle:hover { background: var(--accent-hover); }
+  .mode-pill { display: flex; align-items: center; gap: 2px; background: var(--sunken); border-radius: 99px; padding: 2px; }
+  .mode-pill span { border-radius: 99px; padding: 5px 13px; font-size: 11px; cursor: pointer; color: var(--muted); user-select: none; }
+  .mode-pill span.active { background: var(--panel); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+  .style-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 4px; }
+  .style-chips span { border: 1px solid var(--border); background: var(--panel); color: var(--muted); border-radius: 6px; padding: 7px 9px; font-size: 11px; text-align: center; cursor: pointer; }
+  .style-chips span.active { border-color: var(--accent); background: var(--line2); color: var(--text); }
 
   /* ═══ THEME TOGGLE ═══ */
   .theme-toggle {
@@ -949,8 +935,14 @@
         <input type="range" id="s-time" min="5" max="90" value="40" step="1">
       </div>
       <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">K</span> Flight Style (K_T)</span></div>
-        <select id="s-style">
+        <div class="ir"><span class="il">Flight style</span></div>
+        <div class="style-chips" id="style-chips">
+          <span data-k="1.5">Cinematic</span>
+          <span data-k="1.7">Survey</span>
+          <span data-k="2.0">Aggressive</span>
+          <span data-k="2.5">Freestyle</span>
+        </div>
+        <select id="s-style" style="display:none">
           <option value="1.5">Cinematic / Slow (K=1.5)</option>
           <option value="1.7" selected>Stable / Survey (K=1.7)</option>
           <option value="2.0">Aggressive (K=2.0)</option>
@@ -1089,7 +1081,10 @@
   <div class="main">
     <div class="topbar">
       <div class="header-actions">
-        <button class="mode-toggle" id="mode-toggle" title="Switch between Auto (one-step optimise) and Pro (manual)">Mode: Pro</button>
+        <div class="mode-pill" id="mode-pill" title="Switch between Auto (one-step optimise) and Pro (manual)">
+          <span data-mode="auto">Auto</span>
+          <span data-mode="full">Pro</span>
+        </div>
         <button class="reset-btn" id="reset-all" title="Reset all inputs to defaults"><i class="ph ph-arrow-counter-clockwise"></i> Reset all</button>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme"><i class="ph ph-circle-half"></i></button>
         <button class="theme-toggle" id="export-btn" aria-label="Export inputs as CSV" title="Export inputs as CSV"><i class="ph ph-download-simple"></i></button>
@@ -1098,7 +1093,7 @@
 
     <div class="col results-col">
       <div class="tabs">
-        <button class="tab-btn active" data-tab="overview">Overview</button>
+        <button class="tab-btn active" data-tab="overview">Results</button>
         <button class="tab-btn" data-tab="elec">Electronics</button>
         <button class="tab-btn" data-tab="chain">Calc Chain</button>
       </div>
@@ -1520,8 +1515,7 @@ function applyMode() {
 function setMode(m) {
   appMode = m;
   document.body.classList.toggle('auto-mode', m === 'auto');
-  const btn = document.getElementById('mode-toggle');
-  if (btn) btn.textContent = 'Mode: ' + (m === 'auto' ? 'Auto' : 'Pro');
+  document.querySelectorAll('#mode-pill span').forEach(s => s.classList.toggle('active', s.dataset.mode === m));
   closeSectionMenu();
   // Auto mode hides the Calc Chain tab: if it's active, fall back to Overview.
   if (m === 'auto') {
@@ -2941,9 +2935,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const i = menu ? MENU_ORDER.indexOf(menu.dataset.menu) : -1;
     if (i >= 0) setStage(i + 1);
   });
-  document.getElementById('mode-toggle').addEventListener('click', () => {
-    setMode(appMode === 'auto' ? 'full' : 'auto');
+  document.querySelectorAll('#mode-pill span').forEach(seg => {
+    seg.addEventListener('click', () => setMode(seg.dataset.mode));
+    seg.classList.toggle('active', seg.dataset.mode === appMode);
   });
+  // Flight-style chips (drive the hidden #s-style select)
+  const styleSel = document.getElementById('s-style');
+  function syncStyleChips() {
+    document.querySelectorAll('#style-chips span').forEach(c => c.classList.toggle('active', c.dataset.k === styleSel.value));
+  }
+  document.querySelectorAll('#style-chips span').forEach(chip => {
+    chip.addEventListener('click', () => { styleSel.value = chip.dataset.k; syncStyleChips(); update(); });
+  });
+  syncStyleChips();
   document.getElementById('export-btn').addEventListener('click', exportBuild);
 
   // Global prop filter: re-populates motor list when changed
