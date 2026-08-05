@@ -506,6 +506,8 @@
   }
   .alert-box.err  { background: rgba(255,0,30,0.1); border: 1px solid var(--danger); color: var(--danger); }
   .alert-box.warn { background: rgba(255,97,0,0.08); border: 1px solid var(--warn); color: var(--warn); }
+  .alert-box.info { background: rgba(8,145,166,0.08); border: 1px solid rgba(8,145,166,0.5); color: #0891A6; }
+  :root[data-theme="dark"] .alert-box.info { color: #22D3EE; border-color: rgba(34,211,238,0.5); background: rgba(34,211,238,0.08); }
 
   /* ─── RIGHT TABS ─── */
   .tabs {
@@ -938,7 +940,7 @@
       <div class="ig" id="prop-global-group">
         <div class="ir"><span class="il">Propeller size</span></div>
         <select id="s-prop-global">
-          <option value="">— select prop first —</option>
+          <option value="">Select prop first</option>
         </select>
       </div>
       <div class="ig">
@@ -950,7 +952,7 @@
         <select id="s-prop"></select>
       </div>
 
-      <!-- EFFICIENCY ZONE BOX — shown after motor selected -->
+      <!-- EFFICIENCY ZONE BOX: shown after motor selected -->
       <div id="eff-zone-wrap" style="display:none">
         <div class="eff-bar-wrap">
           <div class="eff-bar-title">
@@ -1097,7 +1099,7 @@ const rho= alt => 1.225 * Math.pow(1 - 0.0065*alt/288.15, 4.256);
 // ══════════════════════════════════════════════════════════
 function interp(data, tgt_g) {
   // Each parameter (I, P, efficiency) has its own independent slope.
-  // Voltage is kept constant (avg of pair) — does not drive calculations.
+  // Voltage is kept constant (avg of pair): does not drive calculations.
   const s = [...data].sort((a,b) => a.thrust_g - b.thrust_g);
   if (!s.length) return null;
 
@@ -1122,13 +1124,13 @@ function interp(data, tgt_g) {
     };
   }
 
-  // Below table — backward extrapolation from first two rows
+  // Below table: backward extrapolation from first two rows
   if (tgt_g < s[0].thrust_g) {
     if (s.length < 2) return null;
     return fromPair(s[0], s[1], true);
   }
 
-  // Above table — forward extrapolation from last two rows (max 10% beyond)
+  // Above table: forward extrapolation from last two rows (max 10% beyond)
   const last = s[s.length-1], sec = s[s.length-2];
   if (tgt_g > last.thrust_g) {
     if (!sec) return null;
@@ -1156,11 +1158,11 @@ let cellsFilter = 'all';
 let lastD = null;
 let currentStage = 1;   // wizard stage 1..4
 let appMode = 'full';   // 'full' (staged wizard) | 'auto' (one-step optimise)
-let lastEffKey = null;  // motor|prop key — eff bar animates only when this changes
-let frameGap = 15;      // prop clearance (mm) — persists across frame re-renders
+let lastEffKey = null;  // motor|prop key: eff bar animates only when this changes
+let frameGap = 15;      // prop clearance (mm): persists across frame re-renders
 
 // ══════════════════════════════════════════════════════════
-// COMPUTE — strict physics model
+// COMPUTE: strict physics model
 // Domains: thrust(g) → current(A) → power(W) → energy(Wh)
 // Never derive power from efficiency.
 // ══════════════════════════════════════════════════════════
@@ -1204,7 +1206,7 @@ function compute() {
     propDataOk = propData.length > 0;
   }
 
-  // ─ PHASE 2: INTERPOLATION — thrust is independent variable ─
+  // ─ PHASE 2: INTERPOLATION: thrust is independent variable ─
   let hover = null, maxThrust = null;
   // Peak current taken from 100% throttle row (motor spec max), NOT from K_T thrust point
   let I_max_motor_1 = null;  // max current of ONE motor at 100% throttle
@@ -1214,7 +1216,7 @@ function compute() {
     const sorted = [...propData].sort((a,b) => a.thrust_g - b.thrust_g);
     maxThrust = sorted[sorted.length-1].thrust_g;
 
-    // Peak efficiency row (for reference/comparison only — never used in power calc)
+    // Peak efficiency row (for reference/comparison only: never used in power calc)
     const peakEffRow = sorted.reduce((best, r) =>
       (r.efficiency != null && r.efficiency > (best?.efficiency || 0)) ? r : best, null);
     peakEfficiency = peakEffRow?.efficiency || null;
@@ -1222,7 +1224,7 @@ function compute() {
     // I_max_motor from 100% throttle row (highest thrust row in DB)
     I_max_motor_1 = sorted[sorted.length-1].current_a;
 
-    // Interpolate at hover thrust — gives I_hover and V_hover per motor
+    // Interpolate at hover thrust: gives I_hover and V_hover per motor
     if (T_hover_per_motor <= maxThrust * 1.1) {
       hover = interp(propData, T_hover_per_motor);
       if (hover && peakEfficiency) {
@@ -1232,7 +1234,7 @@ function compute() {
     }
   }
 
-  // ─ PHASE 3: POWER — P = V × I, never derived from efficiency ─
+  // ─ PHASE 3: POWER: P = V × I, never derived from efficiency ─
   // Use interpolated voltage at hover thrust (from bench data for this prop)
   let I_hover_motor = hover ? hover.current_a : null;    // A per motor at hover
   let V_hover_motor = hover ? hover.voltage_v : null;    // V at hover (from bench)
@@ -1246,7 +1248,7 @@ function compute() {
   const I_peak_motor = I_max_motor_1;
   const I_peak_total = I_peak_motor ? I_peak_motor * N : null;
 
-  // Peak current at K_T thrust (flight style) — interpolated, this is the critical value
+  // Peak current at K_T thrust (flight style): interpolated, this is the critical value
   const pRow = (propDataOk && T_peak_per_motor <= maxThrust * 1.1)
     ? interp(propData, T_peak_per_motor) : null;
   const I_peak_thrust_motor = pRow ? pRow.current_a : null;
@@ -1257,11 +1259,11 @@ function compute() {
   const E_required_wh = (P_hover_total && t_h) ? P_hover_total * t_h : null;
 
   // ─ PHASE 5: BATTERY BENCHMARKS (motor-derived, frozen) ─
-  // Required Ah = I_hover_total × t_h  (no reserve — matches ref worksheet)
+  // Required Ah = I_hover_total × t_h  (no reserve: matches ref worksheet)
   const req_Ah = I_hover_total ? I_hover_total * t_h : null;
 
   // Required C = I_peak_100_motor / req_Ah  (single motor peak from spec / total Ah)
-  // Ref: C rating = I_motor_peak_100 / Ah — single motor current, not ×N
+  // Ref: C rating = I_motor_peak_100 / Ah: single motor current, not ×N
   const req_C  = (I_peak_motor && req_Ah) ? I_peak_motor / req_Ah : null;
 
   // ─ PHASE 5: REAL BATTERY ─
@@ -1288,7 +1290,7 @@ function compute() {
   // Current margin: battery I_max / total current at K_T thrust (flight style)
   const cm = (I_max_batt && I_peak_thrust_total) ? I_max_batt / I_peak_thrust_total : null;
 
-  // ─ VOLTAGE MISMATCH — use prop's own test voltage, not motor avg ─
+  // ─ VOLTAGE MISMATCH: use prop's own test voltage, not motor avg ─
   let vMismatch = false;
   let propTestV = null;
   if (propData && propData.length > 0) {
@@ -1382,7 +1384,7 @@ function setMode(m) {
   const btn = document.getElementById('mode-toggle');
   if (btn) btn.textContent = 'Mode: ' + (m === 'auto' ? 'Auto' : 'Full');
   closeSectionMenu();
-  // Auto mode hides detail tabs — if one is active, fall back to Performance.
+  // Auto mode hides detail tabs: if one is active, fall back to Performance.
   if (m === 'auto') {
     const active = document.querySelector('.tab-btn.active');
     if (active && ['chain','checks','motor'].includes(active.dataset.tab)) {
@@ -1394,7 +1396,7 @@ function setMode(m) {
 }
 
 // ══════════════════════════════════════════════════════════
-// AUTO OPTIMISER — pick motor + prop + battery to match flight-time target
+// AUTO OPTIMISER: pick motor + prop + battery to match flight-time target
 // ══════════════════════════════════════════════════════════
 function optToast(msg, ok) {
   let t = document.getElementById('opt-toast');
@@ -1435,7 +1437,7 @@ function runOptimise() {
 
         if (d.flightTime < target * 0.98) continue;                  // must reach target
 
-        // score: least overshoot, closest to 85% peak-eff, lightest — lower = better
+        // score: least overshoot, closest to 85% peak-eff, lightest: lower = better
         const overshoot = d.flightTime - target;
         const effPen = Math.abs((d.effPctOfPeak == null ? 40 : d.effPctOfPeak) - 85);
         const score = overshoot * 1.0 + effPen * 0.4 + d.MTOW * 0.001;
@@ -1591,7 +1593,7 @@ function renderEffZone(d) {
 }
 
 // ══════════════════════════════════════════════════════════
-// GLOBAL PROP SELECTOR — appears before motor list
+// GLOBAL PROP SELECTOR: appears before motor list
 // ══════════════════════════════════════════════════════════
 function populatePropGlobal() {
   const sel = document.getElementById('s-prop-global');
@@ -1604,7 +1606,7 @@ function populatePropGlobal() {
     });
   });
   const sorted = [...propSizes].map(Number).sort((a,b) => a-b);
-  sel.innerHTML = '<option value="">— all motors —</option>';
+  sel.innerHTML = '<option value="">All motors</option>';
   sorted.forEach(s => {
     const opt = document.createElement('option');
     opt.value = s.toString();
@@ -1620,7 +1622,7 @@ function motorKV(name) {
 }
 
 // ══════════════════════════════════════════════════════════
-// MOTOR LIST — sorted by KV ascending, filtered by prop size
+// MOTOR LIST: sorted by KV ascending, filtered by prop size
 // ══════════════════════════════════════════════════════════
 function populateMotors() {
   const filter      = document.getElementById('motor-filter').value.toLowerCase();
@@ -1789,15 +1791,15 @@ function populateBatteries() {
 // ══════════════════════════════════════════════════════════
 // MIDDLE: BENCHMARKS vs REALITY
 // ══════════════════════════════════════════════════════════
-// Card tooltips — plain-English PURPOSE. The live calculation (card's sub/bench
+// Card tooltips: plain-English PURPOSE. The live calculation (card's sub/bench
 // text) is appended below at render time, so the calc lives only in the tooltip.
 const CARD_PURPOSE = {
-  'MTOW': 'Max Take-Off Weight — total mass the motors must lift.',
+  'MTOW': 'Max Take-Off Weight: total mass the motors must lift.',
   'Fixed Mass': 'All non-battery mass (structure, motors, ESC, avionics, wiring, camera, payload).',
   'Hover Thrust / Motor': 'Thrust each of the 4 motors must produce just to hover.',
-  'Peak Thrust Target / Motor': 'Per-motor thrust needed for manoeuvres — the motor-selection target.',
+  'Peak Thrust Target / Motor': 'Per-motor thrust needed for manoeuvres: the motor-selection target.',
   'Motor Efficiency at Hover': 'Propulsive efficiency (g/W) at hover thrust vs the motor’s peak. Sweet spot = 80–90% of peak.',
-  'Thrust / Weight': 'Control-authority margin — total max thrust vs weight.',
+  'Thrust / Weight': 'Control-authority margin: total max thrust vs weight.',
   'Required Capacity': 'Battery capacity needed to hit the target flight time.',
   'Required C-Rating': 'Minimum battery C-rating to safely supply peak current.',
   'Hover Current (total)': 'Current drawn by all 4 motors at hover.',
@@ -1829,7 +1831,7 @@ function buildCard(lbl, value, calc, cls, drift) {
   </div>`;
 }
 
-// Custom hover tooltip for cards — lets the calc render in a serif font (native title can't).
+// Custom hover tooltip for cards: lets the calc render in a serif font (native title can't).
 function initCardTooltip() {
   const tip = document.createElement('div');
   tip.id = 'card-tip';
@@ -1872,19 +1874,69 @@ function gcardInfo(lbl, val, sub='') {
   return buildCard(lbl, val, sub, 'info');
 }
 
+// FULL mode: concise technical alerts.
+function fullAlerts(d) {
+  let a = '';
+  if (d.hasMotor && d.propDataOk && d.hover === null)
+    a += `<div class="alert-box err">⛔ Motor cannot achieve hover: ${fG(d.T_hover_per_motor)}/motor required, max ${fG(d.maxThrust)}</div>`;
+  if (d.vMismatch)
+    a += `<div class="alert-box warn">⚠ Voltage mismatch: prop tested at ${d.propTestV.toFixed(1)}V · battery is ${d.batt.voltage_v.toFixed(1)}V; DB data may not be representative</div>`;
+  if (d.using_placeholder && !d.batt)
+    a += `<div class="alert-box warn" style="display:block">Using battery placeholder (${fG(d.m_batt_ph)}). Select a real battery to update MTOW.</div>`;
+  return a;
+}
+
+// AUTO mode: plain-language, explain-what-it-means advisories.
+function autoAlerts(d) {
+  const A = [];
+  const box = (cls, txt) => `<div class="alert-box ${cls}" style="display:block">${txt}</div>`;
+
+  if (d.hasMotor && d.propDataOk && d.hover === null)
+    A.push(box('err', 'This motor and prop can’t make enough thrust to hover the drone at this weight. Try a larger motor/prop or reduce mass.'));
+
+  if (d.vMismatch)
+    A.push(box('warn', 'Motor and prop were not tested at this voltage; performance might vary.'));
+
+  // Efficiency / loading of the motor at the hover point
+  if (d.hover) {
+    const thr  = d.hover.throttle;
+    const iRat = (d.I_hover_motor && d.I_peak_motor) ? d.I_hover_motor / d.I_peak_motor : null;
+    const under = (thr !== null && thr < 40) || (iRat !== null && iRat < 0.2);
+    const over  = (thr !== null && thr > 60) || (iRat !== null && iRat > 0.4);
+    const ineff = (d.effPctOfPeak !== null && d.effPctOfPeak < 80) || under || over;
+    if (ineff) {
+      const why = over ? 'it is over-loaded (working too hard at hover)'
+                : under ? 'it is over-specced (barely working, so it wastes energy)'
+                : 'it is running off its best efficiency point';
+      A.push(box('warn', `Motor is inefficient at hover: ${why}.`));
+    }
+  }
+
+  if (d.tw !== null && d.tw < 2.0)
+    A.push(box('warn', d.tw < 1.5
+      ? 'Low thrust-to-weight: the drone may struggle to stay controllable.'
+      : 'Thrust-to-weight is marginal: the drone will feel underpowered.'));
+
+  if (d.cm !== null && d.cm < 1.5)
+    A.push(box('warn', d.cm < 1.2
+      ? 'The battery is being pushed past a safe current draw and may overheat.'
+      : 'The battery is close to its current limit at peak thrust.'));
+
+  if (d.flightTime !== null && d.flightTime < d.t_min)
+    A.push(box('warn', `This build reaches about ${fMin(d.flightTime)}, short of your ${d.t_min} min target.`));
+
+  // Missing / extrapolated bench data
+  const incomplete = (d.batt && !d.battHasWt) || (d.batt && d.batt.discharge_c == null) || (d.hover && d.hover.extrapolated);
+  if (incomplete)
+    A.push(box('info', 'Be advised, the data is incomplete for this specific configuration.'));
+
+  return A.join('');
+}
+
 function renderMiddle(d) {
   const body = document.getElementById('mid-body');
 
-  let alerts = '';
-  if (d.hasMotor && d.propDataOk && d.hover === null) {
-    alerts += `<div class="alert-box err">⛔ Motor cannot achieve hover: ${fG(d.T_hover_per_motor)}/motor required, max ${fG(d.maxThrust)}</div>`;
-  }
-  if (d.vMismatch) {
-    alerts += `<div class="alert-box warn">⚠ Voltage mismatch: prop tested at ${d.propTestV.toFixed(1)}V · battery is ${d.batt.voltage_v.toFixed(1)}V — DB data may not be representative</div>`;
-  }
-  if (d.using_placeholder && !d.batt) {
-    alerts += `<div class="alert-box warn" style="display:block">Using battery placeholder (${fG(d.m_batt_ph)}). Select a real battery to update MTOW.</div>`;
-  }
+  const alerts = appMode === 'auto' ? autoAlerts(d) : fullAlerts(d);
 
   // ─ SECTION 1: MASS & MTOW ─
   const mtowCard = gcardInfo('MTOW',
@@ -1896,7 +1948,7 @@ function renderMiddle(d) {
   // Hover thrust target
   const hoverThrCard = gcardInfo('Hover Thrust / Motor', fG(d.T_hover_per_motor), '[MTOW] / [4]');
   // Peak thrust target
-  const peakThrCard = gcardInfo('Peak Thrust Target / Motor', fG(d.T_peak_per_motor), `[hover] × [K=${d.K_T}] — motor selection target`);
+  const peakThrCard = gcardInfo('Peak Thrust Target / Motor', fG(d.T_peak_per_motor), `[hover] × [K=${d.K_T}]: motor selection target`);
 
   // Efficiency at hover
   let effCard;
@@ -1907,7 +1959,7 @@ function renderMiddle(d) {
     const delta = (pct - 85).toFixed(1); // vs midpoint of sweet spot
     effCard = gcard('Motor Efficiency at Hover', tgt, fEff(d.effAtHover) + ' (' + pct.toFixed(0) + '%)', delta, cls, 'Sweet spot');
   } else if (d.peakEfficiency !== null) {
-    effCard = gcard('Motor Efficiency at Hover', `80–90% of ${fEff(d.peakEfficiency)}`, '— hover out of range', null, 'bad', 'Sweet spot');
+    effCard = gcard('Motor Efficiency at Hover', `80–90% of ${fEff(d.peakEfficiency)}`, 'hover out of range', null, 'bad', 'Sweet spot');
   } else if (d.hasMotor) {
     effCard = gcardInfo('Motor Efficiency at Hover', '—', 'select motor + prop');
   } else {
@@ -1923,21 +1975,21 @@ function renderMiddle(d) {
     twCard = gcardInfo('Thrust / Weight', '—', d.maxThrust ? 'max thrust: '+fG(d.maxThrust) : 'select motor');
   }
 
-  // ─ SECTION 3: BATTERY BENCHMARKS FROM MOTOR (frozen — motor+prop+MTOW only) ─
+  // ─ SECTION 3: BATTERY BENCHMARKS FROM MOTOR (frozen: motor+prop+MTOW only) ─
   // These never change once motor+prop+MTOW are set. No battery values involved.
   const benchAhCard  = d.req_Ah !== null
-    ? gcardInfo('Required Capacity', fAh(d.req_Ah), '[I_hover_total] × [t] — motor derived')
+    ? gcardInfo('Required Capacity', fAh(d.req_Ah), '[I_hover_total] × [t]: motor derived')
     : gcardInfo('Required Capacity', '—', 'need motor + MTOW');
 
   const benchCCard   = d.req_C !== null
-    ? gcardInfo('Required C-Rating', '>=' + d.req_C.toFixed(0) + 'C', '[I_peak_motor] / [req_Ah] — motor derived')
+    ? gcardInfo('Required C-Rating', '>=' + d.req_C.toFixed(0) + 'C', '[I_peak_motor] / [req_Ah]: motor derived')
     : gcardInfo('Required C-Rating', '—', 'need motor + MTOW');
 
   const benchIhCard  = d.I_hover_total !== null
     ? gcardInfo('Hover Current (total)', fA(d.I_hover_total), '[' + fA(d.I_hover_motor) + '/motor] \u2192 [interp(T_hover, I)]')
     : gcardInfo('Hover Current (total)', '—', '');
 
-  // Peak current at K_T thrust (flight style) — the critical current value
+  // Peak current at K_T thrust (flight style): the critical current value
   const benchIpCard  = d.I_peak_thrust_total !== null
     ? gcardInfo('Total Current @ K_T Thrust', fA(d.I_peak_thrust_total), '[' + fA(d.I_peak_thrust_motor) + '/motor] @ T_peak ([K_T] × [T_hover])')
     : gcardInfo('Total Current @ K_T Thrust', '—', '');
@@ -1976,7 +2028,7 @@ function renderMiddle(d) {
     // Battery weight impact on MTOW
     const wtCard = d.battHasWt
       ? gcardInfo('Battery Weight', fG(d.batt.weight_g), 'vs placeholder ' + fG(d.m_batt_ph) + ' (' + (d.batt.weight_g - d.m_batt_ph >= 0 ? '+' : '') + fG(d.batt.weight_g - d.m_batt_ph) + ')')
-      : gcardInfo('Battery Weight', '— no data', 'MTOW uses placeholder');
+      : gcardInfo('Battery Weight', 'no data', 'MTOW uses placeholder');
 
     const voltCard = gcardInfo('Battery Voltage', fV(d.batt.voltage_v) + ' (' + d.batt.cells + ')',
       d.propTestV ? 'prop tested at ' + d.propTestV.toFixed(1) + 'V' : '');
@@ -1996,7 +2048,7 @@ function renderMiddle(d) {
     <div class="gap-grid" data-section="mass">${mtowCard}${gcardInfo('Fixed Mass', fKg(d.m_fixed), 'excl. battery')}</div>
     ${sectionTitle('motor', 'MOTOR BENCHMARKS', comp(motorProp))}
     <div class="gap-grid" data-section="motor">${hoverThrCard}${peakThrCard}${effCard}${twCard}</div>
-    ${sectionTitle('batt-bench', 'BATTERY BENCHMARKS — FROM MOTOR (frozen)', comp(motorProp))}
+    ${sectionTitle('batt-bench', 'BATTERY BENCHMARKS: FROM MOTOR (frozen)', comp(motorProp))}
     <div class="gap-grid" data-section="batt-bench">${benchAhCard}${benchCCard}${benchIhCard}${benchIpCard}${benchPwrCard}</div>
     ${battActualsHtml}
   `;
@@ -2012,7 +2064,7 @@ function sectionTitle(section, label, compHtml = '') {
 }
 
 // ══════════════════════════════════════════════════════════
-// CARD VISIBILITY — auto mode shows only mission-critical cards;
+// CARD VISIBILITY: auto mode shows only mission-critical cards;
 // full mode shows all and lets the user hide (X) / re-add (+) per section.
 // ══════════════════════════════════════════════════════════
 const AUTO_CARDS = new Set(['mtow','motor-efficiency-at-hover','thrust-weight','flight-time','current-margin','required-capacity']);
@@ -2120,7 +2172,7 @@ function renderChain(d) {
   row(16, 'Peak thrust ref / motor','T_p','T_h \xd7 K_T',    fG(d.T_peak_per_motor));
 
   if (d.hover) {
-    ph('MOTOR — INTERPOLATED AT T_hover (thrust \u2192 current \u2192 power)');
+    ph('MOTOR: INTERPOLATED AT T_hover (thrust \u2192 current \u2192 power)');
     row(17, 'I per motor at hover', 'I_h',  'interp(T_h, I)',  fA(d.I_hover_motor) + (d.hover.extrapolated?' \u26a0':''));
     row(18, 'V at hover (bench)',   'V_h',  'interp(T_h, V)',  d.V_hover_motor ? d.V_hover_motor.toFixed(2)+' V' : '—');
     row(19, 'P per motor = V\xd7I', 'P_m',  'V_h \xd7 I_h',   d.P_hover_motor ? fW(d.P_hover_motor) : '—', 'kr');
@@ -2131,7 +2183,7 @@ function renderChain(d) {
   }
 
   if (d.I_peak_motor !== null) {
-    ph('PEAK CURRENT — FROM 100% THROTTLE ROW (motor spec)');
+    ph('PEAK CURRENT: FROM 100% THROTTLE ROW (motor spec)');
     row(24, 'I per motor at 100%', 'I_pk1','DB row, 100% thr', fA(d.I_peak_motor));
     row(25, 'Total peak current',  'I_pk', 'I_pk1 \xd7 N',     fA(d.I_peak_total), 'kr');
   }
@@ -2220,8 +2272,8 @@ function renderChecks(d) {
   const add = (lbl, dot, badge, det) => checks.push({lbl, dot, badge, det});
 
   // Battery weight
-  if (!d.batt) add('Battery selected', 'info', 'info', 'No battery selected — using placeholder mass');
-  else if (!d.battHasWt) add('Battery weight in DB', 'warn', 'warn', `SKU ${d.batt.sku} — no weight, MTOW locked to placeholder`);
+  if (!d.batt) add('Battery selected', 'info', 'info', 'No battery selected: using placeholder mass');
+  else if (!d.battHasWt) add('Battery weight in DB', 'warn', 'warn', `SKU ${d.batt.sku}: no weight, MTOW locked to placeholder`);
   else add('Battery weight in DB', 'pass', 'pass', `${d.batt.weight_g}g confirmed`);
 
   // Hover achievable
@@ -2235,53 +2287,53 @@ function renderChecks(d) {
   if (d.effPctOfPeak !== null) {
     const pct = d.effPctOfPeak;
     if (pct >= 80) add('F1: η_hover ≥ 80% of peak', 'pass', 'pass', `${fEff(d.effAtHover)} = ${pct.toFixed(1)}% of peak`);
-    else           add('F1: η_hover ≥ 80% of peak', 'fail', 'fail', `${pct.toFixed(1)}% — motor inefficient at hover thrust`);
+    else           add('F1: η_hover ≥ 80% of peak', 'fail', 'fail', `${pct.toFixed(1)}%: motor inefficient at hover thrust`);
   } else if (d.hasMotor)
     add('F1: η_hover ≥ 80% of peak', 'info', 'info', 'set MTOW to evaluate');
 
   // Factor 2: hover throttle 40–60%
   if (d.hover && d.hover.throttle !== null) {
     const thr = d.hover.throttle;
-    if (thr >= 40 && thr <= 60) add('F2: Throttle 40–60%', 'pass', 'pass', `${thr.toFixed(1)}% — good operating range`);
-    else if (thr < 40)          add('F2: Throttle 40–60%', 'warn', 'warn', `${thr.toFixed(1)}% — below 40%, motor overspec for this MTOW`);
-    else if (thr <= 70)         add('F2: Throttle 40–60%', 'warn', 'warn', `${thr.toFixed(1)}% — above 60%, limited headroom`);
-    else                        add('F2: Throttle 40–60%', 'fail', 'fail', `${thr.toFixed(1)}% — dangerously high hover throttle`);
+    if (thr >= 40 && thr <= 60) add('F2: Throttle 40–60%', 'pass', 'pass', `${thr.toFixed(1)}%: good operating range`);
+    else if (thr < 40)          add('F2: Throttle 40–60%', 'warn', 'warn', `${thr.toFixed(1)}%: below 40%, motor overspec for this MTOW`);
+    else if (thr <= 70)         add('F2: Throttle 40–60%', 'warn', 'warn', `${thr.toFixed(1)}%: above 60%, limited headroom`);
+    else                        add('F2: Throttle 40–60%', 'fail', 'fail', `${thr.toFixed(1)}%: dangerously high hover throttle`);
   } else if (d.hasMotor) add('F2: Throttle 40–60%', 'info', 'info', 'need MTOW');
 
   // Factor 3: I_hover / I_max = 0.2–0.4
   if (d.I_hover_motor && d.I_peak_motor) {
     const iRat = d.I_hover_motor / d.I_peak_motor;
     if (iRat >= 0.2 && iRat <= 0.4) add('F3: I_hover/I_max 0.2–0.4', 'pass', 'pass', `${(iRat*100).toFixed(1)}% (${fA(d.I_hover_motor)} / ${fA(d.I_peak_motor)})`);
-    else if (iRat < 0.2)             add('F3: I_hover/I_max 0.2–0.4', 'warn', 'warn', `${(iRat*100).toFixed(1)}% — motor very underloaded`);
-    else                             add('F3: I_hover/I_max 0.2–0.4', 'warn', 'warn', `${(iRat*100).toFixed(1)}% — motor heavily loaded at hover`);
+    else if (iRat < 0.2)             add('F3: I_hover/I_max 0.2–0.4', 'warn', 'warn', `${(iRat*100).toFixed(1)}%: motor very underloaded`);
+    else                             add('F3: I_hover/I_max 0.2–0.4', 'warn', 'warn', `${(iRat*100).toFixed(1)}%: motor heavily loaded at hover`);
   } else if (d.hasMotor) add('F3: I_hover/I_max 0.2–0.4', 'info', 'info', 'need MTOW');
 
   // T/W
   if (d.tw !== null) {
     if (d.tw >= 2.0) add('T/W ≥ 2.0', 'pass', 'pass', `${f(d.tw,2)}:1`);
-    else if (d.tw >= 1.5) add('T/W ≥ 2.0', 'warn', 'warn', `${f(d.tw,2)}:1 — marginal`);
-    else add('T/W ≥ 2.0', 'fail', 'fail', `${f(d.tw,2)}:1 — insufficient`);
+    else if (d.tw >= 1.5) add('T/W ≥ 2.0', 'warn', 'warn', `${f(d.tw,2)}:1: marginal`);
+    else add('T/W ≥ 2.0', 'fail', 'fail', `${f(d.tw,2)}:1: insufficient`);
   } else add('T/W ratio', 'info', 'info', 'need motor + MTOW');
 
   // Voltage match
   if (selMotor && d.batt && d.propTestV) {
     const diff = Math.abs(d.propTestV - d.batt.voltage_v) / d.batt.voltage_v * 100;
     if (diff <= 10) add('Voltage match', 'pass', 'pass', `Prop tested at ${d.propTestV.toFixed(1)}V · Battery ${d.batt.voltage_v}V`);
-    else if (diff <= 20) add('Voltage match', 'warn', 'warn', `${diff.toFixed(0)}% diff — prop at ${d.propTestV.toFixed(1)}V · data may not match`);
-    else add('Voltage match', 'fail', 'fail', `${diff.toFixed(0)}% diff — prop at ${d.propTestV.toFixed(1)}V vs battery ${d.batt.voltage_v}V`);
+    else if (diff <= 20) add('Voltage match', 'warn', 'warn', `${diff.toFixed(0)}% diff: prop at ${d.propTestV.toFixed(1)}V · data may not match`);
+    else add('Voltage match', 'fail', 'fail', `${diff.toFixed(0)}% diff: prop at ${d.propTestV.toFixed(1)}V vs battery ${d.batt.voltage_v}V`);
   }
 
   // Ah sufficient
   if (d.req_Ah && d.battAh) {
     if (d.battAh >= d.req_Ah) add('Battery Ah sufficient', 'pass', 'pass', `${fAh(d.battAh)} ≥ ${fAh(d.req_Ah)} required`);
     else add('Battery Ah sufficient', 'fail', 'fail', `${fAh(d.battAh)} < ${fAh(d.req_Ah)} required`);
-  } else if (d.req_Ah) add('Battery Ah', 'info', 'info', `Need ${fAh(d.req_Ah)} — select battery`);
+  } else if (d.req_Ah) add('Battery Ah', 'info', 'info', `Need ${fAh(d.req_Ah)}: select battery`);
 
   // Current margin
   if (d.cm !== null) {
-    if (d.cm >= 1.5) add('Current margin ≥ 1.5×', 'pass', 'pass', `${f(d.cm,2)}× — I_max ${fA(d.I_max_batt)} / I_peak ${fA(d.I_peak_total)}`);
-    else if (d.cm >= 1.2) add('Current margin ≥ 1.5×', 'warn', 'warn', `${f(d.cm,2)}× — marginal`);
-    else add('Current margin ≥ 1.5×', 'fail', 'fail', `${f(d.cm,2)}× — battery may overheat`);
+    if (d.cm >= 1.5) add('Current margin ≥ 1.5×', 'pass', 'pass', `${f(d.cm,2)}×: I_max ${fA(d.I_max_batt)} / I_peak ${fA(d.I_peak_total)}`);
+    else if (d.cm >= 1.2) add('Current margin ≥ 1.5×', 'warn', 'warn', `${f(d.cm,2)}×: marginal`);
+    else add('Current margin ≥ 1.5×', 'fail', 'fail', `${f(d.cm,2)}×: battery may overheat`);
   }
 
   // Flight time
@@ -2289,15 +2341,15 @@ function renderChecks(d) {
     const r = d.flightTime / d.t_min;
     if (r >= 1.0) add('Flight time vs target', 'pass', 'pass', `${fMin(d.flightTime)} ≥ ${d.t_min} min`);
     else if (r >= 0.8) add('Flight time vs target', 'warn', 'warn', `${fMin(d.flightTime)} vs ${d.t_min} min`);
-    else add('Flight time vs target', 'fail', 'fail', `${fMin(d.flightTime)} — battery too small`);
+    else add('Flight time vs target', 'fail', 'fail', `${fMin(d.flightTime)}: battery too small`);
   } else add('Flight time', 'info', 'info', 'need motor + battery');
 
   // Air density
   if (d.AIR >= 1.0) add('Air density', 'pass', 'pass', `ρ = ${f(d.AIR,4)} kg/m³`);
-  else if (d.AIR >= 0.9) add('Air density', 'warn', 'warn', `ρ = ${f(d.AIR,4)} — high altitude`);
-  else add('Air density', 'fail', 'fail', `ρ = ${f(d.AIR,4)} — very thin air`);
+  else if (d.AIR >= 0.9) add('Air density', 'warn', 'warn', `ρ = ${f(d.AIR,4)}: high altitude`);
+  else add('Air density', 'fail', 'fail', `ρ = ${f(d.AIR,4)}: very thin air`);
 
-  if (d.hover?.extrapolated) add('Data extrapolation', 'warn', 'warn', 'Hover thrust outside DB range — extrapolated');
+  if (d.hover?.extrapolated) add('Data extrapolation', 'warn', 'warn', 'Hover thrust outside DB range: extrapolated');
 
   list.innerHTML = checks.map(c => `
     <div class="chk">
@@ -2340,7 +2392,7 @@ function frameTopHTML(d, gap, g) {
 function frameSVG(d, g) {
   // Draw to real proportions at 1:10 (SVG user unit = 1 mm; physical width in mm = span/10).
   // Prop-circle radius is the TRUE prop size and stays fixed; clearance spreads the motors
-  // apart, so the DIAGONAL grows — not the circle diameter.
+  // apart, so the DIAGONAL grows: not the circle diameter.
   const armR  = g.arm;          // mm, motor distance from centre (= diagonal / 2)
   const propR = g.propDia / 2;  // mm, prop radius (constant vs clearance)
   const reach = armR + propR;   // mm, centre → prop tip
@@ -2393,7 +2445,7 @@ function renderFrame(d) {
     document.getElementById('frame-top').innerHTML = frameTopHTML(d, frameGap, g);
     document.getElementById('frame-diagram').innerHTML = frameSVG(d, g);
   };
-  sl.addEventListener('input', draw);   // updates diagram only — slider is never rebuilt
+  sl.addEventListener('input', draw);   // updates diagram only: slider is never rebuilt
   draw();
 }
 
@@ -2469,7 +2521,7 @@ function renderKPI(d) {
 }
 
 // ══════════════════════════════════════════════════════════
-// ELECTRONICS TAB (stub — populated in step 2)
+// ELECTRONICS TAB (stub: populated in step 2)
 // ══════════════════════════════════════════════════════════
 function renderElec(d) {
   const area = document.getElementById('elec-content');
@@ -2582,7 +2634,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('export-btn').addEventListener('click', exportBuild);
 
-  // Global prop filter — re-populates motor list when changed
+  // Global prop filter: re-populates motor list when changed
   document.getElementById('s-prop-global').addEventListener('change', () => {
     selMotor = null; selProp = null;
     document.getElementById('prop-group').style.display = 'none';
