@@ -26,52 +26,60 @@
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap');
 
   /* ─── LIGHT (default) ─── */
   :root {
-    --bg: #F1F0ED;           /* soft grey page background */
-    --panel: #ffffff;
-    --panel2: #fafafa;
-    --border: #E0E0E0;       /* borders / dividers */
-    --border2: #E0E0E0;
-    --accent: #1A1A1A;
+    --bg: #F1F0ED;           /* page */
+    --panel: #FFFFFF;        /* card */
+    --panel2: #FAF9F6;
+    --border: #E7E4DF;       /* line */
+    --border2: #E0DDD7;      /* grid2 */
+    --line2: #F2F0EC;
+    --accent: #16181A;       /* ink (primary action) */
     --accent-hover: #000000;
-    --on-accent: #ffffff;    /* text on accent surfaces */
-    --green: #6FA81E;        /* good  (muted) */
-    --warn:  #FF6100;        /* medium */
-    --danger:#FF001E;        /* bad    */
-    --phase: #0AA69A;        /* legible teal */
-    --text: #1A1A1A;         /* primary text */
-    --muted: #666666;        /* secondary text */
-    --sunken: #F5F5F5;
-    --card-border: #E0E0E0;
+    --on-accent: #FFFFFF;
+    --green: #2E9E63;        /* good */
+    --warn:  #B8801A;        /* med */
+    --danger:#BE4230;        /* bad */
+    --phase: #0E8F86;
+    --text: #16181A;         /* ink */
+    --body: #55534E;
+    --muted: #6E6C66;        /* mut */
+    --dim: #7E7B74;
+    --sunken: #FAF9F6;
+    --card-border: #E7E4DF;
     /* box-coloring tints (colour the box, not the text) */
     --good-bg: rgba(111,168,30,0.12);
     --warn-bg: rgba(255,97,0,0.10);
     --bad-bg:  rgba(255,0,30,0.08);
     --info-bg: rgba(26,26,26,0.07);
     --phase-bg: rgba(10,166,154,0.10);
-    --mono: 'Inter', ui-monospace, monospace;
-    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'Spline Sans Mono', ui-monospace, monospace;
+    --sans: 'Instrument Sans', system-ui, sans-serif;
   }
 
   /* ─── DARK ─── */
   :root[data-theme="dark"] {
-    --bg: #0d0d0d;
-    --panel: #161616;
-    --panel2: #1e1e1e;
-    --border: rgba(255,255,255,0.12);
-    --border2: rgba(255,255,255,0.16);
-    --accent: #f2f2f2;         /* neutral primary in dark */
+    --bg: #101215;
+    --panel: #1B1E22;
+    --panel2: #23272B;
+    --border: #2C3035;
+    --border2: #343A3F;
+    --line2: #23272B;
+    --accent: #F2F1EE;
     --accent-hover: #ffffff;
-    --on-accent: #0d0d0d;
-    --green: #7CB82A;
-    --phase: #00FFE1;
-    --text: #ffffff;
-    --muted: rgba(255,255,255,0.5);
-    --sunken: rgba(255,255,255,0.04);
-    --card-border: rgba(255,255,255,0.12);
+    --on-accent: #16181A;
+    --green: #5BC58C;
+    --warn: #D6A63A;
+    --danger: #E0715C;
+    --phase: #4FC7BC;
+    --text: #F2F1EE;
+    --body: #C6C3BD;
+    --muted: #96938C;
+    --dim: #8A867F;
+    --sunken: #23272B;
+    --card-border: #2C3035;
     --good-bg: rgba(124,184,42,0.16);
     --warn-bg: rgba(255,97,0,0.16);
     --bad-bg:  rgba(255,0,30,0.15);
@@ -80,20 +88,25 @@
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
-      --bg: #0d0d0d;
-      --panel: #161616;
-      --panel2: #1e1e1e;
-      --border: rgba(255,255,255,0.12);
-      --border2: rgba(255,255,255,0.16);
-      --accent: #f2f2f2;
+      --bg: #101215;
+      --panel: #1B1E22;
+      --panel2: #23272B;
+      --border: #2C3035;
+      --border2: #343A3F;
+      --line2: #23272B;
+      --accent: #F2F1EE;
       --accent-hover: #ffffff;
-      --on-accent: #0d0d0d;
-      --green: #7CB82A;
-      --phase: #00FFE1;
-      --text: #ffffff;
-      --muted: rgba(255,255,255,0.5);
-      --sunken: rgba(255,255,255,0.04);
-      --card-border: rgba(255,255,255,0.12);
+      --on-accent: #16181A;
+      --green: #5BC58C;
+      --warn: #D6A63A;
+      --danger: #E0715C;
+      --phase: #4FC7BC;
+      --text: #F2F1EE;
+      --body: #C6C3BD;
+      --muted: #96938C;
+      --dim: #8A867F;
+      --sunken: #23272B;
+      --card-border: #2C3035;
       --good-bg: rgba(124,184,42,0.16);
       --warn-bg: rgba(255,97,0,0.16);
       --bad-bg:  rgba(255,0,30,0.15);
@@ -245,12 +258,16 @@
   .iv { font-family: var(--mono); font-size: 11px; color: var(--green); font-weight: 600; }
 
   input[type=range] {
-    width: 100%; height: 3px; -webkit-appearance: none;
-    background: var(--border2); border-radius: 2px; outline: none; cursor: pointer;
+    width: 100%; height: 4px; -webkit-appearance: none; appearance: none;
+    background: var(--sunken); border-radius: 2px; outline: none; cursor: pointer;
   }
   input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none; width: 11px; height: 11px;
-    background: var(--accent); border-radius: 50%; cursor: pointer;
+    -webkit-appearance: none; width: 13px; height: 13px;
+    background: var(--panel); border: 1.5px solid var(--accent); border-radius: 50%; cursor: pointer;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 13px; height: 13px;
+    background: var(--panel); border: 1.5px solid var(--accent); border-radius: 50%; cursor: pointer;
   }
 
   select {
@@ -844,6 +861,57 @@
     font-family: Georgia, 'Times New Roman', serif; font-style: italic; color: var(--muted);
   }
   #card-tip .ct-calc b { font-style: normal; font-family: var(--sans); color: var(--muted); }
+  /* ═══ COMP OVERVIEW ═══ */
+  .results-col .col-body { overflow-y: auto; overflow-x: hidden; }
+  #tab-overview.active { display: flex; gap: 12px; align-items: flex-start; }
+  .ov-left { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+  .ov-right { flex: 0 0 268px; display: flex; flex-direction: column; gap: 10px; }
+  .ov-row { display: flex; gap: 12px; }
+  .ov-row > .ov-card { flex: 1 1 0; min-width: 0; }
+  .ov-card { background: var(--panel); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+  .ov-h { font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: -0.005em; }
+  .ov-h-row { display: flex; align-items: baseline; gap: 9px; }
+  .ov-mut { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .ov-u { font-size: 11px; color: var(--muted); }
+  .ov-big { font-family: var(--mono); font-size: 34px; letter-spacing: -0.04em; line-height: 1; color: var(--text); }
+  .ov-big2 { font-family: var(--mono); font-size: 24px; letter-spacing: -0.04em; line-height: 1; color: var(--text); white-space: nowrap; }
+  .ov-mid { font-family: var(--mono); font-size: 16px; line-height: 1; color: var(--text); }
+  .ov-mass { flex-direction: row; align-items: center; gap: 12px; min-height: 150px; }
+  .ov-mass-info { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .ov-legend { display: flex; flex-direction: column; gap: 5px; }
+  .ov-leg { display: flex; align-items: center; gap: 7px; font-size: 11.5px; color: var(--body); white-space: nowrap; }
+  .ov-leg .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .ov-leg .lead { flex: 1; min-width: 10px; border-bottom: 1px dotted var(--border2); transform: translateY(-3px); }
+  .ov-leg .g { font-family: var(--mono); font-size: 11px; flex-shrink: 0; color: var(--text); }
+  .ov-donut-wrap { position: relative; width: 150px; height: 150px; margin-left: auto; flex-shrink: 0; }
+  .ov-donut-wrap svg { width: 100%; height: 100%; display: block; }
+  .ov-donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
+  .ov-chartcard { height: 218px; }
+  .ov-chart-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .ov-thr { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+  .ov-chart { display: flex; gap: 10px; flex: 1; min-height: 0; }
+  .ov-yax { width: 30px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; font-family: var(--mono); font-size: 10px; color: var(--dim); }
+  .ov-plot { flex: 1; min-width: 0; position: relative; }
+  .ov-plot svg { width: 100%; height: 100%; display: block; }
+  .ov-marker { position: absolute; width: 9px; height: 9px; border-radius: 50%; border: 2px solid var(--panel); transform: translate(-50%,-50%); }
+  .ov-vline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--border2); }
+  .ov-sweet { position: absolute; top: 2px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 10px; color: var(--dim); }
+  .ov-tgt { position: absolute; right: 3px; transform: translateY(-130%); font-family: var(--mono); font-size: 10px; color: var(--dim); }
+  .ov-xax { display: flex; justify-content: space-between; padding-left: 40px; font-family: var(--mono); font-size: 10px; color: var(--dim); }
+  .ov-groups { display: flex; flex-direction: column; gap: 12px; }
+  .ov-grp-title { display: flex; align-items: baseline; gap: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line2); font-size: 11px; font-weight: 600; color: var(--body); }
+  .ov-grp-model { flex: 1; text-align: right; font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ov-cells { display: grid; grid-template-columns: repeat(auto-fit,minmax(92px,1fr)); gap: 12px 16px; margin-top: 9px; }
+  .ov-cell { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .ov-cell .lbl { font-size: 11px; color: var(--muted); line-height: 1.35; }
+  .ov-cell .val { font-family: var(--mono); font-size: 16px; letter-spacing: -0.02em; white-space: nowrap; color: var(--text); }
+  .ov-cell .u { font-size: 10px; color: var(--muted); }
+  .ov-cell .delta { font-size: 10px; }
+  .ov-checkscard { padding: 14px 0; }
+  .ov-checkscard .ov-h-row { padding: 0 16px; }
+  .ov-cta { background: var(--accent); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; }
+  .ov-cta-h { font-size: 13px; font-weight: 600; color: var(--on-accent); }
+  .ov-cta-p { font-size: 11.5px; line-height: 1.5; color: var(--on-accent); opacity: 0.72; }
 </style>
 </head>
 <body>
@@ -861,16 +929,13 @@
   <div class="col sidebar-col">
     <div class="brand">
       <div class="logo" aria-label="Drone Optimiser logo">
-        <svg viewBox="0 0 1000 1000" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g clip-path="url(#logoclip)">
-            <rect width="1000" height="1000" fill="#0D0D0D"/>
-            <g id="logo-ring"><circle cx="293.5" cy="293.5" r="177.5" stroke="white" stroke-width="20"/></g>
-            <use xlink:href="#logo-ring" transform="translate(412.5)"/>
-            <use xlink:href="#logo-ring" transform="translate(0 412.5)"/>
-            <use xlink:href="#logo-ring" transform="translate(412.5 412.5)"/>
-            <path d="M741.238 694.44C760.105 724.96 724.961 760.105 694.44 741.238L517.878 632.094C506.922 625.321 493.079 625.321 482.123 632.094L305.561 741.238C275.04 760.104 239.896 724.96 258.762 694.44L367.907 517.878C374.679 506.921 374.679 493.079 367.907 482.122L258.762 305.56C239.896 275.04 275.04 239.896 305.56 258.762L482.123 367.906C493.079 374.679 506.922 374.679 517.878 367.906L694.44 258.762C724.961 239.896 760.105 275.04 741.238 305.56L632.094 482.122C625.321 493.079 625.321 506.921 632.094 517.878L741.238 694.44Z" fill="#00FFE1"/>
-          </g>
-          <defs><clipPath id="logoclip"><rect width="1000" height="1000" fill="white"/></clipPath></defs>
+        <svg viewBox="0 0 300 300" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="300" rx="20" fill="#0D0D0D"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M97.6191 154.762C123.918 154.762 145.238 176.082 145.238 202.381C145.238 228.68 123.918 250 97.6191 250C71.3198 250 50 228.68 50 202.381C50 176.082 71.3198 154.762 97.6191 154.762ZM97.6191 164.921C76.9303 164.921 60.1587 181.692 60.1587 202.381C60.1587 223.07 76.9303 239.841 97.6191 239.841C118.308 239.841 135.079 223.07 135.079 202.381C135.079 181.692 118.308 164.921 97.6191 164.921Z" fill="white"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M202.381 154.762C228.68 154.762 250 176.082 250 202.381C250 228.68 228.68 250 202.381 250C176.082 250 154.762 228.68 154.762 202.381C154.762 176.082 176.082 154.762 202.381 154.762ZM202.381 164.921C181.692 164.921 164.921 181.692 164.921 202.381C164.921 223.07 181.692 239.841 202.381 239.841C223.07 239.841 239.841 223.07 239.841 202.381C239.841 181.692 223.07 164.921 202.381 164.921Z" fill="white"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M97.6191 50C123.918 50 145.238 71.3198 145.238 97.6191C145.238 123.918 123.918 145.238 97.6191 145.238C71.3198 145.238 50 123.918 50 97.6191C50 71.3198 71.3198 50 97.6191 50ZM97.6191 60.1587C76.9303 60.1587 60.1587 76.9303 60.1587 97.6191C60.1587 118.308 76.9303 135.079 97.6191 135.079C118.308 135.079 135.079 118.308 135.079 97.6191C135.079 76.9303 118.308 60.1587 97.6191 60.1587Z" fill="white"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M202.381 50C228.68 50 250 71.3198 250 97.6191C250 123.918 228.68 145.238 202.381 145.238C176.082 145.238 154.762 123.918 154.762 97.6191C154.762 71.3198 176.082 50 202.381 50ZM202.381 60.1587C181.692 60.1587 164.921 76.9303 164.921 97.6191C164.921 118.308 181.692 135.079 202.381 135.079C223.07 135.079 239.841 118.308 239.841 97.6191C239.841 76.9303 223.07 60.1587 202.381 60.1587Z" fill="white"/>
+          <path d="M198.945 191.106C202.959 196.294 196.295 202.959 191.107 198.944L153.483 169.834C151.47 168.276 148.658 168.276 146.645 169.834L109.021 198.944C103.833 202.959 97.1691 196.294 101.183 191.106L130.294 153.483C131.851 151.469 131.851 148.658 130.294 146.644L101.183 109.021C97.1691 103.833 103.833 97.1686 109.021 101.183L146.645 130.293C148.658 131.851 151.47 131.851 153.483 130.293L191.107 101.183C196.295 97.1686 202.959 103.833 198.945 109.021L169.835 146.644C168.277 148.658 168.277 151.469 169.835 153.483L198.945 191.106Z" fill="white"/>
         </svg>
       </div>
       <span class="brand-name">Drone Optimiser</span>
@@ -1039,19 +1104,53 @@
       </div>
       <div class="col-body">
 
-        <!-- OVERVIEW: performance + layout + checks -->
+        <!-- OVERVIEW: donut + curves + benchmarks/selection | layout + checks -->
         <div class="tab-pane active" id="tab-overview">
-          <div class="area-card">
-            <div class="area-title">Performance</div>
-            <div id="mid-body"><div class="empty">Set MTOW to generate benchmarks</div></div>
+          <div class="ov-left">
+            <!-- take-off mass -->
+            <div class="ov-card ov-mass">
+              <div class="ov-mass-info">
+                <div class="ov-h">Take-off mass</div>
+                <div id="ov-donut-legend" class="ov-legend"></div>
+              </div>
+              <div class="ov-donut-wrap">
+                <svg id="ov-donut" viewBox="0 0 140 140"></svg>
+                <div class="ov-donut-center"><span id="ov-mtow" class="ov-big">—</span><span class="ov-u">kg</span></div>
+              </div>
+            </div>
+            <!-- curves -->
+            <div class="ov-row">
+              <div class="ov-card ov-chartcard">
+                <div class="ov-chart-head">
+                  <div><div class="ov-h">Motor efficiency</div><div id="ov-eff-val" class="ov-big2">—</div></div>
+                  <div class="ov-thr"><span class="ov-u">throttle</span><div id="ov-thr-val" class="ov-mid">—</div></div>
+                </div>
+                <div class="ov-chart"><div class="ov-yax" id="ov-eff-ticks"></div>
+                  <div class="ov-plot"><svg id="ov-eff" viewBox="0 0 100 100" preserveAspectRatio="none"></svg><span class="ov-sweet">sweet spot</span></div></div>
+                <div class="ov-xax"><span>0</span><span>25</span><span>50</span><span>75</span><span>100%</span></div>
+              </div>
+              <div class="ov-card ov-chartcard">
+                <div class="ov-chart-head"><div><div class="ov-h">Flight time</div><div id="ov-ft-val" class="ov-big2">—</div></div></div>
+                <div class="ov-chart"><div class="ov-yax" id="ov-ft-ticks"></div>
+                  <div class="ov-plot"><svg id="ov-ft" viewBox="0 0 100 100" preserveAspectRatio="none"></svg></div></div>
+                <div class="ov-xax" id="ov-ft-xax"></div>
+              </div>
+            </div>
+            <!-- benchmarks + selection -->
+            <div class="ov-row">
+              <div class="ov-card"><div class="ov-h">Benchmarks</div><div id="ov-bench" class="ov-groups"></div></div>
+              <div class="ov-card"><div class="ov-h">Selection</div><div id="ov-sel" class="ov-groups"></div></div>
+            </div>
           </div>
-          <div class="area-card">
-            <div class="area-title">Layout</div>
-            <div id="frame-content"><div class="empty">Select a motor + prop to calculate frame dimensions</div></div>
-          </div>
-          <div class="area-card">
-            <div class="area-title">Checks</div>
-            <div class="chk-list" id="checks-list"><div class="empty">Select motor + battery to run checks</div></div>
+          <div class="ov-right">
+            <div class="ov-card"><div class="ov-h-row"><span class="ov-h">Layout</span><span id="ov-frame-cls" class="ov-mut"></span></div>
+              <div id="frame-content"><div class="empty">Select a motor + prop</div></div></div>
+            <div class="ov-card ov-checkscard"><div class="ov-h-row"><span class="ov-h">Checks</span><span id="ov-checks-count" class="ov-mut"></span></div>
+              <div class="chk-list" id="checks-list"><div class="empty">Select motor + battery</div></div></div>
+            <a class="ov-cta" href="https://form.typeform.com/to/ciDWV9CU" target="_blank" rel="noopener" data-cta="overview-cta">
+              <span class="ov-cta-h">Help grow the database</span>
+              <span class="ov-cta-p">Add motor or battery bench data and every build gets better for everyone.</span>
+            </a>
           </div>
         </div>
 
@@ -1973,6 +2072,153 @@ function autoAlerts(d) {
   return A.join('');
 }
 
+// ══════════════════════════════════════════════════════════
+// OVERVIEW (comp design): donut + curves + benchmarks/selection
+// ══════════════════════════════════════════════════════════
+function ovSmooth(pts) {
+  if (pts.length < 2) return '';
+  let s = 'M' + pts[0][0].toFixed(2) + ' ' + pts[0][1].toFixed(2);
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i > 0 ? i - 1 : 0], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+    const c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = p1[1] + (p2[1] - p0[1]) / 6;
+    const c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = p2[1] - (p3[1] - p1[1]) / 6;
+    s += ' C' + c1x.toFixed(2) + ' ' + c1y.toFixed(2) + ',' + c2x.toFixed(2) + ' ' + c2y.toFixed(2) + ',' + p2[0].toFixed(2) + ' ' + p2[1].toFixed(2);
+  }
+  return s;
+}
+function flightAtMass(d, mtow) {
+  if (!d.propDataOk || !selMotor || !selProp || !d.battEnergy) return null;
+  const pd = MOTOR_DB[selMotor].data.filter(r => r.prop === selProp);
+  const maxT = Math.max(...pd.map(r => r.thrust_g));
+  const Th = mtow / 4;
+  if (Th > maxT * 1.1) return null;
+  const h = interp(pd, Th);
+  if (!h) return null;
+  const P = 4 * h.voltage_v * h.current_a;
+  if (!(P > 0)) return null;
+  return (d.battEnergy / P) * d.eta_total * 60;
+}
+function renderOverview(d) {
+  const $ = id => document.getElementById(id);
+  if (!$('ov-donut')) return;
+  const fit = t => t === 'good' ? 'var(--green)' : t === 'med' ? 'var(--warn)' : t === 'bad' ? 'var(--danger)' : 'var(--text)';
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark'
+    || (!document.documentElement.getAttribute('data-theme') && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+  const nn = (v, dp) => (v == null || isNaN(v)) ? '—' : (+v).toFixed(dp);
+  const sign = v => (parseFloat(v) >= 0 ? '+' : '') + v;
+
+  // ── donut (mass groups) ──
+  const groups = [
+    ['Structure', d.m_struct + d.m_misc],
+    ['Propulsion', d.m_motors + d.m_esc],
+    ['Avionics', d.m_av + d.m_cam],
+    ['Payload', d.m_payload],
+    [d.using_placeholder ? 'Battery · est.' : 'Battery', d.m_batt_used]
+  ].filter(g => g[1] > 0);
+  const shade = dark ? ['#F2F1EE', '#B9B5AC', '#8B887F', '#565B60', '#3D4247'] : ['#16181A', '#4E5049', '#8B887F', '#B9B5AC', '#DCD8D0'];
+  const total = d.MTOW || 1, r = 58, CIRC = 2 * Math.PI * r, GAP = 4, SW = 11, MIN = 18;
+  const need = groups.map(g => Math.max((g[1] / total) * CIRC, MIN));
+  const scale = CIRC / (need.reduce((a, b) => a + b, 0) || 1);
+  let cum = 0, segs = '', legend = '';
+  groups.forEach((g, i) => {
+    const len = need[i] * scale, o = -cum; cum += len;
+    const dash = Math.max(len - GAP - SW, 0.4), round = (len - GAP - SW) > 0.4, col = shade[i % shade.length];
+    segs += `<circle cx="70" cy="70" r="${r}" fill="none" stroke="${col}" stroke-width="${SW}" stroke-linecap="${round ? 'round' : 'butt'}" stroke-dasharray="${dash.toFixed(2)} ${(CIRC - dash).toFixed(2)}" stroke-dashoffset="${(o - GAP / 2 - (round ? SW / 2 : 0)).toFixed(2)}" transform="rotate(-90 70 70)"></circle>`;
+    legend += `<div class="ov-leg"><span class="dot" style="background:${col}"></span><span>${g[0]}</span><span class="lead"></span><span class="g">${Math.round(g[1])} g</span></div>`;
+  });
+  $('ov-donut').innerHTML = segs;
+  $('ov-donut-legend').innerHTML = legend;
+  $('ov-mtow').textContent = (d.MTOW / 1000).toFixed(2);
+
+  // ── efficiency curve (bench: efficiency vs throttle) ──
+  const pd = (d.propDataOk && selMotor && selProp) ? MOTOR_DB[selMotor].data.filter(x => x.prop === selProp) : [];
+  const byThr = {};
+  pd.forEach(x => { if (x.throttle != null && x.efficiency != null) (byThr[x.throttle] = byThr[x.throttle] || []).push(x.efficiency); });
+  const ep = Object.keys(byThr).map(k => [+k, byThr[k].reduce((a, b) => a + b, 0) / byThr[k].length]).sort((a, b) => a[0] - b[0]);
+  const effTop = (d.peakEfficiency || 1) * 1.15;
+  const eY = v => 100 - Math.max(0, Math.min(v / effTop, 1)) * 100;
+  const effPath = ep.length ? ovSmooth(ep.map(q => [q[0], eY(q[1])])) : '';
+  const gl = (x1, y1, x2, y2, c, dash) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${dash ? 0.8 : 0.6}"${dash ? ' stroke-dasharray="3 3"' : ''} vector-effect="non-scaling-stroke"/>`;
+  $('ov-eff').innerHTML =
+    gl(0, 0, 100, 0, 'var(--border2)') + gl(0, 33.3, 100, 33.3, 'var(--border2)') + gl(0, 66.6, 100, 66.6, 'var(--border2)') + gl(0, 100, 100, 100, 'var(--border2)') +
+    gl(40, 0, 40, 100, 'var(--dim)', 1) + gl(60, 0, 60, 100, 'var(--dim)', 1) +
+    (effPath ? `<path d="${effPath}" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>` : '');
+  $('ov-eff-ticks').innerHTML = [effTop, effTop * 2 / 3, effTop / 3, 0].map(v => `<span>${v.toFixed(1)}</span>`).join('');
+  const effFit = d.effPctOfPeak == null ? '' : (d.effPctOfPeak >= 80 ? 'good' : d.effPctOfPeak >= 65 ? 'med' : 'bad');
+  $('ov-eff-val').innerHTML = d.effAtHover != null ? `${d.effAtHover.toFixed(2)}<span class="ov-u"> g/W at hover</span>` : '—';
+  $('ov-eff-val').style.color = fit(effFit);
+  $('ov-thr-val').innerHTML = d.hover ? `${d.hover.throttle.toFixed(0)}<span class="ov-u"> %</span>` : '—';
+  const effPlot = $('ov-eff').parentElement;
+  [...effPlot.querySelectorAll('.ov-marker,.ov-vline')].forEach(e => e.remove());
+  if (d.hover && d.effAtHover != null) {
+    const mx = Math.max(0, Math.min(d.hover.throttle, 100)), my = eY(d.effAtHover);
+    effPlot.insertAdjacentHTML('beforeend', `<span class="ov-vline" style="left:${mx.toFixed(1)}%"></span><span class="ov-marker" style="left:${mx.toFixed(1)}%;top:${my.toFixed(1)}%;background:var(--accent)"></span>`);
+  }
+
+  // ── flight-time vs take-off mass ──
+  const mtowBase = d.MTOW - d.m_payload;
+  const mtowTop = Math.min(20000, Math.max(Math.ceil(d.MTOW * 1.6 / 500) * 500, Math.ceil((mtowBase + 1500) / 500) * 500));
+  const payMax = Math.max(500, mtowTop - mtowBase);
+  const pPts = []; let lo = Infinity, hi = -Infinity;
+  const step = payMax / 30;
+  for (let g = 0; g <= payMax + 0.5; g += step) { const f = flightAtMass(d, mtowBase + g); if (f == null) continue; pPts.push([g, f]); if (f < lo) lo = f; if (f > hi) hi = f; }
+  const ftPlot = $('ov-ft').parentElement;
+  [...ftPlot.querySelectorAll('.ov-marker,.ov-vline,.ov-tgt')].forEach(e => e.remove());
+  if (pPts.length >= 2) {
+    const tgt = d.t_min;
+    const yLo = Math.max(0, Math.min(lo, tgt) * 0.92), yHi = Math.max(hi, tgt) * 1.06;
+    const pY = v => 100 - Math.max(0, Math.min((v - yLo) / ((yHi - yLo) || 1), 1)) * 100;
+    const fpath = ovSmooth(pPts.map(q => [(q[0] / payMax) * 100, pY(q[1])]));
+    const tgtY = pY(tgt);
+    $('ov-ft').innerHTML =
+      gl(0, 0, 100, 0, 'var(--border2)') + gl(0, 33.3, 100, 33.3, 'var(--border2)') + gl(0, 66.6, 100, 66.6, 'var(--border2)') + gl(0, 100, 100, 100, 'var(--border2)') +
+      gl(0, tgtY, 100, tgtY, 'var(--muted)', 1) +
+      `<path d="${fpath}" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`;
+    const ftFit = d.flightTime == null ? '' : (d.flightTime >= tgt ? 'good' : d.flightTime >= tgt * 0.8 ? 'med' : 'bad');
+    if (d.flightTime != null) {
+      const mx = Math.max(1, Math.min((d.m_payload / payMax) * 100, 99)), my = pY(d.flightTime);
+      ftPlot.insertAdjacentHTML('beforeend', `<span class="ov-vline" style="left:${mx.toFixed(1)}%"></span><span class="ov-marker" style="left:${mx.toFixed(1)}%;top:${my.toFixed(1)}%;background:${fit(ftFit)}"></span>`);
+    }
+    ftPlot.insertAdjacentHTML('beforeend', `<span class="ov-tgt" style="top:${tgtY.toFixed(1)}%">target ${tgt} min</span>`);
+    $('ov-ft-ticks').innerHTML = [yHi, yLo + (yHi - yLo) * 2 / 3, yLo + (yHi - yLo) / 3, yLo].map(v => `<span>${v.toFixed(0)}</span>`).join('');
+    $('ov-ft-xax').innerHTML = [mtowBase, mtowBase + payMax * 0.25, mtowBase + payMax * 0.5, mtowBase + payMax * 0.75, mtowTop].map(v => `<span>${(v / 1000).toFixed(1)}</span>`).join('');
+    $('ov-ft-val').innerHTML = d.flightTime != null ? `${d.flightTime.toFixed(0)}<span class="ov-u"> min at ${(d.MTOW / 1000).toFixed(2)} kg</span>` : '—';
+    $('ov-ft-val').style.color = fit(ftFit);
+  } else {
+    $('ov-ft').innerHTML = ''; $('ov-ft-val').textContent = '—'; $('ov-ft-ticks').innerHTML = ''; $('ov-ft-xax').innerHTML = '';
+  }
+
+  // ── benchmarks + selection ──
+  const cell = (lbl, val, unit, color, delta, dcolor) =>
+    `<div class="ov-cell"><span class="lbl">${lbl}</span><span class="val"${color ? ` style="color:${color}"` : ''}>${val}${unit ? `<span class="u"> ${unit}</span>` : ''}${delta ? `<span class="delta" style="color:${dcolor || 'var(--muted)'}"> ${delta}</span>` : ''}</span></div>`;
+  const grp = (title, model, cells) =>
+    `<div><div class="ov-grp-title"><span>${title}</span>${model ? `<span class="ov-grp-model">${model}</span>` : ''}</div><div class="ov-cells">${cells}</div></div>`;
+  $('ov-bench').innerHTML =
+    grp('Motor', '×4',
+      cell('Hover thrust / motor', nn(d.T_hover_per_motor, 0), 'g') +
+      cell('Peak thrust / motor', nn(d.T_peak_per_motor, 0), 'g') +
+      cell('Min thrust / weight', d.K_T.toFixed(1), ': 1')) +
+    grp('Battery', 'per pack',
+      cell('Capacity', nn(d.req_Ah, 1), 'Ah') +
+      cell('C-rating', d.req_C != null ? '≥' + Math.ceil(d.req_C) : '—', 'C') +
+      cell('Hover current', nn(d.I_hover_total, 1), 'A'));
+  const twFit = d.tw == null ? '' : (d.tw >= 2 ? 'good' : d.tw >= 1.5 ? 'med' : 'bad');
+  const ahFit = (d.battAh != null && d.req_Ah != null) ? (d.battAh >= d.req_Ah ? 'good' : d.battAh >= d.req_Ah * 0.85 ? 'med' : 'bad') : '';
+  const cFit = (d.battC != null && d.req_C != null) ? (d.battC >= d.req_C ? 'good' : 'bad') : '';
+  const cmFit = d.cm == null ? '' : (d.cm >= 1.5 ? 'good' : d.cm >= 1.2 ? 'med' : 'bad');
+  $('ov-sel').innerHTML =
+    grp('Motor performance', selMotor ? (selMotor + (selProp ? ' · ' + selProp : '')) : '—',
+      cell('Max thrust / motor', nn(d.maxThrust, 0), 'g') +
+      cell('Thrust / weight', nn(d.tw, 2), ': 1', fit(twFit), d.tw != null ? sign((d.tw - d.K_T).toFixed(2)) : '', fit(twFit)) +
+      cell('Hover current / motor', nn(d.I_hover_motor, 1), 'A')) +
+    grp('Battery performance', d.batt ? (d.batt.cells + ' · ' + d.batt.capacity_mah + 'mAh · ' + d.batt.discharge_c + 'C') : '—',
+      cell('Capacity', nn(d.battAh, 2), 'Ah', fit(ahFit), (d.battAh != null && d.req_Ah != null) ? sign((d.battAh - d.req_Ah).toFixed(1)) : '', fit(ahFit)) +
+      cell('C-rating', d.battC != null ? d.battC : '—', 'C', fit(cFit), (d.battC != null && d.req_C != null) ? sign(d.battC - Math.ceil(d.req_C)) : '', fit(cFit)) +
+      cell('Current margin', nn(d.cm, 2), '×', fit(cmFit)));
+
+  const fc = $('ov-frame-cls'); if (fc) fc.textContent = d.propInches ? ('Prop size ' + Math.round(d.propInches) + '"') : '';
+}
+
 function renderMiddle(d) {
   const body = document.getElementById('mid-body');
 
@@ -2639,7 +2885,7 @@ function update() {
   updateLabels(d);
   renderKPI(d);
   renderEffZone(d);
-  renderMiddle(d);
+  renderOverview(d);
   renderChain(d);
   renderMotorDetail(d);
   renderChecks(d);
