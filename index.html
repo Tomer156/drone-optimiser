@@ -131,11 +131,11 @@
   }
   .logo {
     width: 26px; height: 26px;
-    background: var(--accent);
-    border-radius: 4px;
+    border-radius: 4px; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px; flex-shrink: 0; color: var(--on-accent); font-weight: 700;
+    flex-shrink: 0;
   }
+  .logo svg { display: block; }
   header h1 { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
   header p  { font-size: 10px; color: var(--muted); font-family: var(--mono); margin-top: 1px; }
 
@@ -813,7 +813,19 @@
 </div>
 
 <header>
-  <div class="logo"><i class="ph-bold ph-drone"></i></div>
+  <div class="logo" aria-label="Drone Optimiser logo">
+    <svg viewBox="0 0 1000 1000" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g clip-path="url(#logoclip)">
+        <rect width="1000" height="1000" fill="#0D0D0D"/>
+        <g id="logo-ring"><circle cx="293.5" cy="293.5" r="177.5" stroke="white" stroke-width="20"/></g>
+        <use xlink:href="#logo-ring" transform="translate(412.5)"/>
+        <use xlink:href="#logo-ring" transform="translate(0 412.5)"/>
+        <use xlink:href="#logo-ring" transform="translate(412.5 412.5)"/>
+        <path d="M741.238 694.44C760.105 724.96 724.961 760.105 694.44 741.238L517.878 632.094C506.922 625.321 493.079 625.321 482.123 632.094L305.561 741.238C275.04 760.104 239.896 724.96 258.762 694.44L367.907 517.878C374.679 506.921 374.679 493.079 367.907 482.122L258.762 305.56C239.896 275.04 275.04 239.896 305.56 258.762L482.123 367.906C493.079 374.679 506.922 374.679 517.878 367.906L694.44 258.762C724.961 239.896 760.105 275.04 741.238 305.56L632.094 482.122C625.321 493.079 625.321 506.921 632.094 517.878L741.238 694.44Z" fill="#00FFE1"/>
+      </g>
+      <defs><clipPath id="logoclip"><rect width="1000" height="1000" fill="white"/></clipPath></defs>
+    </svg>
+  </div>
   <div>
     <h1>Drone Optimiser</h1>
     <p>Bench data · Efficiency-driven motor matching · Iterative battery selection</p>
