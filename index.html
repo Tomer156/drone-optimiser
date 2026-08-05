@@ -30,7 +30,7 @@
 
   /* ─── LIGHT (default) ─── */
   :root {
-    --bg: #ffffff;
+    --bg: #F1F0ED;           /* soft grey page background */
     --panel: #ffffff;
     --panel2: #fafafa;
     --border: #E0E0E0;       /* borders / dividers */
@@ -189,43 +189,38 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border-right: 1px solid var(--border);
   }
-  .col:last-child { border-right: none; }
+  .sidebar-col { background: var(--panel); border-right: 1px solid var(--border); }
+  .results-col { background: var(--bg); }
 
-  .col-hdr {
-    padding: 7px 14px;
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #ffffff;
+  /* ─── SIDEBAR BRAND (logo + product name) ─── */
+  .brand {
+    display: flex; align-items: center; gap: 9px;
+    padding: 12px 14px;
     border-bottom: 1px solid var(--border);
-    background: #1A1A1A;
     flex-shrink: 0;
-    display: flex; align-items: center; gap: 6px;
   }
-  .col-hdr .hdr-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .brand .brand-name { font-size: 13px; font-weight: 700; letter-spacing: -0.01em; }
 
   .col-body { overflow-y: auto; flex: 1; }
 
-  /* ─── SECTION HEADER (menu header: dark bg, white text) ─── */
+  /* ─── SECTION HEADER (grey divider, no fill) ─── */
   .sec {
-    padding: 6px 14px 5px;
-    font-size: 8px;
+    padding: 12px 14px 6px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: 0.13em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #ffffff;
+    color: var(--muted);
     border-bottom: 1px solid var(--border);
-    background: #1A1A1A;
+    background: transparent;
     display: flex; align-items: center; gap: 7px;
   }
   .sec-n {
     display: inline-flex; align-items: center; justify-content: center;
     width: 16px; height: 16px; border-radius: 50%;
-    background: #ffffff; color: #1A1A1A;
-    font-size: 11px; font-weight: 800; letter-spacing: 0;
+    background: var(--accent); color: var(--on-accent);
+    font-size: 10px; font-weight: 800; letter-spacing: 0;
     flex-shrink: 0;
   }
 
@@ -422,6 +417,7 @@
   }
   .sec-add:hover { border-color: var(--accent); color: var(--accent); }
   body.auto-mode .sec-add { display: none; }
+  body.auto-mode .sym { display: none; }
   #sec-menu {
     position: fixed; z-index: 3500; min-width: 190px; max-height: 320px; overflow-y: auto;
     background: var(--panel); border: 1px solid var(--border2); border-radius: 8px;
@@ -455,26 +451,18 @@
   .gap-card {
     background: var(--panel);
     border: 1px solid var(--border);
-    border-radius: 5px;
-    padding: 9px 11px;
+    border-radius: 10px;
+    padding: 10px 12px;
     position: relative; overflow: hidden;
     aspect-ratio: 1 / 1;
     display: flex; flex-direction: column; justify-content: flex-start;
   }
   .gap-card .gc-lbl { order: -1; }        /* title pinned top-left */
   .gap-card .gc-actual { margin-top: auto; margin-bottom: auto; }  /* value centered in remaining space */
-  .gap-card::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-    background: var(--muted);
-  }
-  /* colour the box, not the text */
-  .gap-card.good { background: var(--good-bg); border-color: var(--green); }
-  .gap-card.warn { background: var(--warn-bg); border-color: var(--warn); }
-  .gap-card.bad  { background: var(--bad-bg);  border-color: var(--danger); }
-  .gap-card.good::before { background: var(--green); }
-  .gap-card.warn::before { background: var(--warn); }
-  .gap-card.bad::before  { background: var(--danger); }
-  .gap-card.info::before { background: var(--accent); }
+  /* colour the VALUE, not the box */
+  .gap-card.good .gc-actual { color: var(--green); }
+  .gap-card.warn .gc-actual { color: var(--warn); }
+  .gap-card.bad  .gc-actual { color: var(--danger); }
 
   .gc-info { font-size: 12px; color: var(--muted); opacity: 0.55; cursor: help; vertical-align: -1px; }
   .gap-card:hover .gc-info { opacity: 1; color: var(--accent); }
@@ -489,7 +477,7 @@
   body.auto-mode .gc-close { display: none; }
   .card-hidden { display: none !important; }
   .gc-drift { font-size: 11px; font-weight: 600; color: var(--muted); }
-  .gc-lbl    { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; padding-right: 16px; }
+  .gc-lbl    { font-size: 8px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; padding-right: 16px; }
   .gc-bench  { font-size: 9px; color: var(--muted); font-family: var(--mono); margin-bottom: 1px; }
   .gc-actual { font-family: var(--mono); font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.1; }
   .gc-delta  { font-family: var(--mono); font-size: 9px; margin-top: 2px; color: var(--muted); }
@@ -511,18 +499,28 @@
 
   /* ─── RIGHT TABS ─── */
   .tabs {
-    display: flex; border-bottom: 1px solid var(--border);
-    background: var(--panel); flex-shrink: 0;
+    display: flex; gap: 2px; flex-shrink: 0;
+    background: transparent; padding: 12px 14px 0;
   }
   .tab-btn {
-    padding: 8px 11px; font-size: 9px; font-family: var(--mono);
-    background: none; border: none; border-bottom: 2px solid transparent;
-    margin-bottom: -1px; color: var(--muted); cursor: pointer; white-space: nowrap;
+    padding: 6px 12px; font-size: 11px; font-weight: 500; font-family: var(--sans);
+    background: none; border: none; border-radius: 7px;
+    color: var(--muted); cursor: pointer; white-space: nowrap;
   }
-  .tab-btn.active { color: var(--text); border-bottom-color: var(--text); }
+  .tab-btn:hover { background: rgba(0,0,0,0.04); color: var(--text); }
+  .tab-btn.active { color: var(--text); background: var(--panel); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
 
-  .tab-pane { display: none; padding: 10px 12px; }
-  .tab-pane.active { display: block; }
+  .results-col .col-body { padding: 4px 14px 14px; }
+  .tab-pane { display: none; }
+  .tab-pane.active {
+    display: block;
+    background: var(--panel);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.04);
+    padding: 6px 4px 12px;
+    overflow: hidden;
+  }
 
   /* ─── CHAIN TABLE ─── */
   .ctbl { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 9px; }
@@ -819,25 +817,8 @@
 </div>
 
 <header>
-  <div class="logo" aria-label="Drone Optimiser logo">
-    <svg viewBox="0 0 1000 1000" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <g clip-path="url(#logoclip)">
-        <rect width="1000" height="1000" fill="#0D0D0D"/>
-        <g id="logo-ring"><circle cx="293.5" cy="293.5" r="177.5" stroke="white" stroke-width="20"/></g>
-        <use xlink:href="#logo-ring" transform="translate(412.5)"/>
-        <use xlink:href="#logo-ring" transform="translate(0 412.5)"/>
-        <use xlink:href="#logo-ring" transform="translate(412.5 412.5)"/>
-        <path d="M741.238 694.44C760.105 724.96 724.961 760.105 694.44 741.238L517.878 632.094C506.922 625.321 493.079 625.321 482.123 632.094L305.561 741.238C275.04 760.104 239.896 724.96 258.762 694.44L367.907 517.878C374.679 506.921 374.679 493.079 367.907 482.122L258.762 305.56C239.896 275.04 275.04 239.896 305.56 258.762L482.123 367.906C493.079 374.679 506.922 374.679 517.878 367.906L694.44 258.762C724.961 239.896 760.105 275.04 741.238 305.56L632.094 482.122C625.321 493.079 625.321 506.921 632.094 517.878L741.238 694.44Z" fill="#00FFE1"/>
-      </g>
-      <defs><clipPath id="logoclip"><rect width="1000" height="1000" fill="white"/></clipPath></defs>
-    </svg>
-  </div>
-  <div>
-    <h1>Drone Optimiser</h1>
-    <p>Bench data · Efficiency-driven motor matching · Iterative battery selection</p>
-  </div>
-  <div class="header-actions">
-    <button class="mode-toggle" id="mode-toggle" title="Switch between Auto (one-step optimise) and Full (manual wizard)">Mode: Full</button>
+  <div class="header-actions" style="margin-left:auto">
+    <button class="mode-toggle" id="mode-toggle" title="Switch between Auto (one-step optimise) and Pro (manual wizard)">Mode: Pro</button>
     <button class="reset-btn" id="reset-all" title="Reset all inputs to defaults"><i class="ph ph-arrow-counter-clockwise"></i> Reset all</button>
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme"><i class="ph ph-circle-half"></i></button>
     <button class="theme-toggle" id="export-btn" aria-label="Export inputs as CSV" title="Export inputs as CSV"><i class="ph ph-download-simple"></i></button>
@@ -846,18 +827,33 @@
 
 <!-- STEP INDICATOR -->
 <div class="steps-bar">
-  <div class="step-pill" id="step1-pill" data-stage="1"><div class="step-num">1</div>MISSION + MTOW</div>
-  <div class="step-pill" id="step2-pill" data-stage="2"><div class="step-num">2</div>MOTOR</div>
-  <div class="step-pill" id="step3-pill" data-stage="3"><div class="step-num">3</div>BATTERY</div>
-  <div class="step-pill" id="step4-pill" data-stage="4"><div class="step-num">4</div>FINE TUNE</div>
+  <div class="step-pill" id="step1-pill" data-stage="1"><div class="step-num">1</div>Mission</div>
+  <div class="step-pill" id="step2-pill" data-stage="2"><div class="step-num">2</div>Mass Budget</div>
+  <div class="step-pill" id="step3-pill" data-stage="3"><div class="step-num">3</div>Motor + Prop</div>
+  <div class="step-pill" id="step4-pill" data-stage="4"><div class="step-num">4</div>Battery</div>
 </div>
 
 <!-- KPI STRIP -->
 <div class="layout">
 
   <!-- ═══ LEFT: INPUTS ═══ -->
-  <div class="col">
-    <div class="col-hdr"><div class="hdr-dot" style="background:#fff"></div>INPUTS &amp; SELECTIONS</div>
+  <div class="col sidebar-col">
+    <div class="brand">
+      <div class="logo" aria-label="Drone Optimiser logo">
+        <svg viewBox="0 0 1000 1000" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g clip-path="url(#logoclip)">
+            <rect width="1000" height="1000" fill="#0D0D0D"/>
+            <g id="logo-ring"><circle cx="293.5" cy="293.5" r="177.5" stroke="white" stroke-width="20"/></g>
+            <use xlink:href="#logo-ring" transform="translate(412.5)"/>
+            <use xlink:href="#logo-ring" transform="translate(0 412.5)"/>
+            <use xlink:href="#logo-ring" transform="translate(412.5 412.5)"/>
+            <path d="M741.238 694.44C760.105 724.96 724.961 760.105 694.44 741.238L517.878 632.094C506.922 625.321 493.079 625.321 482.123 632.094L305.561 741.238C275.04 760.104 239.896 724.96 258.762 694.44L367.907 517.878C374.679 506.921 374.679 493.079 367.907 482.122L258.762 305.56C239.896 275.04 275.04 239.896 305.56 258.762L482.123 367.906C493.079 374.679 506.922 374.679 517.878 367.906L694.44 258.762C724.961 239.896 760.105 275.04 741.238 305.56L632.094 482.122C625.321 493.079 625.321 506.921 632.094 517.878L741.238 694.44Z" fill="#00FFE1"/>
+          </g>
+          <defs><clipPath id="logoclip"><rect width="1000" height="1000" fill="white"/></clipPath></defs>
+        </svg>
+      </div>
+      <span class="brand-name">Drone Optimiser</span>
+    </div>
     <div class="col-body">
 
       <div class="menu" data-menu="mission">
@@ -1001,7 +997,7 @@
   </div>
 
   <!-- ═══ RIGHT: 5 TABS ═══ -->
-  <div class="col" style="border-right:none">
+  <div class="col results-col" style="border-right:none">
     <div class="tabs">
       <button class="tab-btn active" data-tab="perf">Performance</button>
       <button class="tab-btn" data-tab="chain">Calc Chain</button>
@@ -1342,19 +1338,19 @@ function updateSteps() {
   });
 }
 
-// which left-column menus are visible per stage
+// Pro mode: one step per section title. Auto mode: mission + mass together.
 const STAGE_MENUS = {
-  1: ['mission','mass'],
-  2: ['motor'],
-  3: ['battery'],
-  4: ['mission','mass','motor','battery'],
+  1: ['mission'],
+  2: ['mass'],
+  3: ['motor'],
+  4: ['battery'],
 };
 
 function setStage(n) {
-  // Auto mode: only stage 1 exists; the Next button becomes Optimise.
+  // Auto mode: single setup step; the Next button becomes Optimise.
   if (appMode === 'auto') n = 1;
   currentStage = Math.max(1, Math.min(4, n));
-  const show = STAGE_MENUS[currentStage];
+  const show = appMode === 'auto' ? ['mission','mass'] : STAGE_MENUS[currentStage];
   document.querySelectorAll('.menu').forEach(m => {
     m.style.display = show.includes(m.dataset.menu) ? '' : 'none';
   });
@@ -1382,7 +1378,7 @@ function setMode(m) {
   appMode = m;
   document.body.classList.toggle('auto-mode', m === 'auto');
   const btn = document.getElementById('mode-toggle');
-  if (btn) btn.textContent = 'Mode: ' + (m === 'auto' ? 'Auto' : 'Full');
+  if (btn) btn.textContent = 'Mode: ' + (m === 'auto' ? 'Auto' : 'Pro');
   closeSectionMenu();
   // Auto mode hides detail tabs: if one is active, fall back to Performance.
   if (m === 'auto') {
