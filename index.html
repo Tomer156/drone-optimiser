@@ -412,12 +412,12 @@
 
   /* ─── MIDDLE: GAP CARDS ─── */
   .gap-section-title {
-    padding: 7px 12px;
+    padding: 6px 12px 4px;
     font-size: 8px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--muted);
-    border-bottom: 1px solid var(--border);
     display: flex; align-items: center; gap: 6px;
   }
+  #frame-content, #motor-detail-area { padding: 8px 12px; }
   .sec-add {
     margin-left: auto; flex-shrink: 0;
     width: 18px; height: 18px; border-radius: 4px;
@@ -457,19 +457,18 @@
   }
   :root[data-theme="dark"] .sec-comp { color: #22D3EE; background: rgba(34,211,238,0.14); border-color: rgba(34,211,238,0.4); }
 
-  .gap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); gap: 7px; padding: 10px 12px; }
+  .gap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 6px; padding: 8px 10px; }
 
   .gap-card {
     background: var(--panel);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 12px;
+    border-radius: 9px;
+    padding: 7px 9px;
     position: relative; overflow: hidden;
-    aspect-ratio: 1 / 1;
     display: flex; flex-direction: column; justify-content: flex-start;
   }
   .gap-card .gc-lbl { order: -1; }        /* title pinned top-left */
-  .gap-card .gc-actual { margin-top: auto; margin-bottom: auto; }  /* value centered in remaining space */
+  .gap-card .gc-actual { margin-top: 3px; }
   /* colour the VALUE, not the box */
   .gap-card.good .gc-actual { color: var(--green); }
   .gap-card.warn .gc-actual { color: var(--warn); }
@@ -490,7 +489,7 @@
   .gc-drift { font-size: 11px; font-weight: 600; color: var(--muted); }
   .gc-lbl    { font-size: 8px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; padding-right: 16px; }
   .gc-bench  { font-size: 9px; color: var(--muted); font-family: var(--mono); margin-bottom: 1px; }
-  .gc-actual { font-family: var(--mono); font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.1; }
+  .gc-actual { font-family: var(--mono); font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.05; }
   .gc-delta  { font-family: var(--mono); font-size: 9px; margin-top: 2px; color: var(--muted); }
   .gap-card .gc-actual { color: var(--text); }
 
@@ -574,18 +573,19 @@
   .fc { color: var(--muted); font-size: 9px; font-family: Georgia, 'Times New Roman', serif; font-style: italic; }
 
   /* ─── CHECKS ─── */
-  .chk-list { display: flex; flex-direction: column; gap: 4px; }
+  .chk-list { display: flex; flex-direction: column; gap: 2px; padding: 6px 12px; }
   .chk {
-    display: flex; align-items: flex-start; gap: 7px; padding: 6px 9px;
+    display: flex; align-items: flex-start; gap: 7px; padding: 3px 9px;
     background: var(--panel); border: 1px solid var(--border); border-radius: 4px;
   }
+  .chk-dot { margin-top: 2px; }
   .chk-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
   .chk-dot.pass { background: var(--green); box-shadow: 0 0 4px rgba(158,255,0,0.4); }
   .chk-dot.warn { background: var(--warn); }
   .chk-dot.fail { background: var(--danger); box-shadow: 0 0 4px rgba(255,0,30,0.4); }
   .chk-dot.info { background: var(--muted); }
-  .chk-lbl  { font-size: 10px; color: var(--text); font-weight: 500; }
-  .chk-det  { font-size: 8px; color: var(--muted); font-family: var(--mono); margin-top: 1px; }
+  .chk-lbl  { font-size: 9px; color: var(--text); font-weight: 600; line-height: 1.2; }
+  .chk-det  { font-size: 7px; color: var(--muted); font-family: var(--mono); margin-top: 0; line-height: 1.2; }
   .bdg {
     margin-left: auto; font-size: 7px; font-family: var(--mono);
     padding: 2px 5px; border-radius: 2px; flex-shrink: 0; align-self: flex-start;
@@ -596,14 +596,15 @@
   .bdg.info { background: rgba(77,89,110,0.2); color: var(--muted); }
 
   /* ─── FRAME TAB ─── */
-  .frame-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-bottom: 10px; }
-  .fst { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; padding: 8px 9px; text-align: center; }
+  .frame-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 5px; margin-bottom: 6px; }
+  .fst { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; padding: 5px 7px; text-align: center; }
   .fst-lbl { font-size: 7px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
-  .fst-val { font-family: var(--mono); font-size: 16px; font-weight: 700; color: var(--accent); margin: 2px 0; }
+  .fst-val { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--accent); margin: 1px 0; }
   .fst-u   { font-size: 8px; color: var(--muted); font-family: var(--mono); }
-  .frame-cls { display: inline-block; padding: 2px 9px; border-radius: 3px; font-family: var(--mono); font-size: 11px; font-weight: 700; background: rgba(26,26,26,0.1); border: 1px solid var(--accent); color: var(--accent); margin-bottom: 8px; }
-  .frame-note { font-size: 8px; color: var(--muted); font-family: var(--mono); padding: 7px 9px; background: var(--panel); border: 1px solid var(--border); border-radius: 4px; margin-top: 8px; line-height: 1.6; }
-  .frame-diagram { display: flex; justify-content: center; padding: 8px 0 4px; }
+  .frame-cls { display: inline-block; padding: 2px 9px; border-radius: 3px; font-family: var(--mono); font-size: 11px; font-weight: 700; background: rgba(26,26,26,0.1); border: 1px solid var(--accent); color: var(--accent); margin-bottom: 4px; }
+  .frame-note { display: none; }
+  .frame-diagram { display: flex; justify-content: center; padding: 4px 0 0; }
+  .frame-diagram svg { max-height: 128px; width: auto; }
   .gap-slider-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
   .gap-slider-row span { font-size: 9px; color: var(--muted); font-family: var(--mono); white-space: nowrap; }
   .gap-slider-row .gv { color: var(--green); font-weight: 600; min-width: 32px; }
@@ -806,11 +807,17 @@
   .nav-btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
   .nav-btn.primary:hover:not(:disabled) { background: var(--accent-hover); }
 
-  /* Optimise bar: only shown in Auto mode */
-  #optimise-bar { display: none; }
-  body.auto-mode #optimise-bar { display: flex; }
+  /* Auto mode: single Optimise button (Back hidden) */
+  body.auto-mode #stage-back { display: none; }
   /* Auto mode: hide the detailed Calc Chain tab */
   body.auto-mode .tab-btn[data-tab="chain"] { display: none; }
+  /* Wizard accordion: collapsed step shows only its title */
+  .menu.collapsed > *:not(.sec) { display: none !important; }
+  body:not(.auto-mode) .sec { cursor: pointer; }
+  .sec.sec-active { color: var(--text); }
+  .sec.sec-active .sec-n { background: var(--accent); color: var(--on-accent); }
+  .sec.sec-done .sec-n { background: var(--green); color: #fff; font-size: 0; }
+  .sec.sec-done .sec-n::after { content: '✓'; font-size: 10px; }
 
   /* Optimiser result toast */
   #opt-toast {
@@ -1007,8 +1014,9 @@
       </div><!-- /menu finetune -->
 
     </div>
-    <div class="stage-nav" id="optimise-bar">
-      <button class="nav-btn primary" id="stage-next">Optimise <i class="ph ph-sparkle"></i></button>
+    <div class="stage-nav" id="stage-nav">
+      <button class="nav-btn" id="stage-back"><i class="ph ph-arrow-left"></i> Back</button>
+      <button class="nav-btn primary" id="stage-next">Next <i class="ph ph-arrow-right"></i></button>
     </div>
   </div>
 
@@ -1363,15 +1371,51 @@ function compute() {
 // STEP INDICATOR
 // ══════════════════════════════════════════════════════════
 // The numbered section titles ARE the steps (no separate steps bar).
-// Pro shows every section; Auto shows only the manual-input sections (the rest is auto-picked).
+// Pro = guided wizard: all titles show; only the current step's inputs expand; Back/Next
+// or clicking a title navigates. Auto = manual-input sections only (rest is auto-picked).
+const MENU_ORDER = ['mission','mass','motor','battery','finetune'];
 const AUTO_SECTIONS = ['mission','mass','finetune'];
-const ALL_SECTIONS  = ['mission','mass','motor','battery','finetune'];
+let currentStage = 1;
+const getMenu = name => document.querySelector(`.menu[data-menu="${name}"]`);
 
-function applyMenuVisibility() {
-  const show = appMode === 'auto' ? AUTO_SECTIONS : ALL_SECTIONS;
-  document.querySelectorAll('.menu').forEach(m => {
-    m.style.display = show.includes(m.dataset.menu) ? '' : 'none';
+function setStage(n) {
+  currentStage = Math.max(1, Math.min(MENU_ORDER.length, n));
+  MENU_ORDER.forEach((name, i) => {
+    const menu = getMenu(name); if (!menu) return;
+    const stage = i + 1;
+    menu.style.display = '';                                 // title always visible
+    menu.classList.toggle('collapsed', stage !== currentStage);
+    const sec = menu.querySelector('.sec');
+    if (sec) {
+      sec.classList.toggle('sec-active', stage === currentStage);
+      sec.classList.toggle('sec-done', stage < currentStage);
+    }
   });
+  const back = document.getElementById('stage-back');
+  const next = document.getElementById('stage-next');
+  if (back) back.disabled = currentStage === 1;
+  if (next) {
+    if (currentStage === MENU_ORDER.length) { next.style.display = 'none'; }   // last step: export is in the header
+    else { next.style.display = ''; next.innerHTML = 'Next <i class="ph ph-arrow-right"></i>'; }
+  }
+  const body = document.querySelector('.sidebar-col .col-body');
+  if (body) body.scrollTop = 0;
+}
+
+function applyMode() {
+  const next = document.getElementById('stage-next');
+  if (appMode === 'auto') {
+    MENU_ORDER.forEach(name => {
+      const menu = getMenu(name); if (!menu) return;
+      menu.style.display = AUTO_SECTIONS.includes(name) ? '' : 'none';
+      menu.classList.remove('collapsed');
+      const sec = menu.querySelector('.sec');
+      if (sec) sec.classList.remove('sec-active', 'sec-done');
+    });
+    if (next) next.innerHTML = 'Optimise <i class="ph ph-sparkle"></i>';
+  } else {
+    setStage(currentStage);
+  }
 }
 
 function setMode(m) {
@@ -1387,7 +1431,7 @@ function setMode(m) {
       document.querySelector('.tab-btn[data-tab="overview"]').click();
     }
   }
-  applyMenuVisibility();
+  applyMode();
   applyCardVisibility();
 }
 
@@ -2636,9 +2680,20 @@ document.addEventListener('DOMContentLoaded', () => {
     inp.addEventListener('keydown', e => { if (e.key === 'Enter') { commit(true); inp.blur(); } });
   });
 
-  // Optimise (Auto mode only)
+  // Wizard nav (Pro) / Optimise (Auto)
   document.getElementById('stage-next').addEventListener('click', () => {
     if (appMode === 'auto') runOptimise();
+    else setStage(currentStage + 1);
+  });
+  document.getElementById('stage-back').addEventListener('click', () => setStage(currentStage - 1));
+  // Clicking a section title jumps to that step (Pro only)
+  document.querySelector('.sidebar-col').addEventListener('click', e => {
+    if (appMode === 'auto') return;
+    const sec = e.target.closest('.sec');
+    if (!sec) return;
+    const menu = sec.closest('.menu');
+    const i = menu ? MENU_ORDER.indexOf(menu.dataset.menu) : -1;
+    if (i >= 0) setStage(i + 1);
   });
   document.getElementById('mode-toggle').addEventListener('click', () => {
     setMode(appMode === 'auto' ? 'full' : 'auto');
@@ -2683,7 +2738,7 @@ document.addEventListener('DOMContentLoaded', () => {
   populateMotors();
   populateBatteries();
   update();
-  applyMenuVisibility();
+  applyMode();
 });
 
 </script>
