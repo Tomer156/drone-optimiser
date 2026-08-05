@@ -176,13 +176,23 @@
   /* tick mark on completed */
   .step-pill.done   .step-num::after { content: '✓'; font-size: 10px; line-height: 1; }
 
-  /* ─── THREE-COLUMN LAYOUT ─── */
-  .layout {
-    display: grid;
-    grid-template-columns: 300px 1fr;
+  /* ─── APP SHELL: full-height sidebar + main ─── */
+  .app {
+    display: flex;
     flex: 1;
     overflow: hidden;
     min-height: 0;
+  }
+  .main {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .topbar {
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+    padding: 10px 14px;
   }
 
   .col {
@@ -190,8 +200,8 @@
     flex-direction: column;
     overflow: hidden;
   }
-  .sidebar-col { background: var(--panel); border-right: 1px solid var(--border); }
-  .results-col { background: var(--bg); }
+  .sidebar-col { width: 300px; flex-shrink: 0; background: var(--panel); border-right: 1px solid var(--border); }
+  .results-col { flex: 1; background: var(--bg); }
 
   /* ─── SIDEBAR BRAND (logo + product name) ─── */
   .brand {
@@ -418,6 +428,7 @@
   .sec-add:hover { border-color: var(--accent); color: var(--accent); }
   body.auto-mode .sec-add { display: none; }
   body.auto-mode .sym { display: none; }
+  body.auto-mode .sec-n { display: none; }
   #sec-menu {
     position: fixed; z-index: 3500; min-width: 190px; max-height: 320px; overflow-y: auto;
     background: var(--panel); border: 1px solid var(--border2); border-radius: 8px;
@@ -512,14 +523,19 @@
 
   .results-col .col-body { padding: 4px 14px 14px; }
   .tab-pane { display: none; }
-  .tab-pane.active {
-    display: block;
+  .tab-pane.active { display: block; }
+  /* each grouped area is its own rounded, soft-shadow card with a title */
+  .area-card {
     background: var(--panel);
     border: 1px solid var(--card-border);
     border-radius: 14px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.04);
-    padding: 6px 4px 12px;
+    margin-bottom: 14px;
     overflow: hidden;
+  }
+  .area-title {
+    font-size: 13px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+    padding: 12px 14px; border-bottom: 1px solid var(--border);
   }
 
   /* ─── CHAIN TABLE ─── */
@@ -769,16 +785,11 @@
   .nav-btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
   .nav-btn.primary:hover:not(:disabled) { background: var(--accent-hover); }
 
-  /* Auto mode: only stage 1 pill is relevant */
-  body.auto-mode #step2-pill,
-  body.auto-mode #step3-pill,
-  body.auto-mode #step4-pill { display: none; }
-  /* Auto mode: no Back button; Optimise takes the full width */
-  body.auto-mode #stage-back { display: none; }
-  /* Auto mode: hide detail tabs, keep it simple */
-  body.auto-mode .tab-btn[data-tab="chain"],
-  body.auto-mode .tab-btn[data-tab="checks"],
-  body.auto-mode .tab-btn[data-tab="motor"] { display: none; }
+  /* Optimise bar: only shown in Auto mode */
+  #optimise-bar { display: none; }
+  body.auto-mode #optimise-bar { display: flex; }
+  /* Auto mode: hide the detailed Calc Chain tab */
+  body.auto-mode .tab-btn[data-tab="chain"] { display: none; }
 
   /* Optimiser result toast */
   #opt-toast {
@@ -816,27 +827,9 @@
   <button class="banner-x" id="banner-close" aria-label="Dismiss banner"><i class="ph ph-x"></i></button>
 </div>
 
-<header>
-  <div class="header-actions" style="margin-left:auto">
-    <button class="mode-toggle" id="mode-toggle" title="Switch between Auto (one-step optimise) and Pro (manual wizard)">Mode: Pro</button>
-    <button class="reset-btn" id="reset-all" title="Reset all inputs to defaults"><i class="ph ph-arrow-counter-clockwise"></i> Reset all</button>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme"><i class="ph ph-circle-half"></i></button>
-    <button class="theme-toggle" id="export-btn" aria-label="Export inputs as CSV" title="Export inputs as CSV"><i class="ph ph-download-simple"></i></button>
-  </div>
-</header>
+<div class="app">
 
-<!-- STEP INDICATOR -->
-<div class="steps-bar">
-  <div class="step-pill" id="step1-pill" data-stage="1"><div class="step-num">1</div>Mission</div>
-  <div class="step-pill" id="step2-pill" data-stage="2"><div class="step-num">2</div>Mass Budget</div>
-  <div class="step-pill" id="step3-pill" data-stage="3"><div class="step-num">3</div>Motor + Prop</div>
-  <div class="step-pill" id="step4-pill" data-stage="4"><div class="step-num">4</div>Battery</div>
-</div>
-
-<!-- KPI STRIP -->
-<div class="layout">
-
-  <!-- ═══ LEFT: INPUTS ═══ -->
+  <!-- ═══ SIDEBAR (full height) ═══ -->
   <div class="col sidebar-col">
     <div class="brand">
       <div class="logo" aria-label="Drone Optimiser logo">
@@ -876,20 +869,6 @@
         <input type="range" id="s-alt" min="0" max="3000" value="500" step="100">
         <div id="lbl-rho" style="display:none"></div>
       </div>
-      <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">&eta;_wind</span> Wind losses</span><span class="iv-edit"><input class="iv-input" id="in-eff-wind" data-slider="s-eff-wind" inputmode="decimal"><span class="iv-unit">%</span></span></div>
-        <input type="range" id="s-eff-wind" min="50" max="100" value="75" step="1">
-      </div>
-      <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">&eta;_prop</span> Motor+ESC+Prop</span><span class="iv-edit"><input class="iv-input" id="in-eff-prop" data-slider="s-eff-prop" inputmode="decimal"><span class="iv-unit">%</span></span></div>
-        <input type="range" id="s-eff-prop" min="50" max="100" value="100" step="1">
-      </div>
-      <div class="ig">
-        <div class="ir"><span class="il"><span class="sym">&eta;_av</span> Avionics+Misc</span><span class="iv-edit"><input class="iv-input" id="in-eff-av" data-slider="s-eff-av" inputmode="decimal"><span class="iv-unit">%</span></span></div>
-        <input type="range" id="s-eff-av" min="50" max="100" value="95" step="1">
-        <div style="font-size:8px;color:var(--muted);font-family:var(--mono);margin-top:3px">&eta;_total = <span id="lbl-eta-total">—</span></div>
-      </div>
-
       </div><!-- /menu mission -->
 
       <div class="menu" data-menu="mass">
@@ -989,58 +968,92 @@
       </div>
       </div><!-- /menu battery -->
 
+      <div class="menu" data-menu="finetune">
+      <div class="sec"><span class="sec-n">5</span> Fine tune</div>
+      <div class="ig">
+        <div class="ir"><span class="il"><span class="sym">&eta;_wind</span> Wind losses</span><span class="iv-edit"><input class="iv-input" id="in-eff-wind" data-slider="s-eff-wind" inputmode="decimal"><span class="iv-unit">%</span></span></div>
+        <input type="range" id="s-eff-wind" min="50" max="100" value="75" step="1">
+      </div>
+      <div class="ig">
+        <div class="ir"><span class="il"><span class="sym">&eta;_prop</span> Motor+ESC+Prop</span><span class="iv-edit"><input class="iv-input" id="in-eff-prop" data-slider="s-eff-prop" inputmode="decimal"><span class="iv-unit">%</span></span></div>
+        <input type="range" id="s-eff-prop" min="50" max="100" value="100" step="1">
+      </div>
+      <div class="ig">
+        <div class="ir"><span class="il"><span class="sym">&eta;_av</span> Avionics+Misc</span><span class="iv-edit"><input class="iv-input" id="in-eff-av" data-slider="s-eff-av" inputmode="decimal"><span class="iv-unit">%</span></span></div>
+        <input type="range" id="s-eff-av" min="50" max="100" value="95" step="1">
+        <div style="font-size:8px;color:var(--muted);font-family:var(--mono);margin-top:3px">&eta;_total = <span id="lbl-eta-total">—</span></div>
+      </div>
+      </div><!-- /menu finetune -->
+
     </div>
-    <div class="stage-nav">
-      <button class="nav-btn" id="stage-back"><i class="ph ph-arrow-left"></i> Back</button>
-      <button class="nav-btn primary" id="stage-next">Next <i class="ph ph-arrow-right"></i></button>
+    <div class="stage-nav" id="optimise-bar">
+      <button class="nav-btn primary" id="stage-next">Optimise <i class="ph ph-sparkle"></i></button>
     </div>
   </div>
 
-  <!-- ═══ RIGHT: 5 TABS ═══ -->
-  <div class="col results-col" style="border-right:none">
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="perf">Performance</button>
-      <button class="tab-btn" data-tab="chain">Calc Chain</button>
-      <button class="tab-btn" data-tab="checks">Checks</button>
-      <button class="tab-btn" data-tab="elec">Electronics</button>
-      <button class="tab-btn" data-tab="layout">Layout</button>
-      <button class="tab-btn" data-tab="motor">Motor Data</button>
+  <!-- ═══ MAIN ═══ -->
+  <div class="main">
+    <div class="topbar">
+      <div class="header-actions">
+        <button class="mode-toggle" id="mode-toggle" title="Switch between Auto (one-step optimise) and Pro (manual)">Mode: Pro</button>
+        <button class="reset-btn" id="reset-all" title="Reset all inputs to defaults"><i class="ph ph-arrow-counter-clockwise"></i> Reset all</button>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme"><i class="ph ph-circle-half"></i></button>
+        <button class="theme-toggle" id="export-btn" aria-label="Export inputs as CSV" title="Export inputs as CSV"><i class="ph ph-download-simple"></i></button>
+      </div>
     </div>
-    <div class="col-body">
 
-      <!-- PERFORMANCE: former middle column content -->
-      <div class="tab-pane active" id="tab-perf">
-        <div id="mid-body"><div class="empty">Set MTOW to generate benchmarks</div></div>
+    <div class="col results-col">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="overview">Overview</button>
+        <button class="tab-btn" data-tab="elec">Electronics</button>
+        <button class="tab-btn" data-tab="chain">Calc Chain</button>
       </div>
+      <div class="col-body">
 
-      <!-- CALC CHAIN: unchanged -->
-      <div class="tab-pane" id="tab-chain">
-        <table class="ctbl">
-          <thead><tr><th>#</th><th>Parameter</th><th>Sym</th><th>Formula</th><th style="text-align:right">Value</th></tr></thead>
-          <tbody id="chain-body"><tr><td colspan="5" class="empty">Set mass budget to begin</td></tr></tbody>
-        </table>
+        <!-- OVERVIEW: performance + layout + checks -->
+        <div class="tab-pane active" id="tab-overview">
+          <div class="area-card">
+            <div class="area-title">Performance</div>
+            <div id="mid-body"><div class="empty">Set MTOW to generate benchmarks</div></div>
+          </div>
+          <div class="area-card">
+            <div class="area-title">Layout</div>
+            <div id="frame-content"><div class="empty">Select a motor + prop to calculate frame dimensions</div></div>
+          </div>
+          <div class="area-card">
+            <div class="area-title">Checks</div>
+            <div class="chk-list" id="checks-list"><div class="empty">Select motor + battery to run checks</div></div>
+          </div>
+        </div>
+
+        <!-- ELECTRONICS: electronics + motor data + battery data -->
+        <div class="tab-pane" id="tab-elec">
+          <div class="area-card">
+            <div class="area-title">Electronics</div>
+            <div id="elec-content"><div class="empty">Select motor + battery to see electronics requirements</div></div>
+          </div>
+          <div class="area-card">
+            <div class="area-title">Motor Data</div>
+            <div id="motor-detail-area"><div class="empty">Select a motor to see bench data</div></div>
+          </div>
+          <div class="area-card">
+            <div class="area-title">Battery Data</div>
+            <div id="battery-data-area"><div class="empty">Select a battery to see its specs</div></div>
+          </div>
+        </div>
+
+        <!-- CALC CHAIN -->
+        <div class="tab-pane" id="tab-chain">
+          <div class="area-card">
+            <div class="area-title">Calc Chain</div>
+            <table class="ctbl">
+              <thead><tr><th>#</th><th>Parameter</th><th>Sym</th><th>Formula</th><th style="text-align:right">Value</th></tr></thead>
+              <tbody id="chain-body"><tr><td colspan="5" class="empty">Set mass budget to begin</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
-
-      <!-- CHECKS: unchanged -->
-      <div class="tab-pane" id="tab-checks">
-        <div class="chk-list" id="checks-list"><div class="empty">Select motor + battery to run checks</div></div>
-      </div>
-
-      <!-- ELECTRONICS: new -->
-      <div class="tab-pane" id="tab-elec">
-        <div id="elec-content"><div class="empty">Select motor + battery to see electronics requirements</div></div>
-      </div>
-
-      <!-- LAYOUT: former frame tab -->
-      <div class="tab-pane" id="tab-layout">
-        <div id="frame-content"><div class="empty">Select a motor + prop to calculate frame dimensions</div></div>
-      </div>
-
-      <!-- MOTOR DATA: unchanged -->
-      <div class="tab-pane" id="tab-motor">
-        <div id="motor-detail-area"><div class="empty">Select a motor to see bench data</div></div>
-      </div>
-
     </div>
   </div>
 
@@ -1152,8 +1165,7 @@ let selProp  = null;   // prop string
 let selBatt  = null;   // index into BATTERY_DB
 let cellsFilter = 'all';
 let lastD = null;
-let currentStage = 1;   // wizard stage 1..4
-let appMode = 'full';   // 'full' (staged wizard) | 'auto' (one-step optimise)
+let appMode = 'full';   // 'full'/Pro (all sections) | 'auto' (one-step optimise)
 let lastEffKey = null;  // motor|prop key: eff bar animates only when this changes
 let frameGap = 15;      // prop clearance (mm): persists across frame re-renders
 
@@ -1329,49 +1341,16 @@ function compute() {
 // ══════════════════════════════════════════════════════════
 // STEP INDICATOR
 // ══════════════════════════════════════════════════════════
-function updateSteps() {
-  // pills reflect the wizard stage: before = done, current = active
-  ['step1-pill','step2-pill','step3-pill','step4-pill'].forEach((id, i) => {
-    const stage = i + 1;
-    const el = document.getElementById(id);
-    el.className = 'step-pill' + (stage < currentStage ? ' done' : (stage === currentStage ? ' active' : ''));
-  });
-}
+// The numbered section titles ARE the steps (no separate steps bar).
+// Pro shows every section; Auto shows only the manual-input sections (the rest is auto-picked).
+const AUTO_SECTIONS = ['mission','mass','finetune'];
+const ALL_SECTIONS  = ['mission','mass','motor','battery','finetune'];
 
-// Pro mode: one step per section title. Auto mode: mission + mass together.
-const STAGE_MENUS = {
-  1: ['mission'],
-  2: ['mass'],
-  3: ['motor'],
-  4: ['battery'],
-};
-
-function setStage(n) {
-  // Auto mode: single setup step; the Next button becomes Optimise.
-  if (appMode === 'auto') n = 1;
-  currentStage = Math.max(1, Math.min(4, n));
-  const show = appMode === 'auto' ? ['mission','mass'] : STAGE_MENUS[currentStage];
+function applyMenuVisibility() {
+  const show = appMode === 'auto' ? AUTO_SECTIONS : ALL_SECTIONS;
   document.querySelectorAll('.menu').forEach(m => {
     m.style.display = show.includes(m.dataset.menu) ? '' : 'none';
   });
-  // nav buttons
-  const back = document.getElementById('stage-back');
-  const next = document.getElementById('stage-next');
-  if (appMode === 'auto') {
-    if (back) back.disabled = true;
-    if (next) { next.style.display = ''; next.innerHTML = 'Optimise <i class="ph ph-sparkle"></i>'; }
-  } else {
-    if (back) back.disabled = currentStage === 1;
-    // Export lives in the header now → last stage has no Next button
-    if (next) {
-      if (currentStage === 4) { next.style.display = 'none'; }
-      else { next.style.display = ''; next.innerHTML = 'Next <i class="ph ph-arrow-right"></i>'; }
-    }
-  }
-  updateSteps();
-  // scroll input panel back to top on stage change
-  const body = document.querySelector('.col-body');
-  if (body) body.scrollTop = 0;
 }
 
 function setMode(m) {
@@ -1380,14 +1359,14 @@ function setMode(m) {
   const btn = document.getElementById('mode-toggle');
   if (btn) btn.textContent = 'Mode: ' + (m === 'auto' ? 'Auto' : 'Pro');
   closeSectionMenu();
-  // Auto mode hides detail tabs: if one is active, fall back to Performance.
+  // Auto mode hides the Calc Chain tab: if it's active, fall back to Overview.
   if (m === 'auto') {
     const active = document.querySelector('.tab-btn.active');
-    if (active && ['chain','checks','motor'].includes(active.dataset.tab)) {
-      document.querySelector('.tab-btn[data-tab="perf"]').click();
+    if (active && active.dataset.tab === 'chain') {
+      document.querySelector('.tab-btn[data-tab="overview"]').click();
     }
   }
-  setStage(m === 'auto' ? 1 : currentStage);
+  applyMenuVisibility();
   applyCardVisibility();
 }
 
@@ -2566,13 +2545,33 @@ function renderElec(d) {
 }
 
 // ══════════════════════════════════════════════════════════
+// BATTERY DATA (specs of the selected battery)
+// ══════════════════════════════════════════════════════════
+function renderBatteryData(d) {
+  const area = document.getElementById('battery-data-area');
+  if (!area) return;
+  if (!d.batt) { area.innerHTML = '<div class="empty">Select a battery to see its specs</div>'; return; }
+  const b = d.batt;
+  const st = (l, v, u) => `<div class="fst"><div class="fst-lbl">${l}</div><div class="fst-val">${v}</div><div class="fst-u">${u || ''}</div></div>`;
+  area.innerHTML = `<div class="frame-stats" style="padding:12px 14px">
+    ${st('Configuration', b.cells, '')}
+    ${st('Capacity', d.battAh.toFixed(1), 'Ah')}
+    ${st('C-rating', b.discharge_c, 'C')}
+    ${st('Voltage', b.voltage_v.toFixed(1), 'V')}
+    ${st('Weight', b.weight_g != null ? b.weight_g : 'n/a', b.weight_g != null ? 'g' : '')}
+    ${st('Energy', d.battEnergy.toFixed(1), 'Wh')}
+    ${st('Max current', d.I_max_batt.toFixed(0), 'A')}
+    ${st('Connector', b.connector || 'n/a', '')}
+  </div>`;
+}
+
+// ══════════════════════════════════════════════════════════
 // MAIN UPDATE
 // ══════════════════════════════════════════════════════════
 function update() {
   const d = compute();
   lastD = d;
   updateLabels(d);
-  updateSteps();
   renderKPI(d);
   renderEffZone(d);
   renderMiddle(d);
@@ -2581,6 +2580,7 @@ function update() {
   renderChecks(d);
   renderFrame(d);
   renderElec(d);
+  renderBatteryData(d);
   // Refresh motor list to update efficiency dots
   populateMotors();
 }
@@ -2615,15 +2615,9 @@ document.addEventListener('DOMContentLoaded', () => {
     inp.addEventListener('keydown', e => { if (e.key === 'Enter') { commit(true); inp.blur(); } });
   });
 
-  // Stage navigation
-  document.querySelectorAll('.step-pill').forEach(p => {
-    p.addEventListener('click', () => setStage(+p.dataset.stage));
-  });
-  document.getElementById('stage-back').addEventListener('click', () => setStage(currentStage - 1));
+  // Optimise (Auto mode only)
   document.getElementById('stage-next').addEventListener('click', () => {
     if (appMode === 'auto') runOptimise();
-    else if (currentStage === 4) exportBuild();
-    else setStage(currentStage + 1);
   });
   document.getElementById('mode-toggle').addEventListener('click', () => {
     setMode(appMode === 'auto' ? 'full' : 'auto');
@@ -2668,7 +2662,7 @@ document.addEventListener('DOMContentLoaded', () => {
   populateMotors();
   populateBatteries();
   update();
-  setStage(1);
+  applyMenuVisibility();
 });
 
 </script>
