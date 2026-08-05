@@ -521,22 +521,43 @@
   .tab-btn:hover { background: rgba(0,0,0,0.04); color: var(--text); }
   .tab-btn.active { color: var(--text); background: var(--panel); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
 
-  .results-col .col-body { padding: 4px 14px 14px; }
+  /* results area fills the viewport; tabs lay out on a fixed grid (no page scroll) */
+  .results-col .col-body {
+    flex: 1; min-height: 0; overflow: hidden;
+    padding: 4px 14px 14px;
+    display: flex; flex-direction: column;
+  }
   .tab-pane { display: none; }
-  .tab-pane.active { display: block; }
+  .tab-pane.active { display: grid; flex: 1; min-height: 0; gap: 14px; }
+  /* Left: main area (full height). Upper-right + bottom-right: the two others. */
+  #tab-overview.active, #tab-elec.active {
+    grid-template-columns: 1.25fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  #tab-overview.active > .area-card:nth-child(1),
+  #tab-elec.active     > .area-card:nth-child(1) { grid-column: 1; grid-row: 1 / 3; }
+  #tab-overview.active > .area-card:nth-child(2),
+  #tab-elec.active     > .area-card:nth-child(2) { grid-column: 2; grid-row: 1; }
+  #tab-overview.active > .area-card:nth-child(3),
+  #tab-elec.active     > .area-card:nth-child(3) { grid-column: 2; grid-row: 2; }
+  #tab-chain.active { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+
   /* each grouped area is its own rounded, soft-shadow card with a title */
   .area-card {
     background: var(--panel);
     border: 1px solid var(--card-border);
     border-radius: 14px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 6px 20px rgba(0,0,0,0.04);
-    margin-bottom: 14px;
     overflow: hidden;
+    display: flex; flex-direction: column; min-height: 0;
   }
   .area-title {
+    flex-shrink: 0;
     font-size: 13px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
-    padding: 12px 14px; border-bottom: 1px solid var(--border);
+    padding: 11px 14px; border-bottom: 1px solid var(--border);
   }
+  /* the content region under the title scrolls internally if it overflows */
+  .area-card > .area-title + * { flex: 1; min-height: 0; overflow: auto; }
 
   /* ─── CHAIN TABLE ─── */
   .ctbl { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 9px; }
