@@ -775,6 +775,10 @@
   body.auto-mode #step4-pill { display: none; }
   /* Auto mode: no Back button; Optimise takes the full width */
   body.auto-mode #stage-back { display: none; }
+  /* Auto mode: hide detail tabs, keep it simple */
+  body.auto-mode .tab-btn[data-tab="chain"],
+  body.auto-mode .tab-btn[data-tab="checks"],
+  body.auto-mode .tab-btn[data-tab="motor"] { display: none; }
 
   /* Optimiser result toast */
   #opt-toast {
@@ -1378,6 +1382,13 @@ function setMode(m) {
   const btn = document.getElementById('mode-toggle');
   if (btn) btn.textContent = 'Mode: ' + (m === 'auto' ? 'Auto' : 'Full');
   closeSectionMenu();
+  // Auto mode hides detail tabs — if one is active, fall back to Performance.
+  if (m === 'auto') {
+    const active = document.querySelector('.tab-btn.active');
+    if (active && ['chain','checks','motor'].includes(active.dataset.tab)) {
+      document.querySelector('.tab-btn[data-tab="perf"]').click();
+    }
+  }
   setStage(m === 'auto' ? 1 : currentStage);
   applyCardVisibility();
 }
