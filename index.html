@@ -52,12 +52,13 @@ table{border-collapse:collapse;width:100%}
     <div style="width:288px;flex-shrink:0;background:{{ t.card }};border-right:1px solid {{ t.line }};display:flex;flex-direction:column;min-height:0">
       <div style="height:56px;flex-shrink:0;display:flex;align-items:center;gap:10px;padding:0 20px">
         <div style="width:22px;height:22px;border-radius:5px;overflow:hidden;flex-shrink:0;background:{{ logoBg }}">
-          <svg viewBox="0 0 1000 1000" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="293.5" cy="293.5" r="177.5" stroke="{{ logoRing }}" stroke-width="34"></circle>
-            <circle cx="706" cy="293.5" r="177.5" stroke="{{ logoRing }}" stroke-width="34"></circle>
-            <circle cx="293.5" cy="706" r="177.5" stroke="{{ logoRing }}" stroke-width="34"></circle>
-            <circle cx="706" cy="706" r="177.5" stroke="{{ logoRing }}" stroke-width="34"></circle>
-            <path d="M741.238 694.44C760.105 724.96 724.961 760.105 694.44 741.238L517.878 632.094C506.922 625.321 493.079 625.321 482.123 632.094L305.561 741.238C275.04 760.104 239.896 724.96 258.762 694.44L367.907 517.878C374.679 506.921 374.679 493.079 367.907 482.122L258.762 305.56C239.896 275.04 275.04 239.896 305.56 258.762L482.123 367.906C493.079 374.679 506.922 374.679 517.878 367.906L694.44 258.762C724.961 239.896 760.105 275.04 741.238 305.56L632.094 482.122C625.321 493.079 625.321 506.921 632.094 517.878L741.238 694.44Z" fill="{{ accent }}"></path>
+          <svg viewBox="0 0 300 300" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="300" rx="20" fill="#0D0D0D"></rect>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M97.6191 154.762C123.918 154.762 145.238 176.082 145.238 202.381C145.238 228.68 123.918 250 97.6191 250C71.3198 250 50 228.68 50 202.381C50 176.082 71.3198 154.762 97.6191 154.762ZM97.6191 164.921C76.9303 164.921 60.1587 181.692 60.1587 202.381C60.1587 223.07 76.9303 239.841 97.6191 239.841C118.308 239.841 135.079 223.07 135.079 202.381C135.079 181.692 118.308 164.921 97.6191 164.921Z" fill="white"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M202.381 154.762C228.68 154.762 250 176.082 250 202.381C250 228.68 228.68 250 202.381 250C176.082 250 154.762 228.68 154.762 202.381C154.762 176.082 176.082 154.762 202.381 154.762ZM202.381 164.921C181.692 164.921 164.921 181.692 164.921 202.381C164.921 223.07 181.692 239.841 202.381 239.841C223.07 239.841 239.841 223.07 239.841 202.381C239.841 181.692 223.07 164.921 202.381 164.921Z" fill="white"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M97.6191 50C123.918 50 145.238 71.3198 145.238 97.6191C145.238 123.918 123.918 145.238 97.6191 145.238C71.3198 145.238 50 123.918 50 97.6191C50 71.3198 71.3198 50 97.6191 50ZM97.6191 60.1587C76.9303 60.1587 60.1587 76.9303 60.1587 97.6191C60.1587 118.308 76.9303 135.079 97.6191 135.079C118.308 135.079 135.079 118.308 135.079 97.6191C135.079 76.9303 118.308 60.1587 97.6191 60.1587Z" fill="white"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M202.381 50C228.68 50 250 71.3198 250 97.6191C250 123.918 228.68 145.238 202.381 145.238C176.082 145.238 154.762 123.918 154.762 97.6191C154.762 71.3198 176.082 50 202.381 50ZM202.381 60.1587C181.692 60.1587 164.921 76.9303 164.921 97.6191C164.921 118.308 181.692 135.079 202.381 135.079C223.07 135.079 239.841 118.308 239.841 97.6191C239.841 76.9303 223.07 60.1587 202.381 60.1587Z" fill="white"></path>
+            <path d="M198.945 191.106C202.959 196.294 196.295 202.959 191.107 198.944L153.483 169.834C151.47 168.276 148.658 168.276 146.645 169.834L109.021 198.944C103.833 202.959 97.1691 196.294 101.183 191.106L130.294 153.483C131.851 151.469 131.851 148.658 130.294 146.644L101.183 109.021C97.1691 103.833 103.833 97.1686 109.021 101.183L146.645 130.293C148.658 131.851 151.47 131.851 153.483 130.293L191.107 101.183C196.295 97.1686 202.959 103.833 198.945 109.021L169.835 146.644C168.277 148.658 168.277 151.469 169.835 153.483L198.945 191.106Z" fill="white"></path>
           </svg>
         </div>
         <span style="font-size:14px;font-weight:600;letter-spacing:-.012em">Drone Optimiser</span>
@@ -606,12 +607,13 @@ table{border-collapse:collapse;width:100%}
     <div style="width:400px;max-width:100%;background:{{ t.card }};border-radius:14px;padding:26px 26px 22px;display:flex;flex-direction:column;gap:14px" onClick="{{ stopIt }}">
       <div style="display:flex;align-items:center;gap:10px">
         <div style="width:22px;height:22px;border-radius:5px;overflow:hidden;flex-shrink:0;background:{{ logoBg }}">
-          <svg viewBox="0 0 1000 1000" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="293.5" cy="293.5" r="177.5" stroke="{{ logoRing }}" stroke-width="34"></circle>
-            <circle cx="706" cy="293.5" r="177.5" stroke="{{ logoRing }}" stroke-width="34"></circle>
-            <circle cx="293.5" cy="706" r="177.5" stroke="{{ logoRing }}" stroke-width="34"></circle>
-            <circle cx="706" cy="706" r="177.5" stroke="{{ logoRing }}" stroke-width="34"></circle>
-            <path d="M741.238 694.44C760.105 724.96 724.961 760.105 694.44 741.238L517.878 632.094C506.922 625.321 493.079 625.321 482.123 632.094L305.561 741.238C275.04 760.104 239.896 724.96 258.762 694.44L367.907 517.878C374.679 506.921 374.679 493.079 367.907 482.122L258.762 305.56C239.896 275.04 275.04 239.896 305.56 258.762L482.123 367.906C493.079 374.679 506.922 374.679 517.878 367.906L694.44 258.762C724.961 239.896 760.105 275.04 741.238 305.56L632.094 482.122C625.321 493.079 625.321 506.921 632.094 517.878L741.238 694.44Z" fill="{{ accent }}"></path>
+          <svg viewBox="0 0 300 300" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="300" rx="20" fill="#0D0D0D"></rect>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M97.6191 154.762C123.918 154.762 145.238 176.082 145.238 202.381C145.238 228.68 123.918 250 97.6191 250C71.3198 250 50 228.68 50 202.381C50 176.082 71.3198 154.762 97.6191 154.762ZM97.6191 164.921C76.9303 164.921 60.1587 181.692 60.1587 202.381C60.1587 223.07 76.9303 239.841 97.6191 239.841C118.308 239.841 135.079 223.07 135.079 202.381C135.079 181.692 118.308 164.921 97.6191 164.921Z" fill="white"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M202.381 154.762C228.68 154.762 250 176.082 250 202.381C250 228.68 228.68 250 202.381 250C176.082 250 154.762 228.68 154.762 202.381C154.762 176.082 176.082 154.762 202.381 154.762ZM202.381 164.921C181.692 164.921 164.921 181.692 164.921 202.381C164.921 223.07 181.692 239.841 202.381 239.841C223.07 239.841 239.841 223.07 239.841 202.381C239.841 181.692 223.07 164.921 202.381 164.921Z" fill="white"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M97.6191 50C123.918 50 145.238 71.3198 145.238 97.6191C145.238 123.918 123.918 145.238 97.6191 145.238C71.3198 145.238 50 123.918 50 97.6191C50 71.3198 71.3198 50 97.6191 50ZM97.6191 60.1587C76.9303 60.1587 60.1587 76.9303 60.1587 97.6191C60.1587 118.308 76.9303 135.079 97.6191 135.079C118.308 135.079 135.079 118.308 135.079 97.6191C135.079 76.9303 118.308 60.1587 97.6191 60.1587Z" fill="white"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M202.381 50C228.68 50 250 71.3198 250 97.6191C250 123.918 228.68 145.238 202.381 145.238C176.082 145.238 154.762 123.918 154.762 97.6191C154.762 71.3198 176.082 50 202.381 50ZM202.381 60.1587C181.692 60.1587 164.921 76.9303 164.921 97.6191C164.921 118.308 181.692 135.079 202.381 135.079C223.07 135.079 239.841 118.308 239.841 97.6191C239.841 76.9303 223.07 60.1587 202.381 60.1587Z" fill="white"></path>
+            <path d="M198.945 191.106C202.959 196.294 196.295 202.959 191.107 198.944L153.483 169.834C151.47 168.276 148.658 168.276 146.645 169.834L109.021 198.944C103.833 202.959 97.1691 196.294 101.183 191.106L130.294 153.483C131.851 151.469 131.851 148.658 130.294 146.644L101.183 109.021C97.1691 103.833 103.833 97.1686 109.021 101.183L146.645 130.293C148.658 131.851 151.47 131.851 153.483 130.293L191.107 101.183C196.295 97.1686 202.959 103.833 198.945 109.021L169.835 146.644C168.277 148.658 168.277 151.469 169.835 153.483L198.945 191.106Z" fill="white"></path>
           </svg>
         </div>
         <span style="font-size:16px;font-weight:600;letter-spacing:-.015em;color:{{ t.ink }}">Pro mode</span>
@@ -799,23 +801,17 @@ class Component extends DCLogic {
   }
 
   optimise() {
-    // Pick the LIGHTEST pack that hovers, keeps thrust/weight + current margin, and meets
-    // the flight-time target. (The old score chased a 40–60% throttle band, which with
-    // high-thrust real motors just piled on battery mass — the runaway the user hit.)
-    const target = this.state.mission.time;
-    let best = null, fallback = null;
+    // Goal: MAX FLIGHT TIME among feasible builds (must hover, hold thrust/weight for the
+    // flight style, and keep a safe current margin).
+    let best = null;
     this.MOTORS.forEach(m => this.BATTS.forEach(b => {
       const c = this.calc(this.snap({pair:[m.id, b.id]}));
       if (!(c.load < 1)) return;                    // must hover
       if (!(c.tw >= this.state.style)) return;      // thrust/weight for this style
       if (!(c.cm >= 1.3)) return;                   // safe current margin
-      if (!fallback || c.flight > fallback.f) fallback = {m:m.id, b:b.id, f:c.flight};
-      if (c.flight < target * 0.98) return;         // must reach the target
-      const score = (c.flight - target) + c.mtow * 0.002 + Math.abs(c.throttle - 50) * 0.05; // least overshoot, lightest
-      if (!best || score < best.score) best = {score, m:m.id, b:b.id};
+      if (!best || c.flight > best.f) best = {m:m.id, b:b.id, f:c.flight};
     }));
-    const pick = best || fallback;
-    if (pick) this.setState({motor:pick.m, batt:pick.b, battLocked:true, built:true});
+    if (best) this.setState({motor:best.m, batt:best.b, battLocked:true, built:true});
   }
 
   renderVals() {
