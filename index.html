@@ -1316,7 +1316,7 @@ class Component extends DCLogic {
           if (d.tw < st.style)
             add(d.tw < st.style - 0.4 ? 'bad' : 'med', 'Low thrust-to-weight', 'Only ' + d.tw.toFixed(2) + ':1 against ' + st.style.toFixed(1) + ':1 for this flight style. The drone will feel underpowered.', 3);
           if (thr > 60) add(thr > 70 ? 'bad' : 'med', 'Motor working too hard', 'Hover throttle is ' + thr.toFixed(0) + '%. Little headroom for gusts or climb.', 3);
-          else if (thr < 40) add('med', 'Motor is over-specced', 'Hover throttle is only ' + thr.toFixed(0) + '%. It barely works, so it carries weight it does not need.', 3);
+          else if (thr < 40) add('med', 'Motor is over-specced', 'This motor is built for heavier drones. At this weight it only needs ' + thr.toFixed(0) + '% throttle to hover, so you are paying in motor mass and cost for thrust you never use.', 3);
           if (d.effPct < 80) add(d.effPct < 65 ? 'bad' : 'med', 'Motor is inefficient at hover', 'Running at ' + d.effPct.toFixed(0) + '% of its best efficiency point.', 3);
           if (iR < 0.12 || iR > 0.55) add('med', 'Current ratio outside band', 'Hover draws ' + (iR * 100).toFixed(0) + '% of the motor’s max current; 20–40% is the healthy range.', 3);
           if (d.b.est) {
