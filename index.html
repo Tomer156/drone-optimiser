@@ -416,7 +416,7 @@ table{border-collapse:collapse;width:100%}
                   <span style="margin-left:auto;font-family:'Spline Sans Mono',monospace;font-size:11px;color:{{ t.mut }}">{{ frameClass }}</span>
                 </div>
                 <div style="display:flex;justify-content:center">
-                  <svg viewBox="0 0 160 160" width="132" height="132">
+                  <svg viewBox="-30 0 194 196" width="150" height="150">
                     <line x1="{{ fgA }}" y1="{{ fgA }}" x2="{{ fgB }}" y2="{{ fgB }}" stroke="{{ t.arm }}" stroke-width="5" stroke-linecap="round"></line>
                     <line x1="{{ fgB }}" y1="{{ fgA }}" x2="{{ fgA }}" y2="{{ fgB }}" stroke="{{ t.arm }}" stroke-width="5" stroke-linecap="round"></line>
                     <rect x="{{ fgBodyX }}" y="{{ fgBodyX }}" width="{{ fgBodyW }}" height="{{ fgBodyW }}" rx="4" fill="{{ t.ink }}"></rect>
@@ -424,6 +424,14 @@ table{border-collapse:collapse;width:100%}
                     <circle cx="{{ fgB }}" cy="{{ fgA }}" r="{{ fgR }}" fill="none" stroke="{{ t.rule2 }}" stroke-width="1"></circle>
                     <circle cx="{{ fgA }}" cy="{{ fgB }}" r="{{ fgR }}" fill="none" stroke="{{ t.rule2 }}" stroke-width="1"></circle>
                     <circle cx="{{ fgB }}" cy="{{ fgB }}" r="{{ fgR }}" fill="none" stroke="{{ t.rule2 }}" stroke-width="1"></circle>
+                    <line x1="{{ fgLeft }}" y1="{{ wDimY }}" x2="{{ fgRight }}" y2="{{ wDimY }}" stroke="{{ t.rule2 }}" stroke-width="1"></line>
+                    <line x1="{{ fgLeft }}" y1="{{ wTick0 }}" x2="{{ fgLeft }}" y2="{{ wTick1 }}" stroke="{{ t.rule2 }}" stroke-width="1"></line>
+                    <line x1="{{ fgRight }}" y1="{{ wTick0 }}" x2="{{ fgRight }}" y2="{{ wTick1 }}" stroke="{{ t.rule2 }}" stroke-width="1"></line>
+                    <text x="80" y="{{ wTextY }}" text-anchor="middle" font-size="9" font-family="'Spline Sans Mono',monospace" fill="{{ t.mut }}">W {{ dimW }} mm</text>
+                    <line x1="{{ lDimX }}" y1="{{ fgTop }}" x2="{{ lDimX }}" y2="{{ fgBot }}" stroke="{{ t.rule2 }}" stroke-width="1"></line>
+                    <line x1="{{ lTick0 }}" y1="{{ fgTop }}" x2="{{ lTick1 }}" y2="{{ fgTop }}" stroke="{{ t.rule2 }}" stroke-width="1"></line>
+                    <line x1="{{ lTick0 }}" y1="{{ fgBot }}" x2="{{ lTick1 }}" y2="{{ fgBot }}" stroke="{{ t.rule2 }}" stroke-width="1"></line>
+                    <text x="{{ lTextX }}" y="80" text-anchor="middle" font-size="9" font-family="'Spline Sans Mono',monospace" fill="{{ t.mut }}" transform="rotate(-90 {{ lTextX }} 80)">L {{ dimW }} mm</text>
                   </svg>
                 </div>
                 <div style="display:flex;flex-direction:column;gap:8px;padding-bottom:4px;border-bottom:1px solid {{ t.line2 }}">
@@ -435,8 +443,8 @@ table{border-collapse:collapse;width:100%}
                 </div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 16px">
                   <sc-for list="{{ frameStats }}" as="f" hint-placeholder-count="6">
-                    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
-                      <span style="font-size:11px;color:{{ t.mut }};white-space:nowrap">{{ f.k }}</span>
+                    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;cursor:help" title="{{ f.tip }}">
+                      <span style="font-size:11px;color:{{ t.mut }};white-space:nowrap;border-bottom:1px dotted {{ t.rule2 }}">{{ f.k }}</span>
                       <span style="font-family:'Spline Sans Mono',monospace;font-size:12px">{{ f.v }}</span>
                     </div>
                   </sc-for>
@@ -632,7 +640,7 @@ class Component extends DCLogic {
     mission:{time:22, alt:500},
     mass:{struct:550, motors:780, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450},
     eta:{wind:75, prop:100, av:95},
-    gap:15, prop:'all', motorFilter:'', battFilter:'', cells:'All', hoverSeg:null, hoverKpi:null, theme:'light', gate:false
+    gap:15, prop:'all', motorFilter:'', battFilter:'', cells:'All', hoverSeg:null, hoverKpi:null, theme:'light', gate:false, built:false
   };
 
   get pal() { return this.PAL[this.props.fitPalette === 'safe' ? 'safe' : 'classic']; }
@@ -760,6 +768,7 @@ class Component extends DCLogic {
       g[key] = value;
       const n = {};
       n[group] = g;
+      n.built = true;
       // in Auto the tool owns the pack: any mission/mass change drops back to an estimate
       if (s.mode === 'auto') n.battLocked = false;
       return n;
@@ -789,7 +798,7 @@ class Component extends DCLogic {
       if (!best || score < best.score) best = {score, m:m.id, b:b.id};
     }));
     const pick = best || fallback;
-    if (pick) this.setState({motor:pick.m, batt:pick.b, battLocked:true});
+    if (pick) this.setState({motor:pick.m, batt:pick.b, battLocked:true, built:true});
   }
 
   renderVals() {
@@ -998,7 +1007,7 @@ class Component extends DCLogic {
       optimise: () => this.optimise(),
       prev: () => this.setState(s => ({step:Math.max(1, s.step - 1)})),
       next: () => this.setState(s => ({step:Math.min(5, s.step + 1)})),
-      reset: () => this.setState({step:1, motor:window.__DEFAULT_MOTOR, batt:window.__DEFAULT_BATT, battLocked:false, style:1.7, mission:{time:22, alt:500}, mass:{struct:550, motors:780, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450}, eta:{wind:75, prop:100, av:95}, gap:15, motorFilter:'', cells:'All'}),
+      reset: () => this.setState({step:1, motor:window.__DEFAULT_MOTOR, batt:window.__DEFAULT_BATT, battLocked:false, style:1.7, mission:{time:22, alt:500}, mass:{struct:550, motors:780, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450}, eta:{wind:75, prop:100, av:95}, gap:15, motorFilter:'', cells:'All', built:false}),
 
       s1n:S[0].n, s1bg:S[0].bg, s1fg:S[0].fg, s1txt:S[0].txt, b1:S[0].body, go1:S[0].go,
       s2n:S[1].n, s2bg:S[1].bg, s2fg:S[1].fg, s2txt:S[1].txt, b2:S[1].body, go2:S[1].go,
@@ -1017,7 +1026,7 @@ class Component extends DCLogic {
         border: st.style === s.v ? ink : '#E7E4DF',
         bg: st.style === s.v ? '#E8E6E1' : '#FFFFFF',
         color: st.style === s.v ? ink : '#6E6C66',
-        go: () => this.setState({style:s.v})
+        go: () => this.setState({style:s.v, built:true})
       })),
 
       massSliders: massDefs.map(md => ({
@@ -1036,7 +1045,7 @@ class Component extends DCLogic {
           .sort((a, b) => { const pa = a.split('x').map(parseFloat), pb = b.split('x').map(parseFloat); return (pa[0] - pb[0]) || ((pa[1] || 0) - (pb[1] || 0)) || ((pa[2] || 0) - (pb[2] || 0)); })
           .map(p => ({v:p, label:p.replace(/x/g, ' × ')}))
       ),
-      onProp: e => this.setState({prop:e.target.value}),
+      onProp: e => this.setState({prop:e.target.value, built:true}),
       motorFilter: st.motorFilter,
       onMotorFilter: e => this.setState({motorFilter:e.target.value}),
       motorRows: motors.map(m => {
@@ -1045,11 +1054,17 @@ class Component extends DCLogic {
         // a shortfall driven by the shared pack estimate is not this motor's fault —
         // prefer a motor-specific gate so the list differentiates
         // pack-driven gates are shared by every candidate — judge a motor on its own gates only
-        const own = c.gates.filter(x => x.step < 4 || x.key === 'flight');
+        // Judge the MOTOR on motor traits only — flight time is battery-driven, not the motor's fault.
+        const own = c.gates.filter(x => ['hover', 'tw', 'eff', 'thr', 'irat'].includes(x.key));
         const badOwn = own.filter(x => x.tone === 'bad');
-        // caption prefers a motor-specific fault; flight time only if nothing else is wrong
-        const fail = badOwn.filter(x => x.key !== 'flight')[0] || badOwn[0];
-        const ownTone = own.some(x => x.tone === 'bad') ? 'bad' : (own.some(x => x.tone === 'med') ? 'med' : 'good');
+        const fail = badOwn[0];
+        // Hard fail = can't hover or not enough thrust/weight. Efficiency / throttle-band /
+        // current-ratio are quality notes (amber), not disqualifiers.
+        const hard = own.filter(x => x.key === 'hover' || x.key === 'tw');
+        const soft = own.filter(x => x.key === 'eff' || x.key === 'thr' || x.key === 'irat');
+        const ownTone = hard.some(x => x.tone === 'bad') ? 'bad'
+          : (hard.some(x => x.tone === 'med') || soft.some(x => x.tone !== 'good')) ? 'med'
+          : 'good';
         const faults = {
           hover:'cannot hover this mass',
           eff:'off efficiency peak',
@@ -1068,7 +1083,7 @@ class Component extends DCLogic {
           dot: dot(ownTone),
           nameColor: on ? ink : '#55534E',
           bg: on ? '#F2F0EC' : 'transparent',
-          go: () => this.setState({motor:m.id})
+          go: () => this.setState({motor:m.id, built:true})
         };
       }),
 
@@ -1095,7 +1110,7 @@ class Component extends DCLogic {
           dot: dot(bTone),
           nameColor: on ? ink : '#55534E',
           bg: on ? '#F2F0EC' : 'transparent',
-          go: () => this.setState({batt:b.id, battLocked:true})
+          go: () => this.setState({batt:b.id, battLocked:true, built:true})
         };
       }),
 
@@ -1106,7 +1121,7 @@ class Component extends DCLogic {
       ],
       etaTotal: (d.eta * 100).toFixed(0),
       gap: String(st.gap),
-      onGap: e => this.setState({gap:+e.target.value}),
+      onGap: e => this.setState({gap:+e.target.value, built:true}),
 
       tabs: [{k:'overview',label:'Results'},{k:'elec',label:'Electronics'},{k:'chain',label:'Calc chain'}].map(t => ({
         label:t.label,
@@ -1146,18 +1161,18 @@ class Component extends DCLogic {
       ftEnter: () => this.setState({hoverKpi:'ft'}),
       ftLeave: () => this.setState({hoverKpi:null}),
 
-      effPath,
+      effPath: st.built ? effPath : '',
       effTicks: [effTop.toFixed(1), (effTop * 2 / 3).toFixed(1), (effTop / 3).toFixed(1), '0'],
-      effMxPct: d.throttle.toFixed(1) + '%', effMyPct: eY(d.eff).toFixed(1) + '%',
-      throttleNow: d.throttle.toFixed(0),
+      effMxPct: st.built ? d.throttle.toFixed(1) + '%' : '-999%', effMyPct: eY(d.eff).toFixed(1) + '%',
+      throttleNow: st.built ? d.throttle.toFixed(0) : '—',
 
-      payPath,
+      payPath: st.built ? payPath : '',
       payTargetY: pY(st.mission.time).toFixed(2),
       payTargetPct: pY(st.mission.time).toFixed(1) + '%',
-      payMxPct: Math.max(1, Math.min(((d.mtow - mtowBase) / payMax) * 100, 99)).toFixed(1) + '%',
+      payMxPct: st.built ? Math.max(1, Math.min(((d.mtow - mtowBase) / payMax) * 100, 99)).toFixed(1) + '%' : '-999%',
       payMyPct: pY(d.flight).toFixed(1) + '%',
       payColor: val(gb.flight.tone),
-      effNow: d.eff.toFixed(2),
+      effNow: st.built ? d.eff.toFixed(2) : '—',
       effColor: val(gb.eff.tone),
       payTicks: [yHi.toFixed(0), (yLo + (yHi - yLo) * 2 / 3).toFixed(0), (yLo + (yHi - yLo) / 3).toFixed(0), yLo.toFixed(0)],
       payMaxLabel: (mtowTop / 1000).toFixed(1) + ' kg',
@@ -1169,7 +1184,7 @@ class Component extends DCLogic {
 
       pairChip: d.m.name + ' · ' + d.m.prop + ' · ' + d.b.label,
       thrColor: val(gb.thr.tone),
-      flightNow: d.flight.toFixed(0),
+      flightNow: st.built ? d.flight.toFixed(0) : '—',
       payloadG: String(st.mass.payload),
       stopIt: e => e.stopPropagation(),
       checksDisplay: pro ? 'flex' : 'none',
@@ -1200,14 +1215,20 @@ class Component extends DCLogic {
 
       fgA: fgA.toFixed(1), fgB: (160 - fgA).toFixed(1), fgR: fgR.toFixed(1),
       fgBodyX: (80 - fgBody / 2).toFixed(1), fgBodyW: fgBody.toFixed(1),
+      // Width / Length dimension lines (bounding box across the prop tips, centred at 80)
+      fgLeft: (fgA - fgR).toFixed(1), fgRight: (160 - fgA + fgR).toFixed(1),
+      fgTop: (fgA - fgR).toFixed(1), fgBot: (160 - fgA + fgR).toFixed(1),
+      wDimY: (160 - fgA + fgR + 10).toFixed(1), wTick0: (160 - fgA + fgR + 7).toFixed(1), wTick1: (160 - fgA + fgR + 13).toFixed(1), wTextY: (160 - fgA + fgR + 24).toFixed(1),
+      lDimX: (fgA - fgR - 10).toFixed(1), lTick0: (fgA - fgR - 13).toFixed(1), lTick1: (fgA - fgR - 7).toFixed(1), lTextX: (fgA - fgR - 20).toFixed(1),
+      dimW: span.toFixed(0),
       frameClass: 'Prop size ' + Math.round(d.m.propIn) + '"',
       frameStats: [
-        {k:'Diagonal M–M', v:d.diag.toFixed(0)},
-        {k:'Arm length', v:(d.diag / 2).toFixed(0)},
-        {k:'Tip-to-tip', v:(d.diag + d.propMm).toFixed(0)},
-        {k:'Adjacent M–M', v:d.adj.toFixed(0)},
-        {k:'Min body width', v:((d.diag / 2) * 0.55).toFixed(0)},
-        {k:'Prop diameter', v:d.propMm.toFixed(0)}
+        {k:'Diagonal M–M', v:d.diag.toFixed(0), tip:'Distance between diagonally-opposite motor shafts.'},
+        {k:'Arm length', v:(d.diag / 2).toFixed(0), tip:'Frame centre to a motor shaft — half the diagonal.'},
+        {k:'Tip-to-tip', v:(d.diag + d.propMm).toFixed(0), tip:'Overall span across opposite propeller tips (diagonal).'},
+        {k:'Adjacent M–M', v:d.adj.toFixed(0), tip:'Distance between two side-by-side motor shafts — the frame side.'},
+        {k:'Min body width', v:((d.diag / 2) * 0.55).toFixed(0), tip:'Rough minimum centre-plate width to fit the arms and stack.'},
+        {k:'Prop diameter', v:d.propMm.toFixed(0), tip:'Propeller diameter for the selected motor.'}
       ],
 
       overallColor: val(d.worst),
