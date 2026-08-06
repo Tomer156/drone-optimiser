@@ -1031,7 +1031,11 @@ class Component extends DCLogic {
       mtowKg: (d.mtow / 1000).toFixed(2),
 
       propValue: st.prop,
-      propOptions: [{v:'all', label:'All propeller sizes'}].concat(this.MOTORS.map(m => ({v:m.prop, label:m.prop.replace(/x/g, ' × ')}))),
+      propOptions: [{v:'all', label:'All propeller sizes'}].concat(
+        [...new Set(this.MOTORS.map(m => m.prop))]
+          .sort((a, b) => { const pa = a.split('x').map(parseFloat), pb = b.split('x').map(parseFloat); return (pa[0] - pb[0]) || ((pa[1] || 0) - (pb[1] || 0)) || ((pa[2] || 0) - (pb[2] || 0)); })
+          .map(p => ({v:p, label:p.replace(/x/g, ' × ')}))
+      ),
       onProp: e => this.setState({prop:e.target.value}),
       motorFilter: st.motorFilter,
       onMotorFilter: e => this.setState({motorFilter:e.target.value}),
