@@ -160,12 +160,12 @@ table{border-collapse:collapse;width:100%}
           </div>
           <div style="padding:2px 20px 14px;flex-direction:column;gap:14px;display:{{ b3 }}">
             <sc-for list="{{ estSliders }}" as="m" hint-placeholder-count="2">
-              <div style="display:flex;flex-direction:column;gap:6px;opacity:{{ m.opacity }}">
+              <div style="display:flex;flex-direction:column;gap:6px">
                 <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
                   <span style="font-size:12px;color:{{ t.body }}">{{ m.label }}</span>
                   <span style="font-family:'Spline Sans Mono',monospace;font-size:12px;white-space:nowrap">{{ m.shown }}<span style="color:{{ t.mut }}"> g</span></span>
                 </div>
-                <input type="range" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" disabled="{{ m.disabled }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="background:{{ m.track }}">
+                <input type="range" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="background:{{ m.track }};display:{{ m.sliderShow }}">
                 <span style="font-size:10.5px;color:{{ m.noteColor }}">{{ m.note }}</span>
               </div>
             </sc-for>
@@ -175,7 +175,7 @@ table{border-collapse:collapse;width:100%}
         <!-- 4 OPTIMISATION (Auto mode only) -->
         <div style="display:{{ autoOnly }}">
           <div style="display:flex;align-items:center;gap:11px;padding:10px 20px;border-top:1px solid {{ t.line2 }}">
-            <span style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono',monospace;font-size:9px;font-weight:500;flex-shrink:0;background:{{ t.ink }};color:{{ t.card }}">4</span>
+            <span style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono',monospace;font-size:9px;font-weight:500;flex-shrink:0;background:{{ t.line2 }};color:{{ t.mut }}">4</span>
             <span style="font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:{{ t.ink }}">Optimise for</span>
           </div>
           <div style="padding:2px 20px 14px;display:flex;flex-direction:column;gap:8px">
@@ -932,6 +932,25 @@ class Component extends DCLogic {
     } catch (e) {}
   }
 
+  // Best flight time reachable while the motor stays in its 40-60% throttle band, using the
+  // pack that is currently in play. Endurance and the sweet spot pull against each other: long
+  // endurance wants low disc loading (big motor, low throttle), so a demanding target can make
+  // the band unreachable. That is a mission-budget conflict, not a bad motor choice.
+  bandCeiling() {
+    const base = this.snap();
+    const key = JSON.stringify([base.mass, base.mission.alt, base.eta, base.style, base.batt, base.battLocked]);
+    if (this._bcKey === key) return this._bcVal;
+    let bestF = 0, bestThr = null;
+    this.MOTORS.forEach(m => {
+      const c = this.calc(this.snap({key:'motor', value:m.id}));
+      if (!(c.load < 1) || !(c.tw >= base.style) || !(c.cm >= 1.3)) return;
+      if (!(c.throttle >= 40 && c.throttle <= 60)) return;
+      if (c.flight > bestF) { bestF = c.flight; bestThr = c.throttle; }
+    });
+    this._bcKey = key; this._bcVal = {f:bestF, thr:bestThr};
+    return this._bcVal;
+  }
+
   optimise() {
     // All goals share the same feasibility gate: must hover, hold thrust/weight for the flight
     // style, keep a safe current margin, and reach the mission's target flight time. They differ
@@ -1277,8 +1296,9 @@ class Component extends DCLogic {
           note: frozen ? (isMotor ? d.m.wt + ' g each · from database' : 'from database') : 'estimate',
           noteColor: frozen ? p.good : mut,
           track: frozen ? (dark ? '#2C3035' : '#EAE8E3') : this.track('mass', md[0], md[2], md[3]),
-          disabled: frozen ? 'true' : '',
-          opacity: frozen ? '0.45' : '1',
+          // A permanently disabled slider is just noise: once the real weight is known the row
+          // becomes a plain read-out instead.
+          sliderShow: frozen ? 'none' : 'block',
           onInput: frozen ? (() => {}) : (e => this.set('mass', md[0], +e.target.value))
         };
       }),
@@ -1442,7 +1462,19 @@ class Component extends DCLogic {
           if (d.tw < st.style)
             add(d.tw < st.style - 0.4 ? 'bad' : 'med', 'Low thrust-to-weight', 'Only ' + d.tw.toFixed(2) + ':1 against ' + st.style.toFixed(1) + ':1 for this flight style. The drone will feel underpowered.', 4);
           if (thr > 60) add(thr > 70 ? 'bad' : 'med', 'Motor working too hard', 'Hover throttle is ' + thr.toFixed(0) + '%. Little headroom for gusts or climb.', 4);
-          else if (thr < 40) add('med', 'Motor is over-specced', 'This motor is built for heavier drones. At this weight it only needs ' + thr.toFixed(0) + '% throttle to hover, so you are paying in motor mass and cost for thrust you never use.', 4);
+          else if (thr < 40) {
+            // Is the motor genuinely the wrong pick, or is the mission forcing it? Endurance wants
+            // low disc loading, so a demanding target can put the sweet spot out of reach entirely.
+            const bc = this.bandCeiling();
+            if (bc.f > 0 && bc.f < st.mission.time) {
+              add('med', 'Target needs an oversized motor',
+                'Holding the 40–60% throttle band caps endurance at about ' + bc.f.toFixed(0) + ' min with this pack, short of your ' +
+                st.mission.time + ' min target. Reaching the target means running a bigger motor at ' + thr.toFixed(0) +
+                '% throttle. Lower the target or the mass budget to bring the motor back into its band.', 1);
+            } else {
+              add('med', 'Motor is over-specced', 'This motor is built for heavier drones. At this weight it only needs ' + thr.toFixed(0) + '% throttle to hover, so you are paying in motor mass and cost for thrust you never use.', 4);
+            }
+          }
           if (d.effPct < 80) add(d.effPct < 65 ? 'bad' : 'med', 'Motor is inefficient at hover', 'Running at ' + d.effPct.toFixed(0) + '% of its best efficiency point.', 4);
           if (iR < 0.12 || iR > 0.55) add('med', 'Current ratio outside band', 'Hover draws ' + (iR * 100).toFixed(0) + '% of the motor’s max current; 20–40% is the healthy range.', 4);
           if (d.b.est) {
