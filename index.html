@@ -1246,7 +1246,8 @@ class Component extends DCLogic {
       toggleTheme: () => this.setState({theme: st.theme === 'dark' ? 'light' : 'dark'}),
       proOnly: pro ? 'block' : 'none',
       navDisplay: pro ? 'flex' : 'none',
-      nextDisplay: (pro && st.step < 5) ? 'flex' : 'none',
+      // 6 steps now (Fine tune is the last), so Next must stay through step 5
+      nextDisplay: (pro && st.step < 6) ? 'flex' : 'none',
       optDisplay: pro ? 'none' : 'flex',
       autoBg: pro ? 'transparent' : chip,
       autoFg: pro ? mut : ink,
