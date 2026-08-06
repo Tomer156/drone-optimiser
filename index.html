@@ -786,7 +786,7 @@ class Component extends DCLogic {
     // Endurance from pack energy vs hover power (original tool's formula)
     const battWh = b.ah * b.v;
     const flight = power > 0 ? (battWh / power) * eta * 60 : 0;
-    const tw = (maxT * 4) / mtow;
+    const tw = mtow > 0 ? (maxT * 4) / mtow : 0;   // mass can legitimately be 0: avoid Infinity
     const reqAh = (s.mission.time * I) / (60 * eta);
     const reqC = Math.ceil(Ikt / Math.max(reqAh, 0.1));
     const iRat = Ihm / Ipm;
@@ -931,14 +931,14 @@ class Component extends DCLogic {
     const sign = v => (v >= 0 ? '+' : '') + v;
 
     const massDefs = [
-      ['struct','Structure + frame',50,2000,10],
-      ['motors','Motors (×4)',50,1000,10],
-      ['esc','ESCs',5,300,5],
-      ['av','FC + GPS + RX',10,300,5],
-      ['misc','Wiring + misc',10,300,5],
+      ['struct','Structure + frame',0,2000,10],
+      ['motors','Motors (×4)',0,1000,10],
+      ['esc','ESCs',0,300,5],
+      ['av','FC + GPS + RX',0,300,5],
+      ['misc','Wiring + misc',0,300,5],
       ['cam','Camera / FPV',0,800,5],
       ['payload','Payload',0,5000,25],
-      ['battEst','Battery (est.)',100,6000,25]
+      ['battEst','Battery (est.)',0,6000,25]
     ];
 
     // Motor fit tone (motor traits only) + battery fit tone (voltage/current-margin compatibility).
@@ -1045,8 +1045,9 @@ class Component extends DCLogic {
     const CIRC = 2 * Math.PI * 58;
     const GAP = 4, SW = 11, MIN = 18;
     // every group gets at least MIN of arc so it stays visible and hoverable
-    const need = groups.map(s => Math.max((s[1] / d.mtow) * CIRC, MIN));
-    const scale = CIRC / need.reduce((a, b) => a + b, 0);
+    // (guard a zero MTOW: every mass can legitimately be dialled to 0)
+    const need = groups.map(s => Math.max((s[1] / (d.mtow || 1)) * CIRC, MIN));
+    const scale = CIRC / (need.reduce((a, b) => a + b, 0) || 1);
     let cum = 0;
     const donut = groups.map((s, i) => {
       const len = need[i] * scale;
@@ -1055,7 +1056,7 @@ class Component extends DCLogic {
       const dash = Math.max(len - GAP - SW, 0.4);
       const round = (len - GAP - SW) > 0.4;
       const mid = (cum - len / 2) / CIRC * 2 * Math.PI - Math.PI / 2;
-      return {k:s[0], g:s[1] + ' g', pct:((s[1] / d.mtow) * 100).toFixed(0) + '%', c:shade[i % shade.length],
+      return {k:s[0], g:s[1] + ' g', pct:((s[1] / (d.mtow || 1)) * 100).toFixed(0) + '%', c:shade[i % shade.length],
         cap: round ? 'round' : 'butt',
         d:dash.toFixed(2) + ' ' + (CIRC - dash).toFixed(2), o:(o - GAP / 2 - (round ? SW / 2 : 0)).toFixed(2),
         x:(50 + Math.cos(mid) * 41).toFixed(1) + '%', y:(50 + Math.sin(mid) * 41).toFixed(1) + '%',
@@ -1305,7 +1306,9 @@ class Component extends DCLogic {
         const W = [];
         const add = (tone, title, detail, step) => W.push({tone, title, detail, step});
         const thr = d.throttle, iR = d.iRat;
-        if (!st.built) {
+        if (d.mtow <= 0) {
+          add('info', 'No mass budget set', 'Every component mass is zero, so there is nothing to lift and the numbers below are meaningless. Set at least a frame and battery mass.', 2);
+        } else if (!st.built) {
           add('info', 'No motor selected yet', 'Pick a motor and pack, or hit Optimise, to evaluate this build.', 3);
         } else {
           if (!d.benchOk || d.load >= 1)
@@ -1338,8 +1341,8 @@ class Component extends DCLogic {
             titleColor: w.tone === 'bad' ? p.bad : ink,
             go: () => this.setState({step:w.step})
           })),
-          warnCount: nBad ? (nBad + ' critical') : (nMed ? (nMed + ' to review') : 'all clear'),
-          warnCountColor: nBad ? p.bad : (nMed ? p.med : p.good),
+          warnCount: nBad ? (nBad + ' critical') : (nMed ? (nMed + ' to review') : (W.length ? (W.length === 1 ? '1 note' : W.length + ' notes') : 'all clear')),
+          warnCountColor: nBad ? p.bad : (nMed ? p.med : (W.length ? mut : p.good)),
           warnEmpty: W.length ? 'none' : 'block'
         };
       })(),
