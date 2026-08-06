@@ -886,14 +886,14 @@ class Component extends DCLogic {
     // Each filter greys out the OTHER filter's options that would yield no matches.
     const quietC = dark ? '#3A3F44' : '#B9B5AC';
     const motorAll = this.MOTORS.map(m => { const c = this.calc(this.snap({key:'motor', value:m.id})); return {m, c, tone:motorTone(c)}; });
-    const motors = motorAll.filter(x => (st.prop === 'all' || x.m.prop === st.prop) && (st.motorFit === 'all' || x.tone === st.motorFit));
+    const motors = motorAll.filter(x => x.m.id === st.motor || ((st.prop === 'all' || x.m.prop === st.prop) && (st.motorFit === 'all' || x.tone === st.motorFit)));
     const motorsByProp = motorAll.filter(x => st.prop === 'all' || x.m.prop === st.prop);   // for the fit dropdown
     const motorsByFit  = motorAll.filter(x => st.motorFit === 'all' || x.tone === st.motorFit); // for the prop dropdown
     const fitAvail  = v => v === 'all' || motorsByProp.some(x => x.tone === v);
     const propAvail = v => v === 'all' || motorsByFit.some(x => x.m.prop === v);
 
     const battAll = this.BATTS.map(b => { const c = this.calc(this.snap({key:'batt', value:b.id})); return {b, c, tone:battTone(c)}; });
-    const batts = battAll.filter(x => (st.cells === 'all' || x.b.cells === st.cells) && (st.battFit === 'all' || x.tone === st.battFit));
+    const batts = battAll.filter(x => x.b.id === st.batt || ((st.cells === 'all' || x.b.cells === st.cells) && (st.battFit === 'all' || x.tone === st.battFit)));
     const battByCells = battAll.filter(x => st.cells === 'all' || x.b.cells === st.cells);  // for the fit dropdown
     const battByFit = battAll.filter(x => st.battFit === 'all' || x.tone === st.battFit);   // for the cells dropdown
     const battFitAvail = v => v === 'all' || battByCells.some(x => x.tone === v);
