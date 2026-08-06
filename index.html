@@ -34,8 +34,10 @@ window.__benchAt=function(rows,tgt){
   // not a super-efficient motor. Fall back to momentum theory (I ∝ T^1.5) from the first row.
   if(tgt<minT){
     var phys=rows[0].current_a*Math.pow(Math.max(tgt,1)/minT,1.5);
-    // trust the linear fit (original behaviour) but never let it collapse far below physics
-    cur=(cur>0.5*phys)?cur:phys;
+    // Trust the linear fit (original behaviour) but never let it collapse below physics.
+    // max() of two continuous curves stays continuous — a switch here would put a step in
+    // the efficiency and flight-time charts.
+    cur=Math.max(cur,0.8*phys);
   }
   if(!(cur>0)) return null;
   var thr=(lo.throttle!=null&&hi.throttle!=null)?Math.max(1,lo.throttle+(hi.throttle-lo.throttle)*f):null;
@@ -956,11 +958,23 @@ class Component extends DCLogic {
       return {thr:String(thr), tag:thr === nearest ? 'hover' : '', thrust:thrust.toFixed(0), amps:amps.toFixed(1), watts:w.toFixed(0), eff:(thrust / w).toFixed(2), bg:thr === nearest ? hover2 : chip};
     });
 
-    // ── efficiency curve from the real bench rows (throttle vs g/W) ──
-    const effTop = d.peak * 1.15;
-    const ePts = thrKeys.length >= 2
-      ? thrKeys.map(thr => { const rs = byThr[thr]; const e = rs.some(r => r.efficiency != null) ? avg(rs.filter(r => r.efficiency != null), r => r.efficiency) : avg(rs, r => r.thrust_g) / (avg(rs, r => r.current_a) * avg(rs, r => r.voltage_v)); return [thr, e]; })
-      : (() => { const a = []; for (let t = 5; t <= 100; t += 2.5) { const l = Math.pow(t / 100, 1 / 0.62); const cur = d.m.peakA * (this.A0 + this.AK * Math.pow(l, this.EX)); a.push([t, (d.maxT * l) / (cur * d.b.v)]); } return a; })();
+    // ── efficiency curve over the motor's whole operating range (throttle vs g/W) ──
+    // Sampled through the same interpolator calc() uses, so the hover marker always lies ON
+    // the curve even when hover thrust sits below the lowest bench row.
+    const ePts = (mrows.length >= 2) ? (() => {
+      const maxTb = mrows[mrows.length - 1].thrust_g, pts = [];
+      // bound the sweep to the useful operating region: the near-zero-thrust tail has
+      // implausibly high g/W and would squash the part of the curve that matters
+      const loT = Math.max(Math.min(d.Th * 0.5, maxTb * 0.5), maxTb * 0.03);
+      for (let k = 0; k <= 48; k++) {
+        const bb = window.__benchAt(mrows, loT + (maxTb - loT) * (k / 48));
+        if (!bb || bb.throttle == null || !(bb.efficiency > 0)) continue;
+        pts.push([Math.max(0, Math.min(100, bb.throttle)), bb.efficiency]);
+      }
+      return pts;
+    })() : (() => { const a = []; for (let t = 5; t <= 100; t += 2.5) { const l = Math.pow(t / 100, 1 / 0.62); const cur = d.m.peakA * (this.A0 + this.AK * Math.pow(l, this.EX)); a.push([t, (d.maxT * l) / (cur * d.b.v)]); } return a; })();
+    // scale to the DB peak and the live hover point so the marker is never pinned
+    const effTop = Math.max(d.peak, d.eff) * 1.15;
     const eY = v => 100 - Math.max(0, Math.min(v / effTop, 1)) * 100;
     const smooth = pts => {
       if (pts.length < 2) return '';
