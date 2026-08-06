@@ -148,21 +148,34 @@ table{border-collapse:collapse;width:100%}
                 <input type="range" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="background:{{ m.track }}">
               </div>
             </sc-for>
-            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding-top:4px;border-top:1px solid {{ t.line2 }}">
-              <span style="font-size:12px;color:{{ motorsRowColor }}">{{ motorsRowLabel }}</span>
-              <span style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:{{ motorsRowColor }}">{{ motorsMass }} g</span>
-            </div>
-            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
-              <span style="font-size:12px;color:{{ battRowColor }}">{{ battRowLabel }}</span>
-              <span style="font-family:'Spline Sans Mono',monospace;font-size:12px;color:{{ battRowColor }}">{{ battMass }} g</span>
-            </div>
           </div>
         </div>
 
-        <!-- 3 OPTIMISATION (Auto mode only) -->
+        <!-- 3 INITIAL ESTIMATION -->
+        <div>
+          <div style="display:flex;align-items:center;gap:11px;padding:10px 20px;cursor:pointer;border-top:1px solid {{ t.line2 }}" onClick="{{ go3 }}">
+            <span style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono',monospace;font-size:9px;font-weight:500;flex-shrink:0;background:{{ s3bg }};color:{{ s3fg }}">{{ s3n }}</span>
+            <span style="font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:{{ s3txt }}">Initial Estimation</span>
+            <span style="margin-left:auto;font-family:'Spline Sans Mono',monospace;font-size:11px;color:{{ t.mut }}">{{ estTotal }} g</span>
+          </div>
+          <div style="padding:2px 20px 14px;flex-direction:column;gap:14px;display:{{ b3 }}">
+            <sc-for list="{{ estSliders }}" as="m" hint-placeholder-count="2">
+              <div style="display:flex;flex-direction:column;gap:6px;opacity:{{ m.opacity }}">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
+                  <span style="font-size:12px;color:{{ t.body }}">{{ m.label }}</span>
+                  <span style="font-family:'Spline Sans Mono',monospace;font-size:12px;white-space:nowrap">{{ m.shown }}<span style="color:{{ t.mut }}"> g</span></span>
+                </div>
+                <input type="range" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" disabled="{{ m.disabled }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="background:{{ m.track }}">
+                <span style="font-size:10.5px;color:{{ m.noteColor }}">{{ m.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- 4 OPTIMISATION (Auto mode only) -->
         <div style="display:{{ autoOnly }}">
           <div style="display:flex;align-items:center;gap:11px;padding:10px 20px;border-top:1px solid {{ t.line2 }}">
-            <span style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono',monospace;font-size:9px;font-weight:500;flex-shrink:0;background:{{ t.ink }};color:{{ t.card }}">3</span>
+            <span style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono',monospace;font-size:9px;font-weight:500;flex-shrink:0;background:{{ t.ink }};color:{{ t.card }}">4</span>
             <span style="font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:{{ t.ink }}">Optimise for</span>
           </div>
           <div style="padding:2px 20px 14px;display:flex;flex-direction:column;gap:8px">
@@ -177,11 +190,11 @@ table{border-collapse:collapse;width:100%}
 
         <!-- 4 PROP + MOTOR -->
         <div style="display:{{ proOnly }}">
-          <div style="display:flex;align-items:center;gap:11px;padding:10px 20px;cursor:pointer;border-top:1px solid {{ t.line2 }}" onClick="{{ go3 }}">
-            <span style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono',monospace;font-size:9px;font-weight:500;flex-shrink:0;background:{{ s3bg }};color:{{ s3fg }}">{{ s3n }}</span>
-            <span style="font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:{{ s3txt }}">Prop + Motor</span>
+          <div style="display:flex;align-items:center;gap:11px;padding:10px 20px;cursor:pointer;border-top:1px solid {{ t.line2 }}" onClick="{{ go4 }}">
+            <span style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono',monospace;font-size:9px;font-weight:500;flex-shrink:0;background:{{ s4bg }};color:{{ s4fg }}">{{ s4n }}</span>
+            <span style="font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:{{ s4txt }}">Prop + Motor</span>
           </div>
-          <div style="padding:2px 20px 14px;flex-direction:column;gap:8px;display:{{ b3 }}">
+          <div style="padding:2px 20px 14px;flex-direction:column;gap:8px;display:{{ b4 }}">
             <div style="display:flex;gap:6px">
               <select value="{{ propValue }}" onChange="{{ onProp }}" style="flex:1;min-width:0">
                 <sc-for list="{{ propOptions }}" as="o" hint-placeholder-count="7">
@@ -208,13 +221,13 @@ table{border-collapse:collapse;width:100%}
           </div>
         </div>
 
-        <!-- 4 BATTERY -->
+        <!-- 5 BATTERY -->
         <div style="display:{{ proOnly }}">
-          <div style="display:flex;align-items:center;gap:11px;padding:10px 20px;cursor:pointer;border-top:1px solid {{ t.line2 }}" onClick="{{ go4 }}">
-            <span style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono',monospace;font-size:9px;font-weight:500;flex-shrink:0;background:{{ s4bg }};color:{{ s4fg }}">{{ s4n }}</span>
-            <span style="font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:{{ s4txt }}">Battery</span>
+          <div style="display:flex;align-items:center;gap:11px;padding:10px 20px;cursor:pointer;border-top:1px solid {{ t.line2 }}" onClick="{{ go5 }}">
+            <span style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono',monospace;font-size:9px;font-weight:500;flex-shrink:0;background:{{ s5bg }};color:{{ s5fg }}">{{ s5n }}</span>
+            <span style="font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:{{ s5txt }}">Battery</span>
           </div>
-          <div style="padding:2px 20px 14px;flex-direction:column;gap:8px;display:{{ b4 }}">
+          <div style="padding:2px 20px 14px;flex-direction:column;gap:8px;display:{{ b5 }}">
             <div style="display:flex;gap:6px">
               <select value="{{ battCapValue }}" onChange="{{ onBattCap }}" style="flex:1;min-width:0">
                 <sc-for list="{{ battCapOptions }}" as="o" hint-placeholder-count="6">
@@ -242,14 +255,14 @@ table{border-collapse:collapse;width:100%}
           </div>
         </div>
 
-        <!-- 5 FINE TUNE -->
+        <!-- 6 FINE TUNE -->
         <div style="display:{{ proOnly }}">
-          <div style="display:flex;align-items:center;gap:11px;padding:10px 20px;cursor:pointer;border-top:1px solid {{ t.line2 }}" onClick="{{ go5 }}">
-            <span style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono',monospace;font-size:9px;font-weight:500;flex-shrink:0;background:{{ s5bg }};color:{{ s5fg }}">{{ s5n }}</span>
-            <span style="font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:{{ s5txt }}">Fine tune</span>
+          <div style="display:flex;align-items:center;gap:11px;padding:10px 20px;cursor:pointer;border-top:1px solid {{ t.line2 }}" onClick="{{ go6 }}">
+            <span style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono',monospace;font-size:9px;font-weight:500;flex-shrink:0;background:{{ s6bg }};color:{{ s6fg }}">{{ s6n }}</span>
+            <span style="font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:{{ s6txt }}">Fine tune</span>
             <span style="margin-left:auto;font-family:'Spline Sans Mono',monospace;font-size:11px;color:{{ t.mut }}">{{ etaTotal }}%</span>
           </div>
-          <div style="padding:2px 20px 14px;flex-direction:column;gap:14px;display:{{ b5 }}">
+          <div style="padding:2px 20px 14px;flex-direction:column;gap:14px;display:{{ b6 }}">
             <sc-for list="{{ etaSliders }}" as="e" hint-placeholder-count="3">
               <div style="display:flex;flex-direction:column;gap:8px">
                 <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
@@ -832,22 +845,22 @@ class Component extends DCLogic {
     const t = (v, gd, md) => v >= gd ? 'good' : (v >= md ? 'med' : 'bad');
     const band = (v, lo, hi, slo, shi) => (v >= lo && v <= hi) ? 'good' : ((v >= slo && v <= shi) ? 'med' : 'bad');
     const g = [];
-    g.push({key:'hover',  step:3, label:'Hover achievable', tone:load < 1 ? 'good' : 'bad', value:Th.toFixed(0) + ' g'});
-    g.push({key:'eff',    step:3, label:'F1 · η_hover ≥ 80% of peak', tone:t(effPct, 80, 65), value:effPct.toFixed(0) + '%'});
-    g.push({key:'thr',    step:3, label:'F2 · Throttle 40–60%', tone:band(throttle, 40, 60, 30, 70), value:throttle.toFixed(0) + '%'});
-    g.push({key:'irat',   step:3, label:'F3 · I_hover/I_max 0.2–0.4', tone:band(iRat, 0.2, 0.4, 0.12, 0.55), value:(iRat * 100).toFixed(0) + '%'});
-    g.push({key:'tw',     step:3, label:'T/W ≥ ' + s.style.toFixed(1), tone:t(tw, s.style, s.style - 0.4), value:tw.toFixed(2) + ':1'});
-    g.push({key:'volt',   step:4, label:'Voltage match', tone:Math.abs(b.v - m.avgV) / m.avgV <= 0.12 ? 'good' : (Math.abs(b.v - m.avgV) / m.avgV <= 0.25 ? 'med' : 'bad'), value:b.v.toFixed(1) + ' V'});
-    g.push({key:'ah',     step:4, label:'Battery Ah sufficient', tone:t(b.ah / reqAh, 1, 0.85), value:b.ah.toFixed(0) + ' Ah'});
-    g.push({key:'cm',     step:4, label:'Current margin ≥ 1.5×', tone:t(cm, 1.5, 1.2), value:cm.toFixed(2) + '×'});
-    g.push({key:'flight', step:4, label:'Flight time vs target', tone:t(flight / s.mission.time, 1, 0.8), value:flight.toFixed(0) + ' min'});
+    g.push({key:'hover',  step:4, label:'Hover achievable', tone:load < 1 ? 'good' : 'bad', value:Th.toFixed(0) + ' g'});
+    g.push({key:'eff',    step:4, label:'F1 · η_hover ≥ 80% of peak', tone:t(effPct, 80, 65), value:effPct.toFixed(0) + '%'});
+    g.push({key:'thr',    step:4, label:'F2 · Throttle 40–60%', tone:band(throttle, 40, 60, 30, 70), value:throttle.toFixed(0) + '%'});
+    g.push({key:'irat',   step:4, label:'F3 · I_hover/I_max 0.2–0.4', tone:band(iRat, 0.2, 0.4, 0.12, 0.55), value:(iRat * 100).toFixed(0) + '%'});
+    g.push({key:'tw',     step:4, label:'T/W ≥ ' + s.style.toFixed(1), tone:t(tw, s.style, s.style - 0.4), value:tw.toFixed(2) + ':1'});
+    g.push({key:'volt',   step:5, label:'Voltage match', tone:Math.abs(b.v - m.avgV) / m.avgV <= 0.12 ? 'good' : (Math.abs(b.v - m.avgV) / m.avgV <= 0.25 ? 'med' : 'bad'), value:b.v.toFixed(1) + ' V'});
+    g.push({key:'ah',     step:5, label:'Battery Ah sufficient', tone:t(b.ah / reqAh, 1, 0.85), value:b.ah.toFixed(0) + ' Ah'});
+    g.push({key:'cm',     step:5, label:'Current margin ≥ 1.5×', tone:t(cm, 1.5, 1.2), value:cm.toFixed(2) + '×'});
+    g.push({key:'flight', step:5, label:'Flight time vs target', tone:t(flight / s.mission.time, 1, 0.8), value:flight.toFixed(0) + ' min'});
     g.push({key:'rho',    step:1, label:'Air density', tone:t(rho * 1.225, 1.0, 0.9), value:(rho * 1.225).toFixed(2)});
 
     // with no pack chosen the estimate satisfies its own sizing gates by construction —
     // report them as pending rather than as passes
     // only the gates that genuinely describe an unchosen pack are pending; flight time and
     // voltage follow from the user's own estimate, so they must still be judged
-    if (b.est) g.forEach(x => { if (x.step === 4 && x.key !== 'flight' && x.key !== 'volt') { x.tone = 'pend'; x.value = 'pending'; } });
+    if (b.est) g.forEach(x => { if (x.step === 5 && x.key !== 'flight' && x.key !== 'volt') { x.tone = 'pend'; x.value = 'pending'; } });
     const worst = g.some(x => x.tone === 'bad') ? 'bad' : (g.some(x => x.tone === 'med') ? 'med' : 'good');
     const propMm = m.propIn * 25.4;
     const adj = propMm + s.gap;
@@ -867,25 +880,25 @@ class Component extends DCLogic {
     };
     const cols = dk ? this.TINT_DARK[palKey] : this.TINT[palKey];
     const N = 40;
-    // Sweep the slider and keep the per-gate tones, not just the overall worst. A gate this
-    // slider cannot influence (voltage match, for instance, is purely motor-vs-pack and fails
-    // for 64% of pairs) would otherwise pin the whole track to one colour and hide the zones.
-    const rows = [];
-    for (let i = 0; i < N; i++) rows.push(this.calc(this.snap({group, key, value:min + (max - min) * (i / (N - 1))})).gates);
-    const keys = rows[0].map(g => g.key);
-    const varying = keys.filter(k => {
-      const first = rows[0].find(g => g.key === k).tone;
-      return rows.some(r => { const g = r.find(x => x.key === k); return g && g.tone !== first; });
-    });
-    // Nothing this slider does changes any verdict across its whole range: a flat neutral
-    // track says that honestly, where a flat red would just be noise.
-    if (!varying.length) return dk ? '#2C3035' : '#EAE8E3';
+    // Judge each track only on the gates this parameter can actually move. Voltage match, for
+    // instance, is purely motor-vs-pack and fails for 64% of pairs, so including it pinned every
+    // track to solid red. The scope is fixed per parameter rather than "whatever happened to
+    // change during this sweep", so every mass slider is coloured on the same basis: a 0-300 g
+    // ESC slider and a 0-5000 g payload slider then read consistently instead of one showing
+    // zones and its neighbour going neutral.
+    const ALL = ['hover','eff','thr','irat','tw','ah','cm','flight'];
+    const scopeKeys = group === 'mass' ? ALL
+      : group === 'eta' ? ['ah','flight']
+      : (group === 'mission' && key === 'time') ? ['ah','flight']
+      : (group === 'mission' && key === 'alt') ? ALL.concat('rho')
+      : ALL;
     const rank = {good:0, pend:0, med:1, bad:2}, name = ['good', 'med', 'bad'];
-    const tones = rows.map(r => {
-      // only gates that actually respond to this slider carry positional meaning
-      const scope = r.filter(g => varying.indexOf(g.key) >= 0);
-      return name[scope.reduce((w, g) => Math.max(w, rank[g.tone] || 0), 0)];
-    });
+    const tones = [];
+    for (let i = 0; i < N; i++) {
+      const gates = this.calc(this.snap({group, key, value:min + (max - min) * (i / (N - 1))})).gates;
+      const scope = gates.filter(g => scopeKeys.indexOf(g.key) >= 0);
+      tones.push(name[scope.reduce((w, g) => Math.max(w, rank[g.tone] || 0), 0)]);
+    }
     const stops = [];
     let start = 0;
     for (let i = 1; i <= N; i++) {
@@ -1005,18 +1018,22 @@ class Component extends DCLogic {
         go: () => this.setState({step:n})
       };
     };
-    const S = [sec(1), sec(2), sec(3), sec(4), sec(5)];
+    const S = [sec(1), sec(2), sec(3), sec(4), sec(5), sec(6)];
     const sign = v => (v >= 0 ? '+' : '') + v;
 
+    // Step 2 · known component masses
     const massDefs = [
       ['struct','Structure + frame',0,2000,10],
-      ['motors','Motors (×4)',0,1000,10],
       ['esc','ESCs',0,300,5],
       ['av','FC + GPS + RX',0,300,5],
       ['misc','Wiring + misc',0,300,5],
       ['cam','Camera / FPV',0,800,5],
-      ['payload','Payload',0,5000,25],
-      ['battEst','Battery (est.)',0,6000,25]
+      ['payload','Payload',0,5000,25]
+    ];
+    // Step 3 · placeholders for the parts not chosen yet. They freeze once the real part is known.
+    const estDefs = [
+      ['motors','Motors (×4)',0,1000,10],
+      ['battEst','Battery',0,6000,25]
     ];
 
     // Motor fit tone (motor traits only) + battery fit tone (voltage/current-margin compatibility).
@@ -1210,7 +1227,7 @@ class Component extends DCLogic {
       gateGo: () => this.setState({gate:false, mode:'pro'}),
       optimise: () => this.optimise(),
       prev: () => this.setState(s => ({step:Math.max(1, s.step - 1)})),
-      next: () => this.setState(s => ({step:Math.min(5, s.step + 1)})),
+      next: () => this.setState(s => ({step:Math.min(6, s.step + 1)})),
       reset: () => this.setState({step:1, motor:window.__DEFAULT_MOTOR, batt:window.__DEFAULT_BATT, battLocked:false, style:1.7, mission:{time:22, alt:500}, mass:{struct:550, motors:780, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450}, eta:{wind:75, prop:100, av:95}, gap:15, prop:'all', motorFit:'all', cells:'all', battFit:'all', goal:'time', built:false}),
 
       s1n:S[0].n, s1bg:S[0].bg, s1fg:S[0].fg, s1txt:S[0].txt, b1:S[0].body, go1:S[0].go,
@@ -1218,6 +1235,7 @@ class Component extends DCLogic {
       s3n:S[2].n, s3bg:S[2].bg, s3fg:S[2].fg, s3txt:S[2].txt, b3:S[2].body, go3:S[2].go,
       s4n:S[3].n, s4bg:S[3].bg, s4fg:S[3].fg, s4txt:S[3].txt, b4:S[3].body, go4:S[3].go,
       s5n:S[4].n, s5bg:S[4].bg, s5fg:S[4].fg, s5txt:S[4].txt, b5:S[4].body, go5:S[4].go,
+      s6n:S[5].n, s6bg:S[5].bg, s6fg:S[5].fg, s6txt:S[5].txt, b6:S[5].body, go6:S[5].go,
 
       missionSliders: [
         {label:'Flight time target', unit:'min', value:st.mission.time, min:5, max:90, step:1,
@@ -1246,12 +1264,31 @@ class Component extends DCLogic {
         track:this.track('mass', md[0], md[2], md[3]),
         onInput:e => this.set('mass', md[0], +e.target.value)
       })),
+      // Step 3 · initial estimates. Each one freezes as soon as the real part is known, showing
+      // the DB weight instead of the guess.
+      estSliders: estDefs.map(md => {
+        const isMotor = md[0] === 'motors';
+        const frozen = isMotor ? !d.motorsEst : !d.b.est;
+        const actual = isMotor ? Math.round(d.mMotors) : d.b.wt;
+        return {
+          label:md[1], min:md[2], max:md[3], step:md[4],
+          value: frozen ? String(actual) : String(st.mass[md[0]]),
+          shown: frozen ? String(actual) : String(st.mass[md[0]]),
+          note: frozen ? (isMotor ? d.m.wt + ' g each · from database' : 'from database') : 'estimate',
+          noteColor: frozen ? p.good : mut,
+          track: frozen ? (dark ? '#2C3035' : '#EAE8E3') : this.track('mass', md[0], md[2], md[3]),
+          disabled: frozen ? 'true' : '',
+          opacity: frozen ? '0.45' : '1',
+          onInput: frozen ? (() => {}) : (e => this.set('mass', md[0], +e.target.value))
+        };
+      }),
       battMass: String(d.b.wt),
       battRowLabel: d.b.est ? 'Battery · est.' : 'Battery',
       battRowColor: d.b.est ? ink : mut,
       motorsMass: String(Math.round(d.mMotors)),
       motorsRowLabel: d.motorsEst ? 'Motors ×4 · est.' : 'Motors ×4 · ' + d.m.wt + ' g each',
       motorsRowColor: d.motorsEst ? ink : mut,
+      estTotal: String(Math.round(d.mMotors + d.b.wt)),
       mtowKg: (d.mtow / 1000).toFixed(2),
 
       propValue: st.prop,
@@ -1398,26 +1435,26 @@ class Component extends DCLogic {
         if (d.mtow <= 0) {
           add('info', 'No mass budget set', 'Every component mass is zero, so there is nothing to lift and the numbers below are meaningless. Set at least a frame and battery mass.', 2);
         } else if (!st.built) {
-          add('info', 'No motor selected yet', 'Pick a motor and pack, or hit Optimise, to evaluate this build.', 3);
+          add('info', 'No motor selected yet', 'Pick a motor and pack, or hit Optimise, to evaluate this build.', 4);
         } else {
           if (!d.benchOk || d.load >= 1)
-            add('bad', 'Cannot hover this weight', 'This motor and prop cannot produce the ' + d.Th.toFixed(0) + ' g per motor needed. Use a larger motor/prop or cut mass.', 3);
+            add('bad', 'Cannot hover this weight', 'This motor and prop cannot produce the ' + d.Th.toFixed(0) + ' g per motor needed. Use a larger motor/prop or cut mass.', 4);
           if (d.tw < st.style)
-            add(d.tw < st.style - 0.4 ? 'bad' : 'med', 'Low thrust-to-weight', 'Only ' + d.tw.toFixed(2) + ':1 against ' + st.style.toFixed(1) + ':1 for this flight style. The drone will feel underpowered.', 3);
-          if (thr > 60) add(thr > 70 ? 'bad' : 'med', 'Motor working too hard', 'Hover throttle is ' + thr.toFixed(0) + '%. Little headroom for gusts or climb.', 3);
-          else if (thr < 40) add('med', 'Motor is over-specced', 'This motor is built for heavier drones. At this weight it only needs ' + thr.toFixed(0) + '% throttle to hover, so you are paying in motor mass and cost for thrust you never use.', 3);
-          if (d.effPct < 80) add(d.effPct < 65 ? 'bad' : 'med', 'Motor is inefficient at hover', 'Running at ' + d.effPct.toFixed(0) + '% of its best efficiency point.', 3);
-          if (iR < 0.12 || iR > 0.55) add('med', 'Current ratio outside band', 'Hover draws ' + (iR * 100).toFixed(0) + '% of the motor’s max current; 20–40% is the healthy range.', 3);
+            add(d.tw < st.style - 0.4 ? 'bad' : 'med', 'Low thrust-to-weight', 'Only ' + d.tw.toFixed(2) + ':1 against ' + st.style.toFixed(1) + ':1 for this flight style. The drone will feel underpowered.', 4);
+          if (thr > 60) add(thr > 70 ? 'bad' : 'med', 'Motor working too hard', 'Hover throttle is ' + thr.toFixed(0) + '%. Little headroom for gusts or climb.', 4);
+          else if (thr < 40) add('med', 'Motor is over-specced', 'This motor is built for heavier drones. At this weight it only needs ' + thr.toFixed(0) + '% throttle to hover, so you are paying in motor mass and cost for thrust you never use.', 4);
+          if (d.effPct < 80) add(d.effPct < 65 ? 'bad' : 'med', 'Motor is inefficient at hover', 'Running at ' + d.effPct.toFixed(0) + '% of its best efficiency point.', 4);
+          if (iR < 0.12 || iR > 0.55) add('med', 'Current ratio outside band', 'Hover draws ' + (iR * 100).toFixed(0) + '% of the motor’s max current; 20–40% is the healthy range.', 4);
           if (d.b.est) {
-            add('info', 'No pack chosen yet', 'Numbers use your ' + d.b.wt + ' g battery estimate. Pick a real pack to firm them up.', 4);
+            add('info', 'No pack chosen yet', 'Numbers use your ' + d.b.wt + ' g battery estimate. Pick a real pack to firm them up.', 3);
           } else {
-            if (d.cm < 1.5) add(d.cm < 1.2 ? 'bad' : 'med', 'Battery near its current limit', 'Margin is ' + d.cm.toFixed(2) + '× at peak thrust' + (d.cm < 1.2 ? '; the pack may overheat.' : '.'), 4);
-            if (d.b.ah < d.reqAh) add(d.b.ah < d.reqAh * 0.85 ? 'bad' : 'med', 'Pack capacity is short', 'Needs about ' + d.reqAh.toFixed(1) + ' Ah for the target; this pack has ' + d.b.ah.toFixed(1) + ' Ah.', 4);
-            if (d.flight < st.mission.time) add(d.flight < st.mission.time * 0.8 ? 'bad' : 'med', 'Short of the flight-time target', 'Reaches about ' + d.flight.toFixed(0) + ' min against your ' + st.mission.time + ' min target.', 4);
+            if (d.cm < 1.5) add(d.cm < 1.2 ? 'bad' : 'med', 'Battery near its current limit', 'Margin is ' + d.cm.toFixed(2) + '× at peak thrust' + (d.cm < 1.2 ? '; the pack may overheat.' : '.'), 5);
+            if (d.b.ah < d.reqAh) add(d.b.ah < d.reqAh * 0.85 ? 'bad' : 'med', 'Pack capacity is short', 'Needs about ' + d.reqAh.toFixed(1) + ' Ah for the target; this pack has ' + d.b.ah.toFixed(1) + ' Ah.', 5);
+            if (d.flight < st.mission.time) add(d.flight < st.mission.time * 0.8 ? 'bad' : 'med', 'Short of the flight-time target', 'Reaches about ' + d.flight.toFixed(0) + ' min against your ' + st.mission.time + ' min target.', 5);
             if (Math.abs(d.b.v - d.m.avgV) / d.m.avgV > 0.12)
-              add('med', 'Not tested at this voltage', 'Motor and prop were benched at ' + d.m.avgV.toFixed(1) + ' V, the pack is ' + d.b.v.toFixed(1) + ' V; performance might vary.', 4);
+              add('med', 'Not tested at this voltage', 'Motor and prop were benched at ' + d.m.avgV.toFixed(1) + ' V, the pack is ' + d.b.v.toFixed(1) + ' V; performance might vary.', 5);
           }
-          if (d.extrap) add('info', 'Data is incomplete for this configuration', 'Hover sits below this motor’s bench range, so current and efficiency are estimated rather than measured.', 3);
+          if (d.extrap) add('info', 'Data is incomplete for this configuration', 'Hover sits below this motor’s bench range, so current and efficiency are estimated rather than measured.', 4);
           if (d.rho * 1.225 < 0.9) add('med', 'Thin air at this altitude', 'Air density is ' + (d.rho * 1.225).toFixed(2) + ' kg/m³, so the motors give less thrust per watt.', 1);
         }
         const rank = {bad:0, med:1, info:2};
