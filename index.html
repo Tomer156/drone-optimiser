@@ -453,8 +453,31 @@ table{border-collapse:collapse;width:100%}
             </div>
 
             <!-- RIGHT -->
-            <div style="flex: 0 1 268px; min-width: 204px; display: flex; flex-direction: column; gap: 10px; height: 334px">
-              <div style="background: {{ t.card }}; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 16px; height: 100%">
+            <div style="flex: 0 1 268px; min-width: 204px; display: flex; flex-direction: column; gap: 10px">
+
+              <!-- 1 · FLAGS & WARNINGS -->
+              <div style="order:1;background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px">
+                <div style="padding:0 16px;display:flex;align-items:baseline;gap:9px">
+                  <span style="font-size:13px;font-weight:600">Advisories</span>
+                  <span style="margin-left:auto;font-family:'Spline Sans Mono',monospace;font-size:11px;color:{{ warnCountColor }}">{{ warnCount }}</span>
+                </div>
+                <div style="padding:0 16px;font-size:11.5px;line-height:1.5;color:{{ t.mut }};display:{{ warnEmpty }}">
+                  Nothing to flag: this build hovers, holds its thrust margin and meets the mission target.
+                </div>
+                <div style="display:flex;flex-direction:column">
+                  <sc-for list="{{ warnings }}" as="w" hint-placeholder-count="3">
+                    <div style="display:flex;gap:9px;padding:7px 16px;cursor:pointer" onClick="{{ w.go }}" style-hover="background:{{ t.hover2 }}">
+                      <span style="width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px;background:{{ w.dot }}"></span>
+                      <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+                        <span style="font-size:12px;font-weight:600;color:{{ w.titleColor }}">{{ w.title }}</span>
+                        <span style="font-size:11px;line-height:1.45;color:{{ t.mut }}">{{ w.detail }}</span>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+
+              <div style="order:3;background: {{ t.card }}; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 16px">
                 <div style="display:flex;align-items:baseline;gap:9px">
                   <span style="font-size:13px;font-weight:600">Layout</span>
                   <span style="margin-left:auto;font-family:'Spline Sans Mono',monospace;font-size:11px;color:{{ t.mut }}">{{ frameClass }}</span>
@@ -495,7 +518,7 @@ table{border-collapse:collapse;width:100%}
                 </div>
               </div>
 
-              <div style="background:{{ t.card }};border-radius:12px;padding:14px 16px;flex-direction:column;gap:12px;display:{{ autoPanel }}">
+              <div style="order:2;background:{{ t.card }};border-radius:12px;padding:14px 16px;flex-direction:column;gap:12px;display:{{ autoPanel }}">
                 <span style="font-size:13px;font-weight:600">Selected components</span>
                 <div style="display:flex;flex-direction:column;gap:12px">
                   <sc-for list="{{ autoParts }}" as="a" hint-placeholder-count="4">
@@ -510,7 +533,7 @@ table{border-collapse:collapse;width:100%}
 
               
 
-              <div style="background:{{ t.card }};border-radius:12px;padding:14px 0;flex-direction:column;gap:12px;display:{{ checksDisplay }}">
+              <div style="order:2;background:{{ t.card }};border-radius:12px;padding:14px 0;flex-direction:column;gap:12px;display:{{ checksDisplay }}">
                 <div style="padding:0 16px;display:flex;align-items:baseline;gap:9px">
                   <span style="font-size:13px;font-weight:600">Checks</span>
                   <span style="margin-left:auto;font-family:'Spline Sans Mono',monospace;font-size:11px;color:{{ overallColor }}">{{ passCount }}/{{ checkCount }}</span>
@@ -524,7 +547,7 @@ table{border-collapse:collapse;width:100%}
                     </div>
                   </sc-for>
                 </div>
-              </div><a href="https://form.typeform.com/to/ciDWV9CU" target="_blank" rel="noopener" style="background:{{ t.ink }};border:none;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;text-decoration:none">
+              </div><a href="https://form.typeform.com/to/ciDWV9CU" target="_blank" rel="noopener" style="order:4;background:{{ t.ink }};border:none;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;text-decoration:none">
                 <span style="font-size:13px;font-weight:600;color:{{ t.card }}">Help grow the database</span>
                 <span style="font-size:11.5px;line-height:1.5;color:{{ t.card }};opacity:.72">Add motor or battery bench data and every build gets more accurate.</span>
                 <span style="margin-top:2px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:{{ t.card }}">Contribute data
@@ -791,7 +814,8 @@ class Component extends DCLogic {
     const propMm = m.propIn * 25.4;
     const adj = propMm + s.gap;
     const diag = adj * Math.SQRT2;
-    return {m, b, fixed, mtow, Th, Tpeak, rho, maxT, peak, throttle, eff, effPct, power, I, Ihm, Ipm, Ipeak, Ikt, Imax, cm, eta, flight, tw, reqAh, reqC, iRat, gates:g, worst, propMm, adj, diag, load};
+    return {m, b, fixed, mtow, Th, Tpeak, rho, maxT, peak, throttle, eff, effPct, power, I, Ihm, Ipm, Ipeak, Ikt, Imax, cm, eta, flight, tw, reqAh, reqC, iRat, gates:g, worst, propMm, adj, diag, load,
+      benchOk: !!bench, extrap: !!(bench && bench.extrap)};
   }
 
   track(group, key, min, max) {
@@ -823,8 +847,7 @@ class Component extends DCLogic {
       g[key] = value;
       const n = {};
       n[group] = g;
-      // in Auto the tool owns the pack: any mission/mass change drops back to an estimate
-      if (s.mode === 'auto') n.battLocked = false;
+      // Keep the chosen/optimised pack when sliders move — only Reset clears a selection.
       return n;
     });
   }
@@ -1276,6 +1299,50 @@ class Component extends DCLogic {
       payloadG: String(st.mass.payload),
       stopIt: e => e.stopPropagation(),
       checksDisplay: pro ? 'flex' : 'none',
+
+      // ── ADVISORIES: plain-language flags & warnings, worst first ──
+      ...(() => {
+        const W = [];
+        const add = (tone, title, detail, step) => W.push({tone, title, detail, step});
+        const thr = d.throttle, iR = d.iRat;
+        if (!st.built) {
+          add('info', 'No motor selected yet', 'Pick a motor and pack, or hit Optimise, to evaluate this build.', 3);
+        } else {
+          if (!d.benchOk || d.load >= 1)
+            add('bad', 'Cannot hover this weight', 'This motor and prop cannot produce the ' + d.Th.toFixed(0) + ' g per motor needed. Use a larger motor/prop or cut mass.', 3);
+          if (d.tw < st.style)
+            add(d.tw < st.style - 0.4 ? 'bad' : 'med', 'Low thrust-to-weight', 'Only ' + d.tw.toFixed(2) + ':1 against ' + st.style.toFixed(1) + ':1 for this flight style. The drone will feel underpowered.', 3);
+          if (thr > 60) add(thr > 70 ? 'bad' : 'med', 'Motor working too hard', 'Hover throttle is ' + thr.toFixed(0) + '%. Little headroom for gusts or climb.', 3);
+          else if (thr < 40) add('med', 'Motor is over-specced', 'Hover throttle is only ' + thr.toFixed(0) + '%. It barely works, so it carries weight it does not need.', 3);
+          if (d.effPct < 80) add(d.effPct < 65 ? 'bad' : 'med', 'Motor is inefficient at hover', 'Running at ' + d.effPct.toFixed(0) + '% of its best efficiency point.', 3);
+          if (iR < 0.12 || iR > 0.55) add('med', 'Current ratio outside band', 'Hover draws ' + (iR * 100).toFixed(0) + '% of the motor’s max current; 20–40% is the healthy range.', 3);
+          if (d.b.est) {
+            add('info', 'No pack chosen yet', 'Numbers use your ' + d.b.wt + ' g battery estimate. Pick a real pack to firm them up.', 4);
+          } else {
+            if (d.cm < 1.5) add(d.cm < 1.2 ? 'bad' : 'med', 'Battery near its current limit', 'Margin is ' + d.cm.toFixed(2) + '× at peak thrust' + (d.cm < 1.2 ? '; the pack may overheat.' : '.'), 4);
+            if (d.b.ah < d.reqAh) add(d.b.ah < d.reqAh * 0.85 ? 'bad' : 'med', 'Pack capacity is short', 'Needs about ' + d.reqAh.toFixed(1) + ' Ah for the target; this pack has ' + d.b.ah.toFixed(1) + ' Ah.', 4);
+            if (d.flight < st.mission.time) add(d.flight < st.mission.time * 0.8 ? 'bad' : 'med', 'Short of the flight-time target', 'Reaches about ' + d.flight.toFixed(0) + ' min against your ' + st.mission.time + ' min target.', 4);
+            if (Math.abs(d.b.v - d.m.avgV) / d.m.avgV > 0.12)
+              add('med', 'Not tested at this voltage', 'Motor and prop were benched at ' + d.m.avgV.toFixed(1) + ' V, the pack is ' + d.b.v.toFixed(1) + ' V; performance might vary.', 4);
+          }
+          if (d.extrap) add('info', 'Data is incomplete for this configuration', 'Hover sits below this motor’s bench range, so current and efficiency are estimated rather than measured.', 3);
+          if (d.rho * 1.225 < 0.9) add('med', 'Thin air at this altitude', 'Air density is ' + (d.rho * 1.225).toFixed(2) + ' kg/m³, so the motors give less thrust per watt.', 1);
+        }
+        const rank = {bad:0, med:1, info:2};
+        W.sort((a, b2) => rank[a.tone] - rank[b2.tone]);
+        const nBad = W.filter(x => x.tone === 'bad').length, nMed = W.filter(x => x.tone === 'med').length;
+        return {
+          warnings: W.map(w => ({
+            title:w.title, detail:w.detail,
+            dot: w.tone === 'info' ? quiet : p[w.tone],
+            titleColor: w.tone === 'bad' ? p.bad : ink,
+            go: () => this.setState({step:w.step})
+          })),
+          warnCount: nBad ? (nBad + ' critical') : (nMed ? (nMed + ' to review') : 'all clear'),
+          warnCountColor: nBad ? p.bad : (nMed ? p.med : p.good),
+          warnEmpty: W.length ? 'none' : 'block'
+        };
+      })(),
       requiredGroups: [
         {title:'Motor', model:'×4', cards:[
           {label:'Hover thrust / motor', value:d.Th.toFixed(0), unit:'g'},
