@@ -862,7 +862,13 @@ class Component extends DCLogic {
     g.push({key:'thr',    step:4, label:'F2 · Throttle 40–60%', tone:band(throttle, 40, 60, 30, 70), value:throttle.toFixed(0) + '%'});
     g.push({key:'irat',   step:4, label:'F3 · I_hover/I_max 0.2–0.4', tone:band(iRat, 0.2, 0.4, 0.12, 0.55), value:(iRat * 100).toFixed(0) + '%'});
     g.push({key:'tw',     step:4, label:'T/W ≥ ' + s.style.toFixed(1), tone:t(tw, s.style, s.style - 0.4), value:tw.toFixed(2) + ':1'});
-    g.push({key:'volt',   step:5, label:'Voltage match', tone:Math.abs(b.v - m.avgV) / m.avgV <= 0.12 ? 'good' : (Math.abs(b.v - m.avgV) / m.avgV <= 0.25 ? 'med' : 'bad'), value:b.v.toFixed(1) + ' V'});
+    // m.avgV is the voltage this motor was BENCH-TESTED at, not a rating: these motors accept a
+    // cell range. Treating it as a hard requirement made every pack outside one cell count
+    // "incompatible" (a 16 V bench left only 4S selectable). So this reports how far the pack is
+    // from the tested conditions - a data-confidence question - and only condemns a pack when the
+    // gap is large enough that the bench numbers cannot carry over at all.
+    const vDev = Math.abs(b.v - m.avgV) / m.avgV;
+    g.push({key:'volt', step:5, label:'Pack vs bench voltage', tone:vDev <= 0.12 ? 'good' : (vDev <= 0.40 ? 'med' : 'bad'), value:b.v.toFixed(1) + ' V'});
     g.push({key:'ah',     step:5, label:'Battery Ah sufficient', tone:t(b.ah / reqAh, 1, 0.85), value:b.ah.toFixed(0) + ' Ah'});
     g.push({key:'cm',     step:5, label:'Current margin ≥ 1.5×', tone:t(cm, 1.5, 1.2), value:cm.toFixed(2) + '×'});
     g.push({key:'flight', step:5, label:'Flight time vs target', tone:t(flight / s.mission.time, 1, 0.8), value:flight.toFixed(0) + ' min'});
