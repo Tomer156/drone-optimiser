@@ -68,14 +68,17 @@ window.__DEFAULT_BATT=((window.__BATTS.filter(function(b){return b.cells==='6S';
 <style>
 html,body{margin:0;height:100%;background:#F1F0ED;font-family:'Instrument Sans',system-ui,sans-serif;color:#16181A;-webkit-font-smoothing:antialiased}
 *{box-sizing:border-box}
-a{color:#16181A;text-decoration:none;border-bottom:1px solid #D8D5CE}
-a:hover{border-bottom-color:#16181A}
+a{color:var(--fld-fg,#16181A);text-decoration:none;border-bottom:1px solid var(--fld-bd,#D8D5CE)}
+a:hover{border-bottom-color:var(--fld-fg,#16181A)}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:2px;outline:none;cursor:pointer;margin:0}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:#fff;border:1.5px solid #16181A;cursor:pointer}
-input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:#fff;border:1.5px solid #16181A;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--thumb-bg,#fff);border:1.5px solid var(--thumb-bd,#16181A);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--thumb-bg,#fff);border:1.5px solid var(--thumb-bd,#16181A);cursor:pointer}
+input[type=range]:disabled{cursor:default}
+input[type=range]:disabled::-webkit-slider-thumb{opacity:.4;cursor:default}
 input[type=text],select{font-family:'Instrument Sans',sans-serif;font-size:12px;width:100%;border:1px solid var(--fld-bd,#E7E4DF);border-radius:6px;padding:8px 10px;background:var(--fld-bg,#fff);color:var(--fld-fg,#16181A)}
-input[type=text]::placeholder{color:#7E7B74}
-input[type=text]:focus,select:focus{outline:none;border-color:#16181A}
+input[type=text]::placeholder{color:var(--fld-mut,#7E7B74)}
+input[type=text]:focus,select:focus{outline:none;border-color:var(--fld-fg,#16181A)}
+option{background:var(--fld-bg,#fff);color:var(--fld-fg,#16181A)}
 table{border-collapse:collapse;width:100%}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-thumb{background:var(--scroll,#DEDBD4);border-radius:2px}
@@ -83,7 +86,7 @@ table{border-collapse:collapse;width:100%}
 </style>
 </helmet>
 
-<div style="height:100vh;display:flex;flex-direction:column;background:{{ t.page }};overflow:hidden;--thumb-bg:{{ t.card }};--thumb-bd:{{ t.ink }};--fld-bg:{{ t.card }};--fld-bd:{{ t.line }};--fld-fg:{{ t.ink }};--scroll:{{ t.grid2 }}">
+<div style="height:100vh;display:flex;flex-direction:column;background:{{ t.page }};overflow:hidden;--thumb-bg:{{ t.card }};--thumb-bd:{{ t.ink }};--fld-bg:{{ t.card }};--fld-bd:{{ t.line }};--fld-fg:{{ t.ink }};--fld-mut:{{ t.dim }};--scroll:{{ t.grid2 }}">
   <div style="flex:1;min-height:0;display:flex">
 
     <!-- SIDEBAR -->
@@ -278,8 +281,8 @@ table{border-collapse:collapse;width:100%}
 
       <div style="flex-shrink:0;padding:14px 20px;border-top:1px solid {{ t.line }};display:flex;gap:8px">
         <button style="flex:1;background:{{ t.card }};border:1px solid {{ t.grid2 }};border-radius:7px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans',sans-serif;cursor:pointer;color:{{ t.ink }};justify-content:center;display:{{ navDisplay }}" style-hover="border-color:{{ t.ink }}" onClick="{{ prev }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><path d="M14 6l-6 6 6 6"></path></svg>Back</button>
-        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:7px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans',sans-serif;cursor:pointer;justify-content:center;display:{{ nextDisplay }}" style-hover="background:#000" onClick="{{ next }}">Next<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px"><path d="M10 6l6 6-6 6"></path></svg></button>
-        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:7px;padding:10px;font-size:12.5px;font-weight:500;font-family:'Instrument Sans',sans-serif;cursor:pointer;justify-content:center;display:{{ optDisplay }}" style-hover="background:#000" onClick="{{ optimise }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:7px"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"></path></svg>Optimise</button>
+        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:7px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans',sans-serif;cursor:pointer;justify-content:center;display:{{ nextDisplay }}" style-hover="background:{{ t.inkHover }}" onClick="{{ next }}">Next<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px"><path d="M10 6l6 6-6 6"></path></svg></button>
+        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:7px;padding:10px;font-size:12.5px;font-weight:500;font-family:'Instrument Sans',sans-serif;cursor:pointer;justify-content:center;display:{{ optDisplay }}" style-hover="background:{{ t.inkHover }}" onClick="{{ optimise }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:7px"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"></path></svg>Optimise</button>
       </div>
     </div>
 
@@ -503,7 +506,7 @@ table{border-collapse:collapse;width:100%}
                   <span style="margin-left:auto;font-family:'Spline Sans Mono',monospace;font-size:11px;color:{{ warnCountColor }}">{{ warnCount }}</span>
                 </div>
                 <div style="padding:0 16px;font-size:11.5px;line-height:1.5;color:{{ t.mut }};display:{{ warnEmpty }}">
-                  Nothing to flag: this build hovers, holds its thrust margin and meets the mission target.
+                  Nothing to flag. This build hovers, holds its margins and meets the target.
                 </div>
                 <div style="display:flex;flex-direction:column">
                   <sc-for list="{{ warnings }}" as="w" hint-placeholder-count="3">
@@ -762,16 +765,19 @@ class Component extends DCLogic {
 
   snap(ov) {
     const s = this.state;
-    const o = {motor:s.motor, batt:s.batt, battLocked:s.battLocked, style:s.style, gap:s.gap,
+    const o = {motor:s.motor, batt:s.batt, battLocked:s.battLocked, style:s.style, gap:s.gap, built:s.built,
       mission:Object.assign({}, s.mission), mass:Object.assign({}, s.mass), eta:Object.assign({}, s.eta)};
     if (ov) {
       if (ov.group) o[ov.group][ov.key] = ov.value;
-      else if (ov.pair) { o.motor = ov.pair[0]; o.batt = ov.pair[1]; o.battLocked = true; }
+      // Evaluating a specific motor/pack is the same as choosing it: score it on its real
+      // catalogue weight, not on the user's placeholder estimate.
+      else if (ov.pair) { o.motor = ov.pair[0]; o.batt = ov.pair[1]; o.battLocked = true; o.built = true; }
       else {
         o[ov.key] = ov.value;
         // candidate previews must be scored against a real pack, never the estimate:
         // a battery row IS the pack; a motor row freezes the pack of the current build
         if (ov.key === 'batt') o.battLocked = true;
+        if (ov.key === 'motor' || ov.key === 'batt') o.built = true;
       }
     }
     return o;
@@ -785,7 +791,7 @@ class Component extends DCLogic {
     const maxT = m.maxT * rho;
     const ir = l => this.A0 + this.AK * Math.pow(Math.min(l, 1), this.EX);
     const q = s.mass;
-    const qm = m.wt > 0 ? m.wt * 4 : q.motors;   // real motor weight once we know the motor
+    const qm = (s.built && m.wt > 0) ? m.wt * 4 : q.motors;   // real weight once a motor is chosen
     const Th = (q.struct + qm + q.esc + q.av + q.misc + q.cam + q.payload + wt) / 4;
     const Ikt = 4 * m.peakA * ir(Math.min((Th * s.style) / maxT, 1));
     const v = ref.v;
@@ -801,10 +807,12 @@ class Component extends DCLogic {
     const bRef = this.BATTS.find(x => x.id === s.batt);
     const b = s.battLocked ? bRef : this.estPack(s, m, bRef);
     const q = s.mass;
-    // Motors (x4) come from the DB once a motor is known, exactly like the battery: the slider
-    // is only the estimate used while no real weight is available.
-    const mMotors = m.wt > 0 ? m.wt * 4 : q.motors;
-    const motorsEst = !(m.wt > 0);
+    // Motors (x4) come from the DB once a motor has actually been chosen, exactly like the
+    // battery. On a fresh start or after Reset nothing is chosen yet, so the user's own
+    // placeholder estimate is used and its slider stays live.
+    const useDbMotor = !!s.built && m.wt > 0;
+    const mMotors = useDbMotor ? m.wt * 4 : q.motors;
+    const motorsEst = !useDbMotor;
     const fixed = q.struct + mMotors + q.esc + q.av + q.misc + q.cam + q.payload;
     const mtow = fixed + b.wt;
     const Th = mtow / 4;
@@ -1221,12 +1229,12 @@ class Component extends DCLogic {
       t: dark ? {
         page:'#101215', card:'#1B1E22', line:'#2C3035', line2:'#23272B', grid:'#25292E', grid2:'#343A3F',
         track:'#2C3035', pill:'#282C31', sel:'#343A3F', hover:'#23272B', hover2:'#202429',
-        ink:'#F2F1EE', body:'#C6C3BD', mut:'#96938C', dim:'#8A867F', quiet:'#3A3F44', rule:'#474C51', rule2:'#565B60',
+        ink:'#F2F1EE', inkHover:'#FFFFFF', body:'#C6C3BD', mut:'#96938C', dim:'#8A867F', quiet:'#3A3F44', rule:'#474C51', rule2:'#565B60',
         arm:'#3D4247', dash:'#6C716F'
       } : {
         page:'#F1F0ED', card:'#FFFFFF', line:'#E7E4DF', line2:'#F2F0EC', grid:'#F0EEE9', grid2:'#E0DDD7',
         track:'#EAE8E3', pill:'#E9E7E2', sel:'#E8E6E1', hover:'#F7F6F3', hover2:'#FAF9F6',
-        ink:'#16181A', body:'#55534E', mut:'#6E6C66', dim:'#7E7B74', quiet:'#D6D2CA', rule:'#C9C5BC', rule2:'#B9B5AC',
+        ink:'#16181A', inkHover:'#000000', body:'#55534E', mut:'#6E6C66', dim:'#7E7B74', quiet:'#D6D2CA', rule:'#C9C5BC', rule2:'#B9B5AC',
         arm:'#DEDBD4', dash:'#9C988F'
       },
       toggleTheme: () => this.setState({theme: st.theme === 'dark' ? 'light' : 'dark'}),
@@ -1452,42 +1460,39 @@ class Component extends DCLogic {
         const W = [];
         const add = (tone, title, detail, step) => W.push({tone, title, detail, step});
         const thr = d.throttle, iR = d.iRat;
+        // One short line each: what is off, then what to change.
         if (d.mtow <= 0) {
-          add('info', 'No mass budget set', 'Every component mass is zero, so there is nothing to lift and the numbers below are meaningless. Set at least a frame and battery mass.', 2);
+          add('info', 'No mass budget yet', 'Set a frame and battery mass to get real numbers.', 2);
         } else if (!st.built) {
-          add('info', 'No motor selected yet', 'Pick a motor and pack, or hit Optimise, to evaluate this build.', 4);
+          add('info', 'No build yet', 'Pick a motor and pack, or hit Optimise.', 4);
         } else {
           if (!d.benchOk || d.load >= 1)
-            add('bad', 'Cannot hover this weight', 'This motor and prop cannot produce the ' + d.Th.toFixed(0) + ' g per motor needed. Use a larger motor/prop or cut mass.', 4);
+            add('bad', 'Cannot hover', 'Needs ' + d.Th.toFixed(0) + ' g per motor. Go bigger on motor or prop, or cut mass.', 4);
           if (d.tw < st.style)
-            add(d.tw < st.style - 0.4 ? 'bad' : 'med', 'Low thrust-to-weight', 'Only ' + d.tw.toFixed(2) + ':1 against ' + st.style.toFixed(1) + ':1 for this flight style. The drone will feel underpowered.', 4);
-          if (thr > 60) add(thr > 70 ? 'bad' : 'med', 'Motor working too hard', 'Hover throttle is ' + thr.toFixed(0) + '%. Little headroom for gusts or climb.', 4);
+            add(d.tw < st.style - 0.4 ? 'bad' : 'med', 'Low thrust-to-weight', d.tw.toFixed(2) + ':1 of ' + st.style.toFixed(1) + ':1 needed. Bigger motor or less mass.', 4);
+          if (thr > 60) add(thr > 70 ? 'bad' : 'med', 'Motor working hard', thr.toFixed(0) + '% hover throttle leaves little for gusts. Size up.', 4);
           else if (thr < 40) {
-            // Is the motor genuinely the wrong pick, or is the mission forcing it? Endurance wants
-            // low disc loading, so a demanding target can put the sweet spot out of reach entirely.
+            // Is the motor the wrong pick, or is the mission forcing it? Endurance wants low disc
+            // loading, so a demanding target can put the sweet spot out of reach entirely.
             const bc = this.bandCeiling();
-            if (bc.f > 0 && bc.f < st.mission.time) {
-              add('med', 'Target needs an oversized motor',
-                'Holding the 40–60% throttle band caps endurance at about ' + bc.f.toFixed(0) + ' min with this pack, short of your ' +
-                st.mission.time + ' min target. Reaching the target means running a bigger motor at ' + thr.toFixed(0) +
-                '% throttle. Lower the target or the mass budget to bring the motor back into its band.', 1);
-            } else {
-              add('med', 'Motor is over-specced', 'This motor is built for heavier drones. At this weight it only needs ' + thr.toFixed(0) + '% throttle to hover, so you are paying in motor mass and cost for thrust you never use.', 4);
-            }
+            if (bc.f > 0 && bc.f < st.mission.time)
+              add('med', 'Target forces a big motor', 'In-band endurance caps at ~' + bc.f.toFixed(0) + ' min, under your ' + st.mission.time + ' min. Ease the target or trim mass.', 1);
+            else
+              add('med', 'Motor over-specced', thr.toFixed(0) + '% hover throttle: built for heavier drones. Try a smaller motor.', 4);
           }
-          if (d.effPct < 80) add(d.effPct < 65 ? 'bad' : 'med', 'Motor is inefficient at hover', 'Running at ' + d.effPct.toFixed(0) + '% of its best efficiency point.', 4);
-          if (iR < 0.12 || iR > 0.55) add('med', 'Current ratio outside band', 'Hover draws ' + (iR * 100).toFixed(0) + '% of the motor’s max current; 20–40% is the healthy range.', 4);
+          if (d.effPct < 80) add(d.effPct < 65 ? 'bad' : 'med', 'Off efficiency peak', 'At ' + d.effPct.toFixed(0) + '% of best g/W. Try a different prop or motor size.', 4);
+          if (iR < 0.12 || iR > 0.55) add('med', 'Current ratio off', 'Hover draws ' + (iR * 100).toFixed(0) + '% of max current; aim for 20–40%.', 4);
           if (d.b.est) {
-            add('info', 'No pack chosen yet', 'Numbers use your ' + d.b.wt + ' g battery estimate. Pick a real pack to firm them up.', 3);
+            add('info', 'Pack is an estimate', 'Using ' + d.b.wt + ' g. Pick a real pack to firm up the numbers.', 3);
           } else {
-            if (d.cm < 1.5) add(d.cm < 1.2 ? 'bad' : 'med', 'Battery near its current limit', 'Margin is ' + d.cm.toFixed(2) + '× at peak thrust' + (d.cm < 1.2 ? '; the pack may overheat.' : '.'), 5);
-            if (d.b.ah < d.reqAh) add(d.b.ah < d.reqAh * 0.85 ? 'bad' : 'med', 'Pack capacity is short', 'Needs about ' + d.reqAh.toFixed(1) + ' Ah for the target; this pack has ' + d.b.ah.toFixed(1) + ' Ah.', 5);
-            if (d.flight < st.mission.time) add(d.flight < st.mission.time * 0.8 ? 'bad' : 'med', 'Short of the flight-time target', 'Reaches about ' + d.flight.toFixed(0) + ' min against your ' + st.mission.time + ' min target.', 5);
+            if (d.cm < 1.5) add(d.cm < 1.2 ? 'bad' : 'med', 'Battery near its limit', d.cm.toFixed(2) + '× margin at peak. Choose a higher C-rating.', 5);
+            if (d.b.ah < d.reqAh) add(d.b.ah < d.reqAh * 0.85 ? 'bad' : 'med', 'Pack too small', 'Needs ' + d.reqAh.toFixed(1) + ' Ah, has ' + d.b.ah.toFixed(1) + ' Ah.', 5);
+            if (d.flight < st.mission.time) add(d.flight < st.mission.time * 0.8 ? 'bad' : 'med', 'Short of target', d.flight.toFixed(0) + ' of ' + st.mission.time + ' min. More capacity or less mass.', 5);
             if (Math.abs(d.b.v - d.m.avgV) / d.m.avgV > 0.12)
-              add('med', 'Not tested at this voltage', 'Motor and prop were benched at ' + d.m.avgV.toFixed(1) + ' V, the pack is ' + d.b.v.toFixed(1) + ' V; performance might vary.', 5);
+              add('med', 'Untested voltage', 'Benched at ' + d.m.avgV.toFixed(1) + ' V, pack is ' + d.b.v.toFixed(1) + ' V. Expect some drift.', 5);
           }
-          if (d.extrap) add('info', 'Data is incomplete for this configuration', 'Hover sits below this motor’s bench range, so current and efficiency are estimated rather than measured.', 4);
-          if (d.rho * 1.225 < 0.9) add('med', 'Thin air at this altitude', 'Air density is ' + (d.rho * 1.225).toFixed(2) + ' kg/m³, so the motors give less thrust per watt.', 1);
+          if (d.extrap) add('info', 'Estimated, not measured', 'Hover sits below this motor’s bench data.', 4);
+          if (d.rho * 1.225 < 0.9) add('med', 'Thin air', (d.rho * 1.225).toFixed(2) + ' kg/m³ costs thrust. Allow extra margin.', 1);
         }
         const rank = {bad:0, med:1, info:2};
         W.sort((a, b2) => rank[a.tone] - rank[b2.tone]);
