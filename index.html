@@ -187,7 +187,7 @@ table{border-collapse:collapse;width:100%}
                 <span style="border-radius:6px;padding:7px 4px;font-size:11px;text-align:center;cursor:pointer;border:1px solid {{ g.border }};background:{{ g.bg }};color:{{ g.color }}" title="{{ g.tip }}" onClick="{{ g.go }}">{{ g.label }}</span>
               </sc-for>
             </div>
-            <span style="font-size:11px;line-height:1.45;color:{{ t.mut }}">{{ goalNote }}</span>
+            <span style="font-size:11px;line-height:1.45;color:{{ goalNoteColor }}">{{ goalNote }}</span>
           </div>
         </div>
 
@@ -973,37 +973,39 @@ class Component extends DCLogic {
     // Extrapolated operating points (below the motor's bench range) are penalised so the pick
     // rests on measured data where a measured option exists.
     const target = this.state.mission.time, goal = this.state.goal || 'time';
+    // Airworthiness first: hovers, holds thrust/weight for the flight style, safe current margin.
     const cand = [];
-    let fallback = null;
     this.MOTORS.forEach(m => this.BATTS.forEach(b => {
       const c = this.calc(this.snap({pair:[m.id, b.id]}));
-      if (!(c.load < 1)) return;                    // must hover
-      if (!(c.tw >= this.state.style)) return;      // thrust/weight for this style
-      if (!(c.cm >= 1.3)) return;                   // safe current margin
-      if (!fallback || c.flight > fallback.f) fallback = {m:m.id, b:b.id, f:c.flight};
-      if (c.flight < target * 0.98) return;         // must reach the target
+      if (!(c.load < 1)) return;
+      if (!(c.tw >= this.state.style)) return;
+      if (!(c.cm >= 1.3)) return;
       cand.push({m:m.id, b:b.id, c});
     }));
-    // Rank on trustworthy operating points: measured bench data and a throttle a real build
-    // would use. Only relax these if nothing qualifies, so a goal never wins on an estimate.
-    const solid = cand.filter(x => !x.c.extrap && x.c.throttle >= 30);
-    const usable = solid.length ? solid : (cand.filter(x => x.c.throttle >= 30).length ? cand.filter(x => x.c.throttle >= 30) : cand);
+    if (!cand.length) return;
+    const hits = x => x.c.flight >= target * 0.98;
+    const inBand = x => x.c.throttle >= 40 && x.c.throttle <= 60;
+    // Narrow by preference, but never to nothing: each step is skipped if it empties the pool.
+    const narrow = (pool, ...tests) => tests.reduce((p, t) => { const n = p.filter(t); return n.length ? n : p; }, pool);
+    let pool, rank;
+    if (goal === 'balanced') {
+      // Balanced's promise IS the throttle band, so the band outranks the target. If no in-band
+      // build can reach the target we still return an in-band build and flag the shortfall,
+      // rather than quietly abandoning the band the goal is named for.
+      pool = narrow(cand, inBand, x => !x.c.extrap, hits);
+      rank = x => Math.abs(x.c.throttle - 50) * 1.2 + Math.max(0, target - x.c.flight) * 2 + x.c.mtow * 0.0008;
+    } else if (goal === 'eff') {
+      // Efficiency's promise is g/W, on measured data, with the target as a strong preference.
+      pool = narrow(cand, x => !x.c.extrap, x => x.c.throttle >= 30, hits);
+      rank = x => -x.c.eff * 10 + Math.max(0, target - x.c.flight) * 2;
+    } else {
+      // Time's promise is the target: hit it, then stay lean.
+      pool = narrow(cand, hits, x => !x.c.extrap, x => x.c.throttle >= 30);
+      rank = x => (x.c.flight - target) + x.c.mtow * 0.002 + Math.abs(x.c.throttle - 50) * 0.05;
+    }
     let best = null;
-    usable.forEach(x => {
-      const c = x.c, guess = c.extrap ? 1 : 0;
-      let score;
-      if (goal === 'eff') {
-        score = -c.eff * 10 + guess * 25 + Math.max(0, 40 - c.throttle) * 0.6;
-      } else if (goal === 'balanced') {
-        const band = c.throttle < 40 ? (40 - c.throttle) : (c.throttle > 60 ? (c.throttle - 60) : 0);
-        score = band * 1.2 + guess * 12 + (c.flight - target) * 0.15 + c.mtow * 0.0008;
-      } else {
-        score = (c.flight - target) + c.mtow * 0.002 + Math.abs(c.throttle - 50) * 0.05 + guess * 3;
-      }
-      if (!best || score < best.score) best = {score, m:x.m, b:x.b};
-    });
-    const pick = best || fallback;
-    if (pick) this.setState({motor:pick.m, batt:pick.b, battLocked:true, built:true});
+    pool.forEach(x => { const s = rank(x); if (!best || s < best.s) best = {s, m:x.m, b:x.b}; });
+    if (best) this.setState({motor:best.m, batt:best.b, battLocked:true, built:true});
   }
 
   renderVals() {
@@ -1288,7 +1290,20 @@ class Component extends DCLogic {
         color: st.goal === g.v ? ink : mut,
         go: () => this.setState({goal:g.v})
       })),
-      goalNote: (this.GOALS.find(g => g.v === st.goal) || this.GOALS[0]).tip,
+      // State what the goal actually delivered, so the description can never promise something
+      // the result does not honour.
+      goalNote: !st.built ? (this.GOALS.find(g => g.v === st.goal) || this.GOALS[0]).tip
+        : st.goal === 'balanced'
+          ? (d.throttle >= 40 && d.throttle <= 60
+              ? 'In its sweet spot at ' + d.throttle.toFixed(0) + '% throttle' + (d.flight < st.mission.time ? ', but ' + d.flight.toFixed(0) + ' of ' + st.mission.time + ' min.' : '.')
+              : 'No in-band build fits this mission; closest is ' + d.throttle.toFixed(0) + '% throttle.')
+        : st.goal === 'eff'
+          ? 'Best efficiency found: ' + d.eff.toFixed(2) + ' g/W at ' + d.throttle.toFixed(0) + '% throttle.'
+          : (d.flight >= st.mission.time
+              ? 'Target met at ' + d.flight.toFixed(0) + ' min, ' + (d.mtow / 1000).toFixed(2) + ' kg.'
+              : 'Best reachable is ' + d.flight.toFixed(0) + ' of ' + st.mission.time + ' min.'),
+      goalNoteColor: !st.built ? mut
+        : (st.goal === 'balanced' && !(d.throttle >= 40 && d.throttle <= 60)) || (st.goal === 'time' && d.flight < st.mission.time) ? p.med : mut,
 
       massSliders: massDefs.map(md => ({
         label:md[1], value:st.mass[md[0]], min:md[2], max:md[3], step:md[4],
@@ -1484,8 +1499,11 @@ class Component extends DCLogic {
             else
               add('med', 'Motor over-specced', thr.toFixed(0) + '% hover throttle: built for heavier drones. Try a smaller motor.', 4);
           }
-          if (d.effPct < 80) add(d.effPct < 65 ? 'bad' : 'med', 'Off efficiency peak', 'At ' + d.effPct.toFixed(0) + '% of best g/W. Try a different prop or motor size.', 4);
-          if (iR < 0.12 || iR > 0.55) add('med', 'Current ratio off', 'Hover draws ' + (iR * 100).toFixed(0) + '% of max current; aim for 20–40%.', 4);
+          // Throttle out of band already explains a low current ratio and an off-peak efficiency:
+          // they are the same over/under-motoring, so do not repeat it as separate findings.
+          const loaded = thr >= 40 && thr <= 60;
+          if (d.effPct < 80 && loaded) add(d.effPct < 65 ? 'bad' : 'med', 'Off efficiency peak', 'At ' + d.effPct.toFixed(0) + '% of best g/W. Try a different prop.', 4);
+          if ((iR < 0.12 || iR > 0.55) && loaded) add('med', 'Current ratio off', 'Hover draws ' + (iR * 100).toFixed(0) + '% of max current; aim for 20–40%.', 4);
           if (d.b.est) {
             add('info', 'Pack is an estimate', 'Using ' + d.b.wt + ' g. Pick a real pack to firm up the numbers.', 3);
           } else {
