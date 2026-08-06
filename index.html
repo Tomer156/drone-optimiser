@@ -129,6 +129,16 @@ table{border-collapse:collapse;width:100%}
               </sc-for>
             </select>
             <input type="text" placeholder="Search motors" value="{{ motorFilter }}" onChange="{{ onMotorFilter }}" onInput="{{ onMotorFilter }}">
+            <div style="display:flex;gap:4px">
+              <sc-for list="{{ thrTabs }}" as="c" hint-placeholder-count="4">
+                <span style="flex:1;text-align:center;border-radius:6px;padding:6px 0;font-size:10px;cursor:pointer;border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.color }}" title="{{ c.tip }}" onClick="{{ c.go }}">{{ c.label }}</span>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:4px">
+              <sc-for list="{{ fitTabs }}" as="c" hint-placeholder-count="4">
+                <span style="flex:1;display:flex;align-items:center;justify-content:center;gap:5px;border-radius:6px;padding:6px 0;font-size:10px;cursor:pointer;border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.color }}" onClick="{{ c.go }}"><span style="width:5px;height:5px;border-radius:50%;background:{{ c.dot }};display:{{ c.dotShow }}"></span>{{ c.label }}</span>
+              </sc-for>
+            </div>
             <div style="display:flex;flex-direction:column">
               <sc-for list="{{ motorRows }}" as="m" hint-placeholder-count="6">
                 <div style="display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:6px;cursor:pointer;background:{{ m.bg }}" onClick="{{ m.go }}" style-hover="background:{{ t.hover }}">
@@ -640,7 +650,7 @@ class Component extends DCLogic {
     mission:{time:22, alt:500},
     mass:{struct:550, motors:780, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450},
     eta:{wind:75, prop:100, av:95},
-    gap:15, prop:'all', motorFilter:'', battFilter:'', cells:'All', hoverSeg:null, hoverKpi:null, theme:'light', gate:false, built:false
+    gap:15, prop:'all', motorFilter:'', battFilter:'', cells:'All', motorThr:'all', motorFit:'all', hoverSeg:null, hoverKpi:null, theme:'light', gate:false, built:false
   };
 
   get pal() { return this.PAL[this.props.fitPalette === 'safe' ? 'safe' : 'classic']; }
@@ -768,7 +778,6 @@ class Component extends DCLogic {
       g[key] = value;
       const n = {};
       n[group] = g;
-      n.built = true;
       // in Auto the tool owns the pack: any mission/mass change drops back to an estimate
       if (s.mode === 'auto') n.battLocked = false;
       return n;
@@ -851,7 +860,19 @@ class Component extends DCLogic {
     ];
 
     const mf = st.motorFilter.trim().toLowerCase();
-    const motors = this.MOTORS.filter(m => (st.prop === 'all' || m.prop === st.prop) && (!mf || m.name.toLowerCase().indexOf(mf) >= 0));
+    // Annotate each candidate motor with its fit tone (motor traits only) and hover-throttle band,
+    // then apply the two filter rows (throttle band + fit colour).
+    const motorTone = c => {
+      const own = c.gates.filter(x => ['hover','tw','eff','thr','irat'].includes(x.key));
+      const hard = own.filter(x => x.key === 'hover' || x.key === 'tw');
+      const soft = own.filter(x => x.key === 'eff' || x.key === 'thr' || x.key === 'irat');
+      return hard.some(x => x.tone === 'bad') ? 'bad' : (hard.some(x => x.tone === 'med') || soft.some(x => x.tone !== 'good')) ? 'med' : 'good';
+    };
+    let motors = this.MOTORS
+      .filter(m => (st.prop === 'all' || m.prop === st.prop) && (!mf || m.name.toLowerCase().indexOf(mf) >= 0))
+      .map(m => { const c = this.calc(this.snap({key:'motor', value:m.id})); return {m, c, tone:motorTone(c), band:(c.load >= 1 || c.throttle > 60) ? 'over' : (c.throttle < 40 ? 'under' : 'sweet')}; });
+    if (st.motorThr !== 'all') motors = motors.filter(x => x.band === st.motorThr);
+    if (st.motorFit !== 'all') motors = motors.filter(x => x.tone === st.motorFit);
     const batts = this.BATTS.filter(b => st.cells === 'All' || b.cells === st.cells);
 
     const benchPts = [20, 35, 50, 65, 80, 100];
@@ -1007,7 +1028,7 @@ class Component extends DCLogic {
       optimise: () => this.optimise(),
       prev: () => this.setState(s => ({step:Math.max(1, s.step - 1)})),
       next: () => this.setState(s => ({step:Math.min(5, s.step + 1)})),
-      reset: () => this.setState({step:1, motor:window.__DEFAULT_MOTOR, batt:window.__DEFAULT_BATT, battLocked:false, style:1.7, mission:{time:22, alt:500}, mass:{struct:550, motors:780, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450}, eta:{wind:75, prop:100, av:95}, gap:15, motorFilter:'', cells:'All', built:false}),
+      reset: () => this.setState({step:1, motor:window.__DEFAULT_MOTOR, batt:window.__DEFAULT_BATT, battLocked:false, style:1.7, mission:{time:22, alt:500}, mass:{struct:550, motors:780, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450}, eta:{wind:75, prop:100, av:95}, gap:15, motorFilter:'', cells:'All', motorThr:'all', motorFit:'all', built:false}),
 
       s1n:S[0].n, s1bg:S[0].bg, s1fg:S[0].fg, s1txt:S[0].txt, b1:S[0].body, go1:S[0].go,
       s2n:S[1].n, s2bg:S[1].bg, s2fg:S[1].fg, s2txt:S[1].txt, b2:S[1].body, go2:S[1].go,
@@ -1026,7 +1047,7 @@ class Component extends DCLogic {
         border: st.style === s.v ? ink : '#E7E4DF',
         bg: st.style === s.v ? '#E8E6E1' : '#FFFFFF',
         color: st.style === s.v ? ink : '#6E6C66',
-        go: () => this.setState({style:s.v, built:true})
+        go: () => this.setState({style:s.v})
       })),
 
       massSliders: massDefs.map(md => ({
@@ -1045,26 +1066,13 @@ class Component extends DCLogic {
           .sort((a, b) => { const pa = a.split('x').map(parseFloat), pb = b.split('x').map(parseFloat); return (pa[0] - pb[0]) || ((pa[1] || 0) - (pb[1] || 0)) || ((pa[2] || 0) - (pb[2] || 0)); })
           .map(p => ({v:p, label:p.replace(/x/g, ' × ')}))
       ),
-      onProp: e => this.setState({prop:e.target.value, built:true}),
+      onProp: e => this.setState({prop:e.target.value}),
       motorFilter: st.motorFilter,
       onMotorFilter: e => this.setState({motorFilter:e.target.value}),
-      motorRows: motors.map(m => {
-        const c = this.calc(this.snap({key:'motor', value:m.id}));
+      motorRows: motors.map(row => {
+        const m = row.m, c = row.c, ownTone = row.tone;
         const on = st.motor === m.id;
-        // a shortfall driven by the shared pack estimate is not this motor's fault —
-        // prefer a motor-specific gate so the list differentiates
-        // pack-driven gates are shared by every candidate — judge a motor on its own gates only
-        // Judge the MOTOR on motor traits only — flight time is battery-driven, not the motor's fault.
-        const own = c.gates.filter(x => ['hover', 'tw', 'eff', 'thr', 'irat'].includes(x.key));
-        const badOwn = own.filter(x => x.tone === 'bad');
-        const fail = badOwn[0];
-        // Hard fail = can't hover or not enough thrust/weight. Efficiency / throttle-band /
-        // current-ratio are quality notes (amber), not disqualifiers.
-        const hard = own.filter(x => x.key === 'hover' || x.key === 'tw');
-        const soft = own.filter(x => x.key === 'eff' || x.key === 'thr' || x.key === 'irat');
-        const ownTone = hard.some(x => x.tone === 'bad') ? 'bad'
-          : (hard.some(x => x.tone === 'med') || soft.some(x => x.tone !== 'good')) ? 'med'
-          : 'good';
+        const fail = c.gates.filter(x => ['hover','tw','eff','thr','irat'].includes(x.key) && x.tone === 'bad')[0];
         const faults = {
           hover:'cannot hover this mass',
           eff:'off efficiency peak',
@@ -1086,6 +1094,32 @@ class Component extends DCLogic {
           go: () => this.setState({motor:m.id, built:true})
         };
       }),
+      thrTabs: [
+        {v:'all', label:'All', tip:'Show every motor'},
+        {v:'under', label:'Under', tip:'Hover below 40% throttle — motor is oversized for this build'},
+        {v:'sweet', label:'Sweet', tip:'Hover in the 40–60% band — ideal loading'},
+        {v:'over', label:'Over', tip:'Hover above 60% throttle — motor working hard / undersized'}
+      ].map(o => ({
+        label:o.label, tip:o.tip,
+        border: st.motorThr === o.v ? ink : '#E7E4DF',
+        bg: st.motorThr === o.v ? '#F7F6F3' : '#FFFFFF',
+        color: st.motorThr === o.v ? ink : '#6E6C66',
+        go: () => this.setState({motorThr:o.v})
+      })),
+      fitTabs: [
+        {v:'all', label:'All', tone:null},
+        {v:'good', label:'Fits', tone:'good'},
+        {v:'med', label:'Marginal', tone:'med'},
+        {v:'bad', label:'Won’t hover', tone:'bad'}
+      ].map(o => ({
+        label:o.label,
+        dot: o.tone ? p[o.tone] : 'transparent',
+        dotShow: o.tone ? 'block' : 'none',
+        border: st.motorFit === o.v ? ink : '#E7E4DF',
+        bg: st.motorFit === o.v ? '#F7F6F3' : '#FFFFFF',
+        color: st.motorFit === o.v ? ink : '#6E6C66',
+        go: () => this.setState({motorFit:o.v})
+      })),
 
       cellTabs: this.CELLS.map(c => ({
         label:c,
@@ -1121,7 +1155,7 @@ class Component extends DCLogic {
       ],
       etaTotal: (d.eta * 100).toFixed(0),
       gap: String(st.gap),
-      onGap: e => this.setState({gap:+e.target.value, built:true}),
+      onGap: e => this.setState({gap:+e.target.value}),
 
       tabs: [{k:'overview',label:'Results'},{k:'elec',label:'Electronics'},{k:'chain',label:'Calc chain'}].map(t => ({
         label:t.label,
