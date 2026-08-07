@@ -1,3 +1,8 @@
 
 # local Claude Code settings (permissions, local hooks)
 .claude/settings.local.json
+
+# harvested vendor datasheet images (~63MB working cache); the scripts that
+# fetch and parse them are kept
+.scrape/*
+!.scrape/*.py

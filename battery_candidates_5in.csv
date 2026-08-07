@@ -1,0 +1,22 @@
+brand,model,cells,capacity_mah,voltage_v,discharge_c,weight_g,dims_mm,connector,confidence,source
+Tattu,R-Line V6,6S,1300,22.2,160,203,78x39.5x33,XT60,high,https://www.tattuworld.com/products/tattu-r-line-6-0-1300mah-6s1p-22-2v-160c-st-fpv-lipo-battery.html
+Tattu,R-Line V1,6S,1300,22.2,95,238,,XT60,medium,https://genstattu.com/tattu-r-line-1300mah-95c-6s1p-lipo-battery-pack-with-xt60-plug.html
+Tattu,R-Line V3,6S,1300,22.2,120,280,,XT60,low,https://www.getfpv.com/tattu-r-line-version-3-0-1300mah-6s-120c-lipo-battery.html
+CNHL,Black Series,6S,1300,22.2,100,230,76x35x47,XT60,high,https://www.getfpv.com/cnhl-black-series-100c-6s-lipo-battery-1300mah.html
+CNHL,Black Series V2,6S,1500,22.2,130,232,52x33x75,XT60,high,CNHL Black Series V2 datasheet (stock 1501306BK)
+CNHL,Black Series,6S,1100,22.2,100,205,,XT60,high,https://www.getfpv.com/cnhl-black-series-100c-6s-lipo-battery-1100mah.html
+CNHL,Black Series,6S,1500,22.2,100,266,54x34x75,XT60,high,https://www.getfpv.com/cnhl-black-series-100c-6s-lipo-battery-1500mah.html
+CNHL,Black Series,4S,1500,14.8,100,183,75x37x38,XT60,high,https://www.6sfull.cz/en/cnhl-black-series-1500mah-4s-100c/
+CNHL,Black Series,4S,1300,14.8,130,151,31x33x74,XT60,high,CNHL Black Series V2 datasheet (stock 1301304BK)
+GNB Gaoneng,LiHV,6S,1300,22.8,160,198,82x38x35,XT60,high,https://pyrodrone.com/products/gaoneng-gnb-6s-22-8v-1300mah-160c-hv-lipo-battery-xt60
+GNB Gaoneng,Standard,6S,1300,22.2,120,226,76x35x46,XT60,medium,https://pyrodrone.com/products/gaoneng-gnb-1300mah-22-2v-6s-120c-lipo-battery-xt60
+GNB Gaoneng,Infinity,6S,1300,22.2,110,240,86x35x44,XT60,medium,https://www.amazon.com/GAONENG-1300mAh-Battery-Infinity-Discharge/dp/B097SLMZBF
+GNB Gaoneng,Standard,6S,1500,22.2,130,280,87x35x50,XT60,medium,https://www.fpvthai.com/products/gaoneng-gnb-22-2v-1500mah-130c-260c-6s-lipo-battery-with-xt60-plug-for-rc-fpv-racing
+SMC,HCL-RS,6S,1600,22.2,,240,,XT60,medium,https://pyrodrone.com/products/smc-hcl-rs-22-2v-6s-1600mah-fpv-racing-lipo-battery-pack-xt60
+SMC,HCL-RS,6S,1400,22.2,,208,36x39x79,XT60,high,https://www.smc-racing.com/index.php?route=product/product&product_id=855
+Bonka,U2 Ultra Light,6S,1380,22.2,150,225,,XT60,high,https://pyrodrone.com/products/bonka-u2-ultra-light-1380mah-6s-22-25v-150c-fpv-racing-lipo-battery
+Ovonic,Rebel 2.0,6S,1400,22.2,150,226,,XT60,high,https://us.ovonicshop.com/products/ovonic-150c-racing-series-6s-1400mah-22-2v-lipo-battery-with-xt60-plug-for-5-6-fpv-racing-drones
+DOGCOM,MCK V2.0,6S,1380,22.2,160,225,,XT60,low,https://www.dogcombattery.com/products/mck-v2-dogcom-1380mah-160c-6s-222v
+GNB Gaoneng,LiHV,6S,1300,22.8,120,,,XT60,MISSING,https://www.gaoneng.shop/products/gaoneng-gnb-lihv-6s-22.8v-1300mah-120c-xt60-lipo-battery
+TheFPV,Racing,6S,1100,22.2,120,,,XT60,MISSING,https://www.aos-rc.com/recommended-parts/5in-freestyle
+Tattu,R-Line V5,6S,1200,22.2,150,197,,XT60,high,https://genstattu.com/tattu-r-line-version-5-0-1200mah-6s-150c-22-2v-lipo-battery-pack-with-xt60-plug/

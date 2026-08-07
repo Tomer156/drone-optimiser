@@ -1,0 +1,7 @@
+motor_name,avg_voltage_v,prop,throttle_pct,thrust_g,voltage_v,current_a,power_w,efficiency_gw,rpm
+iFlight XING2 3110 1600KV,25.2,6.0x4.0x3 Nazgul,50,907.4,25.07,12.14,292.3,3.104,
+iFlight XING2 3110 1600KV,25.2,6.0x4.0x3 Nazgul,60,1243.0,24.92,18.39,442.3,2.81,
+iFlight XING2 3110 1600KV,25.2,6.0x4.0x3 Nazgul,70,1646.5,24.71,27.22,654.8,2.515,
+iFlight XING2 3110 1600KV,25.2,6.0x4.0x3 Nazgul,80,2044.9,24.44,38.31,881.8,2.319,
+iFlight XING2 3110 1600KV,25.2,6.0x4.0x3 Nazgul,90,2409.8,24.19,50.22,1204.2,2.001,
+iFlight XING2 3110 1600KV,25.2,6.0x4.0x3 Nazgul,100,2829.2,23.86,65.06,1550.4,1.825,

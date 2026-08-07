@@ -1,0 +1,64 @@
+motor_name,kv,weight_g,weight_basis,cells,prop_in,max_thrust_g,peak_current_a,max_watt_w,no_load_a,stator,thrust_table,confidence,source
+T-Motor Velox V2306 V3,1750,33.8,with cable,6S,5,1697,34.9,820.7,0.85A@10V,23x6,CAPTURED,high,https://www.getfpv.com/t-motor-velox-v2306-v3-motor-1500kv-1750kv-1950kv-2550kv.html
+T-Motor Velox V2306 V3,1950,33.7,with cable,6S,5,1760,41.7,976,1.3A@10V,23x6,CAPTURED,high,https://www.getfpv.com/t-motor-velox-v2306-v3-motor-1500kv-1750kv-1950kv-2550kv.html
+T-Motor Velox V2306 V3,2550,32.6,with cable,4S,5,1392,34.5,533.7,1.95A@10V,23x6,CAPTURED,high,https://www.getfpv.com/t-motor-velox-v2306-v3-motor-1500kv-1750kv-1950kv-2550kv.html
+T-Motor F60 Pro V 2207.5,1750,34.3,with cable,6S,5,1883,40.5,1003,1.0A@10V,22x7.5,CAPTURED,high,https://www.getfpv.com/t-motor-f60-pro-v-motor-1750kv-1950kv-2020kv-2550kv.html
+T-Motor F60 Pro V 2207.5,1950,33.9,with cable,6S,5,1990,49.3,1216,1.1A@10V,22x7.5,CAPTURED,high,https://www.getfpv.com/t-motor-f60-pro-v-motor-1750kv-1950kv-2020kv-2550kv.html
+T-Motor F60 Pro V 2207.5,2020,33.8,with cable,4-6S,5,2010,52.7,1297,1.25A@10V,22x7.5,CAPTURED,high,https://www.getfpv.com/t-motor-f60-pro-v-motor-1750kv-1950kv-2020kv-2550kv.html
+T-Motor F60 Pro V 2207.5,2550,33.3,with cable,4S,5,1394,50.7,825,1.6A@10V,22x7.5,CAPTURED,high,https://www.getfpv.com/t-motor-f60-pro-v-motor-1750kv-1950kv-2020kv-2550kv.html
+iFlight XING2 2306,1755,31.6,with short wire,4-6S,5,,,,,23x6,image-only,high,https://www.getfpv.com/iflight-xing2-2306-1755kv-2555kv-motor.html
+iFlight XING2 2306,2555,31.6,with short wire,4S,5,,,,,23x6,image-only,high,https://www.getfpv.com/iflight-xing2-2306-1755kv-2555kv-motor.html
+iFlight XING-E Pro 2207,1800,33.8,with wire,3-6S,5-6,1899,35.22,845.3,,22x7,CAPTURED,high,https://shop.iflight.com/xing-e-pro-2207-2-6s-fpv-nextgen-motor-pro874
+iFlight XING-E Pro 2207,2450,33.8,with wire,2-4S,5,,42.63,682.1,,22x7,image-only,high,https://shop.iflight.com/xing-e-pro-2207-2-6s-fpv-nextgen-motor-pro874
+iFlight XING-E Pro 2207,2750,33.8,with wire,2-4S,5,,50.03,800.5,,22x7,image-only,high,https://shop.iflight.com/xing-e-pro-2207-2-6s-fpv-nextgen-motor-pro874
+EMAX ECO II 2306,1700,30.2,without cable,3-6S,5,1850,,,,23x6,CAPTURED,high,https://www.getfpv.com/emax-eco-ii-series-2306-motor-1700kv-1900kv-2400kv.html
+EMAX ECO II 2306,1900,30.2,without cable,3-6S,5,1990,,,,23x6,CAPTURED,high,https://www.getfpv.com/emax-eco-ii-series-2306-motor-1700kv-1900kv-2400kv.html
+EMAX ECO II 2306,2400,30.2,without cable,3-4S,5,1620,,,,23x6,CAPTURED,high,https://www.getfpv.com/emax-eco-ii-series-2306-motor-1700kv-1900kv-2400kv.html
+RCinpower GTS V2 2207 Plus,1860,31.5,with 3cm wire,6S,5,,40,,,22x7.5,image-only,high,https://www.getfpv.com/rcinpower-gts-v2-2207-plus-motor-1860kv-2500kv-2750kv.html
+RCinpower GTS V2 2207 Plus,2500,31.5,with 3cm wire,4-5S,5,,,,,22x7.5,image-only,medium,https://www.getfpv.com/rcinpower-gts-v2-2207-plus-motor-1860kv-2500kv-2750kv.html
+RCinpower GTS V2 2207 Plus,2750,31.5,with 3cm wire,4-5S,5,2270,,,,22x7.5,image-only,medium,https://www.getfpv.com/rcinpower-gts-v2-2207-plus-motor-1860kv-2500kv-2750kv.html
+BrotherHobby Avenger V3 2207.5,1750,33.6,with 16cm wires,6S,5,,,,,22x7.5,image-only,high,https://www.brotherhobbystore.com/products/avenger-22075-v3
+BrotherHobby Avenger V3 2207.5,1900,33.6,with 16cm wires,6S,5,,,,,22x7.5,image-only,high,https://www.brotherhobbystore.com/products/avenger-22075-v3
+BrotherHobby Avenger V3 2207.5,2350,33.6,with 16cm wires,4-5S,5,,,,,22x7.5,image-only,high,https://www.brotherhobbystore.com/products/avenger-22075-v3
+Axisflying AE2207 V2,1860,35.2,with wire,6S,5,1703,38.65,902.48,,22x7,image-only,high,https://www.axisflying.com/products/5inch-brushless-economic-fpv-motor-ae2207-v2
+Axisflying AE2207 V2,1960,35.2,with wire,6S,5,1703,38.65,902.48,,22x7,image-only,high,https://www.axisflying.com/products/5inch-brushless-economic-fpv-motor-ae2207-v2
+Hobbywing XRotor Race Pro 2306,1600,27.5,without wires,4-6S,5,,40.73,651.7,1.36@10V,23x6,image-only,low,https://www.hobbywing.com/en/products/xrotor-2306-race-pro167
+Hobbywing XRotor Race Pro 2306,1750,27.5,without wires,4-6S,5,,,,,23x6,image-only,low,https://www.hobbywing.com/en/products/xrotor-2306-race-pro167
+Hobbywing XRotor Race Pro 2306,2700,27.5,without wires,4S,5,,,,,23x6,image-only,low,https://www.hobbywing.com/en/products/xrotor-2306-race-pro167
+Flywoo NIN 2306.5,1750,31.5,unspecified,2-6S,5,,,,,23x6.5,image-only,medium,https://www.getfpv.com/flywoo-nin-2306-5-1750kv-2450kv-motor-1pc.html
+Flywoo NIN 2306.5,2450,31.5,unspecified,2-4S,5,,,,,23x6.5,image-only,medium,https://www.getfpv.com/flywoo-nin-2306-5-1750kv-2450kv-motor-1pc.html
+Flywoo NIN 2306.5 V2,1350,31.5,unspecified,4-6S,5,,24.5,588,,23x6.5,image-only,medium,https://www.getfpv.com/flywoo-nin-2306-5-v2-1750kv-1350kv-2450kv-motor-1pc.html
+AOS Supernova 2207,1980,31,with 2cm wires,5-6S,5,2547,61 (5S),1456,1.1@10V,22x7,CAPTURED,high,https://fpvstorerc.com/products/rcinpower-aos-supernova-2207-1980kv-brushless-fpv-drone-motor
+EMAX ECO II 2004,2000,16.6,without wire,6S,3-4,1130,,,,20x4,CAPTURED,high,https://pyrodrone.com/products/emax-eco-ii-2004-brushless-motor-2000kv
+EMAX ECO II 2207,1700,33.4,without wire,3-6S,5,1980,38 (6S),960,1.2@10V,22x7,CAPTURED,high,https://emax-usa.com/products/eco-ii-2207-brushless-motor-1700kv-1900kv-2400kv
+EMAX ECO II 2207,1900,33.6,without wire,3-6S,5,,45 (6S),1130,1.4@10V,22x7,image-only,high,https://emax-usa.com/products/eco-ii-2207-brushless-motor-1700kv-1900kv-2400kv
+EMAX ECO II 2207,2400,33.5,without wire,3-4S,5,1760,43 (4S),720,2.2@10V,22x7,CAPTURED,high,https://emax-usa.com/products/eco-ii-2207-brushless-motor-1700kv-1900kv-2400kv
+FlyFishRC Flash 2004,1800,16.6,with cable,6S,3-4,837,14.95,357,,20x4,CAPTURED,high,https://www.flyfish-rc.com/products/flash-2004-1800kv-2900kv-fpv-motor
+FlyFishRC Flash 2207,2005,34.1,with cable,6S,5,1754,42.70,997,,22x7,CAPTURED,high,https://www.flyfish-rc.com/products/flash-2207-motor-black
+RCinpower GTS V3 2104T,1800,15.9,with 3cm wire,3-6S,3,,22.1 (3S),530,0.5@10V,21x4,CAPTURED,high,https://pyrodrone.com/products/rcinpower-gts-v3-2104-t-1800kv-teal-pink
+RCinpower SmooX 2306 Plus,1350,33,with 3cm wire,4-6S,5,,25 (5S),600,0.95@10V,23x6.5,CAPTURED,high,https://fpvstorerc.com/products/rcinpower-smoox-gts-v2-2306-plus-brushless-motor
+RCinpower SmooX 2306 Plus,1880,33,with 3cm wire,4-6S,5,2333,36,900,1.35@10V,23x6.6,CAPTURED,high,https://fpvstorerc.com/products/rcinpower-smoox-gts-v2-2306-plus-brushless-motor
+RCinpower SmooX 2306 Plus,2280,33,with 3cm wire,4-5S,5,2224,40,850,1.95@10V,23x6.6,CAPTURED,high,https://fpvstorerc.com/products/rcinpower-smoox-gts-v2-2306-plus-brushless-motor
+RCinpower SmooX 2306 Plus,2580,33,with 3cm wire,4-5S,5,2175,55,1100,2.3@10V,23x6.6,CAPTURED,high,https://fpvstorerc.com/products/rcinpower-smoox-gts-v2-2306-plus-brushless-motor
+RCinpower Wasp Major 22.6-6.5,1860,30.5,with 3cm wire,5-6S,5,2313,35 (5S),900,1.1@10V,22.6x6.5,CAPTURED,high,https://fpvstorerc.com/products/rcinpower-wasp-major-22-6-6-5-1860kv-2020kv-brushless-motor
+RCinpower Wasp Major 22.6-6.5,2020,30.5,with 3cm wire,4-6S,5,,,,,22.6x6.5,image-only,medium,https://fpvstorerc.com/products/rcinpower-wasp-major-22-6-6-5-1860kv-2020kv-brushless-motor
+T-Motor Pacer V3 P2207,1750,34.2,with cable,6S,5,1697,38.4,952,1.2@10V,22x7,CAPTURED,high,https://shop.tmotor.com/products/fpv-brushless-motor-2207-v3
+T-Motor Pacer V3 P2207,1950,34.3,with cable,6S,5,1760,44,1085,1.35@10V,22x7,CAPTURED,high,https://shop.tmotor.com/products/fpv-brushless-motor-2207-v3
+T-Motor Pacer V3 P2207,2080,34.1,with cable,6S,5,1668,44,1037,1.4@10V,22x7,CAPTURED,high,https://shop.tmotor.com/products/fpv-brushless-motor-2207-v3
+T-Motor Pacer V3 P2207,2550,34.2,with cable,4S,5,1392,43.6,713,2.25@10V,22x7,CAPTURED,high,https://shop.tmotor.com/products/fpv-brushless-motor-2207-v3
+T-Motor Veloce V2207.5 V2,1750,34.6,with cable (30.8 excl),6S,5,,35.7,794,1.15@10V,22x7.5,image-only,high,https://www.drone-fpv-racer.com/en/t-motor-velox-v22075-v2-1750kv-7574.html
+T-Motor Veloce V2207.5 V2,1950,35.3,with cable (31.5 excl),6S,5,,39,873,1.42@10V,22x7.5,image-only,high,https://www.drone-fpv-racer.com/en/t-motor-velox-v22075-v2-1750kv-7574.html
+T-Motor Veloce V2207.5 V2,2550,35.6,with cable (31.6 excl),4-5S,5,1289,38.1,557,1.95@10V,22x7.5,CAPTURED,high,https://www.drone-fpv-racer.com/en/t-motor-velox-v22075-v2-1750kv-7574.html
+T-Motor Velox V3 2207,1500,34.6,with cable,8S,5,,33.3,1915.1,0.9@10V,22x7,image-only,high,https://fpvstorerc.com/products/tmotor-velox-v3-0-2207-brushless-motor
+T-Motor Velox V3 2207,1750,37.3,with cable,6S,5,1371,34.6,814.3,1.2@10V,22x7,CAPTURED,high,https://fpvstorerc.com/products/tmotor-velox-v3-0-2207-brushless-motor
+T-Motor Velox V3 2207,1950,37.1,with cable,6S,5,1582,45.0,1050.5,1.32@10V,22x7,CAPTURED,high,https://fpvstorerc.com/products/tmotor-velox-v3-0-2207-brushless-motor
+T-Motor Velox V3 2207,2550,36.5,with cable,4S,5,1192,41.8,642.5,2.25@10V,22x7,CAPTURED,high,https://fpvstorerc.com/products/tmotor-velox-v3-0-2207-brushless-motor
+EMAX ECO II 2004,1600,16.6,without wire,4-6S,3-5,951,,,,20x4,CAPTURED,high,https://emaxmodel.com/products/emax-eco-ii-series-2004-1600kv-2000kv-2400kv-3000kv-brushless-motor-for-rc-drone-fpv-racing
+EMAX ECO II 2004,2400,16.4,without wire,4-6S,3-5,930,,,,20x4,CAPTURED,high,https://emaxmodel.com/products/emax-eco-ii-series-2004-1600kv-2000kv-2400kv-3000kv-brushless-motor-for-rc-drone-fpv-racing
+EMAX ECO II 2004,3000,16.4,without wire,3-6S,3-5,1170,,,,20x4,CAPTURED,high,https://emaxmodel.com/products/emax-eco-ii-series-2004-1600kv-2000kv-2400kv-3000kv-brushless-motor-for-rc-drone-fpv-racing
+FlyFishRC Flash 2004,2900,16.6,with cable,4S,3-4,888,26.01,408,,20x4,CAPTURED,high,https://www.flyfish-rc.com/products/flash-2004-1800kv-2900kv-fpv-motor
+FlyFishRC Flash 2207,1950,34.2,with cable,6S,5,1738,41.42,967,,22x7,CAPTURED,high,https://www.flyfish-rc.com/products/flash-2207-motor-black
+RCinpower GTS V3 2104T,3000,15.9,with 3cm wire,3-4S,3,,36.2 (3S),580,0.9@10V,21x4,CAPTURED,high,https://pyrodrone.com/products/rcinpower-gts-v3-2104-t-1800kv-teal-pink
+T-Motor Velox V3 2207,2050,36.8,with cable,6S,5,1634,49.5,1153.4,1.66@10V,22x7,CAPTURED,high,https://fpvstorerc.com/products/tmotor-velox-v3-0-2207-brushless-motor
+RCinpower Wasp Major 22.6-6.5,2420,30.5,with 3cm wire,4-5S,5,2410,46 (5S),970,1.7@10V,22.6x6.5,CAPTURED,high,https://fpvstorerc.com/products/rcinpower-wasp-major-22-6-6-5-1860kv-2020kv-brushless-motor
+T-Motor Velox V2306 V3,1500,32.7,with cable,8S,5,1691,34.5,1969.9,0.7A@10V,23x6,CAPTURED,high,https://www.getfpv.com/t-motor-velox-v2306-v3-motor-1500kv-1750kv-1950kv-2550kv.html

@@ -1,0 +1,33 @@
+motor_name,kv,weight_g,weight_basis,cells,prop_in,max_thrust_g,peak_current_a,max_watt_w,no_load_a,dims_mm,thrust_table,source
+Hobbywing XRotor 2807,1300,59,motor only,3-6S,7,2818,56.7,1361,2.0@24V,34x20.5,CAPTURED,https://www.hobbywing.com/en/products/-xrotor2807
+Hobbywing XRotor 2807,1500,58.7,motor only,3-5S,7,2646,59.5,1195,2.27@20V,34x20.5,CAPTURED,https://www.hobbywing.com/en/products/-xrotor2807
+Hobbywing XRotor 2807,1700,58.4,motor only,3-4S,7,2205,53.9,864,2.13@16V,34x20.5,CAPTURED,https://www.hobbywing.com/en/products/-xrotor2807
+Hobbywing XRotor 2812,900,83.4,motor only,4-6S,8-9,3355,49.6,1191,1.88@24V,34x25.5,image-only,https://rcdrone.top/products/hobbywing-xrotor-2812motor
+Hobbywing XRotor 2812,1100,83.8,motor only,4-6S,8-9,3722,64.1,1538,1.88@24V,34x25.5,image-only,https://rcdrone.top/products/hobbywing-xrotor-2812motor
+Hobbywing XRotor 3115,1050,126,motor only,4-6S,9-10,4420,70,1675,2.8@24V,37.2x32,CAPTURED,https://www.hobbywing.com/en/products/rtf3110
+Hobbywing RTF 3110,900,89,motor only,4-6S,9,3626,63,1500,2.2@24V,37.2x27,CAPTURED,https://www.hobbywing.com/en/products/rtf3110
+Hobbywing RTF 3110,1150,88,motor only,4-6S,9,4126,69,1656,2.8@24V,37.2x27,CAPTURED,https://www.hobbywing.com/en/products/rtf3110
+iFlight XING2 2809,1250,60.7,with wire,6S,7-8,2933,49.23,1147.1,,35.33x21.7,CAPTURED,https://shop.iflight.com/XING2-2809-FPV-Motor-Unibell-Pro1673
+iFlight XING-E 3314,900,120,with wire,6S,8-10,,58.48,1366.1,,38.6x29.8,image-only,https://shop.iflight.com/XING-E-3314-Cinelifter-Motor-Pro2137
+EMAX ECO II 2807,1300,47.6,with wire,3-6S,6-7,,,,,33.9x34,image-only,https://www.getfpv.com/emax-eco-ii-series-2807-motor-1300kv-1500kv-1700kv.html
+EMAX ECO II 2807,1500,46.9,with wire,3-5S,6-7,,,,,33.9x34,image-only,https://www.getfpv.com/emax-eco-ii-series-2807-motor-1300kv-1500kv-1700kv.html
+EMAX ECO II 2807,1700,47.9,with wire,3-4S,6-7,,,,,33.9x34,image-only,https://www.getfpv.com/emax-eco-ii-series-2807-motor-1300kv-1500kv-1700kv.html
+EMAX ECO II 2814,730,79.5,without wire,3-6S,8-10,,,,,33.2x46.45,image-only,https://emaxmodel.com/products/emax-ecoii-2814-3-6s-730kv-830kv-brushless-motor-for-rc-drone-fpv-racing
+EMAX ECO II 2814,830,79.5,without wire,3-6S,8-10,,,,,33.2x46.45,image-only,https://emaxmodel.com/products/emax-ecoii-2814-3-6s-730kv-830kv-brushless-motor-for-rc-drone-fpv-racing
+EMAX Pro Series 2810,950,63.7,without wire,3-6S,7-8,,49,1235,1.2@10V,33.2x42.05,image-only,https://www.readymaderc.com/products/details/85862-emax-pro-series-2810-brushless-motor-950kv
+EMAX Pro Series 2810,1150,63.7,without wire,3-6S,7-8,,60,1512,1.6@10V,33.2x42.05,image-only,https://www.readymaderc.com/products/details/85863-emax-pro-series-2810-brushless-motor-1150kv
+T-Motor Velox V2808,1300,61.1,with cable,4-6S,5-8,3000,62.4,1511.9,1.19@10V,,image-only,https://www.getfpv.com/t-motor-velox-v2808-cinematic-motor-1300kv-1500kv-1950kv.html
+T-Motor Velox V2808,1500,60.5,with cable,4-6S,5-8,3000,74.3,1781.7,1.49@10V,,image-only,https://www.getfpv.com/t-motor-velox-v2808-cinematic-motor-1300kv-1500kv-1950kv.html
+T-Motor Velox V2808,1950,61.1,with cable,4-6S,5-7,,82.3,1849.3,2.45@10V,,image-only,https://www.getfpv.com/t-motor-velox-v2808-cinematic-motor-1300kv-1500kv-1950kv.html
+T-Motor Velox V3115,900,113.1,with cable,4-6S,9-11,5000,,1894,,,image-only,https://www.getfpv.com/t-motor-velox-v3115-motor-400kv-640kv-900kv.html
+GEPRC EM3110,900,87.5,with wire,6S,8-9,,,,,,image-only,https://geprc.com/product/geprc-em3110-900kv-motor/
+GEPRC EM3215,900,122,with wire,6S,9-10,4120,75,1780,,38.6x30.7,image-only,https://geprc.com/product/geprc-em3215-900kv-750kv-motor/
+GEPRC SPEEDX2 2809,1280,71.4,with wire,6S,7-8,,49.35,1148.9,,,image-only,https://geprc.com/product/geprc-speedx2-2809-1280kv-motor/
+Foxeer Black Hornet 3115,900,110,with 25cm wire,4-6S,9-10,,,,2.0@10V,31x15 stator,image-only,https://www.getfpv.com/foxeer-black-hornet-3115-motor-900kv.html
+Foxeer Black Hornet 3210,900,89,unspecified,5-8S,9-10,,,,,32x10 stator,image-only,https://rcdrone.top/products/foxeer-black-hornet-3210-900kv-motor
+MAD BSC2812,925,76,unspecified,6S,9-10,2927,50.5,1262,1.35@10V,33.6x41.7,CAPTURED,https://store.mad-motor.com/products/mad-2812-drone-motor
+MAD BSC2812,1155,76,unspecified,4-6S,9-10,3000,,,,,image-only,https://store.mad-motor.com/products/mad-2812-drone-motor
+MAD BSC3110,900,87.5,unspecified,6S,9-10,3600,59.3,1484.3,1.4@10V,37.1x43.9,CAPTURED,https://store.mad-motor.com/products/mad-3110-drone-motor
+BrotherHobby SE 2807,1300,48,with 20cm wire,6S,6-7,,,,,,image-only,https://www.brotherhobbystore.com/products/brotherhobby-se-2807-1300kv-motorcw-169
+Xnova Cinelifter 3220 SK,700,155,with 30cm wires,8S,10,,,,1.6@10V,32xx stator,image-only,https://rotorvillage.ca/xnova-3220-700kv-cinelifter-sk-series-1pc/
+RCinpower GTS 3215,920,120,with 3cm wire,5-6S,9-10,,,1900,2.6@10V,57.6x36,image-only,https://www.unmannedtechshop.co.uk/products/rcinpower-gts-3215-brushless-fpv-drone-motor

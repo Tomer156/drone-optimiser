@@ -1,1883 +1,2036 @@
 [
-  {
-    "cells": "1S",
-    "capacity_mah": 320.0,
-    "discharge_c": 75.0,
-    "voltage_v": 3.7,
-    "connector": null,
-    "weight_g": 7.5,
-    "sku": ""
-  },
-  {
-    "cells": "1S",
-    "capacity_mah": 320.0,
-    "discharge_c": 75.0,
-    "voltage_v": 3.7,
-    "connector": null,
-    "weight_g": 7.5,
-    "sku": ""
-  },
-  {
-    "cells": "2S",
-    "capacity_mah": 6200.0,
-    "discharge_c": null,
-    "voltage_v": 7.4,
-    "connector": "XT30",
-    "weight_g": 203.0,
-    "sku": "HP0157.BATT-6200-2S"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 300.0,
-    "discharge_c": 35.0,
-    "voltage_v": 11.100000000000001,
-    "connector": "JST",
-    "weight_g": 25.0,
-    "sku": "9671610003"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 300.0,
-    "discharge_c": 50.0,
-    "voltage_v": 11.100000000000001,
-    "connector": "JST",
-    "weight_g": 30.0,
-    "sku": "9671610004"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 850.0,
-    "discharge_c": 70.0,
-    "voltage_v": 11.1,
-    "connector": "JST",
-    "weight_g": 71.0,
-    "sku": "9067110019"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 1000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 11.1,
-    "connector": "XT60",
-    "weight_g": 91.0,
-    "sku": "9067110024"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 1000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 11.1,
-    "connector": "JST",
-    "weight_g": 84.0,
-    "sku": "9067110023"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 1500.0,
-    "discharge_c": 40.0,
-    "voltage_v": 11.1,
-    "connector": "XT60",
-    "weight_g": 117.0,
-    "sku": "9067110027"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 1500.0,
-    "discharge_c": 40.0,
-    "voltage_v": 11.1,
-    "connector": "EC3",
-    "weight_g": 117.0,
-    "sku": "9067110026"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 1800.0,
-    "discharge_c": 70.0,
-    "voltage_v": 11.1,
-    "connector": "XT60",
-    "weight_g": 136.0,
-    "sku": "9067110059"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 30.0,
-    "voltage_v": 11.1,
-    "connector": "XT60",
-    "weight_g": 147.0,
-    "sku": "9067160023"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 40.0,
-    "voltage_v": 11.1,
-    "connector": "XT60",
-    "weight_g": 167.0,
-    "sku": "9067110030"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 11.1,
-    "connector": "XT60",
-    "weight_g": 178.0,
-    "sku": "9067160609"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 2800.0,
-    "discharge_c": 70.0,
-    "voltage_v": 11.1,
-    "connector": "XT60",
-    "weight_g": 217.0,
-    "sku": "9067110063"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 3000.0,
-    "discharge_c": 70.0,
-    "voltage_v": 11.100000000000001,
-    "connector": "XT90",
-    "weight_g": 265.0,
-    "sku": "9067000542-0"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 3000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 11.1,
-    "connector": "XT90",
-    "weight_g": 259.0,
-    "sku": "9067110038"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 3300.0,
-    "discharge_c": 30.0,
-    "voltage_v": 11.1,
-    "connector": "XT60",
-    "weight_g": 209.0,
-    "sku": "9067110010"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 3600.0,
-    "discharge_c": 60.0,
-    "voltage_v": 11.1,
-    "connector": "XT90",
-    "weight_g": 285.0,
-    "sku": "9067160577"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 4000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 11.1,
-    "connector": "XT60",
-    "weight_g": 253.0,
-    "sku": "9067160598"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 11.1,
-    "connector": "XT90",
-    "weight_g": 332.0,
-    "sku": "9067110033"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 70.0,
-    "voltage_v": 11.100000000000001,
-    "connector": "XT90",
-    "weight_g": 431.0,
-    "sku": "9210000320-0"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 11.1,
-    "connector": "XT90",
-    "weight_g": 389.0,
-    "sku": "9067110012"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 11.1,
-    "connector": "XT60",
-    "weight_g": 380.0,
-    "sku": "9067110001"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 11.1,
-    "connector": "EC5",
-    "weight_g": 380.0,
-    "sku": "9067160561"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 11.1,
-    "connector": "XT90",
-    "weight_g": 380.0,
-    "sku": "9067160560"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 5200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 11.100000000000001,
-    "connector": "EC5",
-    "weight_g": 404.0,
-    "sku": "9067000553-0"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 5200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 11.100000000000001,
-    "connector": "XT90",
-    "weight_g": 404.0,
-    "sku": "9067000552-0"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 5500.0,
-    "discharge_c": 40.0,
-    "voltage_v": 11.1,
-    "connector": "XT90",
-    "weight_g": 410.0,
-    "sku": "9067160582"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 5500.0,
-    "discharge_c": 60.0,
-    "voltage_v": 11.1,
-    "connector": "XT90",
-    "weight_g": 414.0,
-    "sku": "9067160586"
-  },
-  {
-    "cells": "3S2P",
-    "capacity_mah": 5500.0,
-    "discharge_c": 140.0,
-    "voltage_v": 11.1,
-    "connector": "XT90",
-    "weight_g": 416.0,
-    "sku": "9067000525-0"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 70.0,
-    "voltage_v": 11.1,
-    "connector": "XT90",
-    "weight_g": 424.0,
-    "sku": "9067160605"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 11.1,
-    "connector": "XT90",
-    "weight_g": 478.0,
-    "sku": "9067110015"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 11.1,
-    "connector": "XT60",
-    "weight_g": 440.0,
-    "sku": "9067110004"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 11.1,
-    "connector": "EC5",
-    "weight_g": 440.0,
-    "sku": "9067160569"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 11.1,
-    "connector": "XT90",
-    "weight_g": 440.0,
-    "sku": "9067160568"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 6200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 11.100000000000001,
-    "connector": "EC5",
-    "weight_g": 465.0,
-    "sku": "9067000546-0"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 6200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 11.100000000000001,
-    "connector": "XT90",
-    "weight_g": 465.0,
-    "sku": "9067000544-0"
-  },
-  {
-    "cells": "3S",
-    "capacity_mah": 8000.0,
-    "discharge_c": 140.0,
-    "voltage_v": 11.1,
-    "connector": "XT90",
-    "weight_g": 498.0,
-    "sku": "9067000540-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 450.0,
-    "discharge_c": 35.0,
-    "voltage_v": 14.8,
-    "connector": "XT30",
-    "weight_g": 56.0,
-    "sku": "9671610005"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 450.0,
-    "discharge_c": 60.0,
-    "voltage_v": 14.8,
-    "connector": "XT30",
-    "weight_g": 65.0,
-    "sku": "9067000516-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 450.0,
-    "discharge_c": 70.0,
-    "voltage_v": 14.8,
-    "connector": "XT30",
-    "weight_g": 63.0,
-    "sku": "9210000305-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 650.0,
-    "discharge_c": 65.0,
-    "voltage_v": 14.8,
-    "connector": "XT30",
-    "weight_g": 88.0,
-    "sku": "9067000438-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 650.0,
-    "discharge_c": 75.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 87.0,
-    "sku": "9067000370-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 850.0,
-    "discharge_c": 25.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 94.0,
-    "sku": "N850.4S.25"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 850.0,
-    "discharge_c": 45.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 99.0,
-    "sku": "N850.4S.45"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 850.0,
-    "discharge_c": 60.0,
-    "voltage_v": 14.8,
-    "connector": "XT30",
-    "weight_g": 106.0,
-    "sku": "9067000517-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 850.0,
-    "discharge_c": 70.0,
-    "voltage_v": 14.8,
-    "connector": "XT30",
-    "weight_g": 98.0,
-    "sku": "9067110068"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 850.0,
-    "discharge_c": 70.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 107.0,
-    "sku": "9067160613"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 850.0,
-    "discharge_c": 70.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 106.0,
-    "sku": "9210000311-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 850.0,
-    "discharge_c": 95.0,
-    "voltage_v": 14.8,
-    "connector": "XT30",
-    "weight_g": 97.5,
-    "sku": "LB07441"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 121.0,
-    "sku": "9067160590"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1000.0,
-    "discharge_c": 45.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 131.0,
-    "sku": "N1000.4S.45"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1000.0,
-    "discharge_c": 70.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 140.0,
-    "sku": "9210000262-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1300.0,
-    "discharge_c": 45.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 166.0,
-    "sku": "N1300.4S.45"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1300.0,
-    "discharge_c": 75.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 173.0,
-    "sku": "9067000363-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1400.0,
-    "discharge_c": 40.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 153.0,
-    "sku": "9210000287-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1500.0,
-    "discharge_c": 40.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 150.0,
-    "sku": "9067110028"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1500.0,
-    "discharge_c": 65.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 205.0,
-    "sku": "9067000442-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1500.0,
-    "discharge_c": 75.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 202.0,
-    "sku": "9067000515-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1600.0,
-    "discharge_c": 20.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 154.0,
-    "sku": "T1600.4S.20"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1600.0,
-    "discharge_c": 25.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 182.0,
-    "sku": "N1600.4S.25"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1600.0,
-    "discharge_c": 30.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 177.0,
-    "sku": "T1600.4S.30"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1800.0,
-    "discharge_c": 25.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 209.0,
-    "sku": "N1800.4S.25"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1800.0,
-    "discharge_c": 30.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 185.0,
-    "sku": "T1800.4S.30"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1800.0,
-    "discharge_c": 35.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 207.0,
-    "sku": "N1800.4S.35"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1800.0,
-    "discharge_c": 40.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 213.0,
-    "sku": "T1800.4S.40"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1800.0,
-    "discharge_c": 70.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 171.0,
-    "sku": "9067110061"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 1800.0,
-    "discharge_c": 70.0,
-    "voltage_v": 14.8,
-    "connector": "EC3",
-    "weight_g": 167.0,
-    "sku": "9067110060"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 30.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 181.0,
-    "sku": "9067110007"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 30.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 258.0,
-    "sku": "T2200.4S.30"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 40.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 216.0,
-    "sku": "9067110031"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 40.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 248.0,
-    "sku": "T2200.4S.40"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 45.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 254.0,
-    "sku": "N2200.4S.45"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 250.0,
-    "sku": "9067000194-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 70.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 265.26,
-    "sku": "9210000301-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 75.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 260.0,
-    "sku": "9067000372-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2250.0,
-    "discharge_c": 65.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 268.0,
-    "sku": "N2250.4S.65"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2650.0,
-    "discharge_c": 20.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 265.0,
-    "sku": "T2650.4S.20"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2650.0,
-    "discharge_c": 30.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 266.35,
-    "sku": "9210000282-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2700.0,
-    "discharge_c": 65.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 332.0,
-    "sku": "9210000192-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2800.0,
-    "discharge_c": 30.0,
-    "voltage_v": 14.8,
-    "connector": "EC3",
-    "weight_g": 300.0,
-    "sku": "9067000100-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2800.0,
-    "discharge_c": 70.0,
-    "voltage_v": 14.8,
-    "connector": "EC3",
-    "weight_g": 276.0,
-    "sku": "9067110065"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 2800.0,
-    "discharge_c": 70.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 275.0,
-    "sku": "9067110064"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 3000.0,
-    "discharge_c": 1.0,
-    "voltage_v": 14.8,
-    "connector": "XT30",
-    "weight_g": 205.0,
-    "sku": "F009249"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 3000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 330.0,
-    "sku": "9067000253-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 3000.0,
-    "discharge_c": 70.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 337.0,
-    "sku": "9067000543-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 3000.0,
-    "discharge_c": 75.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 360.0,
-    "sku": "9067000422-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 3300.0,
-    "discharge_c": 30.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 273.0,
-    "sku": "9067110011"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 3300.0,
-    "discharge_c": 35.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 344.0,
-    "sku": "9210000314-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 3600.0,
-    "discharge_c": 30.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 395.0,
-    "sku": "9067000263-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 3600.0,
-    "discharge_c": 60.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 370.0,
-    "sku": "9067160578"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 4000.0,
-    "discharge_c": 30.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 452.0,
-    "sku": "9067000268-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 4000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 14.8,
-    "connector": "XT60",
-    "weight_g": 337.0,
-    "sku": "9067160599"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 4000.0,
-    "discharge_c": 60.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 480.0,
-    "sku": "9067000241-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 4000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 419.0,
-    "sku": "9067000412-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 4500.0,
-    "discharge_c": 35.0,
-    "voltage_v": 14.8,
-    "connector": null,
-    "weight_g": 496.0,
-    "sku": "ZC.4500.4S.35"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 25.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 523.0,
-    "sku": "9210000232-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 424.0,
-    "sku": "9067110034"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 550.0,
-    "sku": "9067000172-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 60.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 516.0,
-    "sku": "9067000237-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 70.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 568.0,
-    "sku": "9210000321-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 498.0,
-    "sku": "9067110013"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 14.8,
-    "connector": "EC5",
-    "weight_g": 490.0,
-    "sku": "9067160563"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 490.0,
-    "sku": "9067160562"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 5200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 14.8,
-    "connector": "EC5",
-    "weight_g": 524.0,
-    "sku": "9067000555-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 5200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 524.0,
-    "sku": "9067000554-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 5500.0,
-    "discharge_c": 60.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 535.0,
-    "sku": "9067160584"
-  },
-  {
-    "cells": "4S2P",
-    "capacity_mah": 5500.0,
-    "discharge_c": 140.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 543.0,
-    "sku": "9067000526-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 25.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 623.0,
-    "sku": "9210000238-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 75.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 624.0,
-    "sku": "9067000414-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 605.0,
-    "sku": "9067110016"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 14.8,
-    "connector": "EC5",
-    "weight_g": 570.0,
-    "sku": "9067160571"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 570.0,
-    "sku": "9067160570"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 6200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 14.8,
-    "connector": "EC5",
-    "weight_g": 612.7,
-    "sku": "9067000549-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 6200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 609.0,
-    "sku": "9067000548-0"
-  },
-  {
-    "cells": "4S2P",
-    "capacity_mah": 6500.0,
-    "discharge_c": 140.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 600.0,
-    "sku": "9067000539-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 8000.0,
-    "discharge_c": 12.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 752.0,
-    "sku": "9067000394-0"
-  },
-  {
-    "cells": "4S2P",
-    "capacity_mah": 8000.0,
-    "discharge_c": 140.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 651.0,
-    "sku": "9067000541-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 10000.0,
-    "discharge_c": 12.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 902.0,
-    "sku": "9067000392-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 12000.0,
-    "discharge_c": 12.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 1080.0,
-    "sku": "9067000425-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 16000.0,
-    "discharge_c": 12.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 1366.0,
-    "sku": "9067000430-0"
-  },
-  {
-    "cells": "4S",
-    "capacity_mah": 20000.0,
-    "discharge_c": 12.0,
-    "voltage_v": 14.8,
-    "connector": "XT90",
-    "weight_g": 1775.0,
-    "sku": "9067000389-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 172.0,
-    "sku": "9067160589"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1000.0,
-    "discharge_c": 65.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 205.0,
-    "sku": "9067000440-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1050.0,
-    "discharge_c": 120.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 197.0,
-    "sku": "F010010"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1100.0,
-    "discharge_c": 120.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 201.0,
-    "sku": "9671610007"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1200.0,
-    "discharge_c": 75.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 232.0,
-    "sku": "9067000441-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1300.0,
-    "discharge_c": 35.0,
-    "voltage_v": 22.200000000000003,
-    "connector": null,
-    "weight_g": 218.0,
-    "sku": "T1300.6S.35"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1300.0,
-    "discharge_c": 75.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 249.0,
-    "sku": "9067000513-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1350.0,
-    "discharge_c": 150.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 232.0,
-    "sku": "DC4D7697"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1380.0,
-    "discharge_c": 160.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 221.0,
-    "sku": "DC4B7801"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1480.0,
-    "discharge_c": 150.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 242.0,
-    "sku": "F016872"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1480.0,
-    "discharge_c": 180.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 223.0,
-    "sku": ""
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1480.0,
-    "discharge_c": 180.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 223.0,
-    "sku": "DC4A0213"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1500.0,
-    "discharge_c": 100.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 238.0,
-    "sku": "9067110037"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1550.0,
-    "discharge_c": 65.0,
-    "voltage_v": 22.200000000000003,
-    "connector": null,
-    "weight_g": 287.0,
-    "sku": "9210000106-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1550.0,
-    "discharge_c": 150.0,
-    "voltage_v": 22.200000000000003,
-    "connector": null,
-    "weight_g": 239.0,
-    "sku": "DC4B6868"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1550.0,
-    "discharge_c": 160.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 239.0,
-    "sku": "DC4B7675"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1600.0,
-    "discharge_c": 120.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 272.0,
-    "sku": "9671610009"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1600.0,
-    "discharge_c": 180.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 241.0,
-    "sku": ""
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1600.0,
-    "discharge_c": 180.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 241.0,
-    "sku": "DC4A0223"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1700.0,
-    "discharge_c": 160.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 273.0,
-    "sku": "DC4D0471"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1800.0,
-    "discharge_c": 70.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 247.0,
-    "sku": "9067110062"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 1850.0,
-    "discharge_c": 150.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 292.0,
-    "sku": "DC4D9168"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 30.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 261.0,
-    "sku": "9067110008"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 327.0,
-    "sku": "9671610012"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 95.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 330.0,
-    "sku": "F014074"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 2200.0,
-    "discharge_c": 150.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 311.0,
-    "sku": "DC4D9184"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 2400.0,
-    "discharge_c": 150.0,
-    "voltage_v": 22.2,
-    "connector": "XT60",
-    "weight_g": 342.0,
-    "sku": ""
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 2400.0,
-    "discharge_c": 150.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 385.0,
-    "sku": "DC4D9185"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 2700.0,
-    "discharge_c": 65.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 483.0,
-    "sku": "9210000193-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 2800.0,
-    "discharge_c": 70.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 412.0,
-    "sku": "9067160612"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 3000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 522.0,
-    "sku": "9067000256-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 3000.0,
-    "discharge_c": 70.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 488.41,
-    "sku": "9210000266-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 3000.0,
-    "discharge_c": 75.0,
-    "voltage_v": 22.200000000000003,
-    "connector": null,
-    "weight_g": 598.0,
-    "sku": "9067000376-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 3300.0,
-    "discharge_c": 30.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 505.0,
-    "sku": "9067000261-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 3300.0,
-    "discharge_c": 95.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 694.0,
-    "sku": "F013558"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 3300.0,
-    "discharge_c": 120.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 442.0,
-    "sku": "DC5A4324"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 3600.0,
-    "discharge_c": 30.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 577.0,
-    "sku": "9067000264-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 3600.0,
-    "discharge_c": 60.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 544.0,
-    "sku": "9067160579"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 4000.0,
-    "discharge_c": 1.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 430.0,
-    "sku": "F017833"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 4000.0,
-    "discharge_c": 30.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 610.0,
-    "sku": "9067000385-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 4000.0,
-    "discharge_c": 60.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 682.0,
-    "sku": "9067000386-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 4000.0,
-    "discharge_c": 75.0,
-    "voltage_v": 22.200000000000003,
-    "connector": null,
-    "weight_g": 640.0,
-    "sku": "9067000373-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 4500.0,
-    "discharge_c": 30.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT90",
-    "weight_g": 745.0,
-    "sku": "9067000272-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 1.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 455.0,
-    "sku": "DC5A5233"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 615.0,
-    "sku": "9067110036"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 40.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT90",
-    "weight_g": 805.0,
-    "sku": "9067000305-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 45.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT90",
-    "weight_g": 814.0,
-    "sku": "9210000246-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 60.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 750.0,
-    "sku": "9067000243-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 70.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 825.0,
-    "sku": "9210000269-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 712.0,
-    "sku": "9067110014"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 22.2,
-    "connector": "EC5",
-    "weight_g": 713.0,
-    "sku": "9067160565"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 713.0,
-    "sku": "9067160564"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 22.2,
-    "connector": "EC5",
-    "weight_g": 765.0,
-    "sku": "9067000557-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 757.0,
-    "sku": "9067000556-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5500.0,
-    "discharge_c": 60.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 773.0,
-    "sku": "9067160585"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5500.0,
-    "discharge_c": 150.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT90",
-    "weight_g": 936.0,
-    "sku": "DC5A2381"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5600.0,
-    "discharge_c": 95.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT90",
-    "weight_g": 858.0,
-    "sku": "F017372"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 5600.0,
-    "discharge_c": 95.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT90",
-    "weight_g": 875.0,
-    "sku": "F014630"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 6000.0,
-    "discharge_c": null,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 608.0,
-    "sku": "F014492"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 45.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 810.0,
-    "sku": "F014804"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 70.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 1034.0,
-    "sku": "9210000299-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 875.0,
-    "sku": "9067110017"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 22.2,
-    "connector": "EC5",
-    "weight_g": 835.0,
-    "sku": "9067160573"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 100.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 815.0,
-    "sku": "9067160572"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 120.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT90",
-    "weight_g": 815.0,
-    "sku": "DC5A53662"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 120.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 875.0,
-    "sku": ""
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 6200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 22.2,
-    "connector": "EC5",
-    "weight_g": 895.0,
-    "sku": "9067000551-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 6200.0,
-    "discharge_c": 60.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 895.0,
-    "sku": "9067000550-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 7500.0,
-    "discharge_c": 80.0,
-    "voltage_v": 22.8,
-    "connector": "XT90",
-    "weight_g": 860.0,
-    "sku": "9067160054"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 8000.0,
-    "discharge_c": 1.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 896.0,
-    "sku": "DC4D4686"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 8000.0,
-    "discharge_c": 10.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 896.0,
-    "sku": "F013604"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 8000.0,
-    "discharge_c": 12.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 1110.0,
-    "sku": "9067000393-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 8000.0,
-    "discharge_c": 15.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT90",
-    "weight_g": 1110.0,
-    "sku": "9067000295-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 8000.0,
-    "discharge_c": 120.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT90",
-    "weight_g": 1175.0,
-    "sku": "DC5A3429"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 10000.0,
-    "discharge_c": 1.0,
-    "voltage_v": 22.200000000000003,
-    "connector": "XT60",
-    "weight_g": 910.0,
-    "sku": "DC4D0842"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 10000.0,
-    "discharge_c": 12.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 1320.0,
-    "sku": "9067000391-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 12000.0,
-    "discharge_c": 12.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 1650.0,
-    "sku": "9067000390-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 12000.0,
-    "discharge_c": 15.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 1610.0,
-    "sku": "9067000303-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 14000.0,
-    "discharge_c": 12.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 1820.0,
-    "sku": "9067000431-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 16000.0,
-    "discharge_c": 12.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 2015.0,
-    "sku": "9067000429-0"
-  },
-  {
-    "cells": "6S",
-    "capacity_mah": 20000.0,
-    "discharge_c": 12.0,
-    "voltage_v": 22.2,
-    "connector": "XT90",
-    "weight_g": 2630.0,
-    "sku": "9067000388-0"
-  },
-  {
-    "cells": "8S",
-    "capacity_mah": 5500.0,
-    "discharge_c": 150.0,
-    "voltage_v": 29.6,
-    "connector": "XT90",
-    "weight_g": 1235.0,
-    "sku": "DC5A3099"
-  },
-  {
-    "cells": "8S",
-    "capacity_mah": 5600.0,
-    "discharge_c": 95.0,
-    "voltage_v": 29.6,
-    "connector": "XT90",
-    "weight_g": 1125.0,
-    "sku": "F017371"
-  },
-  {
-    "cells": "8S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 120.0,
-    "voltage_v": 29.6,
-    "connector": "XT90",
-    "weight_g": 1180.0,
-    "sku": "DC5A5366"
-  },
-  {
-    "cells": "8S",
-    "capacity_mah": 6000.0,
-    "discharge_c": 120.0,
-    "voltage_v": 29.6,
-    "connector": "XT90",
-    "weight_g": 1180.0,
-    "sku": ""
-  },
-  {
-    "cells": "10S",
-    "capacity_mah": 5000.0,
-    "discharge_c": null,
-    "voltage_v": 37.0,
-    "connector": "XT60",
-    "weight_g": 445.0,
-    "sku": ""
-  }
+ {
+  "cells": "1S",
+  "capacity_mah": 320.0,
+  "discharge_c": 75.0,
+  "voltage_v": 3.7,
+  "connector": null,
+  "weight_g": 7.5,
+  "sku": ""
+ },
+ {
+  "cells": "1S",
+  "capacity_mah": 320.0,
+  "discharge_c": 75.0,
+  "voltage_v": 3.7,
+  "connector": null,
+  "weight_g": 7.5,
+  "sku": ""
+ },
+ {
+  "cells": "2S",
+  "capacity_mah": 6200.0,
+  "discharge_c": null,
+  "voltage_v": 7.4,
+  "connector": "XT30",
+  "weight_g": 203.0,
+  "sku": "HP0157.BATT-6200-2S"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 300.0,
+  "discharge_c": 35.0,
+  "voltage_v": 11.1,
+  "connector": "JST",
+  "weight_g": 25.0,
+  "sku": "9671610003"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 300.0,
+  "discharge_c": 50.0,
+  "voltage_v": 11.1,
+  "connector": "JST",
+  "weight_g": 30.0,
+  "sku": "9671610004"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 850.0,
+  "discharge_c": 70.0,
+  "voltage_v": 11.1,
+  "connector": "JST",
+  "weight_g": 71.0,
+  "sku": "9067110019"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 1000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 11.1,
+  "connector": "XT60",
+  "weight_g": 91.0,
+  "sku": "9067110024"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 1000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 11.1,
+  "connector": "JST",
+  "weight_g": 84.0,
+  "sku": "9067110023"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 1500.0,
+  "discharge_c": 40.0,
+  "voltage_v": 11.1,
+  "connector": "XT60",
+  "weight_g": 117.0,
+  "sku": "9067110027"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 1500.0,
+  "discharge_c": 40.0,
+  "voltage_v": 11.1,
+  "connector": "EC3",
+  "weight_g": 117.0,
+  "sku": "9067110026"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 1800.0,
+  "discharge_c": 70.0,
+  "voltage_v": 11.1,
+  "connector": "XT60",
+  "weight_g": 136.0,
+  "sku": "9067110059"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 30.0,
+  "voltage_v": 11.1,
+  "connector": "XT60",
+  "weight_g": 147.0,
+  "sku": "9067160023"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 40.0,
+  "voltage_v": 11.1,
+  "connector": "XT60",
+  "weight_g": 167.0,
+  "sku": "9067110030"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 11.1,
+  "connector": "XT60",
+  "weight_g": 178.0,
+  "sku": "9067160609"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 2800.0,
+  "discharge_c": 70.0,
+  "voltage_v": 11.1,
+  "connector": "XT60",
+  "weight_g": 217.0,
+  "sku": "9067110063"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 3000.0,
+  "discharge_c": 70.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 265.0,
+  "sku": "9067000542-0"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 3000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 259.0,
+  "sku": "9067110038"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 3300.0,
+  "discharge_c": 30.0,
+  "voltage_v": 11.1,
+  "connector": "XT60",
+  "weight_g": 209.0,
+  "sku": "9067110010"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 3600.0,
+  "discharge_c": 60.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 285.0,
+  "sku": "9067160577"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 4000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 11.1,
+  "connector": "XT60",
+  "weight_g": 253.0,
+  "sku": "9067160598"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 332.0,
+  "sku": "9067110033"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 70.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 431.0,
+  "sku": "9210000320-0"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 389.0,
+  "sku": "9067110012"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 11.1,
+  "connector": "XT60",
+  "weight_g": 380.0,
+  "sku": "9067110001"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 11.1,
+  "connector": "EC5",
+  "weight_g": 380.0,
+  "sku": "9067160561"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 380.0,
+  "sku": "9067160560"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 5200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 11.1,
+  "connector": "EC5",
+  "weight_g": 404.0,
+  "sku": "9067000553-0"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 5200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 404.0,
+  "sku": "9067000552-0"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 5500.0,
+  "discharge_c": 40.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 410.0,
+  "sku": "9067160582"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 5500.0,
+  "discharge_c": 60.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 414.0,
+  "sku": "9067160586"
+ },
+ {
+  "cells": "3S2P",
+  "capacity_mah": 5500.0,
+  "discharge_c": 140.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 416.0,
+  "sku": "9067000525-0"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 70.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 424.0,
+  "sku": "9067160605"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 478.0,
+  "sku": "9067110015"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 11.1,
+  "connector": "XT60",
+  "weight_g": 440.0,
+  "sku": "9067110004"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 11.1,
+  "connector": "EC5",
+  "weight_g": 440.0,
+  "sku": "9067160569"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 440.0,
+  "sku": "9067160568"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 6200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 11.1,
+  "connector": "EC5",
+  "weight_g": 465.0,
+  "sku": "9067000546-0"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 6200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 465.0,
+  "sku": "9067000544-0"
+ },
+ {
+  "cells": "3S",
+  "capacity_mah": 8000.0,
+  "discharge_c": 140.0,
+  "voltage_v": 11.1,
+  "connector": "XT90",
+  "weight_g": 498.0,
+  "sku": "9067000540-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 450.0,
+  "discharge_c": 35.0,
+  "voltage_v": 14.8,
+  "connector": "XT30",
+  "weight_g": 56.0,
+  "sku": "9671610005"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 450.0,
+  "discharge_c": 60.0,
+  "voltage_v": 14.8,
+  "connector": "XT30",
+  "weight_g": 65.0,
+  "sku": "9067000516-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 450.0,
+  "discharge_c": 70.0,
+  "voltage_v": 14.8,
+  "connector": "XT30",
+  "weight_g": 63.0,
+  "sku": "9210000305-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 650.0,
+  "discharge_c": 65.0,
+  "voltage_v": 14.8,
+  "connector": "XT30",
+  "weight_g": 88.0,
+  "sku": "9067000438-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 650.0,
+  "discharge_c": 75.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 87.0,
+  "sku": "9067000370-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 850.0,
+  "discharge_c": 25.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 94.0,
+  "sku": "N850.4S.25"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 850.0,
+  "discharge_c": 45.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 99.0,
+  "sku": "N850.4S.45"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 850.0,
+  "discharge_c": 60.0,
+  "voltage_v": 14.8,
+  "connector": "XT30",
+  "weight_g": 106.0,
+  "sku": "9067000517-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 850.0,
+  "discharge_c": 70.0,
+  "voltage_v": 14.8,
+  "connector": "XT30",
+  "weight_g": 98.0,
+  "sku": "9067110068"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 850.0,
+  "discharge_c": 70.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 107.0,
+  "sku": "9067160613"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 850.0,
+  "discharge_c": 70.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 106.0,
+  "sku": "9210000311-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 850.0,
+  "discharge_c": 95.0,
+  "voltage_v": 14.8,
+  "connector": "XT30",
+  "weight_g": 97.5,
+  "sku": "LB07441"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 121.0,
+  "sku": "9067160590"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1000.0,
+  "discharge_c": 45.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 131.0,
+  "sku": "N1000.4S.45"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1000.0,
+  "discharge_c": 70.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 140.0,
+  "sku": "9210000262-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1300.0,
+  "discharge_c": 45.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 166.0,
+  "sku": "N1300.4S.45"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1300.0,
+  "discharge_c": 75.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 173.0,
+  "sku": "9067000363-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1400.0,
+  "discharge_c": 40.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 153.0,
+  "sku": "9210000287-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1500.0,
+  "discharge_c": 40.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 150.0,
+  "sku": "9067110028"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1500.0,
+  "discharge_c": 65.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 205.0,
+  "sku": "9067000442-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1500.0,
+  "discharge_c": 75.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 202.0,
+  "sku": "9067000515-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1600.0,
+  "discharge_c": 20.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 154.0,
+  "sku": "T1600.4S.20"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1600.0,
+  "discharge_c": 25.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 182.0,
+  "sku": "N1600.4S.25"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1600.0,
+  "discharge_c": 30.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 177.0,
+  "sku": "T1600.4S.30"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1800.0,
+  "discharge_c": 25.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 209.0,
+  "sku": "N1800.4S.25"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1800.0,
+  "discharge_c": 30.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 185.0,
+  "sku": "T1800.4S.30"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1800.0,
+  "discharge_c": 35.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 207.0,
+  "sku": "N1800.4S.35"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1800.0,
+  "discharge_c": 40.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 213.0,
+  "sku": "T1800.4S.40"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1800.0,
+  "discharge_c": 70.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 171.0,
+  "sku": "9067110061"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1800.0,
+  "discharge_c": 70.0,
+  "voltage_v": 14.8,
+  "connector": "EC3",
+  "weight_g": 167.0,
+  "sku": "9067110060"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 30.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 181.0,
+  "sku": "9067110007"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 30.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 258.0,
+  "sku": "T2200.4S.30"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 40.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 216.0,
+  "sku": "9067110031"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 40.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 248.0,
+  "sku": "T2200.4S.40"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 45.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 254.0,
+  "sku": "N2200.4S.45"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 250.0,
+  "sku": "9067000194-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 70.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 265.26,
+  "sku": "9210000301-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 75.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 260.0,
+  "sku": "9067000372-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2250.0,
+  "discharge_c": 65.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 268.0,
+  "sku": "N2250.4S.65"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2650.0,
+  "discharge_c": 20.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 265.0,
+  "sku": "T2650.4S.20"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2650.0,
+  "discharge_c": 30.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 266.35,
+  "sku": "9210000282-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2700.0,
+  "discharge_c": 65.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 332.0,
+  "sku": "9210000192-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2800.0,
+  "discharge_c": 30.0,
+  "voltage_v": 14.8,
+  "connector": "EC3",
+  "weight_g": 300.0,
+  "sku": "9067000100-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2800.0,
+  "discharge_c": 70.0,
+  "voltage_v": 14.8,
+  "connector": "EC3",
+  "weight_g": 276.0,
+  "sku": "9067110065"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 2800.0,
+  "discharge_c": 70.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 275.0,
+  "sku": "9067110064"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 3000.0,
+  "discharge_c": 1.0,
+  "voltage_v": 14.8,
+  "connector": "XT30",
+  "weight_g": 205.0,
+  "sku": "F009249"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 3000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 330.0,
+  "sku": "9067000253-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 3000.0,
+  "discharge_c": 70.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 337.0,
+  "sku": "9067000543-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 3000.0,
+  "discharge_c": 75.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 360.0,
+  "sku": "9067000422-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 3300.0,
+  "discharge_c": 30.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 273.0,
+  "sku": "9067110011"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 3300.0,
+  "discharge_c": 35.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 344.0,
+  "sku": "9210000314-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 3600.0,
+  "discharge_c": 30.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 395.0,
+  "sku": "9067000263-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 3600.0,
+  "discharge_c": 60.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 370.0,
+  "sku": "9067160578"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 4000.0,
+  "discharge_c": 30.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 452.0,
+  "sku": "9067000268-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 4000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 337.0,
+  "sku": "9067160599"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 4000.0,
+  "discharge_c": 60.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 480.0,
+  "sku": "9067000241-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 4000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 419.0,
+  "sku": "9067000412-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 4500.0,
+  "discharge_c": 35.0,
+  "voltage_v": 14.8,
+  "connector": null,
+  "weight_g": 496.0,
+  "sku": "ZC.4500.4S.35"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 25.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 523.0,
+  "sku": "9210000232-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 424.0,
+  "sku": "9067110034"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 550.0,
+  "sku": "9067000172-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 60.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 516.0,
+  "sku": "9067000237-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 70.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 568.0,
+  "sku": "9210000321-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 498.0,
+  "sku": "9067110013"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 14.8,
+  "connector": "EC5",
+  "weight_g": 490.0,
+  "sku": "9067160563"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 490.0,
+  "sku": "9067160562"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 5200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 14.8,
+  "connector": "EC5",
+  "weight_g": 524.0,
+  "sku": "9067000555-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 5200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 524.0,
+  "sku": "9067000554-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 5500.0,
+  "discharge_c": 60.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 535.0,
+  "sku": "9067160584"
+ },
+ {
+  "cells": "4S2P",
+  "capacity_mah": 5500.0,
+  "discharge_c": 140.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 543.0,
+  "sku": "9067000526-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 25.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 623.0,
+  "sku": "9210000238-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 75.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 624.0,
+  "sku": "9067000414-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 605.0,
+  "sku": "9067110016"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 14.8,
+  "connector": "EC5",
+  "weight_g": 570.0,
+  "sku": "9067160571"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 570.0,
+  "sku": "9067160570"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 6200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 14.8,
+  "connector": "EC5",
+  "weight_g": 612.7,
+  "sku": "9067000549-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 6200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 609.0,
+  "sku": "9067000548-0"
+ },
+ {
+  "cells": "4S2P",
+  "capacity_mah": 6500.0,
+  "discharge_c": 140.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 600.0,
+  "sku": "9067000539-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 8000.0,
+  "discharge_c": 12.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 752.0,
+  "sku": "9067000394-0"
+ },
+ {
+  "cells": "4S2P",
+  "capacity_mah": 8000.0,
+  "discharge_c": 140.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 651.0,
+  "sku": "9067000541-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 10000.0,
+  "discharge_c": 12.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 902.0,
+  "sku": "9067000392-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 12000.0,
+  "discharge_c": 12.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 1080.0,
+  "sku": "9067000425-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 16000.0,
+  "discharge_c": 12.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 1366.0,
+  "sku": "9067000430-0"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 20000.0,
+  "discharge_c": 12.0,
+  "voltage_v": 14.8,
+  "connector": "XT90",
+  "weight_g": 1775.0,
+  "sku": "9067000389-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 172.0,
+  "sku": "9067160589"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1000.0,
+  "discharge_c": 65.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 205.0,
+  "sku": "9067000440-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1050.0,
+  "discharge_c": 120.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 197.0,
+  "sku": "F010010"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1100.0,
+  "discharge_c": 120.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 201.0,
+  "sku": "9671610007"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1200.0,
+  "discharge_c": 75.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 232.0,
+  "sku": "9067000441-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1300.0,
+  "discharge_c": 35.0,
+  "voltage_v": 22.2,
+  "connector": null,
+  "weight_g": 218.0,
+  "sku": "T1300.6S.35"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1300.0,
+  "discharge_c": 75.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 249.0,
+  "sku": "9067000513-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1350.0,
+  "discharge_c": 150.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 232.0,
+  "sku": "DC4D7697"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1380.0,
+  "discharge_c": 160.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 221.0,
+  "sku": "DC4B7801"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1480.0,
+  "discharge_c": 150.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 242.0,
+  "sku": "F016872"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1480.0,
+  "discharge_c": 180.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 223.0,
+  "sku": ""
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1480.0,
+  "discharge_c": 180.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 223.0,
+  "sku": "DC4A0213"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1500.0,
+  "discharge_c": 100.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 238.0,
+  "sku": "9067110037"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1550.0,
+  "discharge_c": 65.0,
+  "voltage_v": 22.2,
+  "connector": null,
+  "weight_g": 287.0,
+  "sku": "9210000106-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1550.0,
+  "discharge_c": 150.0,
+  "voltage_v": 22.2,
+  "connector": null,
+  "weight_g": 239.0,
+  "sku": "DC4B6868"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1550.0,
+  "discharge_c": 160.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 239.0,
+  "sku": "DC4B7675"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1600.0,
+  "discharge_c": 120.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 272.0,
+  "sku": "9671610009"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1600.0,
+  "discharge_c": 180.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 241.0,
+  "sku": ""
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1600.0,
+  "discharge_c": 180.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 241.0,
+  "sku": "DC4A0223"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1700.0,
+  "discharge_c": 160.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 273.0,
+  "sku": "DC4D0471"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1800.0,
+  "discharge_c": 70.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 247.0,
+  "sku": "9067110062"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1850.0,
+  "discharge_c": 150.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 292.0,
+  "sku": "DC4D9168"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 30.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 261.0,
+  "sku": "9067110008"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 327.0,
+  "sku": "9671610012"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 95.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 330.0,
+  "sku": "F014074"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 2200.0,
+  "discharge_c": 150.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 311.0,
+  "sku": "DC4D9184"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 2400.0,
+  "discharge_c": 150.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 342.0,
+  "sku": ""
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 2400.0,
+  "discharge_c": 150.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 385.0,
+  "sku": "DC4D9185"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 2700.0,
+  "discharge_c": 65.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 483.0,
+  "sku": "9210000193-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 2800.0,
+  "discharge_c": 70.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 412.0,
+  "sku": "9067160612"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 3000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 522.0,
+  "sku": "9067000256-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 3000.0,
+  "discharge_c": 70.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 488.41,
+  "sku": "9210000266-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 3000.0,
+  "discharge_c": 75.0,
+  "voltage_v": 22.2,
+  "connector": null,
+  "weight_g": 598.0,
+  "sku": "9067000376-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 3300.0,
+  "discharge_c": 30.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 505.0,
+  "sku": "9067000261-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 3300.0,
+  "discharge_c": 95.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 694.0,
+  "sku": "F013558"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 3300.0,
+  "discharge_c": 120.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 442.0,
+  "sku": "DC5A4324"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 3600.0,
+  "discharge_c": 30.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 577.0,
+  "sku": "9067000264-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 3600.0,
+  "discharge_c": 60.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 544.0,
+  "sku": "9067160579"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 4000.0,
+  "discharge_c": 1.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 430.0,
+  "sku": "F017833"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 4000.0,
+  "discharge_c": 30.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 610.0,
+  "sku": "9067000385-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 4000.0,
+  "discharge_c": 60.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 682.0,
+  "sku": "9067000386-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 4000.0,
+  "discharge_c": 75.0,
+  "voltage_v": 22.2,
+  "connector": null,
+  "weight_g": 640.0,
+  "sku": "9067000373-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 4500.0,
+  "discharge_c": 30.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 745.0,
+  "sku": "9067000272-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 1.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 455.0,
+  "sku": "DC5A5233"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 615.0,
+  "sku": "9067110036"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 40.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 805.0,
+  "sku": "9067000305-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 45.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 814.0,
+  "sku": "9210000246-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 60.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 750.0,
+  "sku": "9067000243-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 70.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 825.0,
+  "sku": "9210000269-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 712.0,
+  "sku": "9067110014"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 22.2,
+  "connector": "EC5",
+  "weight_g": 713.0,
+  "sku": "9067160565"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 713.0,
+  "sku": "9067160564"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 22.2,
+  "connector": "EC5",
+  "weight_g": 765.0,
+  "sku": "9067000557-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 757.0,
+  "sku": "9067000556-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5500.0,
+  "discharge_c": 60.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 773.0,
+  "sku": "9067160585"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5500.0,
+  "discharge_c": 150.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 936.0,
+  "sku": "DC5A2381"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5600.0,
+  "discharge_c": 95.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 858.0,
+  "sku": "F017372"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 5600.0,
+  "discharge_c": 95.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 875.0,
+  "sku": "F014630"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 6000.0,
+  "discharge_c": null,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 608.0,
+  "sku": "F014492"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 45.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 810.0,
+  "sku": "F014804"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 70.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 1034.0,
+  "sku": "9210000299-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 875.0,
+  "sku": "9067110017"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 22.2,
+  "connector": "EC5",
+  "weight_g": 835.0,
+  "sku": "9067160573"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 100.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 815.0,
+  "sku": "9067160572"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 120.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 815.0,
+  "sku": "DC5A53662"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 120.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 875.0,
+  "sku": ""
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 6200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 22.2,
+  "connector": "EC5",
+  "weight_g": 895.0,
+  "sku": "9067000551-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 6200.0,
+  "discharge_c": 60.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 895.0,
+  "sku": "9067000550-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 7500.0,
+  "discharge_c": 80.0,
+  "voltage_v": 22.8,
+  "connector": "XT90",
+  "weight_g": 860.0,
+  "sku": "9067160054"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 8000.0,
+  "discharge_c": 1.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 896.0,
+  "sku": "DC4D4686"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 8000.0,
+  "discharge_c": 10.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 896.0,
+  "sku": "F013604"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 8000.0,
+  "discharge_c": 12.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 1110.0,
+  "sku": "9067000393-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 8000.0,
+  "discharge_c": 15.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 1110.0,
+  "sku": "9067000295-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 8000.0,
+  "discharge_c": 120.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 1175.0,
+  "sku": "DC5A3429"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 10000.0,
+  "discharge_c": 1.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 910.0,
+  "sku": "DC4D0842"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 10000.0,
+  "discharge_c": 12.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 1320.0,
+  "sku": "9067000391-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 12000.0,
+  "discharge_c": 12.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 1650.0,
+  "sku": "9067000390-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 12000.0,
+  "discharge_c": 15.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 1610.0,
+  "sku": "9067000303-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 14000.0,
+  "discharge_c": 12.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 1820.0,
+  "sku": "9067000431-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 16000.0,
+  "discharge_c": 12.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 2015.0,
+  "sku": "9067000429-0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 20000.0,
+  "discharge_c": 12.0,
+  "voltage_v": 22.2,
+  "connector": "XT90",
+  "weight_g": 2630.0,
+  "sku": "9067000388-0"
+ },
+ {
+  "cells": "8S",
+  "capacity_mah": 5500.0,
+  "discharge_c": 150.0,
+  "voltage_v": 29.6,
+  "connector": "XT90",
+  "weight_g": 1235.0,
+  "sku": "DC5A3099"
+ },
+ {
+  "cells": "8S",
+  "capacity_mah": 5600.0,
+  "discharge_c": 95.0,
+  "voltage_v": 29.6,
+  "connector": "XT90",
+  "weight_g": 1125.0,
+  "sku": "F017371"
+ },
+ {
+  "cells": "8S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 120.0,
+  "voltage_v": 29.6,
+  "connector": "XT90",
+  "weight_g": 1180.0,
+  "sku": "DC5A5366"
+ },
+ {
+  "cells": "8S",
+  "capacity_mah": 6000.0,
+  "discharge_c": 120.0,
+  "voltage_v": 29.6,
+  "connector": "XT90",
+  "weight_g": 1180.0,
+  "sku": ""
+ },
+ {
+  "cells": "10S",
+  "capacity_mah": 5000.0,
+  "discharge_c": null,
+  "voltage_v": 37.0,
+  "connector": "XT60",
+  "weight_g": 445.0,
+  "sku": ""
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1300.0,
+  "discharge_c": 160.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 203.0,
+  "sku": "Tattu R-Line V6"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1300.0,
+  "discharge_c": 95.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 238.0,
+  "sku": "Tattu R-Line V1"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1300.0,
+  "discharge_c": 100.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 230.0,
+  "sku": "CNHL Black Series"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1500.0,
+  "discharge_c": 130.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 232.0,
+  "sku": "CNHL Black Series V2"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1100.0,
+  "discharge_c": 100.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 205.0,
+  "sku": "CNHL Black Series"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1500.0,
+  "discharge_c": 100.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 266.0,
+  "sku": "CNHL Black Series"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1500.0,
+  "discharge_c": 100.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 183.0,
+  "sku": "CNHL Black Series"
+ },
+ {
+  "cells": "4S",
+  "capacity_mah": 1300.0,
+  "discharge_c": 130.0,
+  "voltage_v": 14.8,
+  "connector": "XT60",
+  "weight_g": 151.0,
+  "sku": "CNHL Black Series"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1300.0,
+  "discharge_c": 160.0,
+  "voltage_v": 22.8,
+  "connector": "XT60",
+  "weight_g": 198.0,
+  "sku": "GNB Gaoneng LiHV"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1300.0,
+  "discharge_c": 120.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 226.0,
+  "sku": "GNB Gaoneng Standard"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1300.0,
+  "discharge_c": 110.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 240.0,
+  "sku": "GNB Gaoneng Infinity"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1500.0,
+  "discharge_c": 130.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 280.0,
+  "sku": "GNB Gaoneng Standard"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1600.0,
+  "discharge_c": null,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 240.0,
+  "sku": "SMC HCL-RS"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1400.0,
+  "discharge_c": null,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 208.0,
+  "sku": "SMC HCL-RS"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1380.0,
+  "discharge_c": 150.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 225.0,
+  "sku": "Bonka U2 Ultra Light"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1400.0,
+  "discharge_c": 150.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 226.0,
+  "sku": "Ovonic Rebel 2.0"
+ },
+ {
+  "cells": "6S",
+  "capacity_mah": 1200.0,
+  "discharge_c": 150.0,
+  "voltage_v": 22.2,
+  "connector": "XT60",
+  "weight_g": 197.0,
+  "sku": "Tattu R-Line V5"
+ }
 ]
