@@ -283,3 +283,13 @@ Share links never carry the Pro filename. `buildLink()` writes `<dir>/index.html
 forces `mode: 'auto'` into the payload, so a recipient lands on the public page with the build
 populated, whoever generated the link. The old `#b=` form is still parsed so links already sent
 keep working.
+
+## The Visible-Pro Rule
+
+The Auto/Pro toggle stays on the public page, and so does the gate behind it. Clicking Pro opens
+the sign-up dialog, which links to the Typeform and leaves the visitor in Auto; it never grants
+Pro. Pro itself lives only at `pro-7f3k9.html`.
+
+This is deliberate. The toggle is not a broken control that fails to switch modes: it is how a
+visitor finds out Pro exists at all, and the route into signing up for it. Do not remove it on the
+grounds that it "never succeeds" — succeeding is not its job.
