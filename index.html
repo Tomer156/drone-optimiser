@@ -1191,11 +1191,22 @@ class Component extends DCLogic {
 
   // An SVG path's `d` cannot be interpolated by CSS, so a curve that changes shape jumps. Sweep it
   // back on with a dash offset instead: measure the new path, hide it, then let the existing
-  // stroke-dashoffset transition draw it. Only fires when the shape actually changed, so hovering a
-  // marker or moving a slider that leaves the curve alone does not re-animate it.
+  // stroke-dashoffset transition draw it.
+  //
+  // Only a new motor earns the sweep. Dragging a mass slider redraws the flight-time curve on every
+  // input event, and animating that reads as flicker rather than motion; a different motor is a
+  // different machine and is worth announcing. The motor id carries the prop and the voltage group,
+  // so changing either counts. When the motor holds, the shapes are still recorded so the next
+  // real change sweeps from what is on screen.
   animateCurves() {
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const paths = document.querySelectorAll('[data-curve]');
+    const motor = this.state.motor;
+    const held = this._animMotor === motor;
+    this._animMotor = motor;
+    if (held || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      for (let i = 0; i < paths.length; i++) paths[i].__lastD = paths[i].getAttribute('d') || '';
+      return;
+    }
     for (let i = 0; i < paths.length; i++) {
       const el = paths[i], d = el.getAttribute('d') || '';
       if (!d || el.__lastD === d) continue;
