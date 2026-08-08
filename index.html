@@ -901,28 +901,17 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                 </div>
               </div>
 
-              <!-- Named so the gaps are visible rather than implied. Black, like the contribution
-                   card on the Results tab, because the third column is the same ask: the parts we
-                   cannot size yet are the parts nobody has sent bench data for. -->
-              <div class="soon" style="border-radius:12px;padding:16px">
-                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px 26px">
-                  <sc-for list="{{ soonCols }}" as="col" hint-placeholder-count="2">
-                    <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
-                      <sc-for list="{{ col.items }}" as="c" hint-placeholder-count="2">
-                        <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
-                          <span style="font-size:12px;font-weight:600;color:{{ t.card }}">{{ c.k }}</span>
-                          <span style="font-size:10px;line-height:1.45;color:{{ t.card }};opacity:.66">{{ c.n }}</span>
-                        </div>
-                      </sc-for>
+              <!-- Named so the gaps are visible rather than implied. Black rather than a card,
+                   so it reads as a different kind of thing from the panels that carry real data. -->
+              <div class="soon" style="border-radius:12px;padding:14px 16px">
+                <h2 style="font-size:13px;font-weight:600;margin:0 0 12px;color:{{ t.card }}">Coming soon</h2>
+                <div style="display:flex;flex-wrap:wrap;gap:14px 30px">
+                  <sc-for list="{{ soonCards }}" as="c" hint-placeholder-count="4">
+                    <div style="display:flex;flex-direction:column;gap:2px;flex:1 1 150px;min-width:150px">
+                      <span style="font-size:12px;font-weight:600;color:{{ t.card }}">{{ c.k }}</span>
+                      <span style="font-size:10px;line-height:1.45;color:{{ t.card }};opacity:.66">{{ c.n }}</span>
                     </div>
                   </sc-for>
-                  <a href="https://form.typeform.com/to/ciDWV9CU" target="_blank" rel="noopener" style="display:flex;flex-direction:column;gap:4px;min-width:0;text-decoration:none;align-self:start">
-                    <span style="font-size:12px;font-weight:600;color:{{ t.card }}">Coming soon</span>
-                    <span style="font-size:10px;line-height:1.45;color:{{ t.card }};opacity:.66">These land faster with real data behind them. Send bench figures for a part you own.</span>
-                    <span style="margin-top:4px;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:{{ t.card }}">Contribute data
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="M12 6l6 6-6 6"></path></svg>
-                    </span>
-                  </a>
                 </div>
               </div>
             </div>
@@ -2697,11 +2686,11 @@ class Component extends DCLogic {
         };
       })(),
 
-      soonCols: [
-        {items:[{k:'ESC', n:'Chosen by rating, protocol and mounting, not only the current it carries.'},
-                {k:'NAV', n:'GNSS and compass, with the mass and power each one adds.'}]},
-        {items:[{k:'COMMS', n:'Control and video links, their range and what they draw.'},
-                {k:'Avionics', n:'Flight controller, sensors and the wiring between them.'}]}
+      soonCards: [
+        {k:'ESC', n:'Chosen by rating, protocol and mounting, not only the current it carries.'},
+        {k:'NAV', n:'GNSS and compass, with the mass and power each one adds.'},
+        {k:'COMMS', n:'Control and video links, their range and what they draw.'},
+        {k:'Avionics', n:'Flight controller, sensors and the wiring between them.'}
       ],
 
       packSpecs: [
