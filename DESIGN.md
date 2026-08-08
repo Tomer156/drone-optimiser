@@ -195,6 +195,13 @@ Row order in the results area, which is settled and should not be reshuffled:
 
 ### Named Rules
 
+**The Supported-Window Rule.** The No-Scroll Rule holds at **1152x700 and above**, which is where
+it has been measured. Below that the results column is too narrow to keep Required-vs-selected and
+Design flags side by side; the row wraps, the section doubles in height, and the results area
+scrolls. At 1024x768 that is 352 px of overflow. This is a width limit, not a height one, and the
+honest fix is a reflow for narrow windows rather than more squeezing. The sidebar rail scrolls
+below about 780 px of height and says so with a fade.
+
 **The No-Scroll Rule.** The results area does not scroll. It is verified at **1280×860 and above, and 1440×900**, in both modes, with zero overflow. Below roughly 1280×820 the content genuinely exceeds the window and it scrolls; that is the honest outcome, not a target to defeat by shrinking content further.
 
 **The Level-Bottoms Rule.** The last card in the results column ends level with the last card in the rail. This is not achievable with flex: the charts would have to grow into a height that their own growth defines, and that feedback loop is what previously made them overshoot the region and paint over the panels below. `syncChartHeight()` computes it instead: `chart height = region inner height − (the column's other cards + their gaps)`, clamped 200-620px, with one shrink-only corrective pass. It runs on every render and whenever the available height changes.

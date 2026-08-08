@@ -301,6 +301,12 @@ table{border-collapse:collapse;width:100%}
    fifteen depending on the maker, and the flag list, which grows with the number of problems.
    They scroll inside their own box so the tab never does. The bench keeps three rows whatever
    happens, because a table collapsed to its header is worse than a short one. */
+/* A scrollable rail says so. The gradient is painted on the container that holds the rail, not
+   on the scrolling element itself, or it would scroll away with the content. */
+[data-rail-wrap]{position:relative}
+[data-rail-wrap]::after{content:'';position:absolute;left:0;right:0;bottom:0;height:28px;pointer-events:none;
+  opacity:var(--rail-more,0);transition:opacity .2s;
+  background:linear-gradient(to bottom,transparent,var(--rail-fade,#FFFFFF))}
 .bench-wrap{flex:0 1 auto;min-height:84px;overflow-y:auto}
 [data-eleclist]{flex:1 1 auto;min-height:0;overflow-y:auto}
 .bench thead th{position:sticky;top:0;background:var(--card-bg);z-index:1}
@@ -384,7 +390,9 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
         <h1 style="font-size:15px;font-weight:600;letter-spacing:-.015em;margin:0">Drone Optimiser</h1>
       </div>
 
-      <div style="flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding-bottom:8px">
+      <!-- data-rail carries the fade that tells the user there is more below. A 4px scrollbar on
+           white was the only cue that the whole Optimise-for section was under the fold. -->
+      <div data-rail style="position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding-bottom:8px">
 
         <!-- 1 MISSION -->
         <div>
@@ -584,7 +592,10 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
     <div role="main" style="flex:1;min-width:0;display:flex;flex-direction:column;min-height:0">
 
       <div aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">{{ liveMsg }}</div>
-      <div role="toolbar" aria-label="View and build actions" style="height:56px;flex-shrink:0;display:flex;align-items:center;gap:10px;padding:0 16px">
+      <!-- Wraps rather than pushing its right-hand group off screen. At 375px the mode pill and the
+           four icon buttons sat at x=380-741 with no horizontal scroll, so they could not be reached
+           or hit-tested at all. -->
+      <div role="toolbar" aria-label="View and build actions" style="min-height:56px;flex-shrink:0;display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:8px 16px">
         <div role="tablist" aria-label="Result views" style="display:flex;gap:4px">
           <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
             <span role="button" tabindex="0" style="padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;white-space:nowrap;display:{{ t.display }};background:{{ t.bg }};color:{{ t.color }}" onClick="{{ t.go }}">{{ t.label }}</span>
@@ -709,7 +720,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
 
               <!-- REQUIRED vs SELECTED: one table, so each demand sits next to what the build delivers -->
               <div style="display:flex;gap:12px;align-items:stretch;flex-wrap:wrap">
-                <div style="flex:1.9 1 320px;min-width:0;background:{{ t.card }};border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:12px">
+                <div style="flex:1.9 1 280px;min-width:0;background:{{ t.card }};border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:12px">
                   <h2 style="font-size:13px;font-weight:600;margin:0">Required vs selected</h2>
                   <div style="display:flex;flex-direction:column;gap:12px">
                     <sc-for list="{{ compareGroups }}" as="g" hint-placeholder-count="2">
@@ -733,7 +744,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   </div>
                   <span style="font-size:11px;color:{{ t.dim }};line-height:1.5">{{ compareNote }}</span>
                 </div>
-                <div style="flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:12px">
+                <div style="flex:1 1 190px;min-width:0;display:flex;flex-direction:column;gap:12px">
               <div style="flex:1 1 auto;min-height:0;background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px">
                 <div style="padding:0 16px;display:flex;align-items:baseline;gap:9px">
                   <h2 style="font-size:13px;font-weight:600;margin:0">Design flags</h2>
@@ -1337,10 +1348,10 @@ class Component extends DCLogic {
     window.__syncCharts = () => this.syncChartHeight();
     const shared = this.restoreLink();
     if (shared) this.setState(shared);
-    this.syncBody(); this.syncChartHeight();
+    this.syncBody(); this.syncChartHeight(); this.syncRail();
   }
   componentWillUnmount() { if (window.__syncCharts) delete window.__syncCharts; }
-  componentDidUpdate() { this.syncBody(); this.syncChartHeight(); this.animateCurves(); this.revealPick(); }
+  componentDidUpdate() { this.syncBody(); this.syncChartHeight(); this.animateCurves(); this.revealPick(); this.syncRail(); }
 
   // Step 4 opened a 317-row list at the top with the chosen motor 11,583 px below it, so the list
   // gave no sign of being connected to the build on the right. Bring the selection into view once
@@ -1640,6 +1651,22 @@ class Component extends DCLogic {
     } catch (e) {}
   }
 
+  // Shows the rail's bottom fade only while there is something below the fold, and hides it again
+  // at the end of the scroll so it never lies about there being more.
+  syncRail() {
+    try {
+      const rail = document.querySelector('[data-rail]');
+      if (!rail) return;
+      const wrap = rail.parentElement;
+      if (wrap && !wrap.hasAttribute('data-rail-wrap')) {
+        wrap.setAttribute('data-rail-wrap', '');
+        rail.addEventListener('scroll', () => this.syncRail(), {passive:true});
+      }
+      const left = rail.scrollHeight - rail.clientHeight - rail.scrollTop;
+      document.documentElement.style.setProperty('--rail-more', left > 4 ? '1' : '0');
+    } catch (e) {}
+  }
+
   syncBody() {
     try {
       const dk = this.state.theme === 'dark';
@@ -1654,6 +1681,7 @@ class Component extends DCLogic {
       document.documentElement.style.setProperty('--soon-bg', dk ? '#F2F1EE' : '#16181A');
       // the sticky bench header needs an opaque backing, and the card colour lives in JS
       document.documentElement.style.setProperty('--card-bg', dk ? '#1B1E22' : '#FFFFFF');
+      document.documentElement.style.setProperty('--rail-fade', dk ? '#16191D' : '#FFFFFF');
     } catch (e) {}
   }
 
@@ -2528,7 +2556,7 @@ class Component extends DCLogic {
       gStop0: xMap(0).toFixed(1) + '%', gStop1: xMap(22).toFixed(1) + '%', gStop2: xMap(40).toFixed(1) + '%',
       gStop3: xMap(60).toFixed(1) + '%', gStop4: xMap(78).toFixed(1) + '%', gStop5: xMap(100).toFixed(1) + '%',
       effAxis: [xLo, xLo + (xHi - xLo) * 0.25, xLo + (xHi - xLo) * 0.5, xLo + (xHi - xLo) * 0.75, xHi]
-        .map((v, i) => v.toFixed(0) + (i === 4 ? '%' : '')),
+        .map((v, i) => v.toFixed(0) + (i === 4 ? '% throttle' : '')),
       throttleNow: st.built ? d.throttle.toFixed(0) : '—',
 
       payPath: st.built ? payPath : '',
@@ -2540,7 +2568,7 @@ class Component extends DCLogic {
       effNow: st.built ? d.eff.toFixed(2) : '—',
       effColor: val(gb.eff.tone),
       payTicks: [yHi.toFixed(0), (yLo + (yHi - yLo) * 2 / 3).toFixed(0), (yLo + (yHi - yLo) / 3).toFixed(0), yLo.toFixed(0)],
-      payMaxLabel: (mtowTop / 1000).toFixed(1) + ' kg',
+      payMaxLabel: (mtowTop / 1000).toFixed(1) + ' kg all-up',
       payX0: (mtowBase / 1000).toFixed(1),
       payX1: ((mtowBase + payMax * 0.25) / 1000).toFixed(1),
       payX2: ((mtowBase + payMax * 0.5) / 1000).toFixed(1),
