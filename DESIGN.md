@@ -7,7 +7,7 @@ colors:
   mut: "#5F5D57"
   dim: "#6A6761"
   quiet: "#D6D2CA"
-  page: "#EAE8E3"
+  page: "#E8E7E5"
   card: "#FFFFFF"
   line: "#E7E4DF"
   fit-good: "#2E9E63"
@@ -141,7 +141,7 @@ A near-monochrome warm grey system with a single three-tone status palette.
 - **Fit Bad** (`#BE4230`): already AA as text, so it has no separate variant.
 
 ### Neutral
-- **Page** (`#EAE8E3`) / **Card** (`#FFFFFF`): the two surfaces, separated by 1.22:1. That ratio is the only thing distinguishing a card from the page, since the system has no shadows and no card borders. Dark mode: `#101215` / `#1B1E22`.
+- **Page** (`#E8E7E5`) / **Card** (`#FFFFFF`): the two surfaces, separated by 1.24:1. That ratio is the only thing distinguishing a card from the page, since the system has no shadows and no card borders. Dark mode: `#101215` / `#1B1E22`.
 - **Body** (`#55534E`), **Muted** (`#5F5D57`), **Dim** (`#6A6761`): the text ramp, in that order of prominence.
 - **Quiet** (`#D6D2CA`): pending status dots and inactive slider track.
 - **Line** (`#E7E4DF`): dividers and card edges.
