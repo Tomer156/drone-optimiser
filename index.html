@@ -219,7 +219,10 @@ table{border-collapse:collapse;width:100%}
    content, so any grow factor feeds back on the number it is measured against. syncChartHeight()
    measures the shortfall against the rail after layout and sets the height outright. */
 .chart-row{flex:0 0 auto;min-height:0}
-.chart-card{height:200px}
+/* syncChartHeight() writes this height, so it is the one panel dimension the app controls
+   outright and the one worth easing. See the note there on why measuring stays honest. */
+.chart-card{height:200px;transition:height .34s cubic-bezier(.33,1,.68,1)}
+@media (prefers-reduced-motion: reduce){ .chart-card{transition:none} }
 /* Chart transitions. The dot, the vertical rule and the target line move to their new values
    rather than jumping. An SVG path's `d` is not interpolable, so the curve is re-drawn by
    animateCurves() with a dash sweep instead. */
@@ -1168,6 +1171,24 @@ class Component extends DCLogic {
   componentWillUnmount() { if (window.__syncCharts) delete window.__syncCharts; }
   componentDidUpdate() { this.syncBody(); this.syncChartHeight(); this.animateCurves(); }
 
+  // The charts stretch a 0 0 100 100 viewBox with preserveAspectRatio="none", so user units are
+  // not square, and vector-effect="non-scaling-stroke" resolves the dash pattern in screen pixels.
+  // getTotalLength() answers in user units, which tiles the dash instead of sweeping it once.
+  // Walk the path and sum the transformed segments to get the length the dash actually uses.
+  screenLength(el) {
+    const raw = el.getTotalLength();
+    if (!(raw > 0)) return 0;
+    const m = el.getScreenCTM();
+    if (!m) return 0;
+    let out = 0, prev = null;
+    for (let k = 0; k <= 64; k++) {
+      const q = el.getPointAtLength(raw * k / 64).matrixTransform(m);
+      if (prev) out += Math.hypot(q.x - prev.x, q.y - prev.y);
+      prev = q;
+    }
+    return out;
+  }
+
   // An SVG path's `d` cannot be interpolated by CSS, so a curve that changes shape jumps. Sweep it
   // back on with a dash offset instead: measure the new path, hide it, then let the existing
   // stroke-dashoffset transition draw it. Only fires when the shape actually changed, so hovering a
@@ -1182,7 +1203,7 @@ class Component extends DCLogic {
       el.__lastD = d;
       if (first) continue;                          // first paint is the page load, not an update
       let len = 0;
-      try { len = el.getTotalLength(); } catch (e) { continue; }
+      try { len = this.screenLength(el); } catch (e) { continue; }
       if (!(len > 0)) continue;
       el.style.transition = 'none';
       el.style.strokeDasharray = len + ' ' + len;
@@ -1306,20 +1327,33 @@ class Component extends DCLogic {
       // everything in the column except the chart row, which is what gets the remainder
       let others = gap * Math.max(0, kids.length - 1);
       for (let i = 0; i < kids.length; i++) {
-        if (!kids[i].contains(cards[0])) others += kids[i].getBoundingClientRect().height;
+        if (!kids[i].contains(cards[0])) others += kids[i].scrollHeight;
       }
       // The floor is what keeps the results area from scrolling: the charts give up height
       // before the region ever does. 200 still leaves a readable plot; below that the window is
       // genuinely too short and scrolling is the honest answer.
       let next = Math.max(200, Math.min(620, Math.floor(avail - others)));
-      if (Math.abs(next - cards[0].getBoundingClientRect().height) >= 1) {
+      // The cards ease to this height, so their rendered box is mid-flight for a third of a
+      // second after each change. Compare against the target we last wrote, never the rect, or
+      // the transition and the measurement chase each other.
+      if (this._chartH == null || Math.abs(next - this._chartH) >= 1) {
+        this._chartH = next;
+        this._chartSettle = performance.now() + 380;
         for (let i = 0; i < cards.length; i++) cards[i].style.height = next + 'px';
+        // the height poller only fires on a region change, so the corrective pass needs its own
+        // wake-up once the ease has landed
+        clearTimeout(this._chartAfter);
+        this._chartAfter = setTimeout(() => this.syncChartHeight(), 400);
       }
       // Sub-pixel card heights round against us and can leave a few pixels of overflow. One
-      // corrective pass, and it only ever shrinks, so it cannot oscillate.
+      // corrective pass, and it only ever shrinks, so it cannot oscillate. Skipped while a
+      // transition is running, because region.scrollHeight would be reading the animation; the
+      // height poller runs it again once the cards have settled.
+      if (performance.now() < (this._chartSettle || 0)) return;
       const over = region.scrollHeight - region.clientHeight;
       if (over > 0 && next > 200) {
         next = Math.max(200, next - over);
+        this._chartH = next;
         for (let i = 0; i < cards.length; i++) cards[i].style.height = next + 'px';
       }
     } catch (e) {}
