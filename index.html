@@ -235,10 +235,19 @@ table{border-collapse:collapse;width:100%}
 .promo{display:flex;flex-direction:column}
 /* The coming-soon panel sits a step below the cards rather than on them: a dashed outline on the
    page surface, so it reads as a space reserved rather than a card that failed to fill. */
-.soon{background:transparent;border:1px dashed var(--soon-line);display:flex;flex-direction:column}
+.soon{background:var(--soon-bg);display:block}
+/* At 650 the fixed panels want 633 px of a 562 px region before the bench table asks for
+   anything. This is the only one that is not build data, so it is the one that goes. */
 @media (max-height: 760px){ .soon{display:none} }
 /* Bench table spacing lives here so the short-window rule can reach it; inline padding could not
    be overridden by a media query. */
+/* The two lists on the Electronics tab with no fixed length: bench rows, which run six to
+   fifteen depending on the maker, and the flag list, which grows with the number of problems.
+   They scroll inside their own box so the tab never does. The bench keeps three rows whatever
+   happens, because a table collapsed to its header is worse than a short one. */
+.bench-wrap{flex:0 1 auto;min-height:84px;overflow-y:auto}
+[data-eleclist]{flex:1 1 auto;min-height:0;overflow-y:auto}
+.bench thead th{position:sticky;top:0;background:var(--card-bg);z-index:1}
 .bench th{padding:0 14px 8px}
 .bench td{padding:6px 14px}
 .chain th{padding:0 16px 8px}
@@ -402,6 +411,16 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
               </sc-for>
             </div>
             <span style="font-size:11px;line-height:1.45;color:{{ goalNoteColor }}">{{ goalNote }}</span>
+            <!-- Pro spends a step splitting wind, drivetrain and avionics apart. Auto carries one
+                 number that sets all three, so the assumption is adjustable here without a step. -->
+            <div style="display:flex;flex-direction:column;gap:6px;padding-top:3px" data-tip="{{ sysEtaTip }}">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
+                <span style="font-size:12px;color:{{ t.body }}">System efficiency</span>
+                <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;white-space:nowrap">{{ sysEta }}<span style="color:{{ t.mut }}"> %</span></span>
+              </div>
+              <input type="range" aria-label="System efficiency" min="50" max="100" step="1" value="{{ sysEta }}" onChange="{{ onSysEta }}" onInput="{{ onSysEta }}" style="background:{{ sysEtaTrack }}">
+              <span style="font-size:10px;color:{{ t.mut }}">{{ sysEtaNote }}</span>
+            </div>
           </div>
         </div>
 
@@ -657,7 +676,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="font-size:11px;color:{{ t.dim }};line-height:1.5">{{ compareNote }}</span>
                 </div>
                 <div style="flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:12px">
-              <div style="flex:1 1 auto;background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px">
+              <div style="flex:1 1 auto;min-height:0;background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px">
                 <div style="padding:0 16px;display:flex;align-items:baseline;gap:9px">
                   <h2 style="font-size:13px;font-weight:600;margin:0">Design flags</h2>
                   <span style="margin-left:auto;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:11px;color:{{ warnCountColor }}">{{ warnCount }}</span>
@@ -806,16 +825,20 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
           <!-- Grows into the region rather than stopping at its content, so the tab ends level with
                the rail like the Results tab does. The two panels marked flex:1 absorb the slack. -->
           <div style="flex:1 1 auto;min-height:0;display:flex;gap:12px;align-items:stretch">
-            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:12px">
+            <div style="flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;gap:12px">
 
               <!-- MOTOR DATA: the bench rows this build interpolates between, each carrying the prop
                    and the voltage it was taken at, so a row's provenance sits on the row. -->
-              <div style="background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px">
+              <div style="background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px;min-height:0">
                 <div style="padding:0 14px;display:flex;align-items:baseline;gap:9px" data-tip="{{ motorTip }}">
                   <h2 style="font-size:13px;font-weight:600;margin:0">Motor data</h2>
                   <span style="font-size:11px;color:{{ t.mut }}">{{ motorName }}</span>
                 </div>
                 <span style="padding:0 14px;font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ motorEmpty }}">{{ motorNote }}</span>
+                <!-- The one panel here with no fixed row count: a motor can publish six bench rows
+                     or fifteen. When the tab runs short the rows are what gives, inside their own
+                     box, so the tab itself never scrolls and the header stays put. -->
+                <div class="bench-wrap">
                 <table class="bench" style="display:{{ motorTable }}">
                   <thead>
                     <tr>
@@ -842,6 +865,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                     </sc-for>
                   </tbody>
                 </table>
+                </div>
               </div>
 
               <!-- BATTERY: sits under the motor it has to feed. Same card grid as Electronics,
@@ -877,25 +901,33 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                 </div>
               </div>
 
-              <!-- Named so the gaps are visible rather than implied. Deliberately quiet: it carries
-                   no build data, and must not read as a panel that failed to load. -->
-              <div class="soon" style="border-radius:12px;padding:14px 16px;gap:12px">
-                <div style="display:flex;align-items:baseline;gap:9px">
-                  <h2 style="font-size:13px;font-weight:600;margin:0;color:{{ t.mut }}">Coming soon</h2>
-                  <span style="font-size:11px;color:{{ t.dim }}">not part of this build yet</span>
-                </div>
-                <div style="display:flex;flex-wrap:wrap;gap:14px 30px">
-                  <sc-for list="{{ soonCards }}" as="c" hint-placeholder-count="4">
-                    <div style="display:flex;flex-direction:column;gap:2px;min-width:132px">
-                      <span style="font-size:12px;font-weight:600;color:{{ t.mut }}">{{ c.k }}</span>
-                      <span style="font-size:10px;line-height:1.45;color:{{ t.dim }}">{{ c.n }}</span>
+              <!-- Named so the gaps are visible rather than implied. Black, like the contribution
+                   card on the Results tab, because the third column is the same ask: the parts we
+                   cannot size yet are the parts nobody has sent bench data for. -->
+              <div class="soon" style="border-radius:12px;padding:16px">
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px 26px">
+                  <sc-for list="{{ soonCols }}" as="col" hint-placeholder-count="2">
+                    <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+                      <sc-for list="{{ col.items }}" as="c" hint-placeholder-count="2">
+                        <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+                          <span style="font-size:12px;font-weight:600;color:{{ t.card }}">{{ c.k }}</span>
+                          <span style="font-size:10px;line-height:1.45;color:{{ t.card }};opacity:.66">{{ c.n }}</span>
+                        </div>
+                      </sc-for>
                     </div>
                   </sc-for>
+                  <a href="https://form.typeform.com/to/ciDWV9CU" target="_blank" rel="noopener" style="display:flex;flex-direction:column;gap:4px;min-width:0;text-decoration:none;align-self:start">
+                    <span style="font-size:12px;font-weight:600;color:{{ t.card }}">Coming soon</span>
+                    <span style="font-size:10px;line-height:1.45;color:{{ t.card }};opacity:.66">These land faster with real data behind them. Send bench figures for a part you own.</span>
+                    <span style="margin-top:4px;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:{{ t.card }}">Contribute data
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="M12 6l6 6-6 6"></path></svg>
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
 
-            <div style="width:320px;flex-shrink:0;display:flex;flex-direction:column;gap:12px">
+            <div style="width:320px;flex-shrink:0;min-height:0;display:flex;flex-direction:column;gap:12px">
               <!-- ELECTRONICS FLAGS: every gap in this wiring, and the part that closes it. -->
               <div style="flex:1 1 auto;background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px">
                 <div style="padding:0 16px;display:flex;align-items:baseline;gap:9px">
@@ -1048,7 +1080,9 @@ class Component extends DCLogic {
     const o = {motor:s.motor, batt:s.batt, battLocked:s.battLocked, style:s.style, gap:s.gap, built:s.built,
       mission:Object.assign({}, s.mission), mass:Object.assign({}, s.mass), eta:Object.assign({}, s.eta)};
     if (ov) {
-      if (ov.group) o[ov.group][ov.key] = ov.value;
+      // 'all' on the eta group is the Auto slider: one number standing in for all three terms.
+      if (ov.group === 'eta' && ov.key === 'all') { o.eta.wind = o.eta.prop = o.eta.av = ov.value; }
+      else if (ov.group) o[ov.group][ov.key] = ov.value;
       // Evaluating a specific motor/pack is the same as choosing it: score it on its real
       // catalogue weight, not on the user's placeholder estimate.
       else if (ov.pair) { o.motor = ov.pair[0]; o.batt = ov.pair[1]; o.battLocked = true; o.built = true; }
@@ -1532,7 +1566,9 @@ class Component extends DCLogic {
       document.body.style.letterSpacing = dk ? '.004em' : '';
       document.body.classList.toggle('tips-off', this.state.tips === false);
       // the coming-soon outline is drawn by CSS, so its colour has to reach the stylesheet
-      document.documentElement.style.setProperty('--soon-line', dk ? '#3A3F44' : '#D3D0CE');
+      document.documentElement.style.setProperty('--soon-bg', dk ? '#F2F1EE' : '#16181A');
+      // the sticky bench header needs an opaque backing, and the card colour lives in JS
+      document.documentElement.style.setProperty('--card-bg', dk ? '#1B1E22' : '#FFFFFF');
     } catch (e) {}
   }
 
@@ -2223,6 +2259,16 @@ class Component extends DCLogic {
         };
       }),
 
+      // Shown as the average of the three Pro terms, and moving it sets all three to that number.
+      // The three multiply rather than average, so the note carries the combined figure: it is the
+      // one that actually divides into the flight time.
+      sysEta: Math.round((st.eta.wind + st.eta.prop + st.eta.av) / 3),
+      sysEtaTrack: this.track('eta', 'all', 50, 100),
+      onSysEta: e => { const v = +e.target.value; this.setState({eta:{wind:v, prop:v, av:v}}); },
+      sysEtaNote: (d.eta * 100).toFixed(0) + '% of pack energy reaches the props',
+      sysEtaTip: 'Wind, drivetrain and avionics losses in one number. They multiply rather than add, so three terms at '
+                 + Math.round((st.eta.wind + st.eta.prop + st.eta.av) / 3) + '% leave ' + (d.eta * 100).toFixed(0) + '% between them. Pro mode sets each one separately.',
+
       etaSliders: [
         {label:'Wind losses', value:st.eta.wind, track:this.track('eta','wind',50,100), onInput:e => this.set('eta','wind', +e.target.value)},
         {label:'Motor + ESC + prop', value:st.eta.prop, track:this.track('eta','prop',50,100), onInput:e => this.set('eta','prop', +e.target.value)},
@@ -2651,11 +2697,11 @@ class Component extends DCLogic {
         };
       })(),
 
-      soonCards: [
-        {k:'ESC', n:'Pick a real ESC by rating, protocol and mounting, not just the current it must carry.'},
-        {k:'NAV', n:'GNSS, compass and the mass and power each adds.'},
-        {k:'COMMS', n:'Control and video links, their range and what they draw.'},
-        {k:'Avionics', n:'Flight controller, sensors and the wiring between them.'}
+      soonCols: [
+        {items:[{k:'ESC', n:'Chosen by rating, protocol and mounting, not only the current it carries.'},
+                {k:'NAV', n:'GNSS and compass, with the mass and power each one adds.'}]},
+        {items:[{k:'COMMS', n:'Control and video links, their range and what they draw.'},
+                {k:'Avionics', n:'Flight controller, sensors and the wiring between them.'}]}
       ],
 
       packSpecs: [
