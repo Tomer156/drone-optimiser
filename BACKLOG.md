@@ -71,6 +71,13 @@ the x-sort keeps it monotonic.
 **One prop string has an unrecorded pitch.** `4.9x?x3` renders with a literal `?` mid-string. A
 trailing unknown blade count is stripped; a mid-string unknown is not.
 
+**51 SVG attribute parse errors on every page load.** The browser parses the static `<x-dc>`
+template before the runtime hydrates it, so every `{{ }}` sitting on an SVG geometry attribute
+(`x1`, `y2`, `cx`, `r`) is read as an invalid length and logged. Deterministic, harmless, and it
+makes the console useless for spotting a real error. *Fix:* move the interpolated values off SVG
+geometry attributes onto a wrapper the runtime reads, or hide the raw template from the SVG parser
+before boot. Both touch the boot path, which is why this is recorded rather than done.
+
 ## Performance
 
 **The arithmetic prune earns nothing.** The thrust/weight gate before the full evaluation removes

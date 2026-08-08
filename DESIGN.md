@@ -182,7 +182,7 @@ A near-monochrome warm grey system with a single three-tone status palette.
 
 ## Layout
 
-Three regions, fixed: a **283px sidebar** (the wizard, its own scroll), a **results area**, and a **268px rail** inside it. The results area holds two equal columns plus the rail.
+Three regions, fixed: a **288px sidebar** (the wizard, its own scroll), a **results area**, and a **268px rail** inside it. The results area holds two equal columns plus the rail.
 
 Row order in the results area, which is settled and should not be reshuffled:
 
@@ -215,7 +215,7 @@ Flat. There are no shadows on cards. Depth comes entirely from tonal layering: a
 
 ## Shapes
 
-One radius family: **12px** for cards, **8px** for tooltips and popovers, **6px** for buttons, chips, inputs and selects. Status dots are 5-7px circles. The donut is an 11-unit stroke on a 140-unit viewBox, with rounded caps on segments large enough to take them.
+One radius family: **12px** for cards and dialogs, **8px** for tooltips and popovers, **6px** for buttons, chips, badges, inputs and selects. Three sub-tokens exist and are deliberate: **99px** for the mode pill, **5px** for the logo mark, **2px** for slider tracks and scrollbar thumbs. Nothing else. Status dots are 5-7px circles. The donut is an 11-unit stroke on a 140-unit viewBox, with rounded caps on segments large enough to take them.
 
 The frame diagram is a square X-quad schematic drawn at 1:1 or below, never scaled above its authored size, with `vector-effect="non-scaling-stroke"` on every element so weights hold at any size and its dimension labels rendered as HTML overlays so they stay 10px regardless of the drawing's scale.
 
@@ -225,7 +225,7 @@ The frame diagram is a square X-quad schematic drawn at 1:1 or below, never scal
 - **Shape:** 6px radius, 10px padding, 12px body type at weight 500.
 - **Primary:** ink fill, card-coloured text. Hover shifts to `inkHover` (`#000000` light, `#FFFFFF` dark).
 - **Secondary:** card fill with a `grid2` border; hover darkens the border to ink.
-- **Busy state:** the Optimise button paints "Optimising" with `aria-busy`, sets `disabled` so a second click cannot queue a second sweep, and announces the result through a polite live region. The sweep blocks the main thread for **about 2.5 s** on a cold load (321 motor/prop/voltage entries x 221 packs = 70,941 candidates, ~103,000 bench interpolations). A warm repeat with unchanged inputs is near-instant because the interpolation is memoised.
+- **Busy state:** the Optimise button paints "Comparing 0%" through to "Comparing 100%" with `aria-busy`, sets `disabled` so a second click cannot queue a second sweep, and announces the result through a polite live region. The sweep blocks the main thread for **about 2.5 s** on a cold load (321 motor/prop/voltage entries x 221 packs = 70,941 candidates, ~103,000 bench interpolations). A warm repeat with unchanged inputs is near-instant because the interpolation is memoised.
 
 ### Chips
 - Flight style, optimise goal, mode toggle. 6px radius, 11px label, 7px 4px padding.

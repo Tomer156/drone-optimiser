@@ -288,8 +288,9 @@ table{border-collapse:collapse;width:100%}
 #db-loading [data-db-msg]{font-size:12px;line-height:1.5;color:#55534E}
 #db-loading[data-state="error"] [data-db-msg]{color:#BE4230}
 @media (prefers-color-scheme: dark){ #db-loading{background:#101215} #db-loading [data-db-msg]{color:#C6C3BD} }
-/* The coming-soon panel sits a step below the cards rather than on them: a dashed outline on the
-   page surface, so it reads as a space reserved rather than a card that failed to fill. */
+/* The coming-soon panel is ink, like the contribution card: it is an announcement, not a panel
+   that failed to fill, and reading as a different kind of object is the point. It carried a
+   comment describing an earlier dashed-outline draft long after the fill was chosen. */
 .soon{background:var(--soon-bg);display:block}
 /* At 650 the fixed panels want 633 px of a 562 px region before the bench table asks for
    anything. This is the only one that is not build data, so it is the one that goes. */
@@ -417,7 +418,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
           <div role="button" tabindex="0" style="display:flex;align-items:center;gap:11px;padding:7px 20px;cursor:pointer;border-top:1px solid {{ t.line2 }}" onClick="{{ go2 }}">
             <span style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:9px;font-weight:500;flex-shrink:0;background:{{ s2bg }};color:{{ s2fg }}">{{ s2n }}</span>
             <span style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ s2txt }}">Mass Budget</span>
-            <span style="margin-left:auto;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:11px;color:{{ t.mut }}">{{ mtowKg }} kg</span>
+            <span style="margin-left:auto;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:11px;color:{{ t.mut }}">{{ massSubtotal }} g</span>
           </div>
           <div style="padding:2px 20px 7px;flex-direction:column;gap:11px;display:{{ b2 }}">
             <sc-for list="{{ massSliders }}" as="m" hint-placeholder-count="7">
@@ -507,7 +508,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                     <span style="font-size:12px;line-height:1.35;color:{{ m.nameColor }}">{{ m.name }}</span>
                     <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;color:{{ t.mut }}">{{ m.spec }}</span>
                   </div>
-                  <span style="flex-shrink:0;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};border:1px solid {{ t.rule2 }};border-radius:4px;padding:1px 4px;display:{{ m.tagShow }}">current</span>
+                  <span style="flex-shrink:0;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};border:1px solid {{ t.rule2 }};border-radius:6px;padding:1px 4px;display:{{ m.tagShow }}">current</span>
                 </div>
               </sc-for>
             </div>
@@ -542,7 +543,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                     <span style="font-size:12px;color:{{ b.nameColor }}">{{ b.label }}</span>
                     <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;color:{{ t.mut }}">{{ b.spec }}</span>
                   </div>
-<span style="flex-shrink:0;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};border:1px solid {{ t.rule2 }};border-radius:4px;padding:1px 4px;display:{{ b.tagShow }}">current</span>
+<span style="flex-shrink:0;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};border:1px solid {{ t.rule2 }};border-radius:6px;padding:1px 4px;display:{{ b.tagShow }}">current</span>
                   <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:11px;flex-shrink:0;color:{{ b.timeColor }}">{{ b.time }}<span style="color:{{ t.mut }}">m</span></span>
                 </div>
               </sc-for>
@@ -572,9 +573,9 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
       </div>
 
       <div style="flex-shrink:0;padding:11px 20px;border-top:1px solid {{ t.line }};display:flex;gap:8px">
-        <button style="flex:1;background:{{ t.card }};border:1px solid {{ t.grid2 }};border-radius:7px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;color:{{ t.ink }};justify-content:center;display:{{ navDisplay }}" style-hover="border-color:{{ t.ink }}" onClick="{{ prev }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><path d="M14 6l-6 6 6 6"></path></svg>Back</button>
-        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:7px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;justify-content:center;display:{{ nextDisplay }}" style-hover="background:{{ t.inkHover }}" onClick="{{ next }}">Next<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px"><path d="M10 6l6 6-6 6"></path></svg></button>
-        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:7px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;justify-content:center;display:{{ optDisplay }};position:relative;overflow:hidden" style-hover="background:{{ t.inkHover }}" onClick="{{ optimise }}" aria-busy="{{ optBusy }}" disabled="{{ optDisabled }}">
+        <button style="flex:1;background:{{ t.card }};border:1px solid {{ t.grid2 }};border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;color:{{ t.ink }};justify-content:center;display:{{ navDisplay }}" style-hover="border-color:{{ t.ink }}" onClick="{{ prev }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><path d="M14 6l-6 6 6 6"></path></svg>Back</button>
+        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;justify-content:center;display:{{ nextDisplay }}" style-hover="background:{{ t.inkHover }}" onClick="{{ next }}">Next<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px"><path d="M10 6l6 6-6 6"></path></svg></button>
+        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;justify-content:center;display:{{ optDisplay }};position:relative;overflow:hidden" style-hover="background:{{ t.inkHover }}" onClick="{{ optimise }}" aria-busy="{{ optBusy }}" disabled="{{ optDisabled }}">
           <span data-optbar style="position:absolute;left:0;top:0;bottom:0;width:{{ optFill }};background:rgba(255,255,255,.22);display:{{ optBarShow }};transition:width .1s linear"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:7px"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"></path></svg><span data-optlabel style="position:relative">{{ optLabel }}</span></button>
       </div>
     </div>
@@ -1004,9 +1005,9 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
             <table class="chain">
               <thead>
                 <tr>
-                  <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};width:200px">Parameter</th>
+                  <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};width:180px">Parameter</th>
                   <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};width:70px">Sym</th>
-                  <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};width:145px">Formula</th>
+                  <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};width:220px">Formula</th>
                   <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }}">Description</th>
                   <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};width:140px">Value</th>
                 </tr>
@@ -1035,7 +1036,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
   </div>
 
   <div style="position:fixed;inset:0;z-index:220;background:rgba(16,18,21,.55);align-items:center;justify-content:center;padding:24px;display:{{ shareDialog }}" onClick="{{ closeShare }}">
-    <div role="dialog" aria-modal="true" aria-label="Share this build" style="width:440px;max-width:100%;background:{{ t.card }};border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px" onClick="{{ stopIt }}">
+    <div role="dialog" aria-modal="true" aria-label="Share this build" style="width:440px;max-width:100%;background:{{ t.card }};border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:14px" onClick="{{ stopIt }}">
       <span style="font-size:16px;font-weight:600;letter-spacing:-.015em;color:{{ t.ink }}">Share this build</span>
       <span style="font-size:13px;line-height:1.6;color:{{ t.body }};text-wrap:pretty">The link carries every value: mission, mass budget, flight style, goal and the chosen motor and pack. Whoever opens it sees exactly this build.</span>
       <div style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10.5px;line-height:1.5;color:{{ t.mut }};background:{{ t.grid }};border-radius:8px;padding:10px 11px;word-break:break-all;max-height:76px;overflow:auto">{{ shareUrl }}</div>
@@ -1048,7 +1049,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
   </div>
 
   <div style="position:fixed;inset:0;z-index:210;background:rgba(16,18,21,.55);align-items:center;justify-content:center;padding:24px;display:{{ resetShow }}" onClick="{{ resetCancel }}">
-    <div role="dialog" aria-modal="true" aria-label="Start over" style="width:360px;max-width:100%;background:{{ t.card }};border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px" onClick="{{ stopIt }}">
+    <div role="dialog" aria-modal="true" aria-label="Start over" style="width:360px;max-width:100%;background:{{ t.card }};border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px" onClick="{{ stopIt }}">
       <span style="font-size:16px;font-weight:600;letter-spacing:-.015em;color:{{ t.ink }}">Start over?</span>
       <span style="font-size:13px;line-height:1.6;color:{{ t.body }};text-wrap:pretty">This clears the mission, the mass budget, the chosen motor and pack, and every filter. There is no undo.</span>
       <div style="display:flex;gap:8px;margin-top:4px">
@@ -1059,7 +1060,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
   </div>
 
   <div style="position:fixed;inset:0;z-index:200;background:rgba(16,18,21,.55);align-items:center;justify-content:center;padding:24px;display:{{ gateShow }}" onClick="{{ gateClose }}">
-    <div style="width:400px;max-width:100%;background:{{ t.card }};border-radius:14px;padding:26px 26px 22px;display:flex;flex-direction:column;gap:14px" onClick="{{ stopIt }}">
+    <div style="width:400px;max-width:100%;background:{{ t.card }};border-radius:12px;padding:26px 26px 22px;display:flex;flex-direction:column;gap:14px" onClick="{{ stopIt }}">
       <div style="display:flex;align-items:center;gap:10px">
         <div style="width:22px;height:22px;border-radius:5px;overflow:hidden;flex-shrink:0;background:{{ logoBg }}">
           <svg viewBox="0 0 300 300" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2325,6 +2326,9 @@ class Component extends DCLogic {
       }),
       estTotal: String(Math.round(d.mMotors + d.b.wt)),
       mtowKg: (d.mtow / 1000).toFixed(2),
+      // The step header showed whole take-off mass while its own sliders summed to something else,
+      // and the step below it showed its own subtotal. Two headers, two meanings, one slot.
+      massSubtotal: (st.mass.struct + st.mass.esc + st.mass.av + st.mass.misc + st.mass.cam + st.mass.payload).toFixed(0),
 
       propValue: st.prop,
       propOptions: [{v:'all', label:'All Props', color:ink}].concat(
@@ -2451,7 +2455,7 @@ class Component extends DCLogic {
         {k:'Main lead', v:awg + ' AWG', n:d.b.conn + ' connector · ' + d.Ipeak.toFixed(0) + ' A worst case'}
       ] : [],
       partsEmpty: battPicked ? 'none' : 'block',
-      partsNote: pro ? 'Pick a motor and a pack to fill this in.' : 'Hit Optimise to fit a motor and pack.',
+      partsNote: pro ? 'Pick a motor and a pack to fill this in.' : 'The parts appear once a build is chosen.',
       checksEmpty: battPicked ? 'none' : 'block',
       checksNote: 'Checks run once a motor and pack are chosen.',
       // Was good-over-non-pending, so the denominator moved while the row count did not: the same
@@ -2468,11 +2472,11 @@ class Component extends DCLogic {
       massReady: st.built || (pro && st.step > 3),
       massShow: (st.built || (pro && st.step > 3)) ? 'flex' : 'none',
       massEmpty: (st.built || (pro && st.step > 3)) ? 'none' : 'block',
-      massNote: pro ? 'Fill in the estimates at step 3 to see the mass split.' : 'Hit Optimise to see the mass split.',
+      massNote: pro ? 'Fill in the estimates at step 3 to see the mass split.' : 'The mass split appears once a build is chosen.',
       frameShow: st.built ? 'flex' : 'none',
       frameGrid: st.built ? 'grid' : 'none',
       frameEmpty: st.built ? 'none' : 'block',
-      frameNote: pro ? 'Pick a motor to size the frame.' : 'Hit Optimise to size the frame.',
+      frameNote: pro ? 'Pick a motor to size the frame.' : 'Frame size follows from the prop, once one is chosen.',
       frameClassShown: st.built ? ('Prop size ' + Math.round(d.m.propIn) + '″') : '',
       donut,
 
@@ -2747,11 +2751,11 @@ class Component extends DCLogic {
       proFlex: (pro && battPicked) ? 'grid' : 'none',
       motorTable: motorPicked ? 'table' : 'none',
       motorEmpty: motorPicked ? 'none' : 'block',
-      motorNote: pro ? 'Pick a prop and motor at step 4 to see its bench data.' : 'Hit Optimise to fit a motor.',
+      motorNote: pro ? 'Pick a prop and motor at step 4 to see its bench data.' : 'The bench data appears once a motor is chosen.',
       elecEmpty: battPicked ? 'none' : 'block',
-      elecNote: pro ? 'Pick a pack at step 5 to size the ESC and wiring.' : 'Hit Optimise to size the ESC and wiring.',
+      elecNote: pro ? 'Pick a pack at step 5 to size the ESC and wiring.' : 'The ESC and wiring are sized once a pack is chosen.',
       packEmpty: battPicked ? 'none' : 'block',
-      packNote: pro ? 'Pick a pack at step 5 to see its specification.' : 'Hit Optimise to fit a pack.',
+      packNote: pro ? 'Pick a pack at step 5 to see its specification.' : 'The pack specification appears once one is chosen.',
       motorName: motorPicked ? d.m.name : '',
       battName: battPicked ? d.b.label : '',
       motorTip: motorPicked ? 'The maker\u2019s own bench figures for this motor and prop. Every result comes from these rows, read between where needed.' : '',
@@ -2780,7 +2784,7 @@ class Component extends DCLogic {
       ...(() => {
         if (!battPicked) {
           return {elecFlags:[], elecFlagCount:'', elecFlagColor:mut, elecFlagEmpty:'block',
-                  elecFlagNote:pro ? 'Pick a pack at step 5 to check the wiring.' : 'Hit Optimise to check the wiring.'};
+                  elecFlagNote:pro ? 'Pick a pack at step 5 to check the wiring.' : 'The wiring is checked once a pack is chosen.'};
         }
         const F = [];
         const hoverA = d.Ihm * 4;
