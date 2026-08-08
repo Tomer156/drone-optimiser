@@ -223,10 +223,49 @@ table{border-collapse:collapse;width:100%}
 /* The runtime rewrites the style attribute of every templated node on each render, so a cap
    written inline is wiped by the next one. The custom property lives on the document root, which
    nothing templated owns, and the rule reads it from there. */
-[data-flaglist]{max-height:var(--flag-cap, none);overflow-y:var(--flag-of, visible)}
+[data-flaglist="a"]{max-height:var(--cap-a, none);overflow-y:var(--of-a, visible)}
+[data-flaglist="b"]{max-height:var(--cap-b, none);overflow-y:var(--of-b, visible)}
 /* syncChartHeight() writes this height, so it is the one panel dimension the app controls
    outright and the one worth easing. See the note there on why measuring stays honest. */
 .chart-card{height:200px;min-height:max-content;transition:height .34s cubic-bezier(.33,1,.68,1)}
+.plot-min{min-height:128px}
+.part-v{min-height:33px}
+.part-n{min-height:44px}
+/* display lives here, not inline, so the short-window rule can turn it off */
+.promo{display:flex;flex-direction:column}
+/* Bench table spacing lives here so the short-window rule can reach it; inline padding could not
+   be overridden by a media query. */
+.bench th{padding:0 14px 8px}
+.bench td{padding:6px 14px}
+.chain th{padding:0 16px 8px}
+.chain td{padding:6px 16px}
+@media (max-height: 760px){
+  .bench th{padding:0 14px 5px}
+  .bench td{padding:3px 14px}
+  .chain th{padding:0 16px 5px}
+  .chain td{padding:2px 16px}
+}
+/* Short windows. At 1280x700 the results column needs 699 px of a 612 px region even with the
+   charts at their floor and the flags list capped, so something has to give. Reserved space goes
+   first: the plot keeps a readable box at 96, and the parts grid stops holding room for text that
+   is usually one line. That is 87 px back, which is exactly the shortfall, and it costs no
+   information and adds no second scrollbar. */
+@media (max-height: 820px){
+  .plot-min{min-height:96px}
+  .part-v{min-height:0}
+  .part-n{min-height:0}
+}
+/* Under 760 the reserved space is already gone and the column still does not fit, so the parts
+   sub-lines go: they are the part numbers and margins, which the Electronics tab carries in full.
+   The names, which are what the panel is for, stay. */
+@media (max-height: 760px){
+  .plot-min{min-height:72px}
+  .part-n{display:none}
+  /* The side column is content-sized: syncChartHeight balances the main column but has nothing to
+     give here. The promo is the only thing in it that is not build information, and dropping it
+     returns 109 px against a 67 px shortfall. The same link sits in the footer. */
+  .promo{display:none}
+}
 @media (prefers-reduced-motion: reduce){ .chart-card{transition:none} }
 /* Chart transitions. The dot, the vertical rule and the target line move to their new values
    rather than jumping. An SVG path's `d` is not interpolable, so the curve is re-drawn by
@@ -509,13 +548,13 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                       <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:16px;line-height:1;white-space:nowrap;color:{{ thrColor }}">{{ throttleNow }}<span style="font-size:10px;color:{{ t.mut }}"> %</span></span>
                     </div>
                   </div>
-                  <div style="display:flex;gap:10px;flex:1;min-height:128px">
+                  <div class="plot-min" style="display:flex;gap:10px;flex:1">
                     <div style="width:30px;flex-shrink:0;height:100%;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end">
                       <sc-for list="{{ effTicks }}" as="t" hint-placeholder-count="4">
                         <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;color:{{ t.dim }};line-height:1">{{ t }}</span>
                       </sc-for>
                     </div>
-                    <div style="flex:1;min-width:0;position:relative;height:100%;min-height:128px">
+                    <div class="plot-min" style="flex:1;min-width:0;position:relative;height:100%">
                       <svg role="img" aria-label="{{ effAria }}" viewBox="0 0 100 100" width="100%" height="100%" preserveAspectRatio="none" style="display:block">
                         <defs>
                           <!-- userSpaceOnUse pins the colour stops to the throttle axis. The
@@ -560,7 +599,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                     </div>
 
                   </div>
-                  <div style="display:flex;gap:10px;flex:1;min-height:128px">
+                  <div class="plot-min" style="display:flex;gap:10px;flex:1">
                     <div style="width:30px;flex-shrink:0;height:100%;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end">
                       <sc-for list="{{ payTicks }}" as="t" hint-placeholder-count="4">
                         <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;color:{{ t.dim }};line-height:1">{{ t }}</span>
@@ -620,7 +659,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="margin-left:auto;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:11px;color:{{ warnCountColor }}">{{ warnCount }}</span>
                 </div>
                 <div style="padding:0 16px;font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ warnEmpty }}">{{ allClear }}</div>
-                <div data-flaglist style="display:flex;flex-direction:column;min-height:0">
+                <div data-flaglist="a" style="display:flex;flex-direction:column;min-height:0">
                   <sc-for list="{{ warnings }}" as="w" hint-placeholder-count="3">
                     <div role="button" tabindex="0" style="display:flex;gap:9px;padding:7px 16px;cursor:pointer" onClick="{{ w.go }}" style-hover="background:{{ t.hover2 }}">
                       <span style="width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px;background:{{ w.dot }}"></span>
@@ -643,10 +682,10 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <sc-for list="{{ autoParts }}" as="a" hint-placeholder-count="4">
                     <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
                       <span style="font-size:11px;color:{{ t.mut }}">{{ a.k }}</span>
-                      <span style="font-size:12px;font-weight:600;color:{{ t.ink }};overflow-wrap:anywhere;line-height:1.35;min-height:33px">{{ a.v }}</span>
+                      <span style="font-size:12px;font-weight:600;color:{{ t.ink }};overflow-wrap:anywhere;line-height:1.35" class="part-v">{{ a.v }}</span>
                       <!-- two lines are reserved so a prop model name landing in this string
                            lengthens the text without reflowing the row -->
-                      <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;line-height:1.45;color:{{ t.mut }};min-height:44px;overflow-wrap:anywhere">{{ a.n }}</span>
+                      <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;line-height:1.45;color:{{ t.mut }};overflow-wrap:anywhere" class="part-n">{{ a.n }}</span>
                     </div>
                   </sc-for>
                 </div>
@@ -657,7 +696,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="margin-left:auto;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:11px;color:{{ overallColor }}">{{ checkTally }}</span>
                 </div>
                 <div style="padding:0 16px;font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ checksEmpty }}">{{ checksNote }}</div>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(208px,1fr));align-content:start">
+                <div data-flaglist="b" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(208px,1fr));align-content:start;min-height:0">
                   <sc-for list="{{ checks }}" as="c" hint-placeholder-count="10">
                     <div role="button" tabindex="0" style="display:flex;align-items:center;gap:10px;padding:6px 16px;cursor:pointer" onClick="{{ c.go }}" style-hover="background:{{ t.hover2 }}">
                       <span style="width:5px;height:5px;border-radius:50%;flex-shrink:0;background:{{ c.dot }}"></span>
@@ -747,7 +786,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                 </div>
               </div>
 
-              <a href="https://form.typeform.com/to/ciDWV9CU" target="_blank" rel="noopener" style="order:4;background:{{ t.ink }};border:none;border-radius:12px;padding:12px 16px;display:flex;flex-direction:column;gap:4px;text-decoration:none">
+              <a class="promo" href="https://form.typeform.com/to/ciDWV9CU" target="_blank" rel="noopener" style="order:4;background:{{ t.ink }};border:none;border-radius:12px;padding:12px 16px;gap:4px;text-decoration:none">
                 <span style="font-size:13px;font-weight:600;color:{{ t.card }}">Help grow the database</span>
                 <span style="font-size:11px;line-height:1.45;color:{{ t.card }};opacity:.72">Add motor or battery bench data and every build gets more accurate.</span>
                 <span style="margin-top:2px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:{{ t.card }}">Contribute data
@@ -773,28 +812,28 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="font-size:11px;color:{{ t.mut }}">{{ motorName }}</span>
                 </div>
                 <span style="padding:0 14px;font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ motorEmpty }}">{{ motorNote }}</span>
-                <table style="display:{{ motorTable }}">
+                <table class="bench" style="display:{{ motorTable }}">
                   <thead>
                     <tr>
-                      <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">Throttle</th>
-                      <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">Prop</th>
-                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">Volts</th>
-                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">Thrust</th>
-                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">Current</th>
-                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">Power</th>
-                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">g/W</th>
+                      <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }}">Throttle</th>
+                      <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }}">Prop</th>
+                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }}">Volts</th>
+                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }}">Thrust</th>
+                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }}">Current</th>
+                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }}">Power</th>
+                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }}">g/W</th>
                     </tr>
                   </thead>
                   <tbody>
                     <sc-for list="{{ bench }}" as="r" hint-placeholder-count="6">
                       <tr style="background:{{ r.bg }}">
-                        <td style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 14px">{{ r.thr }}<span style="color:{{ t.mut }}">%</span> <span style="color:{{ t.mut }}">{{ r.tag }}</span></td>
-                        <td style="font-size:11px;padding:6px 14px;color:{{ t.body }}">{{ r.prop }} <span style="color:{{ t.mut }}">{{ r.propModel }}</span></td>
-                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 14px">{{ r.volts }}<span style="color:{{ t.mut }}"> V</span></td>
-                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 14px">{{ r.thrust }}<span style="color:{{ t.mut }}"> g</span></td>
-                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 14px">{{ r.amps }}<span style="color:{{ t.mut }}"> A</span></td>
-                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 14px">{{ r.watts }}<span style="color:{{ t.mut }}"> W</span></td>
-                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 14px">{{ r.eff }}</td>
+                        <td style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px">{{ r.thr }}<span style="color:{{ t.mut }}">%</span> <span style="color:{{ t.mut }}">{{ r.tag }}</span></td>
+                        <td style="font-size:11px;color:{{ t.body }}">{{ r.prop }} <span style="color:{{ t.mut }}">{{ r.propModel }}</span></td>
+                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px">{{ r.volts }}<span style="color:{{ t.mut }}"> V</span></td>
+                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px">{{ r.thrust }}<span style="color:{{ t.mut }}"> g</span></td>
+                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px">{{ r.amps }}<span style="color:{{ t.mut }}"> A</span></td>
+                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px">{{ r.watts }}<span style="color:{{ t.mut }}"> W</span></td>
+                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px">{{ r.eff }}</td>
                       </tr>
                     </sc-for>
                   </tbody>
@@ -861,24 +900,24 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
         <sc-if value="{{ isChain }}" hint-placeholder-val="{{ true }}">
           <div style="background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px">
             <h2 style="padding:0 16px;font-size:13px;font-weight:600;margin:0">Calc chain</h2>
-            <table>
+            <table class="chain">
               <thead>
                 <tr>
-                  <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 16px 8px;width:200px">Parameter</th>
-                  <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 16px 8px;width:70px">Sym</th>
-                  <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 16px 8px;width:145px">Formula</th>
-                  <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 16px 8px">Description</th>
-                  <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 16px 8px;width:140px">Value</th>
+                  <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};width:200px">Parameter</th>
+                  <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};width:70px">Sym</th>
+                  <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};width:145px">Formula</th>
+                  <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }}">Description</th>
+                  <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};width:140px">Value</th>
                 </tr>
               </thead>
               <tbody>
                 <sc-for list="{{ chain }}" as="c" hint-placeholder-count="19">
                   <tr>
-                    <td style="font-size:12px;padding:6px 16px;vertical-align:top">{{ c.name }}</td>
-                    <td style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:11px;color:{{ t.mut }};padding:6px 16px;vertical-align:top">{{ c.sym }}</td>
-                    <td style="font-family:Georgia,serif;font-style:italic;font-size:12px;color:{{ t.mut }};padding:6px 16px;vertical-align:top">{{ c.f }}</td>
-                    <td style="font-size:11px;line-height:1.45;color:{{ t.dim }};padding:6px 16px;vertical-align:top;text-wrap:pretty">{{ c.why }}</td>
-                    <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 16px;vertical-align:top;color:{{ c.color }}">{{ c.v }}</td>
+                    <td style="font-size:12px;vertical-align:top">{{ c.name }}</td>
+                    <td style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:11px;color:{{ t.mut }};vertical-align:top">{{ c.sym }}</td>
+                    <td style="font-family:Georgia,serif;font-style:italic;font-size:12px;color:{{ t.mut }};vertical-align:top">{{ c.f }}</td>
+                    <td style="font-size:11px;line-height:1.45;color:{{ t.dim }};vertical-align:top;text-wrap:pretty">{{ c.why }}</td>
+                    <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;vertical-align:top;color:{{ c.color }}">{{ c.v }}</td>
                   </tr>
                 </sc-for>
               </tbody>
@@ -1371,6 +1410,8 @@ class Component extends DCLogic {
       // axis, gaps and padding, none of which depend on the data. Probing every pass meant setting
       // the card to zero and restoring it with the transition already re-armed, so it eased back up
       // from nothing each time and a sampled mid-flight height left the pair looking mismatched.
+      // The floor moves with the viewport now, so the cache is keyed to the space available.
+      if (this._floorAt !== avail) { this._chartFloor = null; this._floorAt = avail; }
       let floor = this._chartFloor;
       if (floor == null) {
         const probe = cards[0], pt = probe.style.transition, ph = probe.style.height;
@@ -1424,22 +1465,34 @@ class Component extends DCLogic {
       // and pushed the column 91 px past the region even with the charts at their floor. Once the
       // charts have given up everything they can, the remainder comes off this list, which scrolls
       // on its own rather than making the whole results area scroll. Every flag stays reachable.
-      const flags = document.querySelector('[data-flaglist]');
-      if (flags) {
-        const root = document.documentElement.style;
-        // Absolute, not relative: work out what the overflow would be with the list fully open, so
-        // the same answer comes out on every pass. Measuring against the current capped height
-        // instead would read zero overflow, release the cap, overflow again and re-cap, once per
-        // render. `hidden` is what the cap is holding back, and zero when there is no cap.
-        const hidden = flags.scrollHeight - flags.clientHeight;
-        const full = flags.scrollHeight;
-        const wouldOver = over + hidden;
-        if (wouldOver > 0) {
-          root.setProperty('--flag-cap', Math.max(88, full - wouldOver) + 'px');
-          root.setProperty('--flag-of', 'auto');
-        } else if (root.getPropertyValue('--flag-cap')) {
-          root.removeProperty('--flag-cap');
-          root.removeProperty('--flag-of');
+      // Design flags and the Pro Checks grid are the two lists with no fixed row count, and the
+      // Results tab shows both. They take the squeeze in turn, worst-case first, once the charts
+      // have given up everything they can.
+      //
+      // Absolute, not relative: each pass works out what the overflow would be with the lists fully
+      // open, so the same answer comes out every time. Measuring against the current capped height
+      // would read zero overflow, release the cap, overflow again and re-cap, once per render.
+      // `hidden` is what a cap is already holding back, and zero when there is none. The value goes
+      // in a custom property on the document root, keyed per list, because the runtime rewrites the
+      // style attribute of every templated node on each render and an inline cap would not survive.
+      const lists = document.querySelectorAll('[data-flaglist]');
+      const root = document.documentElement.style;
+      let owed = over;
+      for (let i = 0; i < lists.length; i++) {
+        const el = lists[i], key = el.getAttribute('data-flaglist');
+        const hidden = el.scrollHeight - el.clientHeight;
+        const full = el.scrollHeight;
+        owed += hidden;
+        if (owed > 0 && full > 0) {
+          // 56 leaves two rows and a clear scroll affordance. A list already at its floor gives
+          // nothing, so credit only what it actually gave back, or the debt grows as it is passed on.
+          const cap = Math.max(56, full - owed);
+          owed -= Math.max(0, full - cap);
+          root.setProperty('--cap-' + key, cap + 'px');
+          root.setProperty('--of-' + key, 'auto');
+        } else if (root.getPropertyValue('--cap-' + key)) {
+          root.removeProperty('--cap-' + key);
+          root.removeProperty('--of-' + key);
         }
       }
     } catch (e) {}
@@ -2499,6 +2552,29 @@ class Component extends DCLogic {
         const F = [];
         const hoverA = d.Ihm * 4;
         const push = (tone, title, detail, fix) => F.push({tone, title, detail, fix});
+        // ── voltage mismatch ──
+        // The bench rows are a fixed pair of facts: this motor, this prop, at this voltage. Run it
+        // on a different pack and rpm moves with it (KV × volts), which moves thrust and current
+        // together. The app scales the rows, so the reading is an estimate rather than a
+        // measurement, and it says so here with the direction it errs in.
+        const dv = d.b.v - d.m.avgV, dvPct = Math.abs(dv) / d.m.avgV * 100;
+        if (dvPct > 8)
+          push(dvPct > 20 ? 'bad' : 'med', 'Pack voltage is not the bench voltage',
+               'Benched at ' + d.m.avgV.toFixed(1) + ' V, your pack is ' + d.b.v.toFixed(1) + ' V, '
+                 + dvPct.toFixed(0) + '% ' + (dv > 0 ? 'higher' : 'lower') + '. rpm follows KV \u00d7 volts, so this prop will spin '
+                 + (dv > 0 ? 'faster than the table: more thrust, and current climbing faster still, because power goes with rpm cubed.'
+                           : 'slower than the table: less thrust at the same throttle, so it sits higher on the stick to hold the same hover.'),
+               dv > 0 ? ('Check the motor\u2019s own voltage limit and give the ESC ' + Math.ceil(escCont * 1.2 / 5) * 5 + ' A rather than ' + escCont + ' A. A pack nearer ' + d.m.avgV.toFixed(1) + ' V removes the guesswork.')
+                      : ('Expect the real flight time to come in under the figure shown. A pack nearer ' + d.m.avgV.toFixed(1) + ' V, or a larger prop, puts hover back in the measured band.'));
+        else if (dvPct > 3)
+          push('info', 'Slight voltage difference',
+               'Benched at ' + d.m.avgV.toFixed(1) + ' V against your ' + d.b.v.toFixed(1) + ' V pack, a ' + dvPct.toFixed(0) + '% gap.',
+               'Small enough to ignore. Every pack sags below its nominal voltage under load anyway.');
+        // The prop is half of what was benched, so it is not free to change.
+        if (d.m.propModel)
+          push('info', 'The prop is part of the measurement',
+               'These rows are ' + d.m.name + ' turning a ' + window.__propSize(d.m.prop) + ' ' + d.m.propModel + '. A different prop of the same size is a different curve.',
+               'Fit this prop, or expect the thrust and current figures to drift. Pitch moves current more than diameter does.');
         if (!connA)
           push('med', 'Connector not listed',
                'This pack record has no connector, so nothing was checked against the ' + d.Ikt.toFixed(0) + ' A design current.',
