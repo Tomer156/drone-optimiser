@@ -244,12 +244,24 @@ html,body{margin:0;height:100%;background:#E8E7E5;font-family:'Instrument Sans',
 *{box-sizing:border-box}
 a{color:var(--fld-fg,#16181A);text-decoration:none;border-bottom:1px solid var(--fld-bd,#D8D5CE)}
 a:hover{border-bottom-color:var(--fld-fg,#16181A)}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:2px;outline:none;cursor:pointer;margin:0}
+/* The track stays 4px to the eye and becomes 24px to the finger: the gradient paints the content
+   box only, and the negative margin gives the padding back to the layout, so eight sliders in a
+   rail that already scrolls do not grow by 160px between them. */
+/* 24px of target, 4px of track. The gradient is handed in as --trk and painted by the track
+   pseudo-element, so the element's own box can be tall for the finger while the line stays thin for
+   the eye. The negative margin returns the extra height to the layout: eight sliders in a rail that
+   already scrolls must not grow by 160px between them. Painting it as the element's background and
+   clipping to the content box does not survive - the runtime re-serialises inline styles and drops
+   background-clip. */
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:24px;padding:10px 0;margin:-10px 0;
+  background:none;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:var(--trk,#EAE8E3)}
+input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(--trk,#EAE8E3)}
 /* The handle is a hollow ring in the fit colour at the value under it, so the control states its
    own verdict without reading the number. `color` and `--halo` are set inline per slider, on input
    rather than change, so ring and halo recolour while the drag is happening. Filling the ring with
    the card colour rather than white keeps it hollow in both themes. */
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;margin-top:-5.5px;width:15px;height:15px;border-radius:50%;
   background:var(--knob,#fff);border:1.5px solid currentColor;cursor:pointer;box-shadow:none;
   transition:box-shadow .15s ease}
 input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 2px var(--halo,transparent)}
@@ -361,9 +373,13 @@ table{border-collapse:collapse;width:100%}
    rather than jumping. An SVG path's `d` is not interpolable, so the curve is re-drawn by
    animateCurves() with a dash sweep instead. */
 [data-chartmark]{transition:left .45s cubic-bezier(.22,1,.36,1),top .45s cubic-bezier(.22,1,.36,1)}
+/* Declared here rather than inline so the reduced-motion block below can actually turn them off;
+   an inline transition outranks any stylesheet rule. */
+.donut-seg{transition:stroke-dasharray .55s cubic-bezier(.33,1,.68,1),stroke-dashoffset .55s cubic-bezier(.33,1,.68,1)}
+[data-optbar]{transition:width .1s linear}
 [data-curve]{transition:none}
 @media (prefers-reduced-motion: reduce){
-  [data-chartmark]{transition:none}
+  [data-chartmark],.donut-seg,[data-optbar],.chart-card{transition:none}
 }
 [data-tip]{position:relative}
 /* the toolbar toggle sets this; the hint text stays in the DOM for assistive tech */
@@ -393,7 +409,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
     <div role="region" aria-label="Build inputs" style="width:288px;flex-shrink:0;background:{{ t.card }};border-right:1px solid {{ t.line }};display:flex;flex-direction:column;min-height:0">
       <div style="height:56px;flex-shrink:0;display:flex;align-items:center;gap:10px;padding:0 20px">
         <div style="width:22px;height:22px;border-radius:5px;overflow:hidden;flex-shrink:0;background:{{ logoBg }}">
-          <svg viewBox="0 0 300 300" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg aria-hidden="true" viewBox="0 0 300 300" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="300" height="300" rx="20" fill="#0D0D0D"></rect>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M97.6191 154.762C123.918 154.762 145.238 176.082 145.238 202.381C145.238 228.68 123.918 250 97.6191 250C71.3198 250 50 228.68 50 202.381C50 176.082 71.3198 154.762 97.6191 154.762ZM97.6191 164.921C76.9303 164.921 60.1587 181.692 60.1587 202.381C60.1587 223.07 76.9303 239.841 97.6191 239.841C118.308 239.841 135.079 223.07 135.079 202.381C135.079 181.692 118.308 164.921 97.6191 164.921Z" fill="white"></path>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M202.381 154.762C228.68 154.762 250 176.082 250 202.381C250 228.68 228.68 250 202.381 250C176.082 250 154.762 228.68 154.762 202.381C154.762 176.082 176.082 154.762 202.381 154.762ZM202.381 164.921C181.692 164.921 164.921 181.692 164.921 202.381C164.921 223.07 181.692 239.841 202.381 239.841C223.07 239.841 239.841 223.07 239.841 202.381C239.841 181.692 223.07 164.921 202.381 164.921Z" fill="white"></path>
@@ -422,7 +438,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="font-size:12px;color:{{ t.body }}">{{ m.label }}</span>
                   <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;white-space:nowrap">{{ m.value }}<span style="color:{{ t.mut }}"> {{ m.unit }}</span></span>
                 </div>
-                <input type="range" aria-label="{{ m.label }}" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="color:{{ m.fitColor }};--halo:{{ m.fitHalo }};background:{{ m.track }}">
+                <input type="range" aria-label="{{ m.label }}" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="color:{{ m.fitColor }};--halo:{{ m.fitHalo }};--trk:{{ m.track }}">
               </div>
             </sc-for>
             <div style="display:flex;flex-direction:column;gap:8px">
@@ -450,7 +466,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="font-size:12px;color:{{ t.body }}">{{ m.label }}</span>
                   <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;white-space:nowrap">{{ m.value }}<span style="color:{{ t.mut }}"> g</span></span>
                 </div>
-                <input type="range" aria-label="{{ m.label }}" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="color:{{ m.fitColor }};--halo:{{ m.fitHalo }};background:{{ m.track }}">
+                <input type="range" aria-label="{{ m.label }}" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="color:{{ m.fitColor }};--halo:{{ m.fitHalo }};--trk:{{ m.track }}">
               </div>
             </sc-for>
           </div>
@@ -470,7 +486,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="font-size:12px;color:{{ t.body }}">{{ m.label }}</span>
                   <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;white-space:nowrap">{{ m.shown }}<span style="color:{{ t.mut }}"> g</span></span>
                 </div>
-                <input type="range" aria-label="{{ m.label }}" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="color:{{ m.fitColor }};--halo:{{ m.fitHalo }};background:{{ m.track }};display:{{ m.sliderShow }}">
+                <input type="range" aria-label="{{ m.label }}" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="color:{{ m.fitColor }};--halo:{{ m.fitHalo }};--trk:{{ m.track }};display:{{ m.sliderShow }}">
                 <span style="font-size:10px;color:{{ m.noteColor }}">{{ m.note }}</span>
               </div>
             </sc-for>
@@ -497,7 +513,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                 <span style="font-size:12px;color:{{ t.body }}">System efficiency</span>
                 <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;white-space:nowrap">{{ sysEta }}<span style="color:{{ t.mut }}"> %</span></span>
               </div>
-              <input type="range" aria-label="System efficiency" min="40" max="95" step="1" value="{{ sysEta }}" onChange="{{ onSysEta }}" onInput="{{ onSysEta }}" style="color:{{ sysEtaColor }};--halo:{{ sysEtaHalo }};background:{{ sysEtaTrack }}">
+              <input type="range" aria-label="System efficiency" min="40" max="95" step="1" value="{{ sysEta }}" onChange="{{ onSysEta }}" onInput="{{ onSysEta }}" style="color:{{ sysEtaColor }};--halo:{{ sysEtaHalo }};--trk:{{ sysEtaTrack }}">
               <span style="font-size:10px;color:{{ t.mut }}">{{ sysEtaNote }}</span>
             </div>
           </div>
@@ -588,7 +604,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="font-size:12px;color:{{ t.body }}">{{ e.label }}</span>
                   <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px">{{ e.value }}<span style="color:{{ t.mut }}"> %</span></span>
                 </div>
-                <input type="range" aria-label="{{ e.label }}" min="50" max="100" step="1" value="{{ e.value }}" onChange="{{ e.onInput }}" onInput="{{ e.onInput }}" style="color:{{ e.fitColor }};--halo:{{ e.fitHalo }};background:{{ e.track }}">
+                <input type="range" aria-label="{{ e.label }}" min="50" max="100" step="1" value="{{ e.value }}" onChange="{{ e.onInput }}" onInput="{{ e.onInput }}" style="color:{{ e.fitColor }};--halo:{{ e.fitHalo }};--trk:{{ e.track }}">
               </div>
             </sc-for>
           </div>
@@ -596,10 +612,10 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
       </div>
 
       <div style="flex-shrink:0;padding:11px 20px;border-top:1px solid {{ t.line }};display:flex;gap:8px">
-        <button style="flex:1;background:{{ t.card }};border:1px solid {{ t.grid2 }};border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;color:{{ t.ink }};justify-content:center;display:{{ navDisplay }}" style-hover="border-color:{{ t.ink }}" onClick="{{ prev }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><path d="M14 6l-6 6 6 6"></path></svg>Back</button>
-        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;justify-content:center;display:{{ nextDisplay }}" style-hover="background:{{ t.inkHover }}" onClick="{{ next }}">Next<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px"><path d="M10 6l6 6-6 6"></path></svg></button>
+        <button style="flex:1;background:{{ t.card }};border:1px solid {{ t.grid2 }};border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;color:{{ t.ink }};justify-content:center;display:{{ navDisplay }}" style-hover="border-color:{{ t.ink }}" onClick="{{ prev }}"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><path d="M14 6l-6 6 6 6"></path></svg>Back</button>
+        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;justify-content:center;display:{{ nextDisplay }}" style-hover="background:{{ t.inkHover }}" onClick="{{ next }}">Next<svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px"><path d="M10 6l6 6-6 6"></path></svg></button>
         <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;justify-content:center;display:{{ optDisplay }};position:relative;overflow:hidden" style-hover="background:{{ t.inkHover }}" onClick="{{ optimise }}" aria-busy="{{ optBusy }}" disabled="{{ optDisabled }}">
-          <span data-optbar style="position:absolute;left:0;top:0;bottom:0;width:{{ optFill }};background:rgba(255,255,255,.22);display:{{ optBarShow }};transition:width .1s linear"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:7px"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"></path></svg><span data-optlabel style="position:relative">{{ optLabel }}</span></button>
+          <span data-optbar style="position:absolute;left:0;top:0;bottom:0;width:{{ optFill }};background:rgba(255,255,255,.22);display:{{ optBarShow }}"></span><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:7px"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"></path></svg><span data-optlabel style="position:relative">{{ optLabel }}</span></button>
       </div>
     </div>
 
@@ -613,7 +629,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
       <div role="toolbar" aria-label="View and build actions" style="min-height:56px;flex-shrink:0;display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:8px 16px">
         <div role="tablist" aria-label="Result views" style="display:flex;gap:4px">
           <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
-            <span role="button" tabindex="0" style="padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;white-space:nowrap;display:{{ t.display }};background:{{ t.bg }};color:{{ t.color }}" onClick="{{ t.go }}">{{ t.label }}</span>
+            <span role="tab" aria-selected="{{ t.on }}" tabindex="0" style="padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;white-space:nowrap;display:{{ t.display }};background:{{ t.bg }};color:{{ t.color }}" onClick="{{ t.go }}">{{ t.label }}</span>
           </sc-for>
         </div>
         <div style="margin-left:auto;display:flex;align-items:center;gap:2px;background:{{ t.pill }};border-radius:99px;padding:2px">
@@ -621,16 +637,16 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
           <span role="button" tabindex="0" style="border-radius:99px;padding:4px 12px;font-size:11px;cursor:pointer;border:1px solid {{ proBd }};background:{{ proBg }};color:{{ proFg }}" onClick="{{ setPro }}">Pro</span>
         </div>
         <button style="background:transparent;border:none;font-size:11px;color:{{ t.mut }};font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;padding:6px 6px;display:inline-flex;align-items:center;gap:6px" style-hover="color:{{ t.ink }}" onClick="{{ toggleTheme }}" aria-label="Toggle theme" data-tip="Toggle theme" data-tip-end>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"></circle><path d="M12 4 A8 8 0 0 1 12 20 Z" fill="currentColor" stroke="none"></path></svg>
+          <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"></circle><path d="M12 4 A8 8 0 0 1 12 20 Z" fill="currentColor" stroke="none"></path></svg>
         </button>
         <button style="background:transparent;border:none;font-size:11px;color:{{ t.mut }};font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;padding:6px 6px;display:inline-flex;align-items:center;gap:6px;opacity:{{ resetDim }}" style-hover="color:{{ t.ink }}" onClick="{{ askReset }}">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.5-5.8"></path><path d="M4 4v4h4"></path></svg>Reset
+          <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.5-5.8"></path><path d="M4 4v4h4"></path></svg>Reset
         </button>
         <button style="background:transparent;border:none;font-size:11px;color:{{ tipsFg }};font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;padding:5px 8px;border-radius:99px;border:1px solid {{ tipsBd }};background:{{ tipsBg }};display:inline-flex;align-items:center;gap:6px" style-hover="color:{{ t.ink }}" onClick="{{ tipsToggle }}" aria-label="Tooltips" aria-pressed="{{ tipsAria }}" data-tip="{{ tipsTitle }}">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2Z"></path></svg>Tooltips
+          <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2Z"></path></svg>Tooltips
         </button>
         <button style="background:transparent;border:none;font-size:11px;color:{{ t.mut }};font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;padding:6px 6px;align-items:center;gap:6px;display:{{ shareShow }}" style-hover="color:{{ t.ink }}" onClick="{{ openShare }}" data-tip="Share this build as a link, or download it as a spreadsheet">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"></path><path d="M12 16V4"></path><path d="M8 8l4-4 4 4"></path></svg>Share
+          <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"></path><path d="M12 16V4"></path><path d="M8 8l4-4 4 4"></path></svg>Share
         </button>
       </div>
 
@@ -645,7 +661,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
               <div class="chart-row" style="display:flex;gap:12px;align-items:stretch;flex-wrap:wrap">
               <div style="flex:1 1 240px;min-width:0;display:flex;gap:12px">
                 <div class="chart-card" style="flex: 1 1 200px; min-width: 0; background: {{ t.card }}; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px">
-                  <div style="position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:10px" data-tip="{{ effTipText }}">
+                  <div tabindex="0" style="position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-radius:6px" data-tip="{{ effTipText }}">
                     <div style="display:flex;flex-direction:column;gap:5px;min-width:0">
                       <h2 style="font-size:13px;font-weight:600;letter-spacing:-.005em;color:{{ t.ink }};margin:0">Motor efficiency</h2>
                       <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:34px;letter-spacing:-.04em;line-height:1;white-space:nowrap;color:{{ effColor }}">{{ effNow }}<span style="font-size:11px;color:{{ t.mut }}"> g/W at hover</span></span>
@@ -699,7 +715,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
 
 <div style="flex:1 1 240px;min-width:0;display:flex;gap:12px">
                 <div class="chart-card" style="flex:1 1 200px;min-width:0;background:{{ t.card }};border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:12px">
-                  <div style="position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:10px" data-tip="{{ ftTipText }}">
+                  <div tabindex="0" style="position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-radius:6px" data-tip="{{ ftTipText }}">
                     <div style="display:flex;flex-direction:column;gap:5px;min-width:0">
                       <h2 style="font-size:13px;font-weight:600;letter-spacing:-.005em;color:{{ t.ink }};margin:0">Flight time</h2>
                       <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:34px;letter-spacing:-.04em;line-height:1;white-space:nowrap;color:{{ payColor }}">{{ flightNow }}<span style="font-size:11px;color:{{ t.mut }}"> min at {{ mtowKg }} kg</span></span>
@@ -747,7 +763,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                           <span style="font-size:10px;color:{{ t.dim }};text-align:right">Margin</span>
                         </div>
                         <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
-                          <div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr) minmax(0,.8fr);gap:10px;align-items:baseline" data-tip="{{ r.tip }}">
+                          <div tabindex="{{ r.tab }}" style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr) minmax(0,.8fr);gap:10px;align-items:baseline;border-radius:6px" data-tip="{{ r.tip }}">
                             <span style="font-size:11px;color:{{ t.mut }};min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.k }}</span>
                             <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:13px;text-align:right;white-space:nowrap;color:{{ t.body }}">{{ r.need }}</span>
                             <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:13px;text-align:right;white-space:nowrap;color:{{ r.haveColor }}">{{ r.have }}</span>
@@ -837,7 +853,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                 <div style="position:relative;aspect-ratio:1;height:100%;max-height:184px">
                   <svg role="img" aria-label="{{ donutAria }}" viewBox="0 0 140 140" width="100%" height="100%" style="display:block">
                     <sc-for list="{{ donut }}" as="s" hint-placeholder-count="5" style="height: 100%">
-                      <circle cx="70" cy="70" r="58" fill="none" stroke="{{ s.c }}" stroke-width="11" stroke-linecap="{{ s.cap }}" stroke-dasharray="{{ s.d }}" stroke-dashoffset="{{ s.o }}" transform="rotate(-90 70 70)" style="cursor:pointer;transition:stroke-dasharray .55s cubic-bezier(.22,1,.36,1),stroke-dashoffset .55s cubic-bezier(.22,1,.36,1)" onMouseEnter="{{ s.enter }}" onMouseLeave="{{ s.leave }}"></circle>
+                      <circle class="donut-seg" cx="70" cy="70" r="58" fill="none" stroke="{{ s.c }}" stroke-width="11" stroke-linecap="{{ s.cap }}" stroke-dasharray="{{ s.d }}" stroke-dashoffset="{{ s.o }}" transform="rotate(-90 70 70)" style="cursor:pointer;" onMouseEnter="{{ s.enter }}" onMouseLeave="{{ s.leave }}"></circle>
                     </sc-for>
                   </svg>
                   <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none">
@@ -863,16 +879,16 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                     <line x1="{{ fgA }}" y1="{{ fgA }}" x2="{{ fgB }}" y2="{{ fgB }}" stroke="{{ t.arm }}" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke"></line>
                     <line x1="{{ fgB }}" y1="{{ fgA }}" x2="{{ fgA }}" y2="{{ fgB }}" stroke="{{ t.arm }}" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke"></line>
                     <rect x="{{ fgBodyX }}" y="{{ fgBodyX }}" width="{{ fgBodyW }}" height="{{ fgBodyW }}" rx="4" fill="{{ t.ink }}"></rect>
-                    <circle cx="{{ fgA }}" cy="{{ fgA }}" r="{{ fgR }}" fill="none" stroke="{{ t.rule2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
-                    <circle cx="{{ fgB }}" cy="{{ fgA }}" r="{{ fgR }}" fill="none" stroke="{{ t.rule2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
-                    <circle cx="{{ fgA }}" cy="{{ fgB }}" r="{{ fgR }}" fill="none" stroke="{{ t.rule2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
-                    <circle cx="{{ fgB }}" cy="{{ fgB }}" r="{{ fgR }}" fill="none" stroke="{{ t.rule2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
-                    <line x1="{{ fgLeft }}" y1="{{ wDimY }}" x2="{{ fgRight }}" y2="{{ wDimY }}" stroke="{{ t.rule2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></line>
-                    <line x1="{{ fgLeft }}" y1="{{ wTick0 }}" x2="{{ fgLeft }}" y2="{{ wTick1 }}" stroke="{{ t.rule2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></line>
-                    <line x1="{{ fgRight }}" y1="{{ wTick0 }}" x2="{{ fgRight }}" y2="{{ wTick1 }}" stroke="{{ t.rule2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+                    <circle cx="{{ fgA }}" cy="{{ fgA }}" r="{{ fgR }}" fill="none" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+                    <circle cx="{{ fgB }}" cy="{{ fgA }}" r="{{ fgR }}" fill="none" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+                    <circle cx="{{ fgA }}" cy="{{ fgB }}" r="{{ fgR }}" fill="none" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+                    <circle cx="{{ fgB }}" cy="{{ fgB }}" r="{{ fgR }}" fill="none" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+                    <line x1="{{ fgLeft }}" y1="{{ wDimY }}" x2="{{ fgRight }}" y2="{{ wDimY }}" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+                    <line x1="{{ fgLeft }}" y1="{{ wTick0 }}" x2="{{ fgLeft }}" y2="{{ wTick1 }}" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+                    <line x1="{{ fgRight }}" y1="{{ wTick0 }}" x2="{{ fgRight }}" y2="{{ wTick1 }}" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></line>
                                                                               </svg>
                   <span style="position:absolute;left:56.70%;top:{{ wTextTop }};transform:translate(-50%,-50%);white-space:nowrap;display:inline-flex;align-items:center;gap:4px;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;color:{{ t.mut }}" data-tip="{{ squareTip }}" data-tip-end>{{ dimW }} mm
-                    <svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="{{ t.rule2 }}" stroke-width="1.4" style="flex-shrink:0"><rect x="1.2" y="1.2" width="7.6" height="7.6" rx="1"></rect></svg>
+                    <svg aria-hidden="true" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="{{ t.rule2 }}" stroke-width="1.4" style="flex-shrink:0"><rect x="1.2" y="1.2" width="7.6" height="7.6" rx="1"></rect></svg>
                   </span>
                   </div>
                 </div>
@@ -881,7 +897,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                     <span style="font-size:12px;color:{{ t.body }}">Prop clearance</span>
                     <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px">{{ gap }}<span style="color:{{ t.mut }}"> mm</span></span>
                   </div>
-                  <input type="range" aria-label="Prop clearance" min="5" max="60" step="1" value="{{ gap }}" onChange="{{ onGap }}" onInput="{{ onGap }}" style="color:{{ gapColor }};--halo:{{ gapHalo }};background:{{ t.track }}">
+                  <input type="range" aria-label="Prop clearance" min="5" max="60" step="1" value="{{ gap }}" onChange="{{ onGap }}" onInput="{{ onGap }}" style="color:{{ gapColor }};--halo:{{ gapHalo }};--trk:{{ t.track }}">
                 </div>
                 <div style="grid-template-columns:1fr 1fr;gap:6px 16px;display:{{ frameGrid }}">
                   <sc-for list="{{ frameStats }}" as="f" hint-placeholder-count="6">
@@ -897,7 +913,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                 <span style="font-size:13px;font-weight:600;color:{{ t.card }}">Help grow the database</span>
                 <span style="font-size:11px;line-height:1.45;color:{{ t.card }};opacity:.72">Add motor or battery bench data and every build gets more accurate.</span>
                 <span style="margin-top:2px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:{{ t.card }}">Contribute data
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="M12 6l6 6-6 6"></path></svg>
+                  <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="M12 6l6 6-6 6"></path></svg>
                 </span>
               </a>
 
@@ -1070,7 +1086,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
         <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:8px;padding:11px;font-size:13px;font-weight:600;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer" style-hover="background:{{ t.inkHover }}" onClick="{{ copyLink }}">{{ copyLabel }}</button>
         <button style="flex:1;background:{{ t.card }};border:1px solid {{ t.grid2 }};border-radius:8px;padding:11px;font-size:13px;color:{{ t.ink }};font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer" style-hover="border-color:{{ t.ink }}" onClick="{{ doExport }}">Download CSV</button>
       </div>
-      <button style="background:transparent;border:none;color:{{ t.mut }};font-size:12px;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;padding:2px" style-hover="color:{{ t.ink }}" onClick="{{ closeShare }}">Close</button>
+      <button style="background:transparent;border:none;color:{{ t.mut }};font-size:12px;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;padding:2px" style-hover="color:{{ t.ink }}" data-autofocus onClick="{{ closeShare }}">Close</button>
     </div>
   </div>
 
@@ -1079,17 +1095,17 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
       <span style="font-size:16px;font-weight:600;letter-spacing:-.015em;color:{{ t.ink }}">Start over?</span>
       <span style="font-size:13px;line-height:1.6;color:{{ t.body }};text-wrap:pretty">This clears the mission, the mass budget, the chosen motor and pack, and every filter. There is no undo.</span>
       <div style="display:flex;gap:8px;margin-top:4px">
-        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:8px;padding:11px;font-size:13px;font-weight:600;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer" style-hover="background:{{ t.inkHover }}" onClick="{{ resetGo }}">Yes, start over</button>
-        <button style="flex:1;background:{{ t.card }};border:1px solid {{ t.grid2 }};border-radius:8px;padding:11px;font-size:13px;color:{{ t.ink }};font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer" style-hover="border-color:{{ t.ink }}" onClick="{{ resetCancel }}">Keep my build</button>
+        <button style="flex:1;background:{{ t.card }};border:1px solid {{ t.grid2 }};border-radius:8px;padding:11px;font-size:13px;color:{{ t.ink }};font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer" style-hover="border-color:{{ t.ink }}" onClick="{{ resetGo }}">Yes, start over</button>
+        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:8px;padding:11px;font-size:13px;font-weight:600;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer" style-hover="background:{{ t.inkHover }}" data-autofocus onClick="{{ resetCancel }}">Keep my build</button>
       </div>
     </div>
   </div>
 
   <div style="position:fixed;inset:0;z-index:200;background:rgba(16,18,21,.55);align-items:center;justify-content:center;padding:24px;display:{{ gateShow }}" onClick="{{ gateClose }}">
-    <div style="width:400px;max-width:100%;background:{{ t.card }};border-radius:12px;padding:26px 26px 22px;display:flex;flex-direction:column;gap:14px" onClick="{{ stopIt }}">
+    <div role="dialog" aria-modal="true" aria-label="Pro mode" style="width:400px;max-width:100%;background:{{ t.card }};border-radius:12px;padding:26px 26px 22px;display:flex;flex-direction:column;gap:14px" onClick="{{ stopIt }}">
       <div style="display:flex;align-items:center;gap:10px">
         <div style="width:22px;height:22px;border-radius:5px;overflow:hidden;flex-shrink:0;background:{{ logoBg }}">
-          <svg viewBox="0 0 300 300" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg aria-hidden="true" viewBox="0 0 300 300" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="300" height="300" rx="20" fill="#0D0D0D"></rect>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M97.6191 154.762C123.918 154.762 145.238 176.082 145.238 202.381C145.238 228.68 123.918 250 97.6191 250C71.3198 250 50 228.68 50 202.381C50 176.082 71.3198 154.762 97.6191 154.762ZM97.6191 164.921C76.9303 164.921 60.1587 181.692 60.1587 202.381C60.1587 223.07 76.9303 239.841 97.6191 239.841C118.308 239.841 135.079 223.07 135.079 202.381C135.079 181.692 118.308 164.921 97.6191 164.921Z" fill="white"></path>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M202.381 154.762C228.68 154.762 250 176.082 250 202.381C250 228.68 228.68 250 202.381 250C176.082 250 154.762 228.68 154.762 202.381C154.762 176.082 176.082 154.762 202.381 154.762ZM202.381 164.921C181.692 164.921 164.921 181.692 164.921 202.381C164.921 223.07 181.692 239.841 202.381 239.841C223.07 239.841 239.841 223.07 239.841 202.381C239.841 181.692 223.07 164.921 202.381 164.921Z" fill="white"></path>
@@ -1104,7 +1120,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
       <div style="display:flex;flex-direction:column;gap:7px">
         <sc-for list="{{ gatePerks }}" as="g" hint-placeholder-count="3">
           <div style="display:flex;align-items:center;gap:9px">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="{{ t.ink }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 12.5l5 5L20 6.5"></path></svg>
+            <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="{{ t.ink }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 12.5l5 5L20 6.5"></path></svg>
             <span style="font-size:12px;color:{{ t.body }}">{{ g }}</span>
           </div>
         </sc-for>
@@ -1385,7 +1401,7 @@ class Component extends DCLogic {
     this.syncBody(); this.syncChartHeight(); this.syncRail();
   }
   componentWillUnmount() { if (window.__syncCharts) delete window.__syncCharts; }
-  componentDidUpdate() { this.syncBody(); this.syncChartHeight(); this.animateCurves(); this.revealPick(); this.syncRail(); }
+  componentDidUpdate() { this.syncBody(); this.syncChartHeight(); this.animateCurves(); this.revealPick(); this.syncRail(); this.syncDialog(); }
 
   // Step 4 opened a 317-row list at the top with the chosen motor 11,583 px below it, so the list
   // gave no sign of being connected to the build on the right. Bring the selection into view once
@@ -1687,6 +1703,53 @@ class Component extends DCLogic {
 
   // Shows the rail's bottom fade only while there is something below the fold, and hides it again
   // at the end of the scroll so it never lies about there being more.
+  // A dialog that does not take focus is a dialog only to a sighted mouse user: a keyboard lands on
+  // whatever was behind it, tabs through the page underneath, and has no way out but the mouse.
+  // One routine for all three, driven by whichever is on screen.
+  syncDialog() {
+    try {
+      const open = [].slice.call(document.querySelectorAll('[role=dialog]'))
+        .filter(d => d.offsetParent !== null)[0] || null;
+      if (open === this._dialog) return;
+
+      if (!open && this._dialog) {                       // closing: hand focus back where it was
+        const back = this._returnTo;
+        this._dialog = null; this._returnTo = null;
+        if (back && document.contains(back)) back.focus();
+        return;
+      }
+      if (!open) return;
+
+      this._returnTo = document.activeElement;           // opening: remember, then move in
+      this._dialog = open;
+      // Prefer whatever the dialog marks as its safe landing: focus should not open on the button
+      // that destroys the build.
+      const first = open.querySelector('[data-autofocus]')
+        || open.querySelector('button, a[href], input, select, [tabindex]:not([tabindex="-1"])');
+      (first || open).focus();
+      if (!first) open.setAttribute('tabindex', '-1');
+
+      if (!this._dialogKeys) {
+        this._dialogKeys = true;
+        document.addEventListener('keydown', e => {
+          const d = this._dialog;
+          if (!d) return;
+          if (e.key === 'Escape') { e.preventDefault(); this.closeDialogs(); return; }
+          if (e.key !== 'Tab') return;
+          // Trap: the page behind is inert to the mouse, so it must be inert to Tab as well.
+          const f = [].slice.call(d.querySelectorAll('button, a[href], input, select, [tabindex]:not([tabindex="-1"])'))
+            .filter(x => x.offsetParent !== null);
+          if (!f.length) return;
+          const first2 = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first2) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first2.focus(); }
+        });
+      }
+    } catch (e) {}
+  }
+
+  closeDialogs() { this.setState({askReset:false, share:false, gate:false}); }
+
   syncRail() {
     try {
       const rail = document.querySelector('[data-rail]');
@@ -2242,7 +2305,7 @@ class Component extends DCLogic {
         page:'#101215', card:'#1B1E22', line:'#2C3035', line2:'#23272B', grid:'#25292E', grid2:'#343A3F',
         track:'#2C3035', pill:'#282C31', sel:'#343A3F', hover:'#23272B', hover2:'#202429',
         ink:'#F2F1EE', inkHover:'#FFFFFF', body:'#C6C3BD', mut:'#96938C', dim:'#8A867F', quiet:'#3A3F44', rule:'#474C51', rule2:'#565B60',
-        arm:'#3D4247', dash:'#6C716F'
+        arm:'#767C82', dim2:'#767C82', dash:'#6C716F'
       } : {
         // Warm graphite: paper-adjacent without being the cream. Card sits 1.24:1 above the page,
         // and the pill 1.12:1 above that so the mode toggle has a container to read against.
@@ -2251,7 +2314,7 @@ class Component extends DCLogic {
         // mut/dim sit one notch darker than the comp's: at 10-11px the originals landed at 4.2:1
         // on the pill and card, just under AA. The ramp order (body > mut > dim) is preserved.
         ink:'#16181A', inkHover:'#000000', body:'#55534E', mut:'#5F5D57', dim:'#6A6761', quiet:'#D3D0CE', rule:'#C4C1BD', rule2:'#B6B1AD',
-        arm:'#DAD7D5', dash:'#A29D97'
+        arm:'#8C8781', dim2:'#8C8781', dash:'#A29D97'
       },
       toggleTheme: () => this.setState({theme: st.theme === 'dark' ? 'light' : 'dark'}),
       proOnly: pro ? 'block' : 'none',
@@ -2504,6 +2567,7 @@ class Component extends DCLogic {
         // element sibling beside a {{ }} interpolation inside sc-for, and text carries to a screen
         // reader anyway, which a coloured dot would not.
         label: t.label + (t.k === 'elec' && elecWorst ? (elecWorst === 'bad' ? ' · 1 critical' : ' · 1 to review') : ''),
+        on: st.tab === t.k ? 'true' : 'false',
         display: ((t.k === 'chain' || t.k === 'elec') && !pro) ? 'none' : 'block',
         bg: st.tab === t.k ? chip : 'transparent',
         color: st.tab === t.k ? ink : mut,
@@ -2778,7 +2842,9 @@ class Component extends DCLogic {
              'The pack is working near its limit when you push hard. It will get warm.',
              'The pack cannot supply what the motors ask for. Expect voltage sag and heat.')}
         ]}
-      ],
+      // A row earns a tab stop only when it has something to say. Before this the whole results
+      // area held no focusable element at all, so none of these explanations reached a keyboard.
+      ].map(g => ({title:g.title, rows:g.rows.map(r => Object.assign({}, r, {tab: r.tip ? '0' : null}))})),
       compareNote: st.built ? 'Hover draws ' + d.I.toFixed(1) + ' A from the pack, ' + d.Ihm.toFixed(1) + ' A per motor.'
                             : 'No motor or pack chosen yet.',
 
