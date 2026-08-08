@@ -199,8 +199,6 @@ window.__dbPromise = (function () {
     throw err;
   });
 })();
-
-
 // The chips, tabs, list rows and step headers are spans and divs with role="button". One
 // delegated listener gives every one of them Enter/Space activation, instead of threading a
 // key handler through each row's data object.
@@ -329,6 +327,9 @@ table{border-collapse:collapse;width:100%}
    sub-lines go: they are the part numbers and margins, which the Electronics tab carries in full.
    The names, which are what the panel is for, stay. */
 @media (max-height: 760px){
+  /* The verdict sentence earns its space; the hover-draw detail beside it does not, and it is the
+     Electronics tab's material anyway. */
+  .note-detail{display:none}
   .plot-min{min-height:72px}
   .part-n{display:none}
   /* The side column is content-sized: syncChartHeight balances the main column but has nothing to
@@ -475,7 +476,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                 <span style="font-size:12px;color:{{ t.body }}">System efficiency</span>
                 <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;white-space:nowrap">{{ sysEta }}<span style="color:{{ t.mut }}"> %</span></span>
               </div>
-              <input type="range" aria-label="System efficiency" min="50" max="100" step="1" value="{{ sysEta }}" onChange="{{ onSysEta }}" onInput="{{ onSysEta }}" style="background:{{ sysEtaTrack }}">
+              <input type="range" aria-label="System efficiency" min="40" max="95" step="1" value="{{ sysEta }}" onChange="{{ onSysEta }}" onInput="{{ onSysEta }}" style="background:{{ sysEtaTrack }}">
               <span style="font-size:10px;color:{{ t.mut }}">{{ sysEtaNote }}</span>
             </div>
           </div>
@@ -596,7 +597,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
         <button style="background:transparent;border:none;font-size:11px;color:{{ t.mut }};font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;padding:6px 6px;display:inline-flex;align-items:center;gap:6px" style-hover="color:{{ t.ink }}" onClick="{{ toggleTheme }}" aria-label="Toggle theme" data-tip="Toggle theme" data-tip-end>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"></circle><path d="M12 4 A8 8 0 0 1 12 20 Z" fill="currentColor" stroke="none"></path></svg>
         </button>
-        <button style="background:transparent;border:none;font-size:11px;color:{{ t.mut }};font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;padding:6px 6px;display:inline-flex;align-items:center;gap:6px" style-hover="color:{{ t.ink }}" onClick="{{ askReset }}">
+        <button style="background:transparent;border:none;font-size:11px;color:{{ t.mut }};font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;padding:6px 6px;display:inline-flex;align-items:center;gap:6px;opacity:{{ resetDim }}" style-hover="color:{{ t.ink }}" onClick="{{ askReset }}">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.5-5.8"></path><path d="M4 4v4h4"></path></svg>Reset
         </button>
         <button style="background:transparent;border:none;font-size:11px;color:{{ tipsFg }};font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;padding:5px 8px;border-radius:99px;border:1px solid {{ tipsBd }};background:{{ tipsBg }};display:inline-flex;align-items:center;gap:6px" style-hover="color:{{ t.ink }}" onClick="{{ tipsToggle }}" aria-label="Tooltips" aria-pressed="{{ tipsAria }}" data-tip="{{ tipsTitle }}">
@@ -730,7 +731,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                       </div>
                     </sc-for>
                   </div>
-                  <span style="font-size:11px;color:{{ t.dim }};line-height:1.5">{{ compareNote }}</span>
+                  <span style="font-size:11px;line-height:1.5;text-wrap:pretty"><span style="font-weight:600;color:{{ verdictColor }}">{{ verdict }}</span> <span class="note-detail" style="color:{{ t.dim }}">{{ compareNote }}</span></span>
                 </div>
                 <div style="flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:12px">
               <div style="flex:1 1 auto;min-height:0;background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px">
@@ -773,7 +774,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
               <div style="flex:0 0 auto;background:{{ t.card }};border-radius:12px;padding:14px 0;flex-direction:column;gap:12px;display:{{ checksDisplay }}">
                 <div style="padding:0 16px;display:flex;align-items:baseline;gap:9px">
                   <h2 style="font-size:13px;font-weight:600;margin:0">Checks</h2>
-                  <span style="margin-left:auto;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:11px;color:{{ overallColor }}">{{ checkTally }}</span>
+                  <span data-tip="{{ checkTip }}" style="margin-left:auto;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:11px;color:{{ overallColor }}">{{ checkTally }}</span>
                 </div>
                 <div style="padding:0 16px;font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ checksEmpty }}">{{ checksNote }}</div>
                 <div data-flaglist="b" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(208px,1fr));align-content:start;min-height:0">
@@ -1127,7 +1128,12 @@ class Component extends DCLogic {
       mission:Object.assign({}, s.mission), mass:Object.assign({}, s.mass), eta:Object.assign({}, s.eta)};
     if (ov) {
       // 'all' on the eta group is the Auto slider: one number standing in for all three terms.
-      if (ov.group === 'eta' && ov.key === 'all') { o.eta.wind = o.eta.prop = o.eta.av = ov.value; }
+      if (ov.group === 'eta' && ov.key === 'all') {
+        const k = Math.log(Math.max(1, ov.value) / 100) / Math.log(0.7125);
+        o.eta.wind = Math.round(Math.pow(0.75, k) * 100);
+        o.eta.prop = Math.round(Math.pow(1.00, k) * 100);
+        o.eta.av   = Math.round(Math.pow(0.95, k) * 100);
+      }
       else if (ov.group) o[ov.group][ov.key] = ov.value;
       // Evaluating a specific motor/pack is the same as choosing it: score it on its real
       // catalogue weight, not on the user's placeholder estimate.
@@ -1316,6 +1322,7 @@ class Component extends DCLogic {
   }
 
   set(group, key, value) {
+    this._epoch = (this._epoch || 0) + 1;
     this.setState(s => {
       const g = Object.assign({}, s[group]);
       g[key] = value;
@@ -1442,6 +1449,10 @@ class Component extends DCLogic {
   // Restores every input to its starting value. Called from the confirmation, never straight
   // from the toolbar.
   reset() {
+    // Anything the user does invalidates a sweep already in flight. Without this, Reset cleared the
+    // build and the sweep repopulated it two seconds later with a motor nobody chose - a
+    // destructive action undone by the app itself, behind a dialog promising there is no undo.
+    this._epoch = (this._epoch || 0) + 1;
     this.setState({step:1, motor:window.__DEFAULT_MOTOR, batt:window.__DEFAULT_BATT, battLocked:false, style:1.7, mission:{time:22, alt:500}, mass:{struct:550, motors:window.__DEFAULT_MOTOR_MASS, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450}, eta:{wind:75, prop:100, av:95}, gap:15, prop:'all', motorFit:'all', cells:'all', battFit:'all', goal:'time', built:false});
   }
 
@@ -1587,18 +1598,19 @@ class Component extends DCLogic {
       // style attribute of every templated node on each render and an inline cap would not survive.
       const lists = document.querySelectorAll('[data-flaglist]');
       const root = document.documentElement.style;
-      let owed = over;
       for (let i = 0; i < lists.length; i++) {
         const el = lists[i], key = el.getAttribute('data-flaglist');
+        // Re-read the region after each cap rather than assuming the last one helped. The Design
+        // flags list sits in a row whose height is set by the comparison card beside it, so
+        // shrinking it frees nothing at all; crediting it for the space it "gave" left the Checks
+        // grid uncapped and the column 66 px over.
+        const live = region.scrollHeight - region.clientHeight;
         const hidden = el.scrollHeight - el.clientHeight;
         const full = el.scrollHeight;
-        owed += hidden;
-        if (owed > 0 && full > 0) {
-          // 56 leaves two rows and a clear scroll affordance. A list already at its floor gives
-          // nothing, so credit only what it actually gave back, or the debt grows as it is passed on.
-          const cap = Math.max(56, full - owed);
-          owed -= Math.max(0, full - cap);
-          root.setProperty('--cap-' + key, cap + 'px');
+        const need = live + hidden;                    // the overflow with this list fully open
+        if (need > 0 && full > 0) {
+          // 28 keeps a row visible and a scroll affordance with it.
+          root.setProperty('--cap-' + key, Math.max(28, full - need) + 'px');
           root.setProperty('--of-' + key, 'auto');
         } else if (root.getPropertyValue('--cap-' + key)) {
           root.removeProperty('--cap-' + key);
@@ -1758,6 +1770,9 @@ class Component extends DCLogic {
 
   // Scores the collected candidates and commits the winner.
   chooseBuild(cand, target, goal) {
+    // The sweep runs across ~2.5 s of yielded slices. If the state moved under it, its answer is
+    // about a drone that no longer exists; drop it rather than reinstate it.
+    if (this._sweepEpoch !== (this._epoch || 0)) return;
     if (!cand.length) return;
     const hits = x => x.c.flight >= target * 0.98;
     const inBand = x => x.c.throttle >= 40 && x.c.throttle <= 60;
@@ -1851,6 +1866,8 @@ class Component extends DCLogic {
     };
     const S = [sec(1), sec(2), sec(3), sec(4), sec(5), sec(6)];
     const sign = v => (v >= 0 ? '+' : '') + v;
+
+
 
     // Step 2 · known component masses
     const massDefs = [
@@ -2075,6 +2092,19 @@ class Component extends DCLogic {
     const connA = CONN[d.b.conn] || 0;
     const connTone = !connA ? 'med' : (connA >= d.Ikt ? 'good' : (connA >= d.Ihm * 4 ? 'med' : 'bad'));
 
+    // Worst tone among the Electronics-tab findings, computed here so the Results badge can include
+    // it. A badge that reports a subset excluding a higher severity is worse than no badge: the
+    // default tab was reassuring with "1 to review" while a red "1 critical" sat one tab away.
+    const elecWorst = (() => {
+      if (!battPicked) return null;
+      const dv = Math.abs(d.b.v - d.m.avgV) / d.m.avgV * 100;
+      if (dv > 20) return 'bad';
+      if (d.b.c < d.reqC) return 'bad';
+      if (connA && connA < d.Ikt && connA < d.Ihm * 4) return 'bad';
+      if (dv > 8 || !connA || (connA && connA < d.Ikt) || d.cm < 1.5) return 'med';
+      return null;
+    })();
+
     const chain = [
       {name:'Fixed mass', sym:'m_fixed', f:'Σ component masses', v:d.fixed.toFixed(0) + ' g', why:'Everything on the drone except the battery, added up.'},
       {name:'Take-off mass', sym:'MTOW', f:'m_fixed + m_batt', v:(d.mtow / 1000).toFixed(3) + ' kg', why:'What the drone weighs ready to fly, battery included.'},
@@ -2131,7 +2161,8 @@ class Component extends DCLogic {
       setAuto: () => this.setState({mode:'auto', tab:'overview'}),
       setPro: () => (pro ? null : (window.__PRO_BUILD ? this.setState({mode:'pro'}) : this.setState({gate:true}))),
       // Reset throws away a build that took a 5 s sweep to produce, so it asks first.
-      askReset: () => this.setState({askReset:true}),
+      askReset: () => (st.optimising ? null : this.setState({askReset:true})),
+      resetDim: st.optimising ? '.4' : '1',
       resetShow: st.askReset ? 'flex' : 'none',
       resetCancel: () => this.setState({askReset:false}),
       resetGo: () => { this.setState({askReset:false}); this.reset(); },
@@ -2166,13 +2197,16 @@ class Component extends DCLogic {
       // first, so the click visibly registers instead of the window just freezing.
       optimise: () => {
         if (st.optimising) return;                     // a second click queued a second sweep
+        this._sweepEpoch = (this._epoch || 0);
         this.setState({optimising:true, optProgress:0, optSeen:0});
         setTimeout(() => this.optimise(() => this.setState({optimising:false, optProgress:1})), 16);
       },
       optDisabled: st.optimising ? 'true' : null,
       // the sweep rewrites every figure on the page; without this the change is silent
       liveMsg: st.optimising ? 'Comparing motors and packs'
-        : (st.built ? 'Build ready: ' + d.flight.toFixed(0) + ' minutes at ' + (d.mtow / 1000).toFixed(2) + ' kilograms' : ''),
+        : (st.built ? (gb.flight && gb.flight.tone !== 'good'
+             ? 'Build falls short: ' + d.flight.toFixed(0) + ' of ' + st.mission.time + ' minutes at ' + (d.mtow / 1000).toFixed(2) + ' kilograms'
+             : 'Build ready: ' + d.flight.toFixed(0) + ' minutes at ' + (d.mtow / 1000).toFixed(2) + ' kilograms') : ''),
       optLabel: st.optimising ? 'Comparing 0%' : 'Optimise',
       optFill: st.optimising ? '0%' : '100%',
       optBarShow: st.optimising ? 'block' : 'none',
@@ -2316,12 +2350,21 @@ class Component extends DCLogic {
       // Shown as the average of the three Pro terms, and moving it sets all three to that number.
       // The three multiply rather than average, so the note carries the combined figure: it is the
       // one that actually divides into the flight time.
-      sysEta: Math.round((st.eta.wind + st.eta.prop + st.eta.av) / 3),
-      sysEtaTrack: this.track('eta', 'all', 50, 100),
-      onSysEta: e => { const v = +e.target.value; this.setState({eta:{wind:v, prop:v, av:v}}); },
-      sysEtaNote: (d.eta * 100).toFixed(0) + '% of pack energy reaches the props',
-      sysEtaTip: 'Wind, drivetrain and avionics losses in one number. They multiply rather than add, so three terms at '
-                 + Math.round((st.eta.wind + st.eta.prop + st.eta.av) / 3) + '% leave ' + (d.eta * 100).toFixed(0) + '% between them. Pro mode sets each one separately.',
+      // The slider used to show the mean of the three terms (90%) while the note under it showed
+      // their product (71%), and dragging it away and back to the same displayed number left the
+      // model changed. It now reads the combined figure directly, and moving it raises all three
+      // terms to a common power: the shape of the defaults is kept, nothing exceeds 100%, and the
+      // starting position is an exact identity, so a round trip changes nothing.
+      sysEta: Math.round(d.eta * 100),
+      sysEtaTrack: this.track('eta', 'all', 40, 95),
+      onSysEta: e => {
+        const k = Math.log(Math.max(1, +e.target.value) / 100) / Math.log(0.7125);
+        this.setState({eta:{wind:Math.round(Math.pow(0.75, k) * 100),
+                            prop:Math.round(Math.pow(1.00, k) * 100),
+                            av:Math.round(Math.pow(0.95, k) * 100)}});
+      },
+      sysEtaNote: st.eta.wind + '% wind \u00b7 ' + st.eta.prop + '% drivetrain \u00b7 ' + st.eta.av + '% avionics',
+      sysEtaTip: 'How much of the pack\u2019s energy reaches the props. Wind, drivetrain and avionics losses multiply rather than add, so this is always lower than any one of them. Pro mode sets each separately.',
 
       etaSliders: [
         {label:'Wind losses', value:st.eta.wind, track:this.track('eta','wind',50,100), onInput:e => this.set('eta','wind', +e.target.value)},
@@ -2333,7 +2376,10 @@ class Component extends DCLogic {
       onGap: e => this.setState({gap:+e.target.value}),
 
       tabs: [{k:'overview',label:'Results'},{k:'elec',label:'Electronics'},{k:'chain',label:'Calc chain'}].map(t => ({
-        label:t.label,
+        // Marked in the label text rather than with a status dot: the runtime cannot reconcile an
+        // element sibling beside a {{ }} interpolation inside sc-for, and text carries to a screen
+        // reader anyway, which a coloured dot would not.
+        label: t.label + (t.k === 'elec' && elecWorst ? (elecWorst === 'bad' ? ' · 1 critical' : ' · 1 to review') : ''),
         display: ((t.k === 'chain' || t.k === 'elec') && !pro) ? 'none' : 'block',
         bg: st.tab === t.k ? chip : 'transparent',
         color: st.tab === t.k ? ink : mut,
@@ -2358,7 +2404,10 @@ class Component extends DCLogic {
       partsNote: pro ? 'Pick a motor and a pack to fill this in.' : 'Hit Optimise to fit a motor and pack.',
       checksEmpty: battPicked ? 'none' : 'block',
       checksNote: 'Checks run once a motor and pack are chosen.',
-      checkTally: battPicked ? d.gates.filter(g => g.tone === 'good').length + '/' + d.gates.filter(g => g.tone !== 'pend').length : '',
+      // Was good-over-non-pending, so the denominator moved while the row count did not: the same
+      // ten rows read 4/8 in one state and 10/10 in another. Count what is on screen.
+      checkTally: battPicked ? d.gates.filter(g => g.tone === 'good').length + '/' + d.gates.length : '',
+      checkTip: battPicked ? 'How many of the ' + d.gates.length + ' checks this build passes. A check that cannot be judged yet counts as not passed.' : '',
       isChain: st.tab === 'chain' && pro,
 
       // Both of these described a drone before one existed: the donut summed the placeholder
@@ -2545,8 +2594,15 @@ class Component extends DCLogic {
             titleColor: w.tone === 'bad' ? pt.bad : ink,
             go: () => this.setState({step:w.step})
           })),
-          warnCount: nBad ? (nBad + ' critical') : (nMed ? (nMed + ' to review') : (W.length ? (W.length === 1 ? '1 note' : W.length + ' notes') : 'all clear')),
-          warnCountColor: nBad ? pt.bad : (nMed ? pt.med : (W.length ? mut : pt.good)),
+          // Rolls in the Electronics tab's worst finding, so the default tab can never read calmer
+          // than the build actually is.
+          warnCount: (nBad || elecWorst === 'bad')
+                       ? ((nBad + (elecWorst === 'bad' ? 1 : 0)) + ' critical')
+                       : ((nMed || elecWorst === 'med')
+                            ? ((nMed + (elecWorst === 'med' ? 1 : 0)) + ' to review')
+                            : (W.length ? (W.length === 1 ? '1 note' : W.length + ' notes') : 'all clear')),
+          warnCountColor: (nBad || elecWorst === 'bad') ? pt.bad
+                          : ((nMed || elecWorst === 'med') ? pt.med : (W.length ? mut : pt.good)),
           warnEmpty: W.length ? 'none' : 'block'
         };
       })(),
@@ -2562,41 +2618,63 @@ class Component extends DCLogic {
       compareGroups: [
         {title:'Motor', rows:[
           {k:'Hover thrust / motor', need:d.Th.toFixed(0) + ' g', have:shown(d.maxT.toFixed(0) + ' g'),
-           haveColor:shownCol(val(gb.hover.tone)), delta:shown((d.maxT / Math.max(d.Th, 1)).toFixed(1) + '×'), deltaColor:shownCol(val(gb.hover.tone)),
+           haveColor:shownCol(val(gb.hover.tone)), delta:shown(sign(Math.round(d.maxT - d.Th)) + ' g'), deltaColor:shownCol(val(gb.hover.tone)),
            tip:why(gb.hover.tone, 'Each motor can lift ' + d.maxT.toFixed(0) + ' g and only needs ' + d.Th.toFixed(0) + ' g to hover.',
              'There is not much lift spare above hovering. A gust or a quick climb could use it all up.',
              'The motors cannot lift this drone. It will not leave the ground.')},
           {k:'Peak thrust / motor', need:d.Tpeak.toFixed(0) + ' g', have:shown(d.maxT.toFixed(0) + ' g'),
-           haveColor:shownCol(val(gb.hover.tone)), delta:shown(sign(Math.round(d.maxT - d.Tpeak))), deltaColor:shownCol(val(gb.hover.tone)),
+           haveColor:shownCol(val(gb.hover.tone)), delta:shown(sign(Math.round(d.maxT - d.Tpeak)) + ' g'), deltaColor:shownCol(val(gb.hover.tone)),
            tip:why(gb.hover.tone, 'Enough punch for the manoeuvres this flight style asks for.',
              'Close to the limit when you push hard. Expect it to feel sluggish in fast turns.',
              'Not enough punch for this flight style. Pick a calmer style or trim weight.')},
           {k:'Thrust / weight', need:st.style.toFixed(1) + ' : 1', have:shown(d.tw.toFixed(2) + ' : 1'),
-           haveColor:shownCol(val(gb.tw.tone)), delta:shown(sign((d.tw - st.style).toFixed(2))), deltaColor:shownCol(val(gb.tw.tone)),
+           haveColor:shownCol(val(gb.tw.tone)), delta:shown(sign((d.tw - st.style).toFixed(2)) + ' : 1'), deltaColor:shownCol(val(gb.tw.tone)),
            tip:why(gb.tw.tone, 'All four motors together can lift ' + d.tw.toFixed(1) + ' times the drone’s weight.',
              'Only just enough power for the flight style you picked. It will fly, but without much authority.',
              'Too little power for this flight style. Trim weight or choose a calmer style.')}
         ]},
         {title:'Battery', rows:[
           {k:'Capacity', need:d.reqAh.toFixed(1) + ' Ah', have:shown(d.b.ah.toFixed(1) + ' Ah'),
-           haveColor:shownCol(val(gb.ah.tone)), delta:shown(sign((d.b.ah - d.reqAh).toFixed(1))), deltaColor:shownCol(val(gb.ah.tone)),
+           haveColor:shownCol(val(gb.ah.tone)), delta:shown(sign((d.b.ah - d.reqAh).toFixed(1)) + ' Ah'), deltaColor:shownCol(val(gb.ah.tone)),
            tip:why(gb.ah.tone, 'The pack holds enough charge for your target flight time.',
              'The pack is a little small for your target time. Expect to land early.',
              'The pack is too small to reach your target time. Use a bigger one or lower the target.')},
           {k:'C-rating', need:d.reqC + ' C', have:shown(d.b.c + ' C'),
-           haveColor:shownCol(d.b.c >= d.reqC ? pt.good : pt.bad), delta:shown(sign(d.b.c - d.reqC)), deltaColor:shownCol(d.b.c >= d.reqC ? pt.good : pt.bad),
-           tip:(d.b.c >= d.reqC ? 'The pack can release power fast enough for these motors.'
+           haveColor:shownCol(d.b.c >= d.reqC ? pt.good : pt.bad), delta:shown(sign(d.b.c - d.reqC) + ' C'), deltaColor:shownCol(d.b.c >= d.reqC ? pt.good : pt.bad),
+           tip:(d.b.c >= d.reqC ? 'The maker\u2019s published rating, not a measured one. It can release power fast enough for these motors.'
                                 : 'This pack cannot release power fast enough. It will sag under load, run hot and wear out early.')},
           // Ikt is the draw at the flight style's thrust demand, which is what the pack has to
           // supply. d.Ipeak (all four motors flat out) sizes the wiring, not the pack, and is
           // reported with the main lead instead.
           {k:'Peak current', need:d.Ikt.toFixed(0) + ' A', have:shown(d.Imax.toFixed(0) + ' A'),
-           haveColor:shownCol(val(gb.cm.tone)), delta:shown(d.cm.toFixed(2) + '×'), deltaColor:shownCol(val(gb.cm.tone)),
-           tip:why(gb.cm.tone, 'The pack supplies the hardest pull with room to spare.',
+           // Capacity x C-rating is the maker's sticker, not a measurement. Left uncapped it printed
+           // margins like 34x beside 1,761 rows of bench data, in the same type and colour.
+           haveColor:shownCol(val(gb.cm.tone)), delta:shown(d.cm > 5 ? '> 5×' : sign(Math.round(d.Imax - d.Ikt)) + ' A'), deltaColor:shownCol(val(gb.cm.tone)),
+           tip:why(gb.cm.tone, 'The pack’s published ceiling, not a measured one. It covers the hardest pull with room to spare.',
              'The pack is working near its limit when you push hard. It will get warm.',
              'The pack cannot supply what the motors ask for. Expect voltage sag and heat.')}
         ]}
       ],
+      // The screen had no sentence in it. Every verdict was a figure, a delta or a coloured dot, so
+      // a build that misses its target by fifteen minutes read as a red 7 and an unlabelled -9.9.
+      // This says what happened and what is holding it back, in the order a person would ask.
+      verdict: !st.built ? ''
+        : (!d.benchOk || d.load >= 1)
+            ? 'This build cannot hover. Nothing in the data lifts ' + (d.mtow / 1000).toFixed(2) + ' kg on four motors.'
+        : (gb.flight && gb.flight.tone !== 'good')
+            ? 'Misses the target: ' + d.flight.toFixed(0) + ' of ' + st.mission.time + ' min. '
+              + (d.b.ah < d.reqAh ? 'The pack is ' + (d.reqAh - d.b.ah).toFixed(1) + ' Ah short of what this mass needs.'
+                 : d.tw < st.style ? 'The motors are working too hard to carry it any further.'
+                 : 'Trimming mass is the shortest route to the target.')
+        : (d.tw < st.style)
+            ? 'Reaches ' + d.flight.toFixed(0) + ' min, but thrust to weight is ' + d.tw.toFixed(2)
+              + ' against the ' + st.style.toFixed(1) + ' this flight style asks for.'
+        : 'Meets the target: ' + d.flight.toFixed(0) + ' min at ' + (d.mtow / 1000).toFixed(2) + ' kg.',
+      verdictColor: !st.built ? mut
+        : ((!d.benchOk || d.load >= 1 || (gb.flight && gb.flight.tone === 'bad')) ? pt.bad
+           : ((gb.flight && gb.flight.tone !== 'good') || d.tw < st.style ? pt.med : ink)),
+      verdictShow: st.built ? 'block' : 'none',
+
       compareNote: st.built ? 'Hover draws ' + d.I.toFixed(1) + ' A from the pack, ' + d.Ihm.toFixed(1) + ' A per motor.'
                             : 'No motor or pack chosen yet.',
 
