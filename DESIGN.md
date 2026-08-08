@@ -269,3 +269,17 @@ One tooltip for the entire app, via a `data-tip` attribute and a single CSS rule
 - **Don't** scale an SVG's text with the drawing. Dimension labels belong outside the SVG so they hold their size.
 - **Don't** add a shadow to a card, or a coloured left border to a panel.
 - **Don't** put a formula in a tooltip.
+
+## The Two-Filenames Rule
+
+`pro-7f3k9.html` is a byte-identical copy of `index.html`. There is one source; only the name it is
+served under differs. The page reads its own filename at boot (`window.__PRO_BUILD`) and, on the
+`pro-` name, starts in Pro mode with no sign-up gate and injects a `noindex` meta.
+
+**Any change to `index.html` must be followed by `cp index.html pro-7f3k9.html`.** A diff between
+the two files is always a mistake.
+
+Share links never carry the Pro filename. `buildLink()` writes `<dir>/index.html?b=<payload>` and
+forces `mode: 'auto'` into the payload, so a recipient lands on the public page with the build
+populated, whoever generated the link. The old `#b=` form is still parsed so links already sent
+keep working.
