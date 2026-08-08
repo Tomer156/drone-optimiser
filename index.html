@@ -1083,7 +1083,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
         </sc-for>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
-        <button style="background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:8px;padding:12px;font-size:13px;font-weight:600;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer" onClick="{{ gateGo }}">Sign up free</button>
+        <a href="{{ gateUrl }}" target="_blank" rel="noopener" style="background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:8px;padding:12px;font-size:13px;font-weight:600;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;text-align:center;text-decoration:none" onClick="{{ gateGo }}">Sign up free</a>
         <button style="background:transparent;border:none;color:{{ t.mut }};font-size:12px;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;padding:6px" onClick="{{ gateClose }}">Stay in Auto mode</button>
       </div>
     </div>
@@ -2160,7 +2160,8 @@ class Component extends DCLogic {
       gateShow: st.gate ? 'flex' : 'none',
       gatePerks: ['Pick the motor, prop and pack yourself', 'Fine-tune losses and clearance', 'Full checks panel and calc chain'],
       gateClose: () => this.setState({gate:false}),
-      gateGo: () => this.setState({gate:false, mode:'pro'}),
+      gateUrl: 'https://form.typeform.com/to/T00nCXg6',
+      gateGo: () => this.setState({gate:false}),
       // The sweep scores ~9,000 motor/pack pairs and blocks for over a second. Paint a busy label
       // first, so the click visibly registers instead of the window just freezing.
       optimise: () => {
