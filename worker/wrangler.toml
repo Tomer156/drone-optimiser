@@ -7,4 +7,4 @@ compatibility_date = "2026-08-08"
 #   wrangler kv namespace create DB
 [[kv_namespaces]]
 binding = "DB"
-id = "REPLACE_WITH_NAMESPACE_ID"
+id = "a706e389eaca4cf3a5604b1b81c736ff"
