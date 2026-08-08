@@ -1,0 +1,10 @@
+name = "droneoptimiser-db"
+main = "src/index.js"
+compatibility_date = "2026-08-08"
+
+# The binding name the Worker reads (env.DB) and the namespace it points at. Fill in the id from
+# `wrangler kv namespace list`, or create it with:
+#   wrangler kv namespace create DB
+[[kv_namespaces]]
+binding = "DB"
+id = "REPLACE_WITH_NAMESPACE_ID"
