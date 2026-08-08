@@ -103,27 +103,28 @@ window.__benchAtRaw=function(rows,tgt){
   if(!dT) return {current_a:lo.current_a,throttle:lo.throttle,voltage_v:lo.voltage_v,efficiency:lo.efficiency,extrap:tgt<minT};
   var f=(tgt-lo.thrust_g)/dT;
   var cur=lo.current_a+(hi.current_a-lo.current_a)*f;
-  // Below the lowest bench row the linear fit can go non-positive: that is unusable data,
-  // not a super-efficient motor. Fall back to momentum theory (I ∝ T^1.5) from the first row.
-  if(tgt<minT){
-    var phys=rows[0].current_a*Math.pow(Math.max(tgt,1)/minT,1.5);
-    // Trust the linear fit (original behaviour) but never let it collapse below physics.
-    // max() of two continuous curves stays continuous — a switch here would put a step in
-    // the efficiency and flight-time charts.
-    cur=Math.max(cur,0.8*phys);
-  }
-  if(!(cur>0)) return null;
   var thr=(lo.throttle!=null&&hi.throttle!=null)?Math.max(1,lo.throttle+(hi.throttle-lo.throttle)*f):null;
   var volt=(lo.voltage_v+hi.voltage_v)/2;
   var ef=(lo.efficiency!=null&&hi.efficiency!=null)?lo.efficiency+(hi.efficiency-lo.efficiency)*f:null;
-  if(tgt<minT||ef==null||!(ef>0)) ef=tgt/(volt*cur);   // keep efficiency consistent with V×I
-  // Below the data, g/W keeps climbing as load drops (P ~ T^1.5). Real motors do not: fixed
-  // iron/ESC losses flatten it out. Without a ceiling an over-specced motor can claim ~2x the
-  // best efficiency ever measured for it, which made "most efficient" mean "most over-motored".
+  // Where there is no data, extrapolate in a straight line and nothing cleverer. This used to be
+  // a momentum-theory floor (I ∝ T^1.5) under a linear fit, with the resulting g/W clipped at
+  // 1.25x the measured peak: the max() put a kink in the curve, the clip put a flat top and a
+  // step where it released, and the clipped value itself was a fabricated 1.25x claim. Extend the
+  // measured (thrust, g/W) trend of the two lowest rows instead and derive the current from it,
+  // so the dashed segment is the straight continuation of the solid one and the slope of the real
+  // data is the only thing bounding it.
   if(tgt<minT){
-    var pk=0; for(var j=0;j<rows.length;j++) if(rows[j].efficiency>pk) pk=rows[j].efficiency;
-    if(pk>0&&ef>pk*1.25) ef=pk*1.25;
+    var gw=function(r){ return (r.efficiency>0)?r.efficiency
+                             :((r.voltage_v>0&&r.current_a>0)?r.thrust_g/(r.voltage_v*r.current_a):0); };
+    var e0=gw(rows[0]),e1=gw(rows[1]),dT0=rows[1].thrust_g-rows[0].thrust_g;
+    if(!(e0>0)||!(e1>0)||!dT0) return null;
+    ef=e0+((e1-e0)/dT0)*(tgt-rows[0].thrust_g);
+    if(!(ef>0)) return null;                     // the trend has run out; there is nothing to say
+    cur=tgt/(volt*ef);
+  } else if(ef==null||!(ef>0)) {
+    ef=tgt/(volt*cur);                           // keep efficiency consistent with V×I
   }
+  if(!(cur>0)) return null;
   return {current_a:cur,throttle:thr,voltage_v:volt,efficiency:ef,extrap:tgt<minT};
 };
 window.__BATTS=BATTERY_DB.map(function(b,i){return {id:'b'+i,label:b.cells+' · '+b.capacity_mah+'mAh · '+b.discharge_c+'C',cells:b.cells,v:b.voltage_v,ah:b.capacity_mah/1000,c:b.discharge_c,wt:(b.weight_g||0),conn:b.connector||''};}).filter(function(b){return b.wt>0&&b.c>0;});
@@ -219,9 +220,13 @@ table{border-collapse:collapse;width:100%}
    content, so any grow factor feeds back on the number it is measured against. syncChartHeight()
    measures the shortfall against the rail after layout and sets the height outright. */
 .chart-row{flex:0 0 auto;min-height:0}
+/* The runtime rewrites the style attribute of every templated node on each render, so a cap
+   written inline is wiped by the next one. The custom property lives on the document root, which
+   nothing templated owns, and the rule reads it from there. */
+[data-flaglist]{max-height:var(--flag-cap, none);overflow-y:var(--flag-of, visible)}
 /* syncChartHeight() writes this height, so it is the one panel dimension the app controls
    outright and the one worth easing. See the note there on why measuring stays honest. */
-.chart-card{height:200px;transition:height .34s cubic-bezier(.33,1,.68,1)}
+.chart-card{height:200px;min-height:max-content;transition:height .34s cubic-bezier(.33,1,.68,1)}
 @media (prefers-reduced-motion: reduce){ .chart-card{transition:none} }
 /* Chart transitions. The dot, the vertical rule and the target line move to their new values
    rather than jumping. An SVG path's `d` is not interpolable, so the curve is re-drawn by
@@ -491,7 +496,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
             <div data-main-col style="flex:1 1 300px;min-width:0;min-height:0;display:flex;flex-direction:column;gap:12px">
 
               <!-- PEER CHARTS: same class of object, so the same card height and plot area -->
-              <div class="chart-row" style="min-height:246px;display:flex;gap:12px;align-items:stretch;flex-wrap:wrap">
+              <div class="chart-row" style="display:flex;gap:12px;align-items:stretch;flex-wrap:wrap">
               <div style="flex:1 1 240px;min-width:0;display:flex;gap:12px">
                 <div class="chart-card" style="flex: 1 1 200px; min-width: 0; background: {{ t.card }}; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px">
                   <div style="position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:10px" data-tip="{{ effTipText }}">
@@ -615,7 +620,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="margin-left:auto;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:11px;color:{{ warnCountColor }}">{{ warnCount }}</span>
                 </div>
                 <div style="padding:0 16px;font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ warnEmpty }}">{{ allClear }}</div>
-                <div style="display:flex;flex-direction:column">
+                <div data-flaglist style="display:flex;flex-direction:column;min-height:0">
                   <sc-for list="{{ warnings }}" as="w" hint-placeholder-count="3">
                     <div role="button" tabindex="0" style="display:flex;gap:9px;padding:7px 16px;cursor:pointer" onClick="{{ w.go }}" style-hover="background:{{ t.hover2 }}">
                       <span style="width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px;background:{{ w.dot }}"></span>
@@ -1340,32 +1345,85 @@ class Component extends DCLogic {
       for (let i = 0; i < kids.length; i++) {
         if (!kids[i].contains(cards[0])) others += kids[i].scrollHeight;
       }
-      // The floor is what keeps the results area from scrolling: the charts give up height
-      // before the region ever does. 200 still leaves a readable plot; below that the window is
-      // genuinely too short and scrolling is the honest answer.
-      let next = Math.max(200, Math.min(620, Math.floor(avail - others)));
+      // The charts give up height before the region does, but only down to what the card actually
+      // needs: header, plot min-height, axis, gaps and padding. 200 was a guess, and once the mass
+      // panels grew past it the cards kept shrinking and dropped their axis labels outside the
+      // card. Ask the card instead. min-height:max-content clamps a 0 request to the real floor,
+      // and restoring the height in the same frame means nothing paints at zero.
+      // Measured once: the floor is structural, set by the plot's own min-height plus the header,
+      // axis, gaps and padding, none of which depend on the data. Probing every pass meant setting
+      // the card to zero and restoring it with the transition already re-armed, so it eased back up
+      // from nothing each time and a sampled mid-flight height left the pair looking mismatched.
+      let floor = this._chartFloor;
+      if (floor == null) {
+        const probe = cards[0], pt = probe.style.transition, ph = probe.style.height;
+        probe.style.transition = 'none';
+        probe.style.height = '0px';
+        floor = this._chartFloor = Math.ceil(probe.getBoundingClientRect().height);
+        probe.style.height = ph;
+        void probe.getBoundingClientRect();   // commit the restored height before re-arming
+        probe.style.transition = pt;
+      }
+      // Below the floor the window is genuinely too short, and a scrollbar beats a clipped chart.
+      let next = Math.max(floor, Math.min(620, Math.floor(avail - others)));
       // The cards ease to this height, so their rendered box is mid-flight for a third of a
       // second after each change. Compare against the target we last wrote, never the rect, or
       // the transition and the measurement chase each other.
-      if (this._chartH == null || Math.abs(next - this._chartH) >= 1) {
-        this._chartH = next;
+      const moved = this._chartH == null || Math.abs(next - this._chartH) >= 1;
+      this._chartH = next;
+      if (moved) {
         this._chartSettle = performance.now() + 380;
-        for (let i = 0; i < cards.length; i++) cards[i].style.height = next + 'px';
         // the height poller only fires on a region change, so the corrective pass needs its own
         // wake-up once the ease has landed
         clearTimeout(this._chartAfter);
         this._chartAfter = setTimeout(() => this.syncChartHeight(), 400);
       }
+      // Written every pass, not only when the target moves. The runtime can drop a node's inline
+      // style on re-render, and a card that falls back to the stylesheet's height while its
+      // neighbour keeps the computed one leaves the pair mismatched. Re-writing the same value
+      // does not restart the transition.
+      for (let i = 0; i < cards.length; i++) cards[i].style.height = next + 'px';
       // Sub-pixel card heights round against us and can leave a few pixels of overflow. One
       // corrective pass, and it only ever shrinks, so it cannot oscillate. Skipped while a
       // transition is running, because region.scrollHeight would be reading the animation; the
       // height poller runs it again once the cards have settled.
-      if (performance.now() < (this._chartSettle || 0)) return;
-      const over = region.scrollHeight - region.clientHeight;
-      if (over > 0 && next > 200) {
-        next = Math.max(200, next - over);
+      // Mid-ease the region's scrollHeight is reading the animation, so the pass that trims the
+      // last pixels has to wait. It always gets a wake-up, whether or not the target moved: the
+      // height poller only fires on a region change, and the flags cap below may be the only thing
+      // left to do.
+      if (performance.now() < (this._chartSettle || 0)) {
+        clearTimeout(this._chartAfter);
+        this._chartAfter = setTimeout(() => this.syncChartHeight(), 400);
+        return;
+      }
+      let over = region.scrollHeight - region.clientHeight;
+      if (over > 0 && next > floor) {
+        next = Math.max(floor, next - over);
         this._chartH = next;
         for (let i = 0; i < cards.length; i++) cards[i].style.height = next + 'px';
+        over = region.scrollHeight - region.clientHeight;
+      }
+      // Design flags is the one list with no fixed row count: a hopeless build stacks up warnings
+      // and pushed the column 91 px past the region even with the charts at their floor. Once the
+      // charts have given up everything they can, the remainder comes off this list, which scrolls
+      // on its own rather than making the whole results area scroll. Every flag stays reachable.
+      const flags = document.querySelector('[data-flaglist]');
+      if (flags) {
+        const root = document.documentElement.style;
+        // Absolute, not relative: work out what the overflow would be with the list fully open, so
+        // the same answer comes out on every pass. Measuring against the current capped height
+        // instead would read zero overflow, release the cap, overflow again and re-cap, once per
+        // render. `hidden` is what the cap is holding back, and zero when there is no cap.
+        const hidden = flags.scrollHeight - flags.clientHeight;
+        const full = flags.scrollHeight;
+        const wouldOver = over + hidden;
+        if (wouldOver > 0) {
+          root.setProperty('--flag-cap', Math.max(88, full - wouldOver) + 'px');
+          root.setProperty('--flag-of', 'auto');
+        } else if (root.getPropertyValue('--flag-cap')) {
+          root.removeProperty('--flag-cap');
+          root.removeProperty('--flag-of');
+        }
       }
     } catch (e) {}
   }
@@ -1680,7 +1738,13 @@ class Component extends DCLogic {
       // starting at 30%. Extend down to the operating point when that happens, and remember
       // where measurement ends so the extrapolated run can be drawn as a dashed continuation.
       const measuredLo = mrows[0].thrust_g;
-      const loT = st.built ? Math.min(measuredLo, Math.max(d.Th * 0.92, maxTb * 0.02)) : measuredLo;
+      // How far past the data the dashed run may go. The straight-line trend is trustworthy just
+      // below the lowest row (1.02x the measured peak at 90% of it, 1.10x worst case across the
+      // catalogue) and degrades with distance (1.82x worst case at 20%). 2% of max thrust was
+      // roughly 7% of the lowest row for a typical motor, which is deep in guesswork. Stop at 60%
+      // of the lowest measured row, unless the build hovers below that: then the operating point
+      // is the limit, and the estimated-not-measured flag is already up.
+      const loT = st.built ? Math.min(measuredLo, Math.max(d.Th * 0.92, measuredLo * 0.6)) : measuredLo;
       for (let k = 0; k <= 48; k++) {
         const T = loT + (maxTb - loT) * (k / 48);
         const bb = window.__benchAt(mrows, T);
