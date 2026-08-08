@@ -2,9 +2,16 @@ name = "droneoptimiser-db"
 main = "src/index.js"
 compatibility_date = "2026-08-08"
 
-# The binding name the Worker reads (env.DB) and the namespace it points at. Fill in the id from
-# `wrangler kv namespace list`, or create it with:
-#   wrangler kv namespace create DB
+# The database. Rebuild and upload with `node tools/publish-db.mjs` from the repo root.
 [[kv_namespaces]]
 binding = "DB"
 id = "a706e389eaca4cf3a5604b1b81c736ff"
+
+# 10 requests per IP per minute. The limiter counts per Cloudflare location rather than globally,
+# so a caller spread across colos gets 10 in each; it throttles a scraper, it does not gate access.
+# `period` accepts only 10 or 60. `namespace_id` is a local label for this limiter, chosen here.
+[[unsafe.bindings]]
+name = "RATE_LIMITER"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 10, period = 60 }

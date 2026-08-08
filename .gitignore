@@ -9,3 +9,6 @@
 
 # generated for the Cloudflare KV upload; the point of moving it is that it is not published
 db.json
+
+# wrangler local state
+.wrangler/
