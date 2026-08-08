@@ -876,9 +876,9 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="font-size:11px;color:{{ t.mut }}">{{ battName }}</span>
                 </div>
                 <span style="font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ packEmpty }}">{{ packNote }}</span>
-                <div style="flex-wrap:wrap;gap:16px 30px;display:{{ proList }}">
+                <div style="grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:16px 30px;display:{{ proList }}">
                   <sc-for list="{{ packSpecs }}" as="p" hint-placeholder-count="9">
-                    <div style="display:flex;flex-direction:column;gap:3px;min-width:126px" data-tip="{{ p.tip }}">
+                    <div style="display:flex;flex-direction:column;gap:3px;min-width:0" data-tip="{{ p.tip }}">
                       <span style="font-size:11px;color:{{ t.mut }};white-space:nowrap">{{ p.k }}</span>
                       <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:16px;letter-spacing:-.02em;color:{{ p.color }}">{{ p.v }}</span>
                     </div>
@@ -890,9 +890,9 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
               <div style="flex:1 1 auto;background:{{ t.card }};border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:14px">
                 <h2 style="font-size:13px;font-weight:600;margin:0">Electronics</h2>
                 <span style="font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ elecEmpty }}">{{ elecNote }}</span>
-                <div style="flex-wrap:wrap;gap:16px 30px;display:{{ proFlex }}">
+                <div style="grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:16px 30px;display:{{ proFlex }}">
                   <sc-for list="{{ elecCards }}" as="e" hint-placeholder-count="8">
-                    <div style="display:flex;flex-direction:column;gap:3px;min-width:126px" data-tip="{{ e.tip }}">
+                    <div style="display:flex;flex-direction:column;gap:3px;min-width:0" data-tip="{{ e.tip }}">
                       <span style="font-size:11px;color:{{ t.mut }};white-space:nowrap">{{ e.label }}</span>
                       <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:16px;letter-spacing:-.02em;color:{{ e.fg }}">{{ e.value }}<span style="font-size:10px;color:{{ t.mut }}"> {{ e.unit }}</span></span>
                       <span style="font-size:10px;color:{{ t.mut }}">{{ e.note }}</span>
@@ -2570,8 +2570,8 @@ class Component extends DCLogic {
       // Each Electronics panel describes one chosen part, so none of them should show the seed
       // build's numbers before that part has been chosen. Motor data opens at step 4, the pack
       // panel and the derived electronics at step 5, and everything opens at once in Auto.
-      proList: (pro && battPicked) ? 'flex' : 'none',
-      proFlex: (pro && battPicked) ? 'flex' : 'none',
+      proList: (pro && battPicked) ? 'grid' : 'none',
+      proFlex: (pro && battPicked) ? 'grid' : 'none',
       motorTable: motorPicked ? 'table' : 'none',
       motorEmpty: motorPicked ? 'none' : 'block',
       motorNote: pro ? 'Pick a prop and motor at step 4 to see its bench data.' : 'Hit Optimise to fit a motor.',
@@ -2702,8 +2702,8 @@ class Component extends DCLogic {
          tip:'How hard the pack can be pulled, as a multiple of its capacity. Needs at least ' + d.reqC.toFixed(0) + 'C here.'},
         {k:'Max discharge', v:(d.b.ah * d.b.c).toFixed(0) + ' A', color:ink,
          tip:'Capacity times C-rating: the maker\u2019s ceiling. Nothing else on the drone may need more.'},
-        {k:'Weight', v:d.b.wt + ' g · ' + ((d.b.wt / d.mtow) * 100).toFixed(0) + '% of MTOW', color:ink,
-         tip:'A bigger pack carries more energy and more of its own weight. That trade is what sets flight time.'},
+        {k:'Weight', v:d.b.wt + ' g', color:ink,
+         tip:'The pack is ' + ((d.b.wt / d.mtow) * 100).toFixed(0) + '% of take-off mass. A bigger one carries more energy and more of its own weight, and that trade is what sets flight time.'},
         {k:'Energy', v:(d.b.ah * d.b.v).toFixed(0) + ' Wh', color:ink,
          tip:'Total energy on board. Divide by the power draw to get hours.'},
         {k:'Usable at 85% DoD', v:(d.b.ah * 0.85).toFixed(1) + ' Ah', color:ink,
