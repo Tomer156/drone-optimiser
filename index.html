@@ -249,7 +249,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;heigh
 input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--thumb-bg,#fff);border:1.5px solid var(--thumb-bd,#16181A);cursor:pointer}
 input[type=range]:disabled{cursor:default}
 input[type=range]:disabled::-webkit-slider-thumb{opacity:.4;cursor:default}
-input[type=text],select{font-family:'Instrument Sans','Instrument Fallback',sans-serif;font-size:12px;width:100%;border:1px solid var(--fld-bd,#E7E4DF);border-radius:6px;padding:8px 10px;background:var(--fld-bg,#fff);color:var(--fld-fg,#16181A)}
+input[type=text],input[type=search],select{font-family:'Instrument Sans','Instrument Fallback',sans-serif;font-size:12px;width:100%;border:1px solid var(--fld-bd,#E7E4DF);border-radius:6px;padding:8px 10px;background:var(--fld-bg,#fff);color:var(--fld-fg,#16181A)}
 input[type=text]::placeholder{color:var(--fld-mut,#7E7B74)}
 input[type=text]:focus,select:focus{outline:none;border-color:var(--fld-fg,#16181A)}
 option{background:var(--fld-bg,#fff);color:var(--fld-fg,#16181A)}
@@ -327,9 +327,6 @@ table{border-collapse:collapse;width:100%}
    sub-lines go: they are the part numbers and margins, which the Electronics tab carries in full.
    The names, which are what the panel is for, stay. */
 @media (max-height: 760px){
-  /* The verdict sentence earns its space; the hover-draw detail beside it does not, and it is the
-     Electronics tab's material anyway. */
-  .note-detail{display:none}
   .plot-min{min-height:72px}
   .part-n{display:none}
   /* The side column is content-sized: syncChartHeight balances the main column but has nothing to
@@ -489,7 +486,8 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
             <span style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ s4txt }}">Prop + Motor</span>
           </div>
           <div style="padding:2px 20px 7px;flex-direction:column;gap:7px;display:{{ b4 }}">
-            <div style="display:flex;gap:6px">
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <input type="search" aria-label="Search motors" placeholder="Search motors" value="{{ motorQ }}" onInput="{{ onMotorQ }}" style="flex:1 0 100%;min-width:0;margin-bottom:6px">
               <select aria-label="Filter motors by propeller size" value="{{ propValue }}" onChange="{{ onProp }}" style="flex:1;min-width:0">
                 <sc-for list="{{ propOptions }}" as="o" hint-placeholder-count="7">
                   <option value="{{ o.v }}" style="color:{{ o.color }}">{{ o.label }}</option>
@@ -503,7 +501,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
             </div>
             <div style="display:flex;flex-direction:column">
               <sc-for list="{{ motorRows }}" as="m" hint-placeholder-count="6">
-                <div role="button" tabindex="0" style="display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:6px;cursor:pointer;background:{{ m.bg }}" onClick="{{ m.go }}" style-hover="background:{{ t.hover }}">
+                <div role="button" tabindex="0" data-pick="{{ m.sel }}" style="display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:6px;cursor:pointer;background:{{ m.bg }}" onClick="{{ m.go }}" style-hover="background:{{ t.hover }}">
                   <span style="width:5px;height:5px;border-radius:50%;flex-shrink:0;background:{{ m.dot }}"></span>
                   <div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0">
                     <span style="font-size:12px;line-height:1.35;color:{{ m.nameColor }}">{{ m.name }}</span>
@@ -523,7 +521,8 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
             <span style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ s5txt }}">Battery</span>
           </div>
           <div style="padding:2px 20px 7px;flex-direction:column;gap:7px;display:{{ b5 }}">
-            <div style="display:flex;gap:6px">
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <input type="search" aria-label="Search packs" placeholder="Search packs" value="{{ battQ }}" onInput="{{ onBattQ }}" style="flex:1 0 100%;min-width:0;margin-bottom:6px">
               <select aria-label="Filter batteries by cell count" value="{{ battCapValue }}" onChange="{{ onBattCap }}" style="flex:1;min-width:0">
                 <sc-for list="{{ battCapOptions }}" as="o" hint-placeholder-count="6">
                   <option value="{{ o.v }}" style="color:{{ o.color }}">{{ o.label }}</option>
@@ -731,7 +730,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                       </div>
                     </sc-for>
                   </div>
-                  <span style="font-size:11px;line-height:1.5;text-wrap:pretty"><span style="font-weight:600;color:{{ verdictColor }}">{{ verdict }}</span> <span class="note-detail" style="color:{{ t.dim }}">{{ compareNote }}</span></span>
+                  <span style="font-size:11px;color:{{ t.dim }};line-height:1.5">{{ compareNote }}</span>
                 </div>
                 <div style="flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:12px">
               <div style="flex:1 1 auto;min-height:0;background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px">
@@ -1111,7 +1110,7 @@ class Component extends DCLogic {
     mission:{time:22, alt:500},
     mass:{struct:550, motors:window.__DEFAULT_MOTOR_MASS, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450},
     eta:{wind:75, prop:100, av:95},
-    gap:15, prop:'all', motorFit:'all', cells:'all', battFit:'all', goal:'time', hoverSeg:null, hoverKpi:null, theme:'light', gate:false, askReset:false, tips:true, share:false, built:false
+    gap:15, prop:'all', motorFit:'all', cells:'all', battFit:'all', goal:'time', motorQ:'', battQ:'', hoverSeg:null, hoverKpi:null, theme:'light', gate:false, askReset:false, tips:true, share:false, built:false
   };
   GOALS = [
     {v:'time',    label:'Time',       tip:'Reach your target flight time with the lightest build that can do it.'},
@@ -1340,7 +1339,27 @@ class Component extends DCLogic {
     this.syncBody(); this.syncChartHeight();
   }
   componentWillUnmount() { if (window.__syncCharts) delete window.__syncCharts; }
-  componentDidUpdate() { this.syncBody(); this.syncChartHeight(); this.animateCurves(); }
+  componentDidUpdate() { this.syncBody(); this.syncChartHeight(); this.animateCurves(); this.revealPick(); }
+
+  // Step 4 opened a 317-row list at the top with the chosen motor 11,583 px below it, so the list
+  // gave no sign of being connected to the build on the right. Bring the selection into view once
+  // per visit, not on every render, or it would fight the user's own scrolling.
+  revealPick() {
+    try {
+      const st = this.state;
+      const key = st.step + '|' + st.motor + '|' + st.batt;
+      if (this._pickKey === key) return;
+      this._pickKey = key;
+      const row = document.querySelector('[data-pick="y"]');
+      if (!row) return;
+      let box = row.parentElement;
+      while (box && box.scrollHeight <= box.clientHeight + 2) box = box.parentElement;
+      if (!box) return;
+      const r = row.getBoundingClientRect(), b = box.getBoundingClientRect();
+      if (r.top >= b.top && r.bottom <= b.bottom) return;      // already visible, leave it alone
+      box.scrollTop += (r.top - b.top) - (b.height / 2) + (r.height / 2);
+    } catch (e) {}
+  }
 
   // The charts stretch a 0 0 100 100 viewBox with preserveAspectRatio="none", so user units are
   // not square, and vector-effect="non-scaling-stroke" resolves the dash pattern in screen pixels.
@@ -1453,7 +1472,7 @@ class Component extends DCLogic {
     // build and the sweep repopulated it two seconds later with a motor nobody chose - a
     // destructive action undone by the app itself, behind a dialog promising there is no undo.
     this._epoch = (this._epoch || 0) + 1;
-    this.setState({step:1, motor:window.__DEFAULT_MOTOR, batt:window.__DEFAULT_BATT, battLocked:false, style:1.7, mission:{time:22, alt:500}, mass:{struct:550, motors:window.__DEFAULT_MOTOR_MASS, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450}, eta:{wind:75, prop:100, av:95}, gap:15, prop:'all', motorFit:'all', cells:'all', battFit:'all', goal:'time', built:false});
+    this.setState({step:1, motor:window.__DEFAULT_MOTOR, batt:window.__DEFAULT_BATT, battLocked:false, style:1.7, mission:{time:22, alt:500}, mass:{struct:550, motors:window.__DEFAULT_MOTOR_MASS, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450}, eta:{wind:75, prop:100, av:95}, gap:15, prop:'all', motorFit:'all', cells:'all', battFit:'all', goal:'time', motorQ:'', battQ:'', built:false});
   }
 
   // Writes the whole build sheet: what was asked for, what came out, and every part. Pro only,
@@ -1899,16 +1918,39 @@ class Component extends DCLogic {
     // The current pick is always listed, filter or not, so you never lose sight of what you have
     // chosen. That made a "Fits" row appear under the "Marginal" filter with nothing to explain it,
     // so rows kept for this reason are tagged instead of silently contradicting the filter.
-    const motorMatch = x => (st.prop === 'all' || String(x.m.propIn) === st.prop) && (st.motorFit === 'all' || x.tone === st.motorFit);
-    const motors = motorAll.filter(x => x.m.id === st.motor || motorMatch(x));
+    // A 317-row catalogue with no way to name what you are looking for. Matches the motor name,
+    // the prop and the KV, so "2207", "6x4" and "xing" all land.
+    const q = (st.motorQ || '').trim().toLowerCase();
+    const qMatch = x => !q || (x.m.id + ' ' + x.m.name + ' ' + x.m.prop).toLowerCase().indexOf(q) >= 0;
+    const motorMatch = x => (st.prop === 'all' || String(x.m.propIn) === st.prop)
+                         && (st.motorFit === 'all' || x.tone === st.motorFit) && qMatch(x);
+    // Sorted rather than filtered: the list used to open on twelve motors that cannot lift the
+    // drone, because it was alphabetical by brand. Fit first, then the goal the user actually
+    // chose, so the top of the list is the answer to the question they asked. Nothing is hidden.
+    const goalKey = st.goal || 'time';
+    const rank = {good:0, med:1, bad:2};
+    const motors = motorAll.filter(x => x.m.id === st.motor || motorMatch(x)).sort((a, b) => {
+      const r = (rank[a.tone] || 0) - (rank[b.tone] || 0);
+      if (r) return r;
+      if (goalKey === 'eff') return (b.c.eff || 0) - (a.c.eff || 0);
+      if (goalKey === 'time') return (b.c.flight || 0) - (a.c.flight || 0);
+      return (b.c.tw || 0) - (a.c.tw || 0);
+    });
     const motorsByProp = motorAll.filter(x => st.prop === 'all' || String(x.m.propIn) === st.prop);   // for the fit dropdown
     const motorsByFit  = motorAll.filter(x => st.motorFit === 'all' || x.tone === st.motorFit); // for the prop dropdown
     const fitAvail  = v => v === 'all' || motorsByProp.some(x => x.tone === v);
     const propAvail = v => v === 'all' || motorsByFit.some(x => String(x.m.propIn) === v);
 
     const battAll = this.BATTS.map(b => { const c = this.calc(this.snap({key:'batt', value:b.id})); return {b, c, tone:battTone(c)}; });
-    const battMatch = x => (st.cells === 'all' || x.b.cells === st.cells) && (st.battFit === 'all' || x.tone === st.battFit);
-    const batts = battAll.filter(x => x.b.id === st.batt || battMatch(x));
+    const bq = (st.battQ || '').trim().toLowerCase();
+    const bqMatch = x => !bq || (x.b.label + ' ' + (x.b.conn || '')).toLowerCase().indexOf(bq) >= 0;
+    const battMatch = x => (st.cells === 'all' || x.b.cells === st.cells)
+                        && (st.battFit === 'all' || x.tone === st.battFit) && bqMatch(x);
+    const batts = battAll.filter(x => x.b.id === st.batt || battMatch(x)).sort((a, b) => {
+      const r = ({good:0, med:1, bad:2}[a.tone] || 0) - ({good:0, med:1, bad:2}[b.tone] || 0);
+      if (r) return r;
+      return (b.c.flight || 0) - (a.c.flight || 0);
+    });
     const battByCells = battAll.filter(x => st.cells === 'all' || x.b.cells === st.cells);  // for the fit dropdown
     const battByFit = battAll.filter(x => st.battFit === 'all' || x.tone === st.battFit);   // for the cells dropdown
     const battFitAvail = v => v === 'all' || battByCells.some(x => x.tone === v);
@@ -2296,27 +2338,35 @@ class Component extends DCLogic {
         const on = st.motor === m.id;
         const fail = c.gates.filter(x => ['hover','tw','eff','thr','irat'].includes(x.key) && x.tone === 'bad')[0];
         const faults = {
-          hover:'cannot hover this mass',
-          eff:'off efficiency peak',
-          thr:c.throttle > 60 ? 'hover throttle ' + c.throttle.toFixed(0) + '%, too high' : 'hover throttle ' + c.throttle.toFixed(0) + '%, too low',
-          irat:'current ratio outside band',
-          tw:'thrust/weight only ' + c.tw.toFixed(2) + ':1',
-          volt:'pack voltage mismatch',
-          ah:'needs ' + c.reqAh.toFixed(1) + ' Ah, pack has ' + c.b.ah,
-          cm:'current margin ' + c.cm.toFixed(2) + '×',
-          flight:'only ' + c.flight.toFixed(0) + ' min of ' + st.mission.time,
+          hover:'cannot lift this drone',
+          eff:'well off its best efficiency',
+          thr:c.throttle > 60 ? 'works too hard to hover, ' + c.throttle.toFixed(0) + '% throttle' : 'barely working at hover, ' + c.throttle.toFixed(0) + '% throttle',
+          irat:'runs outside the current range it was tested at',
+          tw:'only ' + c.tw.toFixed(2) + ':1 thrust to weight',
+          volt:'not tested at this pack voltage',
+          ah:'needs a ' + c.reqAh.toFixed(1) + ' Ah pack, this one is ' + c.b.ah,
+          cm:'pack margin only ' + c.cm.toFixed(2) + '×',
+          flight:'reaches ' + c.flight.toFixed(0) + ' of ' + st.mission.time + ' min',
           rho:'thin air at this altitude'
         };
         return {
           name:m.name,
-          spec: fail ? faults[fail.key] : c.eff.toFixed(2) + ' g/W · ' + c.throttle.toFixed(0) + '% throttle',
+          // The reason used to replace the spec, so one motor listed under three props showed three
+          // identical rows of failure text with nothing to tell them apart. The spec always stays.
+          spec: c.eff.toFixed(2) + ' g/W · ' + c.throttle.toFixed(0) + '% throttle'
+                + (fail ? '  ·  ' + faults[fail.key] : ''),
           dot: dot(ownTone),
           nameColor: on ? ink : body,
           bg: on ? sel : 'transparent',
           tagShow: (on && !motorMatch(row)) ? 'inline-block' : 'none',
+          sel: on ? 'y' : 'n',
           go: () => this.setState({motor:m.id, built:true})
         };
       }),
+      motorQ: st.motorQ || '',
+      onMotorQ: e => this.setState({motorQ:e.target.value}),
+      battQ: st.battQ || '',
+      onBattQ: e => this.setState({battQ:e.target.value}),
       motorFitValue: st.motorFit,
       onMotorFit: e => { if (fitAvail(e.target.value)) this.setState({motorFit:e.target.value}); },
       fitOptions: [{v:'all', label:'All motors', tone:ink}, {v:'good', label:'Fits', tone:pt.good}, {v:'med', label:'Marginal', tone:pt.med}, {v:'bad', label:'Won’t hover', tone:pt.bad}].map(o => ({v:o.v, label:o.label, color: fitAvail(o.v) ? o.tone : quiet})),
@@ -2655,26 +2705,6 @@ class Component extends DCLogic {
              'The pack cannot supply what the motors ask for. Expect voltage sag and heat.')}
         ]}
       ],
-      // The screen had no sentence in it. Every verdict was a figure, a delta or a coloured dot, so
-      // a build that misses its target by fifteen minutes read as a red 7 and an unlabelled -9.9.
-      // This says what happened and what is holding it back, in the order a person would ask.
-      verdict: !st.built ? ''
-        : (!d.benchOk || d.load >= 1)
-            ? 'This build cannot hover. Nothing in the data lifts ' + (d.mtow / 1000).toFixed(2) + ' kg on four motors.'
-        : (gb.flight && gb.flight.tone !== 'good')
-            ? 'Misses the target: ' + d.flight.toFixed(0) + ' of ' + st.mission.time + ' min. '
-              + (d.b.ah < d.reqAh ? 'The pack is ' + (d.reqAh - d.b.ah).toFixed(1) + ' Ah short of what this mass needs.'
-                 : d.tw < st.style ? 'The motors are working too hard to carry it any further.'
-                 : 'Trimming mass is the shortest route to the target.')
-        : (d.tw < st.style)
-            ? 'Reaches ' + d.flight.toFixed(0) + ' min, but thrust to weight is ' + d.tw.toFixed(2)
-              + ' against the ' + st.style.toFixed(1) + ' this flight style asks for.'
-        : 'Meets the target: ' + d.flight.toFixed(0) + ' min at ' + (d.mtow / 1000).toFixed(2) + ' kg.',
-      verdictColor: !st.built ? mut
-        : ((!d.benchOk || d.load >= 1 || (gb.flight && gb.flight.tone === 'bad')) ? pt.bad
-           : ((gb.flight && gb.flight.tone !== 'good') || d.tw < st.style ? pt.med : ink)),
-      verdictShow: st.built ? 'block' : 'none',
-
       compareNote: st.built ? 'Hover draws ' + d.I.toFixed(1) + ' A from the pack, ' + d.Ihm.toFixed(1) + ' A per motor.'
                             : 'No motor or pack chosen yet.',
 
