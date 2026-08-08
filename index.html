@@ -760,29 +760,54 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
         </sc-if>
 
         <sc-if value="{{ isElec }}" hint-placeholder-val="{{ true }}">
-          <div style="display:flex;gap:12px;align-items:flex-start">
+          <!-- Grows into the region rather than stopping at its content, so the tab ends level with
+               the rail like the Results tab does. The two panels marked flex:1 absorb the slack. -->
+          <div style="flex:1 1 auto;min-height:0;display:flex;gap:12px;align-items:stretch">
             <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:12px">
-              <!-- The parts list Auto shows. Pro was the only mode without it, so the one card
-                   you can take to a shop was beginner-only. -->
-              <div style="background:{{ t.card }};border-radius:12px;padding:12px 16px;display:flex;flex-direction:column;gap:10px">
-                <h2 style="font-size:13px;font-weight:600;margin:0">Selected components</h2>
-                <span style="font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ partsEmpty }}">{{ partsNote }}</span>
-                <div style="display:grid;grid-template-columns:1.5fr 1.1fr 1.1fr 1fr 1fr;gap:10px 18px;align-content:start">
-                  <sc-for list="{{ autoParts }}" as="a" hint-placeholder-count="5">
-                    <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
-                      <span style="font-size:11px;color:{{ t.mut }}">{{ a.k }}</span>
-                      <span style="font-size:12px;font-weight:600;color:{{ t.ink }};overflow-wrap:anywhere;line-height:1.35;min-height:33px">{{ a.v }}</span>
-                      <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;line-height:1.45;color:{{ t.mut }};min-height:44px;overflow-wrap:anywhere">{{ a.n }}</span>
-                    </div>
-                  </sc-for>
+
+              <!-- MOTOR DATA: the bench rows this build interpolates between, each carrying the prop
+                   and the voltage it was taken at, so a row's provenance sits on the row. -->
+              <div style="background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px">
+                <div style="padding:0 14px;display:flex;align-items:baseline;gap:9px" data-tip="{{ motorTip }}">
+                  <h2 style="font-size:13px;font-weight:600;margin:0">Motor data</h2>
+                  <span style="font-size:11px;color:{{ t.mut }}">{{ motorName }}</span>
                 </div>
+                <span style="padding:0 14px;font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ motorEmpty }}">{{ motorNote }}</span>
+                <table style="display:{{ motorTable }}">
+                  <thead>
+                    <tr>
+                      <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">Throttle</th>
+                      <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">Prop</th>
+                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">Volts</th>
+                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">Thrust</th>
+                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">Current</th>
+                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">Power</th>
+                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 14px 8px">g/W</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <sc-for list="{{ bench }}" as="r" hint-placeholder-count="6">
+                      <tr style="background:{{ r.bg }}">
+                        <td style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 14px">{{ r.thr }}<span style="color:{{ t.mut }}">%</span> <span style="color:{{ t.mut }}">{{ r.tag }}</span></td>
+                        <td style="font-size:11px;padding:6px 14px;color:{{ t.body }}">{{ r.prop }} <span style="color:{{ t.mut }}">{{ r.propModel }}</span></td>
+                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 14px">{{ r.volts }}<span style="color:{{ t.mut }}"> V</span></td>
+                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 14px">{{ r.thrust }}<span style="color:{{ t.mut }}"> g</span></td>
+                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 14px">{{ r.amps }}<span style="color:{{ t.mut }}"> A</span></td>
+                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 14px">{{ r.watts }}<span style="color:{{ t.mut }}"> W</span></td>
+                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 14px">{{ r.eff }}</td>
+                      </tr>
+                    </sc-for>
+                  </tbody>
+                </table>
               </div>
-              <div style="background:{{ t.card }};border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:16px">
+
+              <!-- ELECTRONICS: the currents, and the parts sized from them. -->
+              <div style="flex:1 1 auto;background:{{ t.card }};border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:14px">
                 <h2 style="font-size:13px;font-weight:600;margin:0">Electronics</h2>
                 <span style="font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ elecEmpty }}">{{ elecNote }}</span>
-                <div style="flex-wrap:wrap;gap:16px 32px;display:{{ proFlex }}">
-                  <sc-for list="{{ elecCards }}" as="e" hint-placeholder-count="7">
-                    <div style="display:flex;flex-direction:column;gap:3px;min-width:132px">
+                <div style="flex-wrap:wrap;gap:16px 30px;display:{{ proFlex }}">
+                  <sc-for list="{{ elecCards }}" as="e" hint-placeholder-count="8">
+                    <div style="display:flex;flex-direction:column;gap:3px;min-width:126px" data-tip="{{ e.tip }}">
                       <span style="font-size:11px;color:{{ t.mut }};white-space:nowrap">{{ e.label }}</span>
                       <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:16px;letter-spacing:-.02em;color:{{ e.fg }}">{{ e.value }}<span style="font-size:10px;color:{{ t.mut }}"> {{ e.unit }}</span></span>
                       <span style="font-size:10px;color:{{ t.mut }}">{{ e.note }}</span>
@@ -790,52 +815,44 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   </sc-for>
                 </div>
               </div>
-
-              <div style="background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px">
-                <div style="padding:0 16px;display:flex;align-items:baseline;gap:9px">
-                  <h2 style="font-size:13px;font-weight:600;margin:0">Motor data</h2>
-                  <span style="font-size:11px;color:{{ t.mut }}">{{ motorName }}</span>
-                </div>
-                <span style="padding:0 16px;font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ motorEmpty }}">{{ motorNote }}</span>
-                <table style="display:{{ motorTable }}">
-                  <thead>
-                    <tr>
-                      <th style="text-align:left;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 16px 8px">Throttle</th>
-                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 16px 8px">Thrust</th>
-                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 16px 8px">Current</th>
-                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 16px 8px">Power</th>
-                      <th style="text-align:right;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{{ t.mut }};padding:0 16px 8px">g/W</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <sc-for list="{{ bench }}" as="r" hint-placeholder-count="6">
-                      <tr style="background:{{ r.bg }}">
-                        <td style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 16px">{{ r.thr }}<span style="color:{{ t.mut }}">%</span> <span style="color:{{ t.mut }}">{{ r.tag }}</span></td>
-                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 16px">{{ r.thrust }}<span style="color:{{ t.mut }}"> g</span></td>
-                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 16px">{{ r.amps }}<span style="color:{{ t.mut }}"> A</span></td>
-                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 16px">{{ r.watts }}<span style="color:{{ t.mut }}"> W</span></td>
-                        <td style="text-align:right;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;padding:6px 16px">{{ r.eff }}</td>
-                      </tr>
-                    </sc-for>
-                  </tbody>
-                </table>
-              </div>
             </div>
 
-            <div style="width:320px;flex-shrink:0;background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:12px">
-              <div style="padding:0 16px;display:flex;flex-direction:column;gap:2px">
-                <h2 style="font-size:13px;font-weight:600;margin:0">Battery data</h2>
-                <span style="font-size:11px;color:{{ t.mut }}">{{ battName }}</span>
+            <div style="width:320px;flex-shrink:0;display:flex;flex-direction:column;gap:12px">
+              <div style="background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:12px">
+                <div style="padding:0 16px;display:flex;flex-direction:column;gap:2px" data-tip="{{ packTip }}">
+                  <h2 style="font-size:13px;font-weight:600;margin:0">Battery</h2>
+                  <span style="font-size:11px;color:{{ t.mut }}">{{ battName }}</span>
+                </div>
+                <span style="padding:0 16px;font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ packEmpty }}">{{ packNote }}</span>
+                <div style="flex-direction:column;display:{{ proList }}">
+                  <sc-for list="{{ packSpecs }}" as="p" hint-placeholder-count="9">
+                    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:6px 16px" data-tip="{{ p.tip }}">
+                      <span style="font-size:12px;color:{{ t.body }}">{{ p.k }}</span>
+                      <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;color:{{ p.color }}">{{ p.v }}</span>
+                    </div>
+                  </sc-for>
+                </div>
               </div>
-              <span style="padding:0 16px;font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ packEmpty }}">{{ packNote }}</span>
-              <span style="padding:0 16px;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;color:{{ t.body }};display:{{ autoOnly }}">{{ battName }}</span>
-              <div style="flex-direction:column;display:{{ proList }}">
-                <sc-for list="{{ packSpecs }}" as="p" hint-placeholder-count="10">
-                  <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:6px 16px">
-                    <span style="font-size:12px;color:{{ t.body }}">{{ p.k }}</span>
-                    <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;color:{{ p.color }}">{{ p.v }}</span>
-                  </div>
-                </sc-for>
+
+              <!-- ELECTRONICS FLAGS: every gap in this wiring, and the part that closes it. -->
+              <div style="flex:1 1 auto;background:{{ t.card }};border-radius:12px;padding:14px 0;display:flex;flex-direction:column;gap:10px">
+                <div style="padding:0 16px;display:flex;align-items:baseline;gap:9px">
+                  <h2 style="font-size:13px;font-weight:600;margin:0">Design flags</h2>
+                  <span style="margin-left:auto;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:11px;color:{{ elecFlagColor }}">{{ elecFlagCount }}</span>
+                </div>
+                <div style="padding:0 16px;font-size:12px;line-height:1.5;color:{{ t.mut }};display:{{ elecFlagEmpty }}">{{ elecFlagNote }}</div>
+                <div data-eleclist style="display:flex;flex-direction:column;min-height:0">
+                  <sc-for list="{{ elecFlags }}" as="w" hint-placeholder-count="3">
+                    <div style="display:flex;gap:9px;padding:7px 16px">
+                      <span style="width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px;background:{{ w.dot }}"></span>
+                      <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
+                        <span style="font-size:12px;font-weight:600;color:{{ w.titleColor }}">{{ w.title }}</span>
+                        <span style="font-size:11px;line-height:1.45;color:{{ t.mut }}">{{ w.detail }}</span>
+                        <span style="font-size:11px;line-height:1.45;color:{{ t.body }}">{{ w.fix }}</span>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
               </div>
             </div>
           </div>
@@ -1725,7 +1742,11 @@ class Component extends DCLogic {
       const rs = byThr[thr];
       const thrust = avg(rs, r => r.thrust_g), amps = avg(rs, r => r.current_a), volts = avg(rs, r => r.voltage_v);
       const w = amps * volts;
-      return {thr:String(thr), tag:thr === nearest ? 'hover' : '', thrust:thrust.toFixed(0), amps:amps.toFixed(1), watts:w.toFixed(0), eff:(thrust / w).toFixed(2), bg:thr === nearest ? hover2 : chip};
+      return {thr:String(thr), tag:thr === nearest ? 'hover' : '',
+              prop:window.__propSize(d.m.prop), propModel:d.m.propModel || '',
+              volts:volts.toFixed(1),
+              thrust:thrust.toFixed(0), amps:amps.toFixed(1), watts:w.toFixed(0),
+              eff:(thrust / w).toFixed(2), bg:thr === nearest ? hover2 : chip};
     });
 
     // ── efficiency curve over the motor's whole operating range (throttle vs g/W) ──
@@ -1872,12 +1893,20 @@ class Component extends DCLogic {
     const fgBody = Math.max(12, (d.adj / 2) * 0.55 * (152 / span));
 
     const escCont = Math.ceil(d.Ipm * 1.25 / 5) * 5;
-    const AWG = [[20,'12'],[28,'11'],[40,'10'],[55,'8'],[75,'6'],[100,'4'],[135,'2'],[180,'1/0']];
-    let awg = '2/0';
-    for (let i = 0; i < AWG.length; i++) { if (d.Ipeak <= AWG[i][0]) { awg = AWG[i][1]; break; } }
-    const CONN = {XT30:30, XT60:60, XT90:90, AS150:150, QS8:200};
+    // Silicone ampacity for a short main lead. The gauge is sized on the flight style's own peak
+    // demand, not on all four motors pinned at 100% at once: that is a number no mission asks for,
+    // and sizing to it drove a 200 A reading straight off the end of the table onto the '2/0'
+    // fallback, which is welding cable. The absolute peak is still reported next to it.
+    const AWG = [[11,'20'],[16,'18'],[22,'16'],[32,'14'],[41,'12'],[55,'10'],[73,'8'],[101,'6'],
+                 [135,'4'],[181,'2'],[245,'1/0'],[330,'2/0']];
+    const gauge = I => {
+      for (let i = 0; i < AWG.length; i++) if (I <= AWG[i][0]) return AWG[i][1];
+      return AWG[AWG.length - 1][1] + '+';
+    };
+    const awg = gauge(d.Ikt), awgPeak = gauge(d.Ipeak);
+    const CONN = {JST:5, XT30:30, EC3:60, XT60:60, EC5:120, XT90:90, AS150:150, QS8:200};
     const connA = CONN[d.b.conn] || 0;
-    const connTone = connA >= d.Ipeak ? 'good' : (connA >= d.Ikt ? 'med' : 'bad');
+    const connTone = !connA ? 'med' : (connA >= d.Ikt ? 'good' : (connA >= d.Ihm * 4 ? 'med' : 'bad'));
 
     const chain = [
       {name:'Fixed mass', sym:'m_fixed', f:'Σ component masses', v:d.fixed.toFixed(0) + ' g', why:'Everything on the drone except the battery, added up.'},
@@ -2132,7 +2161,10 @@ class Component extends DCLogic {
         color: st.tab === t.k ? ink : mut,
         go: () => this.setState({tab:t.k})
       })),
-      isOverview: st.tab === 'overview',
+      // Electronics and Calc chain are Pro-only. Leaving Pro while standing on one of them left
+      // every condition false and the results area empty, so Results is the fallback rather than
+      // a third equal option.
+      isOverview: st.tab === 'overview' || !pro,
       isElec: st.tab === 'elec' && pro,
       autoPanel: pro ? 'none' : 'flex',
       autoParts: battPicked ? [
@@ -2436,27 +2468,107 @@ class Component extends DCLogic {
       packNote: pro ? 'Pick a pack at step 5 to see its specification.' : 'Hit Optimise to fit a pack.',
       motorName: motorPicked ? d.m.name : '',
       battName: battPicked ? d.b.label : '',
+      motorTip: motorPicked ? 'The maker\u2019s own bench figures for this motor and prop. Every result comes from these rows, read between where needed.' : '',
+      packTip: battPicked ? 'What this pack is, and how it measures against what the build asks of it.' : '',
       bench,
       elecCards: [
-        {label:'Motor peak draw', value:d.Ipm.toFixed(0), unit:'A', note:'per motor, full throttle', fg:ink},
-        {label:'ESC rating required', value:'≥' + escCont, unit:'A', note:'continuous, 25% margin', fg:ink},
-        {label:'Current @ K_T thrust', value:d.Ikt.toFixed(0), unit:'A', note:'all four at K_T', fg:val(gb.cm.tone)},
-        {label:'Current @ full throttle', value:d.Ipeak.toFixed(0), unit:'A', note:'absolute worst case', fg:ink},
-        {label:'Main lead gauge', value:awg, unit:'AWG', note:'silicone, ' + d.Ipeak.toFixed(0) + ' A worst case', fg:ink},
-        {label:'Connector', value:d.b.conn, unit:'', note:connA + ' A rated vs ' + d.Ipeak.toFixed(0) + ' A', fg:val(connTone)},
-        {label:'Capacitor', value:'1000', unit:'µF', note:'low-ESR at ESC input', fg:ink}
+        {label:'Hover draw', value:(d.Ihm * 4).toFixed(0), unit:'A', note:'all four, at hover', fg:ink,
+         tip:'What the pack delivers while the drone holds still. Most of the flight sits here.'},
+        {label:'Design current', value:d.Ikt.toFixed(0), unit:'A', note:'all four, at ' + st.style.toFixed(1) + ':1', fg:val(gb.cm.tone),
+         tip:'The pull when the motors are pushed to what your flight style demands. Everything below is sized for this.'},
+        {label:'Absolute peak', value:d.Ipeak.toFixed(0), unit:'A', note:'all four, full throttle', fg:ink,
+         tip:'Four motors at 100% together. Brief and rare, but the connector and lead have to survive it.'},
+        {label:'ESC rating', value:'≥' + escCont, unit:'A each', note:'continuous, 25% margin', fg:ink,
+         tip:'Per motor, not for the set. Buy the next size up if the rating is a burst figure.'},
+        {label:'Main lead', value:awg, unit:'AWG', note:'silicone · ' + awgPeak + ' AWG for peak', fg:ink,
+         tip:'Battery to board, sized for the design current. Short runs of silicone wire carry more than the same gauge in a wall.'},
+        {label:'Connector', value:d.b.conn || 'none listed', unit:'', note:(connA ? connA + ' A rated' : 'not in the data') + ' vs ' + d.Ikt.toFixed(0) + ' A', fg:val(connTone),
+         tip:'The pack\u2019s own connector against the design current. A connector run over its rating heats up and can melt.'},
+        {label:'Capacitor', value:'1000', unit:'µF', note:'low-ESR at ESC input', fg:ink,
+         tip:'Soaks up the voltage spikes long leads create. Cheap, and it is what usually saves an ESC.'}
       ],
+      // ── ELECTRONICS FLAGS: every gap in the wiring, and the part that closes it ──
+      // Separate from the Results advisories on purpose. Those talk about mass, thrust and time,
+      // which is what the sidebar can change. These are procurement: a wrong connector or an
+      // under-rated ESC is fixed at the shop, not with a slider, so each one names the part.
+      ...(() => {
+        if (!battPicked) {
+          return {elecFlags:[], elecFlagCount:'', elecFlagColor:mut, elecFlagEmpty:'block',
+                  elecFlagNote:pro ? 'Pick a pack at step 5 to check the wiring.' : 'Hit Optimise to check the wiring.'};
+        }
+        const F = [];
+        const hoverA = d.Ihm * 4;
+        const push = (tone, title, detail, fix) => F.push({tone, title, detail, fix});
+        if (!connA)
+          push('med', 'Connector not listed',
+               'This pack record has no connector, so nothing was checked against the ' + d.Ikt.toFixed(0) + ' A design current.',
+               'Fit at least ' + (d.Ikt <= 30 ? 'an XT30' : (d.Ikt <= 60 ? 'an XT60' : (d.Ikt <= 90 ? 'an XT90' : (d.Ikt <= 150 ? 'an AS150' : 'a QS8')))) + ', and check what the pack actually arrives with.');
+        else if (connA < d.Ikt)
+          push(connA < hoverA ? 'bad' : 'med', 'Connector under-rated',
+               d.b.conn + ' is rated ' + connA + ' A and the build asks ' + d.Ikt.toFixed(0) + ' A' + (connA < hoverA ? ', which it is under even at hover' : ' at your flight style') + '.',
+               'Move up to ' + (d.Ikt <= 90 ? 'an XT90' : (d.Ikt <= 150 ? 'an AS150' : 'a QS8')) + ', or fly a calmer style. A connector past its rating heats up and can melt.');
+        if (d.b.c < d.reqC)
+          push('bad', 'Pack cannot supply the current',
+               d.b.c + 'C gives ' + (d.b.ah * d.b.c).toFixed(0) + ' A and the build needs ' + d.reqC.toFixed(0) + 'C.',
+               'Pick a higher C-rating or a bigger pack. Pulling past the rating sags the voltage and shortens the pack\u2019s life.');
+        else if (d.cm < 1.5)
+          push('med', 'Little current headroom',
+               'The pack is working at ' + (100 / d.cm).toFixed(0) + '% of what it can give (' + d.cm.toFixed(2) + '× margin).',
+               'A higher C-rating runs cooler and holds its voltage better. Comfortable is 1.5× or more.');
+        if (escCont > 60)
+          push('info', 'ESC is a real component here',
+               '≥' + escCont + ' A continuous per motor, and ESCs are often sold on their burst figure.',
+               'Read the continuous rating on the spec sheet, not the number on the box, and give it airflow.');
+        if (d.Ipeak > 180)
+          push('info', 'Peak current is large',
+               d.Ipeak.toFixed(0) + ' A with all four at full throttle wants ' + awgPeak + ' AWG; the lead is sized ' + awg + ' AWG for the ' + d.Ikt.toFixed(0) + ' A design current.',
+               'Fine for short bursts on silicone wire. Keep the run short, or go up a gauge if you hold full throttle.');
+        if (d.extrap)
+          push('info', 'Rows below hover are estimated',
+               'The build hovers under this motor\u2019s lowest bench row, so the hover figures continue the measured trend rather than reporting it.',
+               'Treat the current and g/W as indicative. A bigger prop or a lighter build moves hover back into measured data.');
+        const clean = !F.length;
+        if (clean)
+          push('info', 'Wiring checks out',
+               'Connector, pack, ESC and lead all carry what this build asks of them.',
+               'Still worth a low-ESR capacitor at the ESC input if the battery lead is long.');
+        const rank = {bad:0, med:1, info:2};
+        F.sort((a, b2) => rank[a.tone] - rank[b2.tone]);
+        const nBad = F.filter(x => x.tone === 'bad').length, nMed = F.filter(x => x.tone === 'med').length;
+        return {
+          elecFlags: F.map(w => ({
+            title:w.title, detail:w.detail, fix:w.fix,
+            dot: w.tone === 'info' ? quiet : p[w.tone],
+            titleColor: w.tone === 'bad' ? pt.bad : ink
+          })),
+          // "all clear" only when the sole entry is the one this panel writes itself; a build with
+          // real notes but no faults still has something to read.
+          elecFlagCount: nBad ? (nBad + ' critical') : (nMed ? (nMed + ' to review')
+                        : (clean ? 'all clear' : (F.length === 1 ? '1 note' : F.length + ' notes'))),
+          elecFlagColor: nBad ? pt.bad : (nMed ? pt.med : pt.good),
+          elecFlagEmpty: 'none', elecFlagNote: ''
+        };
+      })(),
+
       packSpecs: [
-        {k:'Configuration', v:d.b.cells + ' · ' + (d.b.ah * 1000).toFixed(0) + ' mAh', color:ink},
-        {k:'Nominal voltage', v:d.b.v.toFixed(1) + ' V', color:ink},
-        {k:'C-rating', v:d.b.c + 'C', color:d.b.c >= d.reqC ? pt.good : pt.bad},
-        {k:'I_max', v:(d.b.ah * d.b.c).toFixed(0) + ' A', color:ink},
-        {k:'Weight', v:d.b.wt + ' g · ' + ((d.b.wt / d.mtow) * 100).toFixed(0) + '% of MTOW', color:ink},
-        {k:'Energy', v:(d.b.ah * d.b.v).toFixed(0) + ' Wh', color:ink},
-        {k:'Usable at 85% DoD', v:(d.b.ah * 0.85).toFixed(1) + ' Ah', color:ink},
-        {k:'Required capacity', v:d.reqAh.toFixed(1) + ' Ah', color:val(gb.ah.tone)},
-        {k:'Current margin', v:d.cm.toFixed(2) + '×', color:val(gb.cm.tone)},
-        {k:'Connector', v:d.b.conn, color:val(connTone)}
+        {k:'Configuration', v:d.b.cells + ' · ' + (d.b.ah * 1000).toFixed(0) + ' mAh', color:ink,
+         tip:'Cells in series, then how much charge the pack holds.'},
+        {k:'Nominal voltage', v:d.b.v.toFixed(1) + ' V', color:ink,
+         tip:'The pack\u2019s resting voltage. It sags under load and falls as it empties.'},
+        {k:'C-rating', v:d.b.c + 'C', color:d.b.c >= d.reqC ? pt.good : pt.bad,
+         tip:'How hard the pack can be pulled, as a multiple of its capacity. Needs at least ' + d.reqC.toFixed(0) + 'C here.'},
+        {k:'Max discharge', v:(d.b.ah * d.b.c).toFixed(0) + ' A', color:ink,
+         tip:'Capacity times C-rating: the maker\u2019s ceiling. Nothing else on the drone may need more.'},
+        {k:'Weight', v:d.b.wt + ' g · ' + ((d.b.wt / d.mtow) * 100).toFixed(0) + '% of MTOW', color:ink,
+         tip:'A bigger pack carries more energy and more of its own weight. That trade is what sets flight time.'},
+        {k:'Energy', v:(d.b.ah * d.b.v).toFixed(0) + ' Wh', color:ink,
+         tip:'Total energy on board. Divide by the power draw to get hours.'},
+        {k:'Usable at 85% DoD', v:(d.b.ah * 0.85).toFixed(1) + ' Ah', color:ink,
+         tip:'Flat-out empty ruins a lithium pack, so 15% is left in it.'},
+        {k:'Required capacity', v:d.reqAh.toFixed(1) + ' Ah', color:val(gb.ah.tone),
+         tip:'The pack size your flight time target needs at this power draw.'},
+        {k:'Current margin', v:d.cm.toFixed(2) + '×', color:val(gb.cm.tone),
+         tip:'How much harder the pack could work than the build asks. Over 1.5× is comfortable.'}
       ],
       chain
     };

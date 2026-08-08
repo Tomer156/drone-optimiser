@@ -5,14 +5,6 @@ severity, with the evidence that established it so nobody has to re-derive it.
 
 ## Blocking / major
 
-**Connector is never validated against current.** The connector string is read straight off the
-pack record and reported next to a current the app computed itself, which is how you get
-"XT90 connector · 352 A worst case" (an XT90 is rated around 90 A). The AWG gauge is derived
-separately from the same current, so all three can disagree silently.
-*Fix:* give each connector type a rating, treat connector + gauge + peak current as one gate, and
-recommend the next size up rather than reporting the pack's. It belongs in Checks as its own row,
-because it is a real airworthiness item.
-
 **Pro gate modal is not a dialog.** No `role="dialog"`, no `aria-modal`, focus is never moved into
 it, no focus trap, and Escape does not close it — and it is the only route into Pro mode.
 *Deferred at the user's request; revisit with whatever replaces the fake signup.*
