@@ -245,10 +245,25 @@ html,body{margin:0;height:100%;background:#E8E7E5;font-family:'Instrument Sans',
 a{color:var(--fld-fg,#16181A);text-decoration:none;border-bottom:1px solid var(--fld-bd,#D8D5CE)}
 a:hover{border-bottom-color:var(--fld-fg,#16181A)}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:2px;outline:none;cursor:pointer;margin:0}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--thumb-bg,#fff);border:1.5px solid var(--thumb-bd,#16181A);cursor:pointer}
-input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--thumb-bg,#fff);border:1.5px solid var(--thumb-bd,#16181A);cursor:pointer}
+/* The handle is a hollow ring in the fit colour at the value under it, so the control states its
+   own verdict without reading the number. `color` and `--halo` are set inline per slider, on input
+   rather than change, so ring and halo recolour while the drag is happening. Filling the ring with
+   the card colour rather than white keeps it hollow in both themes. */
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;
+  background:var(--knob,#fff);border:1.5px solid currentColor;cursor:pointer;box-shadow:none;
+  transition:box-shadow .15s ease}
+input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 2px var(--halo,transparent)}
+input[type=range]:active::-webkit-slider-thumb{box-shadow:0 0 0 4px var(--halo,transparent)}
+/* Firefox needs the border reset and its own hover rule: a pseudo-element cannot inherit the
+   transition declared on the WebKit one. */
+input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;
+  background:var(--knob,#fff);border:1.5px solid currentColor;cursor:pointer;box-shadow:none;
+  transition:box-shadow .15s ease}
+input[type=range]:hover::-moz-range-thumb{box-shadow:0 0 0 2px var(--halo,transparent)}
+input[type=range]:active::-moz-range-thumb{box-shadow:0 0 0 4px var(--halo,transparent)}
 input[type=range]:disabled{cursor:default}
-input[type=range]:disabled::-webkit-slider-thumb{opacity:.4;cursor:default}
+input[type=range]:disabled::-webkit-slider-thumb{opacity:.4;cursor:default;box-shadow:none}
+input[type=range]:disabled::-moz-range-thumb{opacity:.4;cursor:default;box-shadow:none}
 input[type=text],input[type=search],select{font-family:'Instrument Sans','Instrument Fallback',sans-serif;font-size:12px;width:100%;border:1px solid var(--fld-bd,#E7E4DF);border-radius:6px;padding:8px 10px;background:var(--fld-bg,#fff);color:var(--fld-fg,#16181A)}
 input[type=text]::placeholder{color:var(--fld-mut,#7E7B74)}
 input[type=text]:focus,select:focus{outline:none;border-color:var(--fld-fg,#16181A)}
@@ -407,7 +422,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="font-size:12px;color:{{ t.body }}">{{ m.label }}</span>
                   <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;white-space:nowrap">{{ m.value }}<span style="color:{{ t.mut }}"> {{ m.unit }}</span></span>
                 </div>
-                <input type="range" aria-label="{{ m.label }}" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="background:{{ m.track }}">
+                <input type="range" aria-label="{{ m.label }}" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="color:{{ m.fitColor }};--halo:{{ m.fitHalo }};background:{{ m.track }}">
               </div>
             </sc-for>
             <div style="display:flex;flex-direction:column;gap:8px">
@@ -435,7 +450,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="font-size:12px;color:{{ t.body }}">{{ m.label }}</span>
                   <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;white-space:nowrap">{{ m.value }}<span style="color:{{ t.mut }}"> g</span></span>
                 </div>
-                <input type="range" aria-label="{{ m.label }}" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="background:{{ m.track }}">
+                <input type="range" aria-label="{{ m.label }}" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="color:{{ m.fitColor }};--halo:{{ m.fitHalo }};background:{{ m.track }}">
               </div>
             </sc-for>
           </div>
@@ -455,7 +470,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="font-size:12px;color:{{ t.body }}">{{ m.label }}</span>
                   <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;white-space:nowrap">{{ m.shown }}<span style="color:{{ t.mut }}"> g</span></span>
                 </div>
-                <input type="range" aria-label="{{ m.label }}" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="background:{{ m.track }};display:{{ m.sliderShow }}">
+                <input type="range" aria-label="{{ m.label }}" min="{{ m.min }}" max="{{ m.max }}" step="{{ m.step }}" value="{{ m.value }}" onChange="{{ m.onInput }}" onInput="{{ m.onInput }}" style="color:{{ m.fitColor }};--halo:{{ m.fitHalo }};background:{{ m.track }};display:{{ m.sliderShow }}">
                 <span style="font-size:10px;color:{{ m.noteColor }}">{{ m.note }}</span>
               </div>
             </sc-for>
@@ -482,7 +497,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                 <span style="font-size:12px;color:{{ t.body }}">System efficiency</span>
                 <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px;white-space:nowrap">{{ sysEta }}<span style="color:{{ t.mut }}"> %</span></span>
               </div>
-              <input type="range" aria-label="System efficiency" min="40" max="95" step="1" value="{{ sysEta }}" onChange="{{ onSysEta }}" onInput="{{ onSysEta }}" style="background:{{ sysEtaTrack }}">
+              <input type="range" aria-label="System efficiency" min="40" max="95" step="1" value="{{ sysEta }}" onChange="{{ onSysEta }}" onInput="{{ onSysEta }}" style="color:{{ sysEtaColor }};--halo:{{ sysEtaHalo }};background:{{ sysEtaTrack }}">
               <span style="font-size:10px;color:{{ t.mut }}">{{ sysEtaNote }}</span>
             </div>
           </div>
@@ -573,7 +588,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                   <span style="font-size:12px;color:{{ t.body }}">{{ e.label }}</span>
                   <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px">{{ e.value }}<span style="color:{{ t.mut }}"> %</span></span>
                 </div>
-                <input type="range" aria-label="{{ e.label }}" min="50" max="100" step="1" value="{{ e.value }}" onChange="{{ e.onInput }}" onInput="{{ e.onInput }}" style="background:{{ e.track }}">
+                <input type="range" aria-label="{{ e.label }}" min="50" max="100" step="1" value="{{ e.value }}" onChange="{{ e.onInput }}" onInput="{{ e.onInput }}" style="color:{{ e.fitColor }};--halo:{{ e.fitHalo }};background:{{ e.track }}">
               </div>
             </sc-for>
           </div>
@@ -866,7 +881,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                     <span style="font-size:12px;color:{{ t.body }}">Prop clearance</span>
                     <span style="font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:12px">{{ gap }}<span style="color:{{ t.mut }}"> mm</span></span>
                   </div>
-                  <input type="range" aria-label="Prop clearance" min="5" max="60" step="1" value="{{ gap }}" onChange="{{ onGap }}" onInput="{{ onGap }}" style="background:{{ t.track }}">
+                  <input type="range" aria-label="Prop clearance" min="5" max="60" step="1" value="{{ gap }}" onChange="{{ onGap }}" onInput="{{ onGap }}" style="color:{{ gapColor }};--halo:{{ gapHalo }};background:{{ t.track }}">
                 </div>
                 <div style="grid-template-columns:1fr 1fr;gap:6px 16px;display:{{ frameGrid }}">
                   <sc-for list="{{ frameStats }}" as="f" hint-placeholder-count="6">
@@ -1280,6 +1295,25 @@ class Component extends DCLogic {
       benchOk: !!bench, extrap: !!(bench && bench.extrap), mMotors, motorsEst};
   }
 
+  // The tone at the value the handle sits on, judged on exactly the gates that parameter can move,
+  // which is the same scope the track sweep uses, so the ring always agrees with the band under it.
+  fitAt(group, key) {
+    const off = {color:this.props.showFitTracks === false ? (this.state.theme === 'dark' ? '#F2F1EE' : '#16181A') : null, halo:'transparent'};
+    if (this.props.showFitTracks === false) return off;
+    const ALL = ['hover','eff','thr','irat','tw','ah','cm','flight'];
+    const scopeKeys = group === 'mass' ? ALL
+      : group === 'eta' ? ['ah','flight']
+      : (group === 'mission' && key === 'time') ? ['ah','flight']
+      : (group === 'mission' && key === 'alt') ? ALL.concat('rho')
+      : ALL;
+    const rank = {good:0, pend:0, med:1, bad:2}, name = ['good', 'med', 'bad'];
+    const gates = this.calc().gates.filter(g => scopeKeys.indexOf(g.key) >= 0);
+    const tone = name[gates.reduce((w, g) => Math.max(w, rank[g.tone] || 0), 0)];
+    const hex = this.PAL[this.props.fitPalette === 'safe' ? 'safe' : 'classic'][tone];
+    const n = parseInt(hex.slice(1), 16);
+    return {color:hex, halo:'rgba(' + ((n >> 16) & 255) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',.2)'};
+  }
+
   track(group, key, min, max) {
     if (this.props.showFitTracks === false) return '#EAE8E3';
     // Each track sweeps 40 full physics evaluations, and a render draws nine tracks. Dragging one
@@ -1682,6 +1716,8 @@ class Component extends DCLogic {
       // the sticky bench header needs an opaque backing, and the card colour lives in JS
       document.documentElement.style.setProperty('--card-bg', dk ? '#1B1E22' : '#FFFFFF');
       document.documentElement.style.setProperty('--rail-fade', dk ? '#16191D' : '#FFFFFF');
+      // the slider ring is filled with the card colour so it reads hollow in either theme
+      document.documentElement.style.setProperty('--knob', dk ? '#1B1E22' : '#FFFFFF');
     } catch (e) {}
   }
 
@@ -2295,9 +2331,9 @@ class Component extends DCLogic {
 
       missionSliders: [
         {label:'Flight time target', unit:'min', value:st.mission.time, min:5, max:90, step:1,
-         track:this.track('mission','time',5,90), onInput:e => this.set('mission','time', +e.target.value)},
+         track:this.track('mission','time',5,90), fitColor:(this.fitAt('mission','time')||{}).color, fitHalo:(this.fitAt('mission','time')||{}).halo, onInput:e => this.set('mission','time', +e.target.value)},
         {label:'Altitude', unit:'m', value:st.mission.alt, min:0, max:3000, step:50,
-         track:this.track('mission','alt',0,3000), onInput:e => this.set('mission','alt', +e.target.value)}
+         track:this.track('mission','alt',0,3000), fitColor:(this.fitAt('mission','alt')||{}).color, fitHalo:(this.fitAt('mission','alt')||{}).halo, onInput:e => this.set('mission','alt', +e.target.value)}
       ],
       styles: this.STYLES.map(s => ({
         label:s.label,
@@ -2331,6 +2367,7 @@ class Component extends DCLogic {
       massSliders: massDefs.map(md => ({
         label:md[1], value:st.mass[md[0]], min:md[2], max:md[3], step:md[4],
         track:this.track('mass', md[0], md[2], md[3]),
+        fitColor:(this.fitAt('mass', md[0])||{}).color, fitHalo:(this.fitAt('mass', md[0])||{}).halo,
         onInput:e => this.set('mass', md[0], +e.target.value)
       })),
       // Step 3 · initial estimates. Each one freezes as soon as the real part is known, showing
@@ -2346,6 +2383,8 @@ class Component extends DCLogic {
           note: frozen ? (isMotor ? d.m.wt + ' g each · from database' : 'from database') : 'estimate',
           noteColor: frozen ? pt.good : mut,
           track: frozen ? (dark ? '#2C3035' : '#EAE8E3') : this.track('mass', md[0], md[2], md[3]),
+          fitColor: frozen ? null : (this.fitAt('mass', md[0])||{}).color,
+          fitHalo: frozen ? 'transparent' : (this.fitAt('mass', md[0])||{}).halo,
           // A permanently disabled slider is just noise: once the real weight is known the row
           // becomes a plain read-out instead.
           sliderShow: frozen ? 'none' : 'block',
@@ -2439,6 +2478,8 @@ class Component extends DCLogic {
       // starting position is an exact identity, so a round trip changes nothing.
       sysEta: Math.round(d.eta * 100),
       sysEtaTrack: this.track('eta', 'all', 40, 95),
+      sysEtaColor: (this.fitAt('eta','all')||{}).color,
+      sysEtaHalo: (this.fitAt('eta','all')||{}).halo,
       onSysEta: e => {
         const k = Math.log(Math.max(1, +e.target.value) / 100) / Math.log(0.7125);
         this.setState({eta:{wind:Math.round(Math.pow(0.75, k) * 100),
@@ -2449,12 +2490,13 @@ class Component extends DCLogic {
       sysEtaTip: 'How much of the pack\u2019s energy reaches the props. Wind, drivetrain and avionics losses multiply rather than add, so this is always lower than any one of them. Pro mode sets each separately.',
 
       etaSliders: [
-        {label:'Wind losses', value:st.eta.wind, track:this.track('eta','wind',50,100), onInput:e => this.set('eta','wind', +e.target.value)},
-        {label:'Motor + ESC + prop', value:st.eta.prop, track:this.track('eta','prop',50,100), onInput:e => this.set('eta','prop', +e.target.value)},
-        {label:'Avionics + misc', value:st.eta.av, track:this.track('eta','av',50,100), onInput:e => this.set('eta','av', +e.target.value)}
+        {label:'Wind losses', value:st.eta.wind, track:this.track('eta','wind',50,100), fitColor:(this.fitAt('eta','wind')||{}).color, fitHalo:(this.fitAt('eta','wind')||{}).halo, onInput:e => this.set('eta','wind', +e.target.value)},
+        {label:'Motor + ESC + prop', value:st.eta.prop, track:this.track('eta','prop',50,100), fitColor:(this.fitAt('eta','prop')||{}).color, fitHalo:(this.fitAt('eta','prop')||{}).halo, onInput:e => this.set('eta','prop', +e.target.value)},
+        {label:'Avionics + misc', value:st.eta.av, track:this.track('eta','av',50,100), fitColor:(this.fitAt('eta','av')||{}).color, fitHalo:(this.fitAt('eta','av')||{}).halo, onInput:e => this.set('eta','av', +e.target.value)}
       ],
       etaTotal: (d.eta * 100).toFixed(0),
       gap: String(st.gap),
+      gapColor: ink, gapHalo: 'transparent',
       onGap: e => this.setState({gap:+e.target.value}),
 
       tabs: [{k:'overview',label:'Results'},{k:'elec',label:'Electronics'},{k:'chain',label:'Calc chain'}].map(t => ({
