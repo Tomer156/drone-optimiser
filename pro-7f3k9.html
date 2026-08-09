@@ -757,12 +757,12 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                         <line x1="0" y1="100" x2="100" y2="100" stroke="{{ t.grid2 }}" stroke-width="0.6" vector-effect="non-scaling-stroke"></line>
                         <line x1="{{ effBand0 }}" y1="0" x2="{{ effBand0 }}" y2="100" stroke="{{ t.dash }}" stroke-width="0.8" stroke-dasharray="3 3" vector-effect="non-scaling-stroke" display="{{ effBand0Show }}"></line>
                         <line x1="{{ effBand1 }}" y1="0" x2="{{ effBand1 }}" y2="100" stroke="{{ t.dash }}" stroke-width="0.8" stroke-dasharray="3 3" vector-effect="non-scaling-stroke" display="{{ effBand1Show }}"></line>
-                        <path d="{{ effPathEst }}" fill="none" stroke="url(#curve)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
-                        <path data-curve d="{{ effPath }}" fill="none" stroke="url(#curve)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+                        <path d="{{ effPathEst }}" fill="none" stroke="url(#curve)" stroke-width="3.0" stroke-dasharray="4 3" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+                        <path data-curve d="{{ effPath }}" fill="none" stroke="url(#curve)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
                       </svg>
                       <span data-chartmark style="position:absolute;top:0;bottom:0;width:1px;background:{{ t.rule }};left:{{ effMxPct }}"></span>
                       <span data-chartmark style="position:absolute;width:9px;height:9px;border-radius:50%;background:{{ t.ink }};border:2px solid {{ t.card }};transform:translate(-50%,-50%);left:{{ effMxPct }};top:{{ effMyPct }}"></span>
-                      <span style="position:absolute;top:4px;left:{{ effBandMid }};transform:translateX(-50%);white-space:nowrap;display:{{ effBandLabel }};font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;color:{{ t.dim }}">sweet spot</span>
+                      <span style="position:absolute;top:4px;left:{{ effBandMid }};transform:translateX(-50%);white-space:nowrap;display:{{ effBandLabel }};font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;color:{{ t.dim }}">optimal range</span>
                     </div>
                   </div>
                   <div style="display:flex;justify-content:space-between;padding-left:40px;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;color:{{ t.dim }}">
@@ -793,7 +793,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                         <line x1="0" y1="66.6" x2="100" y2="66.6" stroke="{{ t.grid }}" stroke-width="0.6" vector-effect="non-scaling-stroke"></line>
                         <line x1="0" y1="100" x2="100" y2="100" stroke="{{ t.grid2 }}" stroke-width="0.6" vector-effect="non-scaling-stroke"></line>
                         <line x1="0" y1="{{ payTargetY }}" x2="100" y2="{{ payTargetY }}" stroke="{{ t.rule2 }}" stroke-width="0.8" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"></line>
-                        <path data-curve d="{{ payPath }}" fill="none" stroke="{{ t.ink }}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+                        <path data-curve d="{{ payPath }}" fill="none" stroke="{{ t.ink }}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
                       </svg>
                       <span data-chartmark style="position:absolute;top:0;bottom:0;width:1px;background:{{ t.rule }};left:{{ payMxPct }}"></span>
                       <span data-chartmark style="position:absolute;width:9px;height:9px;border-radius:50%;border:2px solid {{ t.card }};transform:translate(-50%,-50%);left:{{ payMxPct }};top:{{ payMyPct }};background:{{ payColor }}"></span>
@@ -1178,7 +1178,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
       <div style="display:flex;flex-direction:column;gap:7px">
         <sc-for list="{{ gatePerks }}" as="g" hint-placeholder-count="3">
           <div style="display:flex;align-items:center;gap:9px">
-            <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="{{ t.ink }}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 12.5l5 5L20 6.5"></path></svg>
+            <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="{{ t.ink }}" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M4 12.5l5 5L20 6.5"></path></svg>
             <span style="font-size:12px;color:{{ t.body }}">{{ g }}</span>
           </div>
         </sc-for>
@@ -1739,21 +1739,21 @@ class Component extends DCLogic {
       const root = document.documentElement.style;
       for (let i = 0; i < lists.length; i++) {
         const el = lists[i], key = el.getAttribute('data-flaglist');
-        // Re-read the region after each cap rather than assuming the last one helped. The Design
-        // flags list sits in a row whose height is set by the comparison card beside it, so
-        // shrinking it frees nothing at all; crediting it for the space it "gave" left the Checks
-        // grid uncapped and the column 66 px over.
-        const live = region.scrollHeight - region.clientHeight;
-        const hidden = el.scrollHeight - el.clientHeight;
+        // Release first, then measure. Deriving the cap from `live + hidden` looked right but was
+        // self-sustaining: once a list was capped, `hidden` stayed positive, so the sum stayed
+        // positive and the cap renewed itself at the same size for ever. Any momentary overflow -
+        // a chart mid-ease, a state that was briefly taller - truncated the flag list permanently
+        // and nothing gave it back. Clearing the property and reading the region with the list
+        // fully open costs one reflow and asks the only question that matters: with this open, does
+        // the column still fit? No paint happens in between, so nothing flashes.
+        root.removeProperty('--cap-' + key);
+        root.removeProperty('--of-' + key);
+        const open = region.scrollHeight - region.clientHeight;
         const full = el.scrollHeight;
-        const need = live + hidden;                    // the overflow with this list fully open
-        if (need > 0 && full > 0) {
+        if (open > 0 && full > 0) {
           // 28 keeps a row visible and a scroll affordance with it.
-          root.setProperty('--cap-' + key, Math.max(28, full - need) + 'px');
+          root.setProperty('--cap-' + key, Math.max(28, full - open) + 'px');
           root.setProperty('--of-' + key, 'auto');
-        } else if (root.getPropertyValue('--cap-' + key)) {
-          root.removeProperty('--cap-' + key);
-          root.removeProperty('--of-' + key);
         }
       }
     } catch (e) {}
@@ -2486,7 +2486,7 @@ class Component extends DCLogic {
       goalNote: !st.built ? (this.GOALS.find(g => g.v === st.goal) || this.GOALS[0]).tip
         : st.goal === 'balanced'
           ? (d.throttle >= 40 && d.throttle <= 60
-              ? 'In its sweet spot at ' + d.throttle.toFixed(0) + '% throttle' + (d.flight < st.mission.time ? ', but ' + d.flight.toFixed(0) + ' of ' + st.mission.time + ' min.' : '.')
+              ? 'In its optimal range at ' + d.throttle.toFixed(0) + '% throttle' + (d.flight < st.mission.time ? ', but ' + d.flight.toFixed(0) + ' of ' + st.mission.time + ' min.' : '.')
               : 'No in-band build fits this mission; closest is ' + d.throttle.toFixed(0) + '% throttle.')
         : st.goal === 'eff'
           ? 'Best efficiency found: ' + d.eff.toFixed(2) + ' g/W at ' + d.throttle.toFixed(0) + '% throttle.'
@@ -2696,7 +2696,7 @@ class Component extends DCLogic {
         : 'Mass budget donut. No build yet.',
       effAria: st.built
         ? 'Motor efficiency curve against throttle. Current point ' + d.throttle.toFixed(0)
-          + ' percent throttle at ' + d.eff.toFixed(2) + ' grams per watt. Sweet spot is 40 to 60 percent.'
+          + ' percent throttle at ' + d.eff.toFixed(2) + ' grams per watt. The optimal range is 40 to 60 percent.'
         : 'Motor efficiency curve. No motor selected yet.',
       payAria: st.built
         ? 'Flight time against take-off mass. Current point ' + (d.mtow / 1000).toFixed(2)
