@@ -2273,11 +2273,12 @@ class Component extends DCLogic {
       // 8.00, 5.41, 4.00, 3.16 against the card, which looks orderly written down but narrows the
       // gap between neighbours as it goes: dL* fell 13.8, 10.6, 8.4, 6.9, so the last two pairs sat
       // 1.35:1 and 1.27:1 apart and merged into one grey on anything but a good display. These are
-      // 13 dL* apart throughout, worst neighbouring pair 1.43:1. Hue stays out of it: the
+      // ~12 dL* apart throughout, worst neighbouring pair 1.40:1, and every step clears 3:1
+      // against its own card, which the last pair of the previous ramp did not. Hue stays out of it: the
       // Status-Only Rule keeps colour meaning fit, so separation has to come from lightness, and
       // the gap between segments carries it a second time for anyone who cannot see either.
-      ? {structure:'#E6E2DE', propulsion:'#C2BEBA', avionics:'#9F9B97', payload:'#7D7975', battery:'#5D5955'}
-      : {structure:'#29241F', propulsion:'#45403B', avionics:'#635E59', payload:'#847F7A', battery:'#A5A09B'};
+      ? {structure:'#EFEBE7', propulsion:'#CCC8C4', avionics:'#ABA7A3', payload:'#8B8783', battery:'#6C6864'}
+      : {structure:'#241F1A', propulsion:'#3F3A35', avionics:'#5B5651', payload:'#79746F', battery:'#98938E'};
     const groups = [
       ['structure', 'Structure', st.mass.struct + st.mass.misc],
       ['propulsion', 'Propulsion', d.mMotors + st.mass.esc],
