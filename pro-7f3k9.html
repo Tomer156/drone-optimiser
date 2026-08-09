@@ -174,27 +174,81 @@ window.__DEFAULT_BATT=((window.__BATTS.filter(function(b){return b.cells==='6S';
 // Opened before the runtime boots; the runtime waits on it. A rejection leaves the app unbooted
 // and the loading panel showing why, which is the honest outcome: without bench data there is
 // nothing this page can compute.
+// Cached for the session, so a reload costs nothing. Every page load used to spend one of the ten
+// requests a minute the Worker allows, which meant a dozen reloads locked the visitor out of their
+// own site and the error told them to reload again. One fetch per tab now; closing it clears the
+// cache, and the six-hour stamp stops a long-lived tab pinning a stale database.
+window.__DB_CACHE_KEY = 'do-db-v1';
+window.__DB_CACHE_MS = 6 * 60 * 60 * 1000;
+
 window.__dbPromise = (function () {
   var url = window.__DB_URL;
   // Opened from the filesystem there is no origin the Worker will accept, so a local checkout
   // reads the file it would have uploaded. Never reached over http(s).
   if (location.protocol === 'file:') url = 'db.json';
-  return fetch(url, {credentials:'omit'}).then(function (r) {
-    if (!r.ok) throw new Error('database returned ' + r.status);
-    return r.json();
-  }).then(function (db) {
+
+  var panel = function () { return document.getElementById('db-loading'); };
+  var say = function (msg, state) {
+    var el = panel();
+    if (!el) return;
+    var t = el.querySelector('[data-db-msg]');
+    if (t) t.textContent = msg;
+    if (state) el.setAttribute('data-state', state);
+  };
+
+  var install = function (db, fromCache) {
     if (!db || !db.motors || !db.batteries) throw new Error('database is missing motors or batteries');
     window.__initDB(db.motors, db.batteries);
-    var el = document.getElementById('db-loading');
+    var el = panel();
     if (el && el.parentNode) el.parentNode.removeChild(el);
-    return true;
-  }).catch(function (err) {
-    var el = document.getElementById('db-loading');
-    if (el) {
-      var t = el.querySelector('[data-db-msg]');
-      if (t) t.textContent = 'The motor and battery database could not be loaded. Check your connection and reload.';
-      el.setAttribute('data-state', 'error');
+    if (!fromCache) {
+      try {
+        sessionStorage.setItem(window.__DB_CACHE_KEY, JSON.stringify({t:Date.now(), db:db}));
+      } catch (e) {}                                  // a full or disabled store is not an error
     }
+    return true;
+  };
+
+  try {
+    var hit = sessionStorage.getItem(window.__DB_CACHE_KEY);
+    if (hit) {
+      var parsed = JSON.parse(hit);
+      if (parsed && parsed.db && (Date.now() - parsed.t) < window.__DB_CACHE_MS) {
+        return Promise.resolve(install(parsed.db, true));
+      }
+    }
+  } catch (e) {}
+
+  // 429 is the Worker saying "not so fast", not "never". Wait the interval it names and try once
+  // more, saying so, rather than dying and advising a reload that would spend another request.
+  var get = function (attempt) {
+    return fetch(url, {credentials:'omit'}).then(function (r) {
+      if (r.status === 429 && attempt === 0) {
+        var wait = Math.min(90, parseInt(r.headers.get('Retry-After') || '60', 10) || 60);
+        say('Busy right now. Trying again in ' + wait + ' seconds.', null);
+        var left = wait;
+        var tick = setInterval(function () {
+          left -= 1;
+          if (left > 0) say('Busy right now. Trying again in ' + left + ' seconds.', null);
+          else clearInterval(tick);
+        }, 1000);
+        return new Promise(function (res) {
+          setTimeout(function () { clearInterval(tick); res(get(1)); }, wait * 1000);
+        });
+      }
+      if (r.status === 429) { var e = new Error('rate-limited'); e.code = 429; throw e; }
+      if (!r.ok) { var e2 = new Error('database returned ' + r.status); e2.code = r.status; throw e2; }
+      return r.json();
+    });
+  };
+
+  return get(0).then(function (db) {
+    return install(db, false);
+  }).catch(function (err) {
+    say(err && err.code === 429
+        ? 'Too many requests from this connection. Wait a minute, then reload.'
+        : 'The motor and battery database could not be loaded. Check your connection and reload.',
+        'error');
     console.error('[db]', err);
     throw err;
   });
