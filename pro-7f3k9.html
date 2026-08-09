@@ -743,22 +743,22 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                                extent, so the green band drifted off the 40-60% sweet spot
                                whenever the curve did not start at 0%. -->
                           <linearGradient id="curve" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="0">
-                            <stop offset="{{ gStop0 }}" stop-color="{{ gBad }}"></stop>
-                            <stop offset="{{ gStop1 }}" stop-color="{{ gMed }}"></stop>
-                            <stop offset="{{ gStop2 }}" stop-color="{{ gGood }}"></stop>
-                            <stop offset="{{ gStop3 }}" stop-color="{{ gGood }}"></stop>
-                            <stop offset="{{ gStop4 }}" stop-color="{{ gMed }}"></stop>
-                            <stop offset="{{ gStop5 }}" stop-color="{{ gBad }}"></stop>
+                            <stop offset="0" data-svg-offset="{{ gStop0 }}" stop-color="{{ gBad }}"></stop>
+                            <stop offset="0" data-svg-offset="{{ gStop1 }}" stop-color="{{ gMed }}"></stop>
+                            <stop offset="0" data-svg-offset="{{ gStop2 }}" stop-color="{{ gGood }}"></stop>
+                            <stop offset="0" data-svg-offset="{{ gStop3 }}" stop-color="{{ gGood }}"></stop>
+                            <stop offset="0" data-svg-offset="{{ gStop4 }}" stop-color="{{ gMed }}"></stop>
+                            <stop offset="0" data-svg-offset="{{ gStop5 }}" stop-color="{{ gBad }}"></stop>
                           </linearGradient>
                         </defs>
                         <line x1="0" y1="0" x2="100" y2="0" stroke="{{ t.grid }}" stroke-width="0.6" vector-effect="non-scaling-stroke"></line>
                         <line x1="0" y1="33.3" x2="100" y2="33.3" stroke="{{ t.grid }}" stroke-width="0.6" vector-effect="non-scaling-stroke"></line>
                         <line x1="0" y1="66.6" x2="100" y2="66.6" stroke="{{ t.grid }}" stroke-width="0.6" vector-effect="non-scaling-stroke"></line>
                         <line x1="0" y1="100" x2="100" y2="100" stroke="{{ t.grid2 }}" stroke-width="0.6" vector-effect="non-scaling-stroke"></line>
-                        <line x1="{{ effBand0 }}" y1="0" x2="{{ effBand0 }}" y2="100" stroke="{{ t.dash }}" stroke-width="0.8" stroke-dasharray="3 3" vector-effect="non-scaling-stroke" display="{{ effBand0Show }}"></line>
-                        <line x1="{{ effBand1 }}" y1="0" x2="{{ effBand1 }}" y2="100" stroke="{{ t.dash }}" stroke-width="0.8" stroke-dasharray="3 3" vector-effect="non-scaling-stroke" display="{{ effBand1Show }}"></line>
-                        <path d="{{ effPathEst }}" fill="none" stroke="url(#curve)" stroke-width="3.0" stroke-dasharray="4 3" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
-                        <path data-curve d="{{ effPath }}" fill="none" stroke="url(#curve)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+                        <line x1="0" data-svg-x1="{{ effBand0 }}" y1="0" x2="0" data-svg-x2="{{ effBand0 }}" y2="100" stroke="{{ t.dash }}" stroke-width="0.8" stroke-dasharray="3 3" vector-effect="non-scaling-stroke" display="{{ effBand0Show }}"></line>
+                        <line x1="0" data-svg-x1="{{ effBand1 }}" y1="0" x2="0" data-svg-x2="{{ effBand1 }}" y2="100" stroke="{{ t.dash }}" stroke-width="0.8" stroke-dasharray="3 3" vector-effect="non-scaling-stroke" display="{{ effBand1Show }}"></line>
+                        <path d="" data-svg-d="{{ effPathEst }}" fill="none" stroke="url(#curve)" stroke-width="3.0" stroke-dasharray="4 3" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+                        <path data-curve d="" data-svg-d="{{ effPath }}" fill="none" stroke="url(#curve)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
                       </svg>
                       <span data-chartmark style="position:absolute;top:0;bottom:0;width:1px;background:{{ t.rule }};left:{{ effMxPct }}"></span>
                       <span data-chartmark style="position:absolute;width:13px;height:13px;border-radius:50%;background:{{ t.ink }};border:2.5px solid {{ t.card }};transform:translate(-50%,-50%);left:{{ effMxPct }};top:{{ effMyPct }}"></span>
@@ -792,8 +792,8 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                         <line x1="0" y1="33.3" x2="100" y2="33.3" stroke="{{ t.grid }}" stroke-width="0.6" vector-effect="non-scaling-stroke"></line>
                         <line x1="0" y1="66.6" x2="100" y2="66.6" stroke="{{ t.grid }}" stroke-width="0.6" vector-effect="non-scaling-stroke"></line>
                         <line x1="0" y1="100" x2="100" y2="100" stroke="{{ t.grid2 }}" stroke-width="0.6" vector-effect="non-scaling-stroke"></line>
-                        <line x1="0" y1="{{ payTargetY }}" x2="100" y2="{{ payTargetY }}" stroke="{{ t.rule2 }}" stroke-width="0.8" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"></line>
-                        <path data-curve d="{{ payPath }}" fill="none" stroke="{{ t.ink }}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+                        <line x1="0" y1="0" data-svg-y1="{{ payTargetY }}" x2="100" y2="0" data-svg-y2="{{ payTargetY }}" stroke="{{ t.rule2 }}" stroke-width="0.8" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"></line>
+                        <path data-curve d="" data-svg-d="{{ payPath }}" fill="none" stroke="{{ t.ink }}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
                       </svg>
                       <span data-chartmark style="position:absolute;top:0;bottom:0;width:1px;background:{{ t.rule }};left:{{ payMxPct }}"></span>
                       <span data-chartmark style="position:absolute;width:13px;height:13px;border-radius:50%;border:2.5px solid {{ t.card }};transform:translate(-50%,-50%);left:{{ payMxPct }};top:{{ payMyPct }};background:{{ payColor }}"></span>
@@ -934,16 +934,16 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                 <div style="flex:1 1 0;min-height:104px;align-items:center;justify-content:center;display:{{ frameShow }}">
                   <div style="position:relative;height:100%;display:flex">
                   <svg role="img" aria-label="{{ frameAria }}" viewBox="-30 0 194 196" style="height:100%;width:auto;max-height:196px">
-                    <line x1="{{ fgA }}" y1="{{ fgA }}" x2="{{ fgB }}" y2="{{ fgB }}" stroke="{{ t.arm }}" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke"></line>
-                    <line x1="{{ fgB }}" y1="{{ fgA }}" x2="{{ fgA }}" y2="{{ fgB }}" stroke="{{ t.arm }}" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke"></line>
-                    <rect x="{{ fgBodyX }}" y="{{ fgBodyX }}" width="{{ fgBodyW }}" height="{{ fgBodyW }}" rx="4" fill="{{ t.ink }}"></rect>
-                    <circle cx="{{ fgA }}" cy="{{ fgA }}" r="{{ fgR }}" fill="none" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
-                    <circle cx="{{ fgB }}" cy="{{ fgA }}" r="{{ fgR }}" fill="none" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
-                    <circle cx="{{ fgA }}" cy="{{ fgB }}" r="{{ fgR }}" fill="none" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
-                    <circle cx="{{ fgB }}" cy="{{ fgB }}" r="{{ fgR }}" fill="none" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
-                    <line x1="{{ fgLeft }}" y1="{{ wDimY }}" x2="{{ fgRight }}" y2="{{ wDimY }}" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></line>
-                    <line x1="{{ fgLeft }}" y1="{{ wTick0 }}" x2="{{ fgLeft }}" y2="{{ wTick1 }}" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></line>
-                    <line x1="{{ fgRight }}" y1="{{ wTick0 }}" x2="{{ fgRight }}" y2="{{ wTick1 }}" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+                    <line x1="0" data-svg-x1="{{ fgA }}" y1="0" data-svg-y1="{{ fgA }}" x2="0" data-svg-x2="{{ fgB }}" y2="0" data-svg-y2="{{ fgB }}" stroke="{{ t.arm }}" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke"></line>
+                    <line x1="0" data-svg-x1="{{ fgB }}" y1="0" data-svg-y1="{{ fgA }}" x2="0" data-svg-x2="{{ fgA }}" y2="0" data-svg-y2="{{ fgB }}" stroke="{{ t.arm }}" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke"></line>
+                    <rect x="0" data-svg-x="{{ fgBodyX }}" y="0" data-svg-y="{{ fgBodyX }}" width="0" data-svg-width="{{ fgBodyW }}" height="0" data-svg-height="{{ fgBodyW }}" rx="4" fill="{{ t.ink }}"></rect>
+                    <circle cx="0" data-svg-cx="{{ fgA }}" cy="0" data-svg-cy="{{ fgA }}" r="0" data-svg-r="{{ fgR }}" fill="none" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+                    <circle cx="0" data-svg-cx="{{ fgB }}" cy="0" data-svg-cy="{{ fgA }}" r="0" data-svg-r="{{ fgR }}" fill="none" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+                    <circle cx="0" data-svg-cx="{{ fgA }}" cy="0" data-svg-cy="{{ fgB }}" r="0" data-svg-r="{{ fgR }}" fill="none" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+                    <circle cx="0" data-svg-cx="{{ fgB }}" cy="0" data-svg-cy="{{ fgB }}" r="0" data-svg-r="{{ fgR }}" fill="none" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+                    <line x1="0" data-svg-x1="{{ fgLeft }}" y1="0" data-svg-y1="{{ wDimY }}" x2="0" data-svg-x2="{{ fgRight }}" y2="0" data-svg-y2="{{ wDimY }}" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+                    <line x1="0" data-svg-x1="{{ fgLeft }}" y1="0" data-svg-y1="{{ wTick0 }}" x2="0" data-svg-x2="{{ fgLeft }}" y2="0" data-svg-y2="{{ wTick1 }}" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+                    <line x1="0" data-svg-x1="{{ fgRight }}" y1="0" data-svg-y1="{{ wTick0 }}" x2="0" data-svg-x2="{{ fgRight }}" y2="0" data-svg-y2="{{ wTick1 }}" stroke="{{ t.dim2 }}" stroke-width="1" vector-effect="non-scaling-stroke"></line>
                                                                               </svg>
                   <span style="position:absolute;left:56.70%;top:{{ wTextTop }};transform:translate(-50%,-50%);white-space:nowrap;display:inline-flex;align-items:center;gap:4px;font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;color:{{ t.mut }}" data-tip="{{ squareTip }}" data-tip-end>{{ dimW }} mm
                     <svg aria-hidden="true" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="{{ t.rule2 }}" stroke-width="1.4" style="flex-shrink:0"><rect x="1.2" y="1.2" width="7.6" height="7.6" rx="1"></rect></svg>
@@ -1135,6 +1135,32 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
     <span><a href="https://form.typeform.com/to/ciDWV9CU" target="_blank" rel="noopener">Contribute data</a></span>
   </div>
 
+  <!-- FIRST RUN: one appearance per browser, and never on a shared build link, where the visitor
+       came to see a specific drone rather than to be greeted. -->
+  <div style="position:fixed;inset:0;z-index:230;background:rgba(16,18,21,.55);align-items:center;justify-content:center;padding:24px;display:{{ welcomeShow }}" onClick="{{ welcomeGo }}">
+    <div role="dialog" aria-modal="true" aria-label="Welcome to Drone Optimiser" style="width:420px;max-width:100%;background:{{ t.card }};border-radius:12px;padding:26px 26px 22px;display:flex;flex-direction:column;gap:14px" onClick="{{ stopIt }}">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:22px;height:22px;border-radius:5px;overflow:hidden;flex-shrink:0;background:{{ logoBg }}">
+          <svg aria-hidden="true" viewBox="0 0 300 300" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="300" rx="20" fill="#0D0D0D"></rect>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M97.6191 154.762C123.918 154.762 145.238 176.082 145.238 202.381C145.238 228.68 123.918 250 97.6191 250C71.3198 250 50 228.68 50 202.381C50 176.082 71.3198 154.762 97.6191 154.762ZM97.6191 164.921C76.9303 164.921 60.1587 181.692 60.1587 202.381C60.1587 223.07 76.9303 239.841 97.6191 239.841C118.308 239.841 135.079 223.07 135.079 202.381C135.079 181.692 118.308 164.921 97.6191 164.921Z" fill="white"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M202.381 154.762C228.68 154.762 250 176.082 250 202.381C250 228.68 228.68 250 202.381 250C176.082 250 154.762 228.68 154.762 202.381C154.762 176.082 176.082 154.762 202.381 154.762ZM202.381 164.921C181.692 164.921 164.921 181.692 164.921 202.381C164.921 223.07 181.692 239.841 202.381 239.841C223.07 239.841 239.841 223.07 239.841 202.381C239.841 181.692 223.07 164.921 202.381 164.921Z" fill="white"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M97.6191 50C123.918 50 145.238 71.3198 145.238 97.6191C145.238 123.918 123.918 145.238 97.6191 145.238C71.3198 145.238 50 123.918 50 97.6191C50 71.3198 71.3198 50 97.6191 50ZM97.6191 60.1587C76.9303 60.1587 60.1587 76.9303 60.1587 97.6191C60.1587 118.308 76.9303 135.079 97.6191 135.079C118.308 135.079 135.079 118.308 135.079 97.6191C135.079 76.9303 118.308 60.1587 97.6191 60.1587Z" fill="white"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M202.381 50C228.68 50 250 71.3198 250 97.6191C250 123.918 228.68 145.238 202.381 145.238C176.082 145.238 154.762 123.918 154.762 97.6191C154.762 71.3198 176.082 50 202.381 50ZM202.381 60.1587C181.692 60.1587 164.921 76.9303 164.921 97.6191C164.921 118.308 181.692 135.079 202.381 135.079C223.07 135.079 239.841 118.308 239.841 97.6191C239.841 76.9303 223.07 60.1587 202.381 60.1587Z" fill="white"></path>
+            <path d="M198.945 191.106C202.959 196.294 196.295 202.959 191.107 198.944L153.483 169.834C151.47 168.276 148.658 168.276 146.645 169.834L109.021 198.944C103.833 202.959 97.1691 196.294 101.183 191.106L130.294 153.483C131.851 151.469 131.851 148.658 130.294 146.644L101.183 109.021C97.1691 103.833 103.833 97.1686 109.021 101.183L146.645 130.293C148.658 131.851 151.47 131.851 153.483 130.293L191.107 101.183C196.295 97.1686 202.959 103.833 198.945 109.021L169.835 146.644C168.277 148.658 168.277 151.469 169.835 153.483L198.945 191.106Z" fill="white"></path>
+          </svg>
+        </div>
+        <span style="font-size:16px;font-weight:600;letter-spacing:-.015em;color:{{ t.ink }}">Welcome to Drone Optimiser</span>
+      </div>
+      <span style="font-size:13px;line-height:1.6;color:{{ t.body }};text-wrap:pretty">Set a flight time target and a mass budget, and it sizes a quadcopter from real manufacturer bench data: motor, prop, pack, flight time and the checks behind them.</span>
+      <a href="https://form.typeform.com/to/ciDWV9CU" target="_blank" rel="noopener" style="display:flex;flex-direction:column;gap:3px;padding:12px 14px;border-radius:8px;background:{{ t.grid }};text-decoration:none">
+        <span style="font-size:12px;font-weight:600;color:{{ t.ink }}">Have bench data for a motor or pack?</span>
+        <span style="font-size:11px;line-height:1.45;color:{{ t.body }}">Every set of figures makes the next build more accurate. Contribute data →</span>
+      </a>
+      <button data-autofocus style="background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:8px;padding:12px;font-size:13px;font-weight:600;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;margin-top:2px" onClick="{{ welcomeGo }}">Start optimising →</button>
+    </div>
+  </div>
+
   <div style="position:fixed;inset:0;z-index:220;background:rgba(16,18,21,.55);align-items:center;justify-content:center;padding:24px;display:{{ shareDialog }}" onClick="{{ closeShare }}">
     <div role="dialog" aria-modal="true" aria-label="Share this build" style="width:440px;max-width:100%;background:{{ t.card }};border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:14px" onClick="{{ stopIt }}">
       <span style="font-size:16px;font-weight:600;letter-spacing:-.015em;color:{{ t.ink }}">Share this build</span>
@@ -1211,7 +1237,7 @@ class Component extends DCLogic {
     mission:{time:22, alt:500},
     mass:{struct:550, motors:window.__DEFAULT_MOTOR_MASS, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450},
     eta:{wind:75, prop:100, av:95},
-    gap:15, prop:'all', motorFit:'all', cells:'all', battFit:'all', goal:'time', motorQ:'', battQ:'', hoverSeg:null, hoverKpi:null, theme:'light', gate:false, askReset:false, tips:true, share:false, built:false
+    gap:15, prop:'all', motorFit:'all', cells:'all', battFit:'all', goal:'time', motorQ:'', battQ:'', hoverSeg:null, hoverKpi:null, theme:'light', gate:false, askReset:false, tips:true, share:false, welcome:false, built:false
   };
   GOALS = [
     {v:'time',    label:'Time',       tip:'Reach your target flight time with the lightest build that can do it.'},
@@ -1456,10 +1482,15 @@ class Component extends DCLogic {
     window.__syncCharts = () => this.syncChartHeight();
     const shared = this.restoreLink();
     if (shared) this.setState(shared);
-    this.syncBody(); this.syncChartHeight(); this.syncRail();
+    // Shown once per browser, and skipped entirely for a shared build: that visitor followed a link
+    // to see one specific drone, and greeting them would put a dialog between them and it.
+    try {
+      if (!shared && !localStorage.getItem('do-welcomed')) this.setState({welcome:true});
+    } catch (e) {}
+    this.syncSvgGeom(); this.syncBody(); this.syncChartHeight(); this.syncRail();
   }
   componentWillUnmount() { if (window.__syncCharts) delete window.__syncCharts; }
-  componentDidUpdate() { this.syncBody(); this.syncChartHeight(); this.animateCurves(); this.revealPick(); this.syncRail(); this.syncDialog(); }
+  componentDidUpdate() { this.syncSvgGeom(); this.syncBody(); this.syncChartHeight(); this.animateCurves(); this.revealPick(); this.syncRail(); this.syncDialog(); }
 
   // Step 4 opened a 317-row list at the top with the chosen motor 11,583 px below it, so the list
   // gave no sign of being connected to the build on the right. Bring the selection into view once
@@ -1806,7 +1837,27 @@ class Component extends DCLogic {
     } catch (e) {}
   }
 
-  closeDialogs() { this.setState({askReset:false, share:false, gate:false}); }
+  closeDialogs() { this.setState({askReset:false, share:false, gate:false, welcome:false}); }
+
+  // The template lives in the DOM as real markup, because the runtime reads x-dc.innerHTML, so the
+  // browser parses it before any interpolation has happened and reports every {{ }} sitting on an
+  // SVG length attribute as an invalid length. That was 51 console errors on every load: harmless,
+  // deterministic, and enough noise to bury a real one. The bindings now ride on data-svg-* , which
+  // no grammar validates, and this copies them onto the real attributes after each render.
+  syncSvgGeom() {
+    try {
+      const els = document.querySelectorAll('[data-svg-x1],[data-svg-y1],[data-svg-x2],[data-svg-y2],[data-svg-cx],[data-svg-cy],[data-svg-r],[data-svg-x],[data-svg-y],[data-svg-width],[data-svg-height],[data-svg-d],[data-svg-offset],[data-svg-points]');
+      for (let i = 0; i < els.length; i++) {
+        const el = els[i], d = el.dataset;
+        for (const k in d) {
+          if (k.indexOf('svg') !== 0 || k.length < 4) continue;
+          const attr = k.charAt(3).toLowerCase() + k.slice(4);   // svgX1 -> x1, svgWidth -> width
+          const v = d[k];
+          if (v != null && v !== '' && el.getAttribute(attr) !== v) el.setAttribute(attr, v);
+        }
+      }
+    } catch (e) {}
+  }
 
   syncRail() {
     try {
@@ -2429,6 +2480,11 @@ class Component extends DCLogic {
       tipsFg: st.tips === false ? mut : ink,
       tipsAria: st.tips === false ? 'false' : 'true',
       tipsTitle: st.tips === false ? 'Tooltips are off' : 'Tooltips are on',
+      welcomeShow: st.welcome ? 'flex' : 'none',
+      welcomeGo: () => {
+        try { localStorage.setItem('do-welcomed', '1'); } catch (e) {}
+        this.setState({welcome:false});
+      },
       gateShow: st.gate ? 'flex' : 'none',
       gatePerks: ['Pick the motor, prop and pack yourself', 'Fine-tune losses and clearance', 'Full checks panel and calc chain'],
       gateClose: () => this.setState({gate:false}),
