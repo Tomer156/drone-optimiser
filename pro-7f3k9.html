@@ -2269,16 +2269,17 @@ class Component extends DCLogic {
     // own card, and the category keeps its position in the ramp so a slice means the same thing
     // in either theme.
     const SLICE = dark
-      // Spaced by even perceptual step, not by even contrast ratio. The old ramp stepped 12.97,
-      // 8.00, 5.41, 4.00, 3.16 against the card, which looks orderly written down but narrows the
-      // gap between neighbours as it goes: dL* fell 13.8, 10.6, 8.4, 6.9, so the last two pairs sat
-      // 1.35:1 and 1.27:1 apart and merged into one grey on anything but a good display. These are
-      // ~12 dL* apart throughout, worst neighbouring pair 1.40:1, and every step clears 3:1
-      // against its own card, which the last pair of the previous ramp did not. Hue stays out of it: the
+      // Spaced for separation between neighbours, which is what reading a donut actually needs: the
+      // segments are judged against each other, not against the card behind them. 16 to 20 dL* per
+      // step, worst neighbouring pair 1.63:1 light and 1.70:1 dark, against 1.27:1 before. The cost
+      // is deliberate and known: the far step sits at 1.51:1 on its card, under the 3:1 a lone
+      // graphic would need, which it is not - it is a filled band with a gap on either side and a
+      // neighbour two thirds of a stop away. An earlier pass optimised the other way and the
+      // segments still merged, which is the evidence for this trade. Hue stays out of it: the
       // Status-Only Rule keeps colour meaning fit, so separation has to come from lightness, and
       // the gap between segments carries it a second time for anyone who cannot see either.
-      ? {structure:'#EFEBE7', propulsion:'#CCC8C4', avionics:'#ABA7A3', payload:'#8B8783', battery:'#6C6864'}
-      : {structure:'#241F1A', propulsion:'#3F3A35', avionics:'#5B5651', payload:'#79746F', battery:'#98938E'};
+      ? {structure:'#F4F1EE', propulsion:'#BEBBB8', avionics:'#8E8B88', payload:'#64615E', battery:'#3F3C39'}
+      : {structure:'#241F1A', propulsion:'#4F4B47', avionics:'#7B7875', payload:'#A7A5A3', battery:'#D3D2D1'};
     const groups = [
       ['structure', 'Structure', st.mass.struct + st.mass.misc],
       ['propulsion', 'Propulsion', d.mMotors + st.mass.esc],

@@ -148,7 +148,7 @@ A near-monochrome warm grey system with a single three-tone status palette.
 
 ### Named Rules
 
-**The Two-Palette Rule.** Every colour is declared per theme. Nothing is inverted, filtered, or reused across themes. The mass donut ramp had one shared definition and its darkest tone rendered at 1.06:1 on the dark card, invisible. Both ramps are separate, spaced by even perceptual step (~12 dL*, worst neighbouring pair 1.40:1), and every step clears 3:1 against its own card.
+**The Two-Palette Rule.** Every colour is declared per theme. Nothing is inverted, filtered, or reused across themes. The mass donut ramp had one shared definition and its darkest tone rendered at 1.06:1 on the dark card, invisible. Both ramps are separate and spaced for separation between neighbours (16-20 dL* per step, worst neighbouring pair 1.63:1 light and 1.70:1 dark). Donut segments are judged against each other rather than the card, so the far step is allowed to sit under the 3:1 an isolated graphic would need.40:1), and every step clears 3:1 against its own card.
 
 **The Text Variant Rule.** The fit palette exists twice: saturated for dots, arcs and track gradients (which need 3:1), and one step darker for anything that is type (which needs 4.5:1). Never put the graphics tone on text.
 
