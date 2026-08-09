@@ -761,7 +761,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                         <path data-curve d="{{ effPath }}" fill="none" stroke="url(#curve)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
                       </svg>
                       <span data-chartmark style="position:absolute;top:0;bottom:0;width:1px;background:{{ t.rule }};left:{{ effMxPct }}"></span>
-                      <span data-chartmark style="position:absolute;width:9px;height:9px;border-radius:50%;background:{{ t.ink }};border:2px solid {{ t.card }};transform:translate(-50%,-50%);left:{{ effMxPct }};top:{{ effMyPct }}"></span>
+                      <span data-chartmark style="position:absolute;width:13px;height:13px;border-radius:50%;background:{{ t.ink }};border:2.5px solid {{ t.card }};transform:translate(-50%,-50%);left:{{ effMxPct }};top:{{ effMyPct }}"></span>
                       <span style="position:absolute;top:4px;left:{{ effBandMid }};transform:translateX(-50%);white-space:nowrap;display:{{ effBandLabel }};font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;color:{{ t.dim }}">optimal range</span>
                     </div>
                   </div>
@@ -796,7 +796,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
                         <path data-curve d="{{ payPath }}" fill="none" stroke="{{ t.ink }}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
                       </svg>
                       <span data-chartmark style="position:absolute;top:0;bottom:0;width:1px;background:{{ t.rule }};left:{{ payMxPct }}"></span>
-                      <span data-chartmark style="position:absolute;width:9px;height:9px;border-radius:50%;border:2px solid {{ t.card }};transform:translate(-50%,-50%);left:{{ payMxPct }};top:{{ payMyPct }};background:{{ payColor }}"></span>
+                      <span data-chartmark style="position:absolute;width:13px;height:13px;border-radius:50%;border:2.5px solid {{ t.card }};transform:translate(-50%,-50%);left:{{ payMxPct }};top:{{ payMyPct }};background:{{ payColor }}"></span>
                       <span style="position:absolute;right:3px;transform:translateY(-130%);font-family:'Spline Sans Mono','Spline Mono Fallback',monospace;font-size:10px;color:{{ t.dim }};top:{{ payTargetPct }}">target {{ missionTime }} min</span>
                     </div>
                   </div>
