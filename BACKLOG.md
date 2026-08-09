@@ -33,6 +33,11 @@ target of 24×24. The thumb is 13×13 with no padded hit area.
 shell, so OS text scaling and browser minimum-font-size have no effect. Page zoom is the only
 route, and below ~1024px the comparison columns overprint.
 
+**The Auto rail scrolls below ~780 px of height.** Four sections totalling 674 px against about
+556 px available at a 700 px window. Considered and declined before launch: an accordion would
+recover all of it and the machinery already exists, but it costs seeing Mission and Mass budget
+together on a laptop. The bottom fade is the mitigation. See DESIGN.md.
+
 ## Design
 
 **The slider fit-gradient is invisible and unexplained.** Adjacent zones measure **1.06:1**
