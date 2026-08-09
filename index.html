@@ -196,55 +196,71 @@ window.__dbPromise = (function () {
     if (state) el.setAttribute('data-state', state);
   };
 
+  // localStorage, not sessionStorage: a returning visitor on a flaky connection should get the app
+  // from the copy they already have rather than a dead page. The stamp decides whether it is fresh
+  // enough to use without asking the network, not whether it is usable at all.
+  var readCache = function () {
+    try {
+      var hit = localStorage.getItem(window.__DB_CACHE_KEY)
+             || sessionStorage.getItem(window.__DB_CACHE_KEY);      // migrate the old location
+      if (!hit) return null;
+      var parsed = JSON.parse(hit);
+      return (parsed && parsed.db) ? parsed : null;
+    } catch (e) { return null; }
+  };
+
   var install = function (db, fromCache) {
     if (!db || !db.motors || !db.batteries) throw new Error('database is missing motors or batteries');
     window.__initDB(db.motors, db.batteries);
     var el = panel();
     if (el && el.parentNode) el.parentNode.removeChild(el);
     if (!fromCache) {
-      try {
-        sessionStorage.setItem(window.__DB_CACHE_KEY, JSON.stringify({t:Date.now(), db:db}));
-      } catch (e) {}                                  // a full or disabled store is not an error
+      try { localStorage.setItem(window.__DB_CACHE_KEY, JSON.stringify({t:Date.now(), db:db})); }
+      catch (e) {}                                    // a full or disabled store is not an error
     }
     return true;
   };
 
-  try {
-    var hit = sessionStorage.getItem(window.__DB_CACHE_KEY);
-    if (hit) {
-      var parsed = JSON.parse(hit);
-      if (parsed && parsed.db && (Date.now() - parsed.t) < window.__DB_CACHE_MS) {
-        return Promise.resolve(install(parsed.db, true));
-      }
-    }
-  } catch (e) {}
+  var cached = readCache();
+  if (cached && (Date.now() - cached.t) < window.__DB_CACHE_MS) {
+    try { return Promise.resolve(install(cached.db, true)); } catch (e) {}
+  }
 
-  // 429 is the Worker saying "not so fast", not "never". Wait the interval it names and try once
-  // more, saying so, rather than dying and advising a reload that would spend another request.
+  var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+
+  // Three attempts, because the failure this is guarding against is a blink: a dropped connection,
+  // a slow handover between cells, a captive portal answering first. One attempt made any of those
+  // fatal to the whole page. 429 is honoured separately, since the Worker names how long to wait.
   var get = function (attempt) {
-    return fetch(url, {credentials:'omit'}).then(function (r) {
-      if (r.status === 429 && attempt === 0) {
-        var wait = Math.min(90, parseInt(r.headers.get('Retry-After') || '60', 10) || 60);
-        say('Busy right now. Trying again in ' + wait + ' seconds.', null);
-        var left = wait;
-        var tick = setInterval(function () {
-          left -= 1;
-          if (left > 0) say('Busy right now. Trying again in ' + left + ' seconds.', null);
-          else clearInterval(tick);
-        }, 1000);
-        return new Promise(function (res) {
-          setTimeout(function () { clearInterval(tick); res(get(1)); }, wait * 1000);
-        });
+    return fetch(url, {credentials:'omit', cache:'no-store'}).then(function (r) {
+      if (r.status === 429) {
+        var after = Math.min(90, parseInt(r.headers.get('Retry-After') || '60', 10) || 60);
+        if (attempt >= 1) { var e429 = new Error('rate-limited'); e429.code = 429; throw e429; }
+        say('Busy right now. Trying again in ' + after + ' seconds.', null);
+        return wait(after * 1000).then(function () { return get(attempt + 1); });
       }
-      if (r.status === 429) { var e = new Error('rate-limited'); e.code = 429; throw e; }
-      if (!r.ok) { var e2 = new Error('database returned ' + r.status); e2.code = r.status; throw e2; }
+      if (!r.ok) { var e = new Error('database returned ' + r.status); e.code = r.status; throw e; }
       return r.json();
+    }).catch(function (err) {
+      if (err && err.code === 429) throw err;
+      if (attempt >= 2) throw err;
+      say('Still loading the database, one moment.', null);
+      return wait(attempt === 0 ? 600 : 1800).then(function () { return get(attempt + 1); });
     });
   };
 
   return get(0).then(function (db) {
     return install(db, false);
   }).catch(function (err) {
+    // Anything cached beats nothing at all. A day-old database still sizes a drone correctly; a
+    // blank page with an apology does not.
+    var stale = readCache();
+    if (stale) {
+      try {
+        console.warn('[db] serving a cached copy after a failed fetch:', err);
+        return install(stale.db, true);
+      } catch (e) {}
+    }
     say(err && err.code === 429
         ? 'Too many requests from this connection. Wait a minute, then reload.'
         : 'The motor and battery database could not be loaded. Check your connection and reload.',
