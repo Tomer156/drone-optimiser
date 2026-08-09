@@ -335,6 +335,7 @@ input[type=range]:disabled::-moz-range-thumb{opacity:.4;cursor:default;box-shado
    alpha, so keyboard focus stays obvious without switching to a different visual language. */
 .cta-halo{transition:box-shadow .15s ease}
 .cta-halo:hover{box-shadow:0 0 0 3px var(--cta-halo,transparent)}
+.cta-halo:disabled:hover,.cta-halo:disabled:active{box-shadow:none}
 /* The contribute block is the secondary action, so its ring is a shade quieter than the button's
    while keeping the same shape and timing. Focus stays at the heavier alpha for both. */
 a.cta-halo:hover{box-shadow:0 0 0 3px var(--cta-halo-soft,transparent)}
@@ -681,9 +682,9 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
       </div>
 
       <div style="flex-shrink:0;padding:11px 20px;border-top:1px solid {{ t.line }};display:flex;gap:8px">
-        <button style="flex:1;background:{{ t.card }};border:1px solid {{ t.grid2 }};border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;color:{{ t.ink }};justify-content:center;display:{{ navDisplay }}" style-hover="border-color:{{ t.ink }}" onClick="{{ prev }}"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><path d="M14 6l-6 6 6 6"></path></svg>Back</button>
-        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;justify-content:center;display:{{ nextDisplay }}" style-hover="background:{{ t.inkHover }}" onClick="{{ next }}">Next<svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px"><path d="M10 6l6 6-6 6"></path></svg></button>
-        <button style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;justify-content:center;display:{{ optDisplay }};position:relative;overflow:hidden" style-hover="background:{{ t.inkHover }}" onClick="{{ optimise }}" aria-busy="{{ optBusy }}" disabled="{{ optDisabled }}">
+        <button class="cta-halo" style="flex:1;background:{{ t.card }};border:1px solid {{ t.grid2 }};border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;color:{{ t.ink }};justify-content:center;display:{{ navDisplay }}" style-hover="border-color:{{ t.ink }}" onClick="{{ prev }}"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><path d="M14 6l-6 6 6 6"></path></svg>Back</button>
+        <button class="cta-halo" style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;justify-content:center;display:{{ nextDisplay }}" style-hover="background:{{ t.inkHover }}" onClick="{{ next }}">Next<svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px"><path d="M10 6l6 6-6 6"></path></svg></button>
+        <button class="cta-halo" style="flex:1;background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:6px;padding:9px;font-size:12px;font-weight:500;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;justify-content:center;display:{{ optDisplay }};position:relative;overflow:hidden" style-hover="background:{{ t.inkHover }}" onClick="{{ optimise }}" aria-busy="{{ optBusy }}" disabled="{{ optDisabled }}">
           <span data-optbar style="position:absolute;left:0;top:0;bottom:0;width:{{ optFill }};background:rgba(255,255,255,.22);display:{{ optBarShow }}"></span><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:7px"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"></path></svg><span data-optlabel style="position:relative">{{ optLabel }}</span></button>
       </div>
     </div>
@@ -1164,7 +1165,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
         <span style="font-size:16px;font-weight:600;letter-spacing:-.015em;color:{{ t.ink }}">Welcome to Drone Optimiser</span>
       </div>
       <span style="font-size:13px;line-height:1.6;color:{{ t.body }};text-wrap:pretty">Set a flight time target and a mass budget, and it sizes a quadcopter from real manufacturer bench data: motor, prop, pack, flight time and the checks behind them.</span>
-      <a class="cta-halo" href="https://form.typeform.com/to/ciDWV9CU" target="_blank" rel="noopener" style="display:flex;flex-direction:column;gap:3px;padding:12px 14px;border-radius:8px;background:{{ t.grid }};text-decoration:none">
+      <a class="cta-halo" href="https://form.typeform.com/to/ciDWV9CU" target="_blank" rel="noopener" style="display:flex;flex-direction:column;gap:3px;padding:12px 14px;border-radius:8px;background:transparent;text-decoration:none">
         <span style="font-size:12px;font-weight:600;color:{{ t.ink }}">Have bench data for a motor or pack?</span>
         <span style="font-size:11px;line-height:1.45;color:{{ t.body }}">Every set of figures makes the next build more accurate. Contribute data →</span>
       </a>
