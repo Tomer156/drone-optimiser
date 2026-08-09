@@ -330,6 +330,14 @@ input[type=range]:active::-moz-range-thumb{box-shadow:0 0 0 4px var(--halo,trans
 input[type=range]:disabled{cursor:default}
 input[type=range]:disabled::-webkit-slider-thumb{opacity:.4;cursor:default;box-shadow:none}
 input[type=range]:disabled::-moz-range-thumb{opacity:.4;cursor:default;box-shadow:none}
+/* Same halo the slider handle wears, on the dialog's primary action: a ring that grows out of the
+   button rather than a hard outline drawn around it. The focus ring is the same shape at a heavier
+   alpha, so keyboard focus stays obvious without switching to a different visual language. */
+.cta-halo{transition:box-shadow .15s ease}
+.cta-halo:hover{box-shadow:0 0 0 3px var(--cta-halo,transparent)}
+.cta-halo:active{box-shadow:0 0 0 5px var(--cta-halo,transparent)}
+.cta-halo:focus-visible{outline:none;box-shadow:0 0 0 3px var(--cta-halo-focus,transparent)}
+@media (prefers-reduced-motion: reduce){ .cta-halo{transition:none} }
 input[type=text],input[type=search],select{font-family:'Instrument Sans','Instrument Fallback',sans-serif;font-size:12px;width:100%;border:1px solid var(--fld-bd,#E7E4DF);border-radius:6px;padding:8px 10px;background:var(--fld-bg,#fff);color:var(--fld-fg,#16181A)}
 input[type=text]::placeholder{color:var(--fld-mut,#7E7B74)}
 input[type=text]:focus,select:focus{outline:none;border-color:var(--fld-fg,#16181A)}
@@ -1157,7 +1165,7 @@ body.tips-off [data-tip]:hover::after,body.tips-off [data-tip]:focus-visible::af
         <span style="font-size:12px;font-weight:600;color:{{ t.ink }}">Have bench data for a motor or pack?</span>
         <span style="font-size:11px;line-height:1.45;color:{{ t.body }}">Every set of figures makes the next build more accurate. Contribute data →</span>
       </a>
-      <button data-autofocus style="background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:8px;padding:12px;font-size:13px;font-weight:600;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;margin-top:2px" onClick="{{ welcomeGo }}">Start optimising →</button>
+      <button data-autofocus class="cta-halo" style="background:{{ t.ink }};color:{{ t.card }};border:none;border-radius:8px;padding:12px;font-size:13px;font-weight:600;font-family:'Instrument Sans','Instrument Fallback',sans-serif;cursor:pointer;margin-top:2px" onClick="{{ welcomeGo }}">Start optimising →</button>
     </div>
   </div>
 
@@ -1237,7 +1245,14 @@ class Component extends DCLogic {
     mission:{time:22, alt:500},
     mass:{struct:550, motors:window.__DEFAULT_MOTOR_MASS, esc:60, av:45, misc:60, cam:0, payload:0, battEst:450},
     eta:{wind:75, prop:100, av:95},
-    gap:15, prop:'all', motorFit:'all', cells:'all', battFit:'all', goal:'time', motorQ:'', battQ:'', hoverSeg:null, hoverKpi:null, theme:'light', gate:false, askReset:false, tips:true, share:false, welcome:false, built:false
+    gap:15, prop:'all', motorFit:'all', cells:'all', battFit:'all', goal:'time', motorQ:'', battQ:'', hoverSeg:null, hoverKpi:null, theme:'light', gate:false, askReset:false, tips:true, share:false, built:false,
+    // Decided here rather than in componentDidMount. Setting it after mount meant a full render
+    // without the dialog, then a second one with it, which re-ran the chart height pass and made
+    // the whole page jump before the dialog had even settled.
+    welcome: (() => { try {
+      return !/[?&]b=/.test(location.search || '') && !/[#&]b=/.test(location.hash || '')
+             && !localStorage.getItem('do-welcomed');
+    } catch (e) { return false; } })()
   };
   GOALS = [
     {v:'time',    label:'Time',       tip:'Reach your target flight time with the lightest build that can do it.'},
@@ -1482,12 +1497,12 @@ class Component extends DCLogic {
     window.__syncCharts = () => this.syncChartHeight();
     const shared = this.restoreLink();
     if (shared) this.setState(shared);
-    // Shown once per browser, and skipped entirely for a shared build: that visitor followed a link
-    // to see one specific drone, and greeting them would put a dialog between them and it.
-    try {
-      if (!shared && !localStorage.getItem('do-welcomed')) this.setState({welcome:true});
-    } catch (e) {}
     this.syncSvgGeom(); this.syncBody(); this.syncChartHeight(); this.syncRail();
+    // The welcome is decided before the first render, so it is already on screen by the time
+    // this runs and componentDidUpdate may never fire. Without this call it would take no focus
+    // and set no open timestamp, leaving the early-click guard inert and the dialog unreachable
+    // by keyboard.
+    this.syncDialog();
   }
   componentWillUnmount() { if (window.__syncCharts) delete window.__syncCharts; }
   componentDidUpdate() { this.syncSvgGeom(); this.syncBody(); this.syncChartHeight(); this.animateCurves(); this.revealPick(); this.syncRail(); this.syncDialog(); }
@@ -1811,6 +1826,7 @@ class Component extends DCLogic {
 
       this._returnTo = document.activeElement;           // opening: remember, then move in
       this._dialog = open;
+      this._welcomeAt = performance.now();
       // Prefer whatever the dialog marks as its safe landing: focus should not open on the button
       // that destroys the build.
       const first = open.querySelector('[data-autofocus]')
@@ -1890,6 +1906,10 @@ class Component extends DCLogic {
       document.documentElement.style.setProperty('--rail-fade', dk ? '#16191D' : '#FFFFFF');
       // the slider ring is filled with the card colour so it reads hollow in either theme
       document.documentElement.style.setProperty('--knob', dk ? '#1B1E22' : '#FFFFFF');
+      // The CTA halo is the button's own ink, so it reads as the control breathing rather than a
+      // second colour arriving. Focus is the same ring at an alpha that clears 3:1 on the card.
+      document.documentElement.style.setProperty('--cta-halo', dk ? 'rgba(242,241,238,.20)' : 'rgba(22,24,26,.16)');
+      document.documentElement.style.setProperty('--cta-halo-focus', dk ? 'rgba(242,241,238,.50)' : 'rgba(22,24,26,.52)');
     } catch (e) {}
   }
 
@@ -2481,7 +2501,11 @@ class Component extends DCLogic {
       tipsAria: st.tips === false ? 'false' : 'true',
       tipsTitle: st.tips === false ? 'Tooltips are off' : 'Tooltips are on',
       welcomeShow: st.welcome ? 'flex' : 'none',
+      // Ignores anything in the first third of a second. The dialog appears under whatever the
+      // pointer was already doing, and a click already in flight when it opened should not count
+      // as a decision to dismiss it.
       welcomeGo: () => {
+        if (this._welcomeAt && performance.now() - this._welcomeAt < 350) return;
         try { localStorage.setItem('do-welcomed', '1'); } catch (e) {}
         this.setState({welcome:false});
       },
